@@ -17,12 +17,16 @@
         <servlet-class>controller.mentor.CreateCV</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>NewServlet</servlet-name>
-        <servlet-class>controller.home.NewServlet</servlet-class>
+        <servlet-name>ViewCvMentor</servlet-name>
+        <servlet-class>controller.common.ViewCvMentor</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Temp</servlet-name>
-        <servlet-class>controller.common.Temp</servlet-class>
+        <servlet-name>ListFollowingRequest</servlet-name>
+        <servlet-class>controller.mentor.ListFollowingRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCV</servlet-name>
+        <servlet-class>controller.mentor.UpdateCV</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
@@ -41,12 +45,16 @@
         <url-pattern>/CreateCV</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>NewServlet</servlet-name>
-        <url-pattern>/NewServlet</url-pattern>
+        <servlet-name>ViewCvMentor</servlet-name>
+        <url-pattern>/ViewCvMentor</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Temp</servlet-name>
-        <url-pattern>/Temp</url-pattern>
+        <servlet-name>ListFollowingRequest</servlet-name>
+        <url-pattern>/followingRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCV</servlet-name>
+        <url-pattern>/updatecv</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
     Document   : viewCvMentor
     Created on : Jun 11, 2023, 2:00:26 PM
@@ -33,11 +34,13 @@
 
         <link rel="stylesheet" href="assets/css/overrideb6f5.css?v=10" type="text/css" />
 
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="assets/css/ratecomment.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
 
-        <title>Tuan Anh Hoang</title>
+        <title>${cv.getInfor().getFull_name()}</title>
 
     </head>
 
@@ -68,14 +71,13 @@
                                                 <div class="wrap-profile-user-name">
                                                     <div class="wrap-user-name row">
                                                         <div class="col-xs-12 col-md-7">
-                                                            <h3 class="profile-user-name  active">Tuan Anh Hoang</h3>
+                                                            <h3 class="profile-user-name  active">${cv.getInfor().getFull_name()}</h3>
                                                         </div>
                                                         <div class="">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <p class="header-job-title">Software Product Manager tại World Mosquito
-                                                    Program</p>
+                                                <p class="header-job-title">@${cv.getInfor().getUsername()}</p>
                                             </div>
                                             <div class="wrap-profile-avatar">
                                                 <div class="profile_avatar_other profile_avatar img-circle">
@@ -164,11 +166,7 @@
                                                         <div class="intro_section_title">
                                                             <h4>GIỚI THIỆU BẢN THÂN</h4>
                                                         </div>
-                                                        <p>
-                                                            An open-minded, diversified and thriving to success person and
-                                                            looking forward to challenges. Interested in cloud technology,
-                                                            digital innovation & adaptation and how we can utilize those to
-                                                            improve the society and solve problems. </p>
+                                                        <p></p>
                                                     </div>
                                                     <div class="line"></div>
                                                     <div class="mentor_section mentor_exp">
@@ -184,8 +182,8 @@
                                                                              alt="favicon_icon">
                                                                     </div>
                                                                     <div class="text">
-                                                                        <p class="item_title">Software Product Manager</p>
-                                                                        <p class="company_name">World Mosquito Program</p>
+                                                                        <p class="item_title">${cv.getProfession()}</p>
+                                                                        <p class="company_name">${cv.getProfession_introduction()}</p>
                                                                         <p class="achievements"></p>
                                                                     </div>
                                                                     <div class="date">
@@ -199,7 +197,7 @@
                                                     </div>
                                                     <div class="mentor_section mentor_exp mentor_edu">
                                                         <div class="intro_section_title">
-                                                            <h4>DỊCH VỤ</h4>
+                                                            <h4>THÀNH TÍCH</h4>
                                                         </div>
                                                         <ul>
                                                             <li class="clearfix">
@@ -210,10 +208,9 @@
                                                                              alt="favicon_icon">
                                                                     </div>
                                                                     <div class="text">
-                                                                        <p class="item_title">RMIT University</p>
-                                                                        <p class="name">Master of Business Administrations -
-                                                                            Technology & Innovation</p>
-                                                                        <p class="score">MBA Scholarship 2021</p>
+                                                                        <!--<p class="item_title">RMIT University</p>-->
+                                                                        <p class="name">${cv.getAchievements()}</p>
+                                                                        <p class="score">${cv.getAchievements_des()}</p>
                                                                     </div>
                                                                     <div class="date">
                                                                         <span class="start_time"> 10/2021</span>
@@ -221,31 +218,12 @@
                                                                         <span class="end_time">06/2022</span>
                                                                     </div>
                                                                 </div>
-                                                            </li>
-                                                            <li class="clearfix">
-                                                                <span id="edu-1078" class="anchor"></span>
-                                                                <div class="edu-1078 div_result">
-                                                                    <div class="img">
-                                                                        <img src="assets/images/logo2.png"
-                                                                             alt="">
-                                                                    </div>
-                                                                    <div class="text">
-                                                                        <p class="item_title">James Madison University</p>
-                                                                        <p class="name">Business/Finance</p>
-                                                                        <p class="score"></p>
-                                                                    </div>
-                                                                    <div class="date">
-                                                                        <span class="start_time"> 05/2012</span>
-                                                                        <span> - </span>
-                                                                        <span class="end_time">11/2015</span>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
+                                                            </li>                                                            
                                                         </ul>
                                                     </div>
                                                     <div class="mentor_section mentor_exp">
                                                         <div class="intro_section_title">
-                                                            <h4>THÀNH TÍCH</h4>
+                                                            <h4>FRAMEWORK</h4>
                                                         </div>
                                                         <ul>
                                                             <li class="clearfix">
@@ -256,14 +234,7 @@
                                                                              alt="">
                                                                     </div>
                                                                     <div class="text">
-                                                                        <p class="item_title">JMU - International Student
-                                                                            Associate</p>
-                                                                        <p class="name">Webmaster / IT Coordinator</p>
-                                                                        <p class="achievements">Run and managed team
-                                                                            website<br />
-                                                                            Assist team member on technical issues<br />
-                                                                            Maintain member database and email communicate
-                                                                        </p>
+                                                                        <p class="name">${cv.getLanguage()}</p>                                                                       
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -278,215 +249,119 @@
                                                                 <span id="award-870" class="anchor"></span>
                                                                 <div class="award-870 div_result">
                                                                     <div class="text">
-                                                                        <p class="item_title">Dean's Scholarship 2012</p>
-                                                                        <p class="">Scholarship for best international
-                                                                            student admitted to JMU on 2012</p>
+                                                                        <!--                                                                        <p class="item_title">Dean's Scholarship 2012</p>-->
+                                                                        <p class="">${cv.getService_description()}</p>
                                                                     </div>
                                                                 </div>
                                                             </li>
                                                         </ul>
-                                                    </div>
-                                                    <div class="mentor_section mentor_skill">
-                                                        <div class="intro_section_title">
-                                                            <h4>Kỹ năng & chứng chỉ</h4>
-                                                        </div>
-                                                        <div class="row">
-                                                            <span id="skill-843" class="anchor"></span>
-                                                            <div class="col-md-6 skill_item">
-                                                                <div class="skill-843 div_result">
-                                                                    <p class="item_title">Project/Product Management</p>
-                                                                    <p class=""></p>
-                                                                </div>
-                                                            </div>
-                                                            <span id="skill-844" class="anchor"></span>
-                                                            <div class="col-md-6 skill_item">
-                                                                <div class="skill-844 div_result">
-                                                                    <p class="item_title">Career Development</p>
-                                                                    <p class=""></p>
-                                                                </div>
-                                                            </div>
-                                                            <span id="skill-845" class="anchor"></span>
-                                                            <div class="col-md-6 skill_item">
-                                                                <div class="skill-845 div_result">
-                                                                    <p class="item_title">Study Abroad Consulting</p>
-                                                                    <p class=""></p>
-                                                                </div>
-                                                            </div>
-                                                            <span id="skill-846" class="anchor"></span>
-                                                            <div class="col-md-6 skill_item">
-                                                                <div class="skill-846 div_result">
-                                                                    <p class="item_title">IT Risk/Project</p>
-                                                                    <p class=""></p>
-                                                                </div>
-                                                            </div>
-                                                            <span id="skill-847" class="anchor"></span>
-                                                            <div class="col-md-6 skill_item">
-                                                                <div class="skill-847 div_result">
-                                                                    <p class="item_title">Business Analysis</p>
-                                                                    <p class=""></p>
-                                                                </div>
-                                                            </div>
-                                                            <span id="skill-848" class="anchor"></span>
-                                                            <div class="col-md-6 skill_item">
-                                                                <div class="skill-848 div_result">
-                                                                    <p class="item_title">Scrum/Agile</p>
-                                                                    <p class=""></p>
-                                                                </div>
-                                                            </div>
-                                                            <span id="certification-608" class="anchor"></span>
-                                                            <div class="col-md-6 skill_item">
-                                                                <div class="certification-608 div_result">
-                                                                    <p class="item_title">IELTS 8.0</p>
-                                                                    <p class=""></p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    </div>                                                    
                                                 </div>
                                             </div>
                                             <div class="tab-content clearfix" id="tab_profile_pending">
                                             </div>
-                                            <div>
-                                                <div class="box-group-custom-top">
-                                                    <button type="button" class="btn btn-info btn-box-top-lg"
-                                                            style="background-color: #175E4C; color: #fff; margin-top: 20px; min-width: 24%;">Viết đánh giá</button>
-                                                </div>
-                                            </div>
+
 
                                             <div class="tab-content clearfix" id="review">
                                                 <!-- Danh gia o day -->
 
                                                 <div class="pb-4 pt-4 pl-3 pr-3">
                                                     <div class="row">
-                                                        <div class="col-12">
-                                                            <p class="mb-3 t600">Thứ 4, 09-02-2023</p>
+                                                        <div class="wrapper1 col-12">
+                                                            <h3>Viết đánh giá cho Mentor</h3>
+                                                            <form action="#">
+                                                                <div class="rating1">
+                                                                    <input type="number" name="rating" hidden>
+                                                                    <i class='bx bx-star star' style="--i: 0;"></i>
+                                                                    <i class='bx bx-star star' style="--i: 1;"></i>
+                                                                    <i class='bx bx-star star' style="--i: 2;"></i>
+                                                                    <i class='bx bx-star star' style="--i: 3;"></i>
+                                                                    <i class='bx bx-star star' style="--i: 4;"></i>
+                                                                </div>
+                                                                <textarea name="opinion" cols="30" rows="5" placeholder="Your opinion..." 
+                                                                          style="outline: none;resize: none;width: 80%"></textarea>
+                                                                <div class="btn-group">
+                                                                    <button type="submit" class="btn submit">Submit</button>
+                                                                    <button class="btn cancel">Cancel</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <p class="mb-3" style="white-space: pre-line;">Anh Mentor tận
-                                                                tâm tư vấn và định hướng cho e, giúp e nhìn dc ra điều mình
-                                                                thiếu và biết cần làm gì
-                                                                Em hy vọng sau này còn có thể book lịch với mentor tiếp ạ.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-3 pl-0 pr-0">
-                                                            <div class="appointment-mentor">
-                                                                <p class="mb-0 ml-3"
-                                                                   style="line-height: 30px; font-style: italic;">Đánh giá
-                                                                    từ Mentee</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-2 pl-0 pr-0 tright">
-                                                            <a class="info-review" href="523865357.html">
-                                                                <img class="avt-review"
-                                                                     src="../upload/images/ngv1670126599.jpg"
-                                                                     onerror="this.onerror=null; this.src='../assets/images/avatar.jpg'">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-7">
-                                                            <a class="info-review" href="523865357.html"> Trần Ngọc Trà
-                                                                My</a>
-                                                            <div class="">
-                                                                <span class="jobs">
-                                                                    Stock Broker Intern tại <span class="field">SSI Stock
-                                                                        Company</span> </span>
-                                                            </div>
-                                                        </div>
-
-
 
                                                     </div>
                                                 </div>
+
                                                 <div style="border-top: 0.3px solid #E9E9E9;" class=""></div>
-                                                <div class="pb-4 pt-4 pl-3 pr-3">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <p class="mb-3 t600">Thứ 4, 05-10-2022</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <p class="mb-3" style="white-space: pre-line;">Em đã học được
-                                                                rất nhiều điều cũng như là được chia sẻ những định hướng
-                                                                công việc sau buổi cố vấn. Em cảm ơn anh Tuấn Anh rất nhiều
-                                                                ạ!! Em chúc anh Tuấn Anh sức khỏe, may mắn và thành công ạ
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-3 pl-0 pr-0">
-                                                            <div class="appointment-mentor">
-                                                                <p class="mb-0 ml-3"
-                                                                   style="line-height: 30px; font-style: italic;">Đánh giá
-                                                                    từ Mentee</p>
+
+                                                <c:forEach var="i" items="${listF}">
+                                                    <div class="pb-4 pt-4 pl-3 pr-3">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <p class="mb-3 t600">${i.getCreate_date()}</p>
                                                             </div>
                                                         </div>
-                                                        <div class="col-2 pl-0 pr-0 tright">
-                                                            <a class="info-review" href="52387305.html">
-                                                                <img class="avt-review"
-                                                                     src="../upload/images/wsg1664906461.jpg"
-                                                                     onerror="this.onerror=null; this.src='../assets/images/avatar.jpg'">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-7">
-                                                            <a class="info-review" href="52387305.html"> Đinh Ngọc Diệp</a>
-                                                            <div class="">
-                                                                <span class="jobs">
-                                                                    Phó ban Marketing tại <span class="field">VietGOC (dự án
-                                                                        khởi nghiệp xã hội)</span> </span>
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <p class="mb-3" style="white-space: pre-line;">${i.getFeedback_comment()}</p>
                                                             </div>
                                                         </div>
-
-
-
-                                                    </div>
-                                                </div>
-                                                <div style="border-top: 0.3px solid #E9E9E9;" class=""></div>
-                                                <div class="pb-4 pt-4 pl-3 pr-3">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <p class="mb-3 t600">Thứ 2, 29-08-2022</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <p class="mb-3" style="white-space: pre-line;">Mentor vô cùng
-                                                                tâm huyết. Em hy vọng sau này còn có thể book lịch với
-                                                                mentor tiếp ạ.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-3 pl-0 pr-0">
-                                                            <div class="appointment-mentor">
-                                                                <p class="mb-0 ml-3"
-                                                                   style="line-height: 30px; font-style: italic;">Đánh giá
-                                                                    từ Mentee</p>
+                                                        <div class="row">
+                                                            <div class="col-3 pl-0 pr-0">
+                                                                <div class="appointment-mentor">
+                                                                    <!--<p class="mb-0 ml-3"
+                                                                     style="line-height: 30px; font-style: italic;">Đánh giá
+                                                                     từ Mentee</p>-->
+                                                                    <div class="mb-0 ml-3">
+                                                                        <!--                                                                        <div class="stars" style="color: #175E4C;">
+                                                                                                                                                    <i class="fas fa-star"></i>
+                                                                                                                                                    <i class="fas fa-star"></i>
+                                                                                                                                                    <i class="far fa-star"></i>
+                                                                                                                                                    <i class="far fa-star"></i>
+                                                                                                                                                    <i class="far fa-star"></i>
+                                                                                                                                                </div>-->
+                                                                        <c:choose>
+                                                                            <c:when test="${i.getRate_start() > 0}">
+                                                                                <c:set var="yellowStars" value="${i.getRate_start()}" />
+                                                                                <c:set var="greyStars" value="${5 - i.getRate_start()}" />
+                                                                                <c:forEach begin="1" end="${yellowStars}">
+                                                                                    <i class="fa fa-star yellow-star"></i>
+                                                                                </c:forEach>
+                                                                                <c:forEach begin="1" end="${greyStars}">
+                                                                                    <i class="fa fa-star grey-star"></i>
+                                                                                </c:forEach>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <c:forEach begin="1" end="5">
+                                                                                    <i class="fa fa-star grey-star"></i>
+                                                                                </c:forEach>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                    </div>
+                                                                    <style>
+                                                                        .yellow-star {
+                                                                            color: yellow;
+                                                                        }
+                                                                        .grey-star {
+                                                                            color: grey;
+                                                                        }
+                                                                    </style>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-2 pl-0 pr-0 tright">
-                                                            <a class="info-review" href="5238023.html">
-                                                                <img class="avt-review"
-                                                                     src="../upload/images/owh1670322552.jpg"
-                                                                     onerror="this.onerror=null; this.src='../assets/images/avatar.jpg'">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-7">
-                                                            <a class="info-review" href="5238023.html"> Nguyễn Thị Huyền</a>
-                                                            <div class="">
-                                                                <span class="jobs">
-                                                                    Business Analyst tại <span class="field">Viettel
-                                                                        Solutions</span> </span>
+                                                            <div class="col-2 pl-0 pr-0 tright">
+                                                                <a class="info-review" href="523865357.html">
+                                                                    <img class="avt-review"
+                                                                         src="../upload/images/ngv1670126599.jpg"
+                                                                         onerror="this.onerror=null; this.src='../assets/images/avatar.jpg'">
+                                                                </a>
                                                             </div>
+                                                            <div class="col-7">
+                                                                <a class="info-review" href="523865357.html">${i.getInfor().getFull_name()}</a>
+                                                            </div>
+
                                                         </div>
-
-
-
                                                     </div>
-                                                </div>
-                                                <div style="border-top: 0.3px solid #E9E9E9;" class=""></div>
+                                                    <div style="border-top: 0.3px solid #E9E9E9;" class=""></div>
+                                                </c:forEach>
+
                                             </div>
                                         </div>
                                     </div>
@@ -518,193 +393,70 @@
                                     </div>
                                     <h4 class="mb-4 pl-0" style="font-size: 16px; font-weight: bold;">Có thể bạn quan tâm
                                     </h4>
-                                    <div class="mentor_right_item pb-3">
-                                        <a class="user_avatar_name" href="523866403.html#posts">
-                                            <div class="row">
-                                                <div class="col-3 pr-1">
-                                                    <div class="mentor_page" style="margin-top: 0px;">
-                                                        <div class="container">
-                                                            <div class="mentor_list">
+                                    <c:forEach var="i" begin="1" end="5">
+                                        <div class="mentor_right_item pb-3">
+                                            <a class="user_avatar_name" href="523866403.html#posts">
+                                                <div class="row">
+                                                    <div class="col-3 pr-1">
+                                                        <div class="mentor_page" style="margin-top: 0px;">
+                                                            <div class="container">
+                                                                <div class="mentor_list">
 
 
-                                                                <div class="mentor_item wow fadeInUp" data-wow-duration="1s"
-                                                                     data-wow-delay="0.3s" data-id="523866403"
-                                                                     style="margin-bottom: 0px; height: auto;">
+                                                                    <div class="mentor_item wow fadeInUp" data-wow-duration="1s"
+                                                                         data-wow-delay="0.3s" data-id="523866403"
+                                                                         style="margin-bottom: 0px; height: auto;">
 
-                                                                    <div class="">
-                                                                        <img onerror="this.onerror=null; this.src='../assets/images/avatar.jpg'"
-                                                                             src="assets/images/avatar.jpg"
-                                                                             alt="Nguyen Pham"
-                                                                             class="img-circle avatar_header" width="50"
-                                                                             height="50">
+                                                                        <div class="">
+                                                                            <img onerror="this.onerror=null; this.src='../assets/images/avatar.jpg'"
+                                                                                 src="assets/images/avatar.jpg"
+                                                                                 alt="Nguyen Pham"
+                                                                                 class="img-circle avatar_header" width="50"
+                                                                                 height="50">
+                                                                        </div>
+
+                                                                        <!--                                                                        <div class="mentor_item_info_box mentor_item_info_box_523866403"
+                                                                                                                                                     style="display: none; width: 300px;">
+                                                                                                                                                    <div class="span_title"><span>Giới thiệu bản
+                                                                                                                                                            thân</span>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div class="line"></div>
+                                                                                                                                                    <p>Assistant Brand Manager at Unilever</p>
+                                                                                                                                                    <span class="span_title">Chủ đề Mentoring</span>
+                                                                                                                                                    <div class="line"></div>
+                                                                                                                                                    <p><i class="fa fa-circle"
+                                                                                                                                                          style="font-size: 11px !important;"
+                                                                                                                                                          aria-hidden="true"></i>
+                                                                                                                                                        <strong>Định hướng và chia sẻ kinh nghiệm nghề
+                                                                                                                                                            nghiệp: </strong>Assistant Brand Manager tại
+                                                                                                                                                        Unilever
+                                                                                                                                                    </p>
+                                                                                                                                                    <div class="line line2"></div>
+                                                                                                                                                    <div class="text-center">
+                                                                                                                                                        <span
+                                                                                                                                                            class="mentor_detail_link notopmargin mb-1">Xem
+                                                                                                                                                            chi tiết</span>
+                                                                                                                                                    </div>
+                                                                                                                                                </div>-->
                                                                     </div>
 
-                                                                    <div class="mentor_item_info_box mentor_item_info_box_523866403"
-                                                                         style="display: none; width: 300px;">
-                                                                        <div class="span_title"><span>Giới thiệu bản
-                                                                                thân</span>
-                                                                        </div>
-                                                                        <div class="line"></div>
-                                                                        <p>Assistant Brand Manager at Unilever</p>
-                                                                        <span class="span_title">Chủ đề Mentoring</span>
-                                                                        <div class="line"></div>
-                                                                        <p><i class="fa fa-circle"
-                                                                              style="font-size: 11px !important;"
-                                                                              aria-hidden="true"></i>
-                                                                            <strong>Định hướng và chia sẻ kinh nghiệm nghề
-                                                                                nghiệp: </strong>Assistant Brand Manager tại
-                                                                            Unilever
-                                                                        </p>
-                                                                        <div class="line line2"></div>
-                                                                        <div class="text-center">
-                                                                            <span
-                                                                                class="mentor_detail_link notopmargin mb-1">Xem
-                                                                                chi tiết</span>
-                                                                        </div>
-                                                                    </div>
+
                                                                 </div>
-
-
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-9 pl-0">
-                                                    <p class="mb-0 t600">Nguyen Pham</p>
-                                                    <div class="">
-                                                        <span class="jobs" style="color: #949BA1">
-                                                            Assistant Brand Manager tại <span class="field">Unilever</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="mentor_right_item pb-3">
-                                        <a class="user_avatar_name" href="523784088.html#posts">
-                                            <div class="row">
-                                                <div class="col-3 pr-1">
-                                                    <div class="mentor_page" style="margin-top: 0px;">
-                                                        <div class="container">
-                                                            <div class="mentor_list">
-
-
-                                                                <div class="mentor_item wow fadeInUp" data-wow-duration="1s"
-                                                                     data-wow-delay="0.3s" data-id="523784088"
-                                                                     style="margin-bottom: 0px; height: auto;">
-
-                                                                    <div class="">
-                                                                        <img onerror="this.onerror=null; this.src='../assets/images/avatar.jpg'"
-                                                                             src="../upload/images/qxy1652945721.jpg"
-                                                                             alt="Thùy Phạm" class="img-circle avatar_header"
-                                                                             width="50" height="50">
-                                                                    </div>
-
-                                                                    <div class="mentor_item_info_box mentor_item_info_box_523784088"
-                                                                         style="display: none; width: 300px;">
-                                                                        <div class="span_title"><span>Giới thiệu bản
-                                                                                thân</span>
-                                                                        </div>
-                                                                        <div class="line"></div>
-                                                                        <p>As a Product Owner with 10 years of managing and
-                                                                            coordinating low to high-value projects in
-                                                                            domains ...</p>
-                                                                        <span class="span_title">Chủ đề Mentoring</span>
-                                                                        <div class="line"></div>
-                                                                        <p><i class="fa fa-circle"
-                                                                              style="font-size: 11px !important;"
-                                                                              aria-hidden="true"></i>
-                                                                            <strong>Định hướng và chia sẻ kinh nghiệm nghề
-                                                                                nghiệp: </strong>Product Manager tại Sendo
-                                                                        </p>
-                                                                        <div class="line line2"></div>
-                                                                        <div class="text-center">
-                                                                            <span
-                                                                                class="mentor_detail_link notopmargin mb-1">Xem
-                                                                                chi tiết</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-
-                                                            </div>
+                                                    <div class="col-9 pl-0">
+                                                        <p class="mb-0 t600">${listMentor.get(i).getInfor().getFull_name()}</p>
+                                                        <div class="">
+                                                            <span class="jobs" style="color: #949BA1">
+                                                                ${listMentor.get(i).getProfession()}
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-9 pl-0">
-                                                    <p class="mb-0 t600">Thùy Phạm</p>
-                                                    <div class="">
-                                                        <span class="jobs" style="color: #949BA1">
-                                                            Product Manager tại <span class="field">Sendo</span> </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="mentor_right_item pb-3">
-                                        <a class="user_avatar_name" href="523866652.html#posts">
-                                            <div class="row">
-                                                <div class="col-3 pr-1">
-                                                    <div class="mentor_page" style="margin-top: 0px;">
-                                                        <div class="container">
-                                                            <div class="mentor_list">
-
-
-                                                                <div class="mentor_item wow fadeInUp" data-wow-duration="1s"
-                                                                     data-wow-delay="0.3s" data-id="523866652"
-                                                                     style="margin-bottom: 0px; height: auto;">
-
-                                                                    <div class="">
-                                                                        <img onerror="this.onerror=null; this.src='../assets/images/avatar.jpg'"
-                                                                             src="../upload/images/lpc1671159201.jpg"
-                                                                             alt="Bao Ngoc Nguyen"
-                                                                             class="img-circle avatar_header" width="50"
-                                                                             height="50">
-                                                                    </div>
-
-                                                                    <div class="mentor_item_info_box mentor_item_info_box_523866652"
-                                                                         style="display: none; width: 300px;">
-                                                                        <div class="span_title"><span>Giới thiệu bản
-                                                                                thân</span>
-                                                                        </div>
-                                                                        <div class="line"></div>
-                                                                        <p>An enthusiastic, open-minded, decisive and
-                                                                            hard-working professional with more than 2 years
-                                                                            working ...</p>
-                                                                        <span class="span_title">Chủ đề Mentoring</span>
-                                                                        <div class="line"></div>
-                                                                        <p><i class="fa fa-circle"
-                                                                              style="font-size: 11px !important;"
-                                                                              aria-hidden="true"></i>
-                                                                            <strong>Định hướng và chia sẻ kinh nghiệm nghề
-                                                                                nghiệp: </strong>Business Management Officer
-                                                                            tại Viettel Group
-                                                                        </p>
-                                                                        <div class="line line2"></div>
-                                                                        <div class="text-center">
-                                                                            <span
-                                                                                class="mentor_detail_link notopmargin mb-1">Xem
-                                                                                chi tiết</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-9 pl-0">
-                                                    <p class="mb-0 t600">Bao Ngoc Nguyen</p>
-                                                    <div class="">
-                                                        <span class="jobs" style="color: #949BA1">
-                                                            Business Management Officer tại <span class="field">Viettel
-                                                                Group</span> </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
+                                            </a>
+                                        </div>
+                                    </c:forEach>                                                                       
                                 </div>
                             </div>
                         </div>
@@ -1087,6 +839,7 @@
 <script src="assets/js/star-rating.js"></script>
 <!-- Hien thi review -->
 <script src="assets/js/functions.js"></script>
+<script src="assets/js/ratecomment.js"></script>
 
 <jsp:include page="../home/footer.jsp"/>
 </body>

@@ -3,20 +3,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.home;
+package controller.viewListMentor;
 
+import com.oracle.wls.shaded.org.apache.bcel.generic.AALOAD;
+import dao.MentorCVDAO;
+import dao.SkillDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.CV_Mentor;
+import model.Skill;
 
 /**
  *
- * @author Tuan Vinh
+ * @author admin
  */
-public class NewServlet extends HttpServlet {
+@WebServlet(name="viewListMentorController", urlPatterns={"/viewListMentor"})
+public class viewListMentorController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,10 +41,10 @@ public class NewServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet NewServlet</title>");  
+            out.println("<title>Servlet viewListMentorController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet NewServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet viewListMentorController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,7 +61,17 @@ public class NewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        //Get all list sklill
+        SkillDAO sk = new SkillDAO();
+        List<Skill> listS = sk.getAllSkillByStatus();
+        request.setAttribute("listS", listS);
+        //Get all list mentor 
+        MentorCVDAO cv = new MentorCVDAO();
+        List<CV_Mentor> listM = cv.getAllListMentor();
+        request.setAttribute("listM", listM);
+        
+        request.getRequestDispatcher("common/viewListMentor.jsp").forward(request, response);
+        
     } 
 
     /** 

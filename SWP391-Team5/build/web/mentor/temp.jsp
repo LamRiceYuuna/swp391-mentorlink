@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
     Document   : temp
     Created on : Jun 11, 2023, 10:51:52 PM
@@ -12,6 +13,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+    <c:forEach var="e" items="${listR}">
+        ${e.getTitle()}
+    </c:forEach>
     </body>
 </html>
