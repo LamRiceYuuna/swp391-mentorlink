@@ -24,6 +24,26 @@
         <servlet-name>Temp</servlet-name>
         <servlet-class>controller.common.Temp</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>requestMentor</servlet-name>
+        <servlet-class>controller.CreateRequest.requestMentor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>listRequestMenTee</servlet-name>
+        <servlet-class>controller.CreateRequest.listRequestMenTee</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>signupController</servlet-name>
+        <servlet-class>controller.signup.signupController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>registerVerificationController</servlet-name>
+        <servlet-class>controller.signup.registerVerificationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewSkill</servlet-name>
+        <servlet-class>controller.common.viewSkill</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -47,6 +67,26 @@
     <servlet-mapping>
         <servlet-name>Temp</servlet-name>
         <url-pattern>/Temp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>requestMentor</servlet-name>
+        <url-pattern>/requestMentor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>listRequestMenTee</servlet-name>
+        <url-pattern>/listRequestMenTee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>signupController</servlet-name>
+        <url-pattern>/signupController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>registerVerificationController</servlet-name>
+        <url-pattern>/registerVerificationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewSkill</servlet-name>
+        <url-pattern>/viewSkill</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

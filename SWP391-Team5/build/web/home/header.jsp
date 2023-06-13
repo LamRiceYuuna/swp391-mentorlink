@@ -38,7 +38,7 @@
                         <ul id="mobile-menu" class="dt-menu-mega d-flex justify-content-between mobile-menu-none"
                             hide="true">
                             <li class="sub-menu dropdown_list">
-                                <a href="#" target="_blank">
+                                <a href="http://localhost:9999/SWP391-Team5/viewSkill" target="_blank">
                                     List skill
                                 </a>
 
@@ -87,7 +87,7 @@
                                     <a href="http://localhost:9999/SWP391-Team5/login" class="btn-info btn">Đăng nhập</a>
                                 </li>
                                 <li class="login-box">
-                                    <a href="http://localhost:9999/SWP391-Team5/signup/signup.jsp" class="btn-info btn">Đăng ký</a>
+                                    <a href="http://localhost:9999/SWP391-Team5/signupController" class="btn-info btn">Đăng ký</a>
                                 </li>
                             </c:if>
                         </ul>
@@ -140,13 +140,13 @@
                                         <li><a class="pb-0">Cá nhân</a></li>
                                         <li class="dt-menu-item-parent"></li>
                                         <li>
-                                            <a href="#" class="pb-0" style="cursor: pointer;">
-                                                <i class="fa fa-tag"></i>Mã khuyến mãi
+                                            <a href="http://localhost:9999/SWP391-Team5/requestMentor" class="pb-0" style="cursor: pointer;">
+                                                <i class="fa fa-tag"></i>requestMentor
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="pb-0" style="cursor: pointer;">
-                                                <i class="fa fa-shopping-cart"></i>Mua gói đặt lịch cố vấn
+                                            <a href="http://localhost:9999/SWP391-Team5/listRequestMenTee" class="pb-0" style="cursor: pointer;">
+                                                <i class="fa fa-shopping-cart"></i>list Request MenTee
                                             </a>
                                         </li>
                                         <li>

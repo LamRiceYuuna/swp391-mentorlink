@@ -1,0 +1,159 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+package controller.CreateRequest;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.User;
+import dao.requestDAO;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Skill;
+
+/**
+ *
+ * @author damtu
+ */
+public class requestMentor extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+          
+            int id_mentor = 2;
+
+            requestDAO dao = new requestDAO();
+            List<Skill> list = dao.getAllskillBySkill_id(id_mentor);
+
+            // day data len jsp
+            request.setAttribute("listp", list);
+
+            request.getRequestDispatcher("/mentee/createRequest.jsp").forward(request, response);
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // lấy id của mentee
+        HttpSession session = request.getSession();
+        User sessionUser = (User) session.getAttribute("acc");
+      String sessionUser_id = sessionUser.getUser_id();
+       
+        //lấy mail của mentee  
+        String mail = sessionUser.getEmail();
+        String name = sessionUser.getFull_name();
+        //lấy id mentor
+        // trước hết cứ mặc định là 2
+        int id_mentor = 2;
+        String tieude = request.getParameter("tieude");
+        String batdau = request.getParameter("batdau");
+        String ketthuc = request.getParameter("ketthuc");
+        String sogiohoc = request.getParameter("sogiohoc");
+        String noidung = request.getParameter("noidung");
+        String [] skills = request.getParameterValues("skills");
+        String framework = request.getParameter("framework");
+        Mail ml = new Mail();
+        //********************************************************
+        requestMentor rq = new requestMentor();
+        Timestamp batdau1 = rq.convertToTimestamp(batdau);
+        System.out.println(batdau);
+        System.out.println(ketthuc);
+        Timestamp ketthuc1 = rq.convertToTimestamp(ketthuc);
+        //***********************************************************************
+        long khoangCach = ketthuc1.getTime() - batdau1.getTime();
+        long soGioHoc1 = Long.parseLong(sogiohoc) * 3600000; // Chuyển số giờ học thành mili giây
+        //***********************************************************************
+        if (isEmpty(tieude) || isEmpty(batdau) || isEmpty(ketthuc) || isEmpty(sogiohoc)
+                || isEmpty(noidung) || skills== null || isEmpty(framework)) {
+            request.setAttribute("errE", "Không được để trống thông tin nào!");
+            processRequest(request, response);
+        }
+        else if(khoangCach < soGioHoc1){
+         System.out.println("Lỗi: Thời gian bắt đầu và kết thúc phải lớn hơn hoạc bằng với số giờ học");
+            request.setAttribute("errE", "Lỗi: Thời gian bắt đầu và kết thúc phải lớn hơn hoạc bằng với số giờ học");
+            processRequest(request, response);
+        }
+         else if (ketthuc1.before(batdau1)) {
+            System.out.println("Lỗi: Thời điểm kết thúc nhỏ hơn thời điểm bắt đầu ");
+            request.setAttribute("errE", "Lỗi: Thời điểm kết thúc nhỏ hơn thời điểm bắt đầu");
+            processRequest(request, response);
+        } else {
+            // Kiểm tra nếu kết thúc cách bắt đầu ít nhất 1 giờ
+            long diffInMillies = ketthuc1.getTime() - batdau1.getTime();
+            long diffInHours = diffInMillies / (60 * 60 * 1000);
+            // Chuyển đổi milliseconds sang giờ
+
+            if (diffInHours < 1) {
+                System.out.println("Lỗi: Thời điểm kết thúc phải cách bắt đầu ít nhất 1 giờ");
+                request.setAttribute("errE", "Lỗi: Thời điểm kết thúc phải cách bắt đầu ít nhất 1 giờ!");
+                processRequest(request, response);
+            } else {
+                requestDAO DAO = new requestDAO();
+                DAO.insert(tieude, batdau1, id_mentor, sessionUser_id, ketthuc1, sogiohoc, noidung, framework);
+                 processRequest(request, response);
+                try {
+                    ml.send(mail, name, tieude, batdau1, ketthuc1, sogiohoc, noidung, skills, framework);
+                   
+                } catch (ParseException ex) {
+                    Logger.getLogger(requestMentor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }
+//        
+    }
+
+    boolean isEmpty(String msg) {
+        boolean result = false;
+        if (msg.isEmpty()) {
+            result = true;
+        }
+        return result;
+    }
+
+    public static Timestamp convertToTimestamp(String timestampString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+
+        try {
+            // Chuyển đổi chuỗi thành đối tượng java.util.Date
+            java.util.Date parsedDate = dateFormat.parse(timestampString);
+
+            // Chuyển đổi java.util.Date thành Timestamp
+            Timestamp timestamp = new Timestamp(parsedDate.getTime());
+
+            return timestamp;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+}
