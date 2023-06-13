@@ -20,6 +20,10 @@
         <servlet-name>NewServlet</servlet-name>
         <servlet-class>controller.home.NewServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Temp</servlet-name>
+        <servlet-class>controller.common.Temp</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Temp</servlet-name>
+        <url-pattern>/Temp</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
