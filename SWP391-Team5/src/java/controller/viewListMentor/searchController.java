@@ -5,7 +5,6 @@
 
 package controller.viewListMentor;
 
-import com.oracle.wls.shaded.org.apache.bcel.generic.AALOAD;
 import dao.MentorCVDAO;
 import dao.SkillDAO;
 import java.io.IOException;
@@ -23,8 +22,8 @@ import model.Skill;
  *
  * @author admin
  */
-@WebServlet(name="viewListMentorController", urlPatterns={"/viewListMentor"})
-public class viewListMentorController extends HttpServlet {
+@WebServlet(name="searchController", urlPatterns={"/search"})
+public class searchController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,16 +35,20 @@ public class viewListMentorController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        //Get all list sklill
         SkillDAO sk = new SkillDAO();
         List<Skill> listS = sk.getAllSkillByStatus();
         request.setAttribute("listS", listS);
-        //Get all list mentor 
+        
+        String keyword = request.getParameter("keyword");
+        String professtion = request.getParameter("profession");
+        String service = request.getParameter("service");
+        String achievements = request.getParameter("achievements");
         MentorCVDAO cv = new MentorCVDAO();
-        List<CV_Mentor> list1 = cv.getAllListMentor();
-        //phan trang
+        List<CV_Mentor> listM = cv.search(keyword, professtion, service, achievements);
+        request.setAttribute("listM", listM);
+        
         int page,numperpage=8;
-        int size = list1.size();
+        int size = listM.size();
         int num =(size%8==0?(size/8):((size/8))+1);
         String xpage = request.getParameter("page");
         if(xpage == null){
@@ -57,8 +60,8 @@ public class viewListMentorController extends HttpServlet {
         int start,end;
         start=(page-1)*numperpage;
         end = Math.min(page*numperpage, size);
-        List<CV_Mentor> listM = cv.getListByPage(list1, start, end);
-        request.setAttribute("listM", listM);
+        List<CV_Mentor> listTT = cv.getListByPage(listM, start, end);
+        request.setAttribute("listM", listTT);
         request.setAttribute("page", page);
         request.setAttribute("num", num);
         request.getRequestDispatcher("common/viewListMentor.jsp").forward(request, response);
@@ -76,7 +79,6 @@ public class viewListMentorController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-        
     } 
 
     /** 

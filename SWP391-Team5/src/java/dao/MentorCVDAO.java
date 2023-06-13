@@ -127,6 +127,48 @@ public class MentorCVDAO extends DBContext {
         }
         return list;
     }
+   
+   public List<CV_Mentor> getListByPage(List<CV_Mentor> lisst, int start, int end){
+     List<CV_Mentor> arr = new ArrayList<>();
+       for (int i = start; i < end; i++) {
+           arr.add(lisst.get(i));
+       }
+       return arr;
+   };
+   
+   public List<CV_Mentor> search(String keyword, String professtion, String service ,String achievements){
+       List<CV_Mentor> list = new ArrayList<>();
+       String sql = "select   mentor_id ,email,full_name, avatar, profession, profession_introduction,service_description, achievements \n" +
+        "  from user inner join cv_of_mentor on user_id = mentor_id where 1=1 ";
+       if(keyword!=null && !keyword.equals("")){
+           sql += " and full_name like '%" + keyword + "%' " ;
+       }
+       if(professtion!= null && !professtion.equals("")){
+           sql += " and profession like '%" + professtion + "%' " ;
+       }
+       if(service != null && !service.equals("")){
+           sql += " and service_description like '%" + service +"%'  " ;
+       }
+       if(achievements != null && !achievements.equals("")){
+           sql += " and achievements like '%" + achievements +"%'  " ;
+       }
+       
+       try{
+           PreparedStatement stm = connection.prepareStatement(sql);
+           ResultSet rs = stm.executeQuery();
+           while(rs.next()){
+               list.add(new CV_Mentor(rs.getInt("mentor_id"), rs.getString("profession"), 
+                        rs.getString("profession_introduction"), rs.getString("service_description"), rs.getString("achievements"), 
+                        new User(rs.getString("avatar"), rs.getString("full_name"), rs.getString("email"))));
+           }
+            
+       }catch(SQLException e){
+           System.out.println(e);
+       }
+        return list;
+           
+        
+   }
 
    
    Connection conn = null;
