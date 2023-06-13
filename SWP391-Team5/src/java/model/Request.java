@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.*;
 /**
  *
@@ -12,28 +14,37 @@ public class Request {
     private int request_id;
     private int mentor_id;
     private int mentee_id;
-    private int skill_id;
     private String title;
     private String request_content;
+    private int time_study;
+    private Timestamp time_begin;
+    private Timestamp created_date;
+    private Timestamp finish_date;
     private int request_status;
-    private Date created_date;
-    private Date finish_date;
+   
+    
 
     public Request() {
     }
 
-    public Request(int request_id, int mentor_id, int mentee_id, int skill_id, String title, String request_content, int request_status, Date created_date, Date finish_date) {
+
+    public Request(int request_id, int mentor_id, int mentee_id,  String title, String request_content, int time_study, Timestamp time_begin, Timestamp created_date, Timestamp finish_date, int request_status) {
         this.request_id = request_id;
         this.mentor_id = mentor_id;
         this.mentee_id = mentee_id;
-        this.skill_id = skill_id;
+      
         this.title = title;
         this.request_content = request_content;
-        this.request_status = request_status;
+        this.time_study = time_study;
+        this.time_begin = time_begin;
         this.created_date = created_date;
         this.finish_date = finish_date;
+        this.request_status = request_status;
     }
 
+  
+
+  
     public int getRequest_id() {
         return request_id;
     }
@@ -58,13 +69,7 @@ public class Request {
         this.mentee_id = mentee_id;
     }
 
-    public int getSkill_id() {
-        return skill_id;
-    }
-
-    public void setSkill_id(int skill_id) {
-        this.skill_id = skill_id;
-    }
+ 
 
     public String getTitle() {
         return title;
@@ -82,6 +87,38 @@ public class Request {
         this.request_content = request_content;
     }
 
+    public int getTime_study() {
+        return time_study;
+    }
+
+    public void setTime_study(int time_study) {
+        this.time_study = time_study;
+    }
+
+    public Timestamp getTime_begin() {
+        return time_begin;
+    }
+
+    public void setTime_begin(Timestamp time_begin) {
+        this.time_begin = time_begin;
+    }
+
+    public Timestamp getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(Timestamp created_date) {
+        this.created_date = created_date;
+    }
+
+    public Timestamp getFinish_date() {
+        return finish_date;
+    }
+
+    public void setFinish_date(Timestamp finish_date) {
+        this.finish_date = finish_date;
+    }
+
     public int getRequest_status() {
         return request_status;
     }
@@ -90,21 +127,11 @@ public class Request {
         this.request_status = request_status;
     }
 
-    public Date getCreated_date() {
-        return created_date;
+    @Override
+    public String toString() {
+        return "Request{" + "request_id=" + request_id + ", mentor_id=" + mentor_id + ", mentee_id=" + mentee_id + ", title=" + title + ", request_content=" + request_content + ", time_study=" + time_study + ", time_begin=" + time_begin + ", created_date=" + created_date + ", finish_date=" + finish_date + ", request_status=" + request_status + '}';
     }
 
-    public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
-    }
-
-    public Date getFinish_date() {
-        return finish_date;
-    }
-
-    public void setFinish_date(Date finish_date) {
-        this.finish_date = finish_date;
-    }
     
     
 }

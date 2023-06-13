@@ -24,6 +24,13 @@ public class Skill {
         this.skill_img = skill_img;
         this.skill_status = skill_status;
     }
+        public Skill(int mentor_id, int skill_id, String skill_name, int skill_status) {
+        
+        this.skill_id = skill_id;
+        this.skill_name = skill_name;
+        this.skill_status = skill_status;
+    }
+
 
     public int getSkill_id() {
         return skill_id;
