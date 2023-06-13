@@ -33,6 +33,8 @@
 
         <link rel="stylesheet" href="assets/css/overrideb6f5.css?v=10" type="text/css" />
 
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="assets/css/ratecomment.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
@@ -346,15 +348,36 @@
                                             </div>
                                             <div class="tab-content clearfix" id="tab_profile_pending">
                                             </div>
-                                            <div>
-                                                <div class="box-group-custom-top">
-                                                    <button type="button" class="btn btn-info btn-box-top-lg"
-                                                            style="background-color: #175E4C; color: #fff; margin-top: 20px; min-width: 24%;">Viết đánh giá</button>
-                                                </div>
-                                            </div>
+
 
                                             <div class="tab-content clearfix" id="review">
                                                 <!-- Danh gia o day -->
+
+                                                <div class="pb-4 pt-4 pl-3 pr-3">
+                                                    <div class="row">
+                                                        <div class="wrapper1 col-12">
+                                                            <h3>Viết đánh giá cho Mentor</h3>
+                                                            <form action="commentAndRateStart?mentor_id=1" method="post">
+                                                                <div class="rating1">
+                                                                    <input type="number" name="rating" hidden>
+                                                                    <i class='bx bx-star star' style="--i: 1;"></i>
+                                                                    <i class='bx bx-star star' style="--i: 2;"></i>
+                                                                    <i class='bx bx-star star' style="--i: 3;"></i>
+                                                                    <i class='bx bx-star star' style="--i: 4;"></i>
+                                                                    <i class='bx bx-star star' style="--i: 5;"></i>
+                                                                </div>
+                                                                <textarea name="opinion" cols="30" rows="5" placeholder="Your opinion..." 
+                                                                          style="outline: none;resize: none;width: 80%"></textarea>
+                                                                <div class="btn-group">
+                                                                    <button type="submit" class="btn submit">Submit</button>
+                                                                    <button class="btn cancel">Cancel</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
 
                                                 <div class="pb-4 pt-4 pl-3 pr-3">
                                                     <div class="row">
@@ -1087,6 +1110,7 @@
 <script src="assets/js/star-rating.js"></script>
 <!-- Hien thi review -->
 <script src="assets/js/functions.js"></script>
+<script src="assets/js/ratecomment.js"></script>
 
 <jsp:include page="../home/footer.jsp"/>
 </body>

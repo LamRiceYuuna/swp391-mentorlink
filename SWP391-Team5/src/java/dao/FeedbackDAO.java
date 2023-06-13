@@ -46,5 +46,10 @@ public class FeedbackDAO extends DBContext {
             System.out.println(e);
         }
     }
+    
+    public static void main(String[] args) {
+        FeedbackDAO fb = new FeedbackDAO();
+        fb.insertFeedback(3, 1, 5, "Mentor good");
+    }
 
 }
