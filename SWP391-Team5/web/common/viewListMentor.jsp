@@ -54,7 +54,7 @@
             <a id="button" class="show"></a>
 
 
-            <form id="formSearchMentor" action="" method="get">
+            <form id="formSearchMentor" action="search" method="get">
                 <div class="search_mentor"
                      style="background: url(assets/images/banner_cover.png) center center no-repeat; background-size: cover; height: 300px;">
                     <div class="header_overlay"></div>
@@ -70,10 +70,8 @@
                                 <div class="row col-12">
                                     <div class="mb_10 col-sm-12 col-md-6">
                                         <input type="text" name="keyword" style="width: 100%" value="" class="form-control"
-                                               placeholder="Nhập từ khóa để tìm kiếm">
+                                               placeholder="Nhập từ khóa để tìm kiếm Mentor">
                                     </div>
-                                    <input type="hidden" name="page" value="1">
-
 
 
                                     <div class="select-search-box-multiple col-sm-12 col-md-3 mb_10">
@@ -100,33 +98,28 @@
                 </div>
                 <div class="container mt-3">
                     <div class="col-12">
-                        <p class="mb-2">Tìm thấy <b>688</b> Mentor cho bạn!<span class="ml-3"
+<!--                        <p class="mb-2">Tìm thấy <b>688</b> Mentor cho bạn!<span class="ml-3"
                                                                                  style="cursor: pointer;color:#175E4C;" onclick="toggleFilter()"><b>Lọc kết quả</b><i
                                     id="toggle-icon-filter" class="fa fa-chevron-circle-down fa-lg" aria-hidden="true"
-                                    style="color:#175E4C; padding-left: 5px;  border-left: 1px solid #fff;"></i></span></p>
+                                    style="color:#175E4C; padding-left: 5px;  border-left: 1px solid #fff;"></i></span></p>-->
                     </div>
                     <div id="filter-search" class="col-12 pt-2" style="background-color: #63A393">
                         <div class="search_mentor">
                             <div class="search_box_mentor page_search_mentor pt-1 pb-1">
                                 <div class="form-inline pl-3 mb-1 justify-content-between">
                                     <div class="row">
-                                        <div class="select-search-box mb_10 col-md-3" style="margin-right: 20px; ">
-                                            <select name="topic_id" id="topic_id" data-placeholder="Chọn ngôn ngữ">
-                                                <option value="0">Chọn Chủ đề</option>
-                                                <option value="1">Định hướng và chia sẻ kinh nghiệm nghề nghiệp</option>
-                                                <option value="2">Hoạt động ngoại khóa/ Học bổng du học/ Cuộc thi</option>
-                                                <option value="3">Kỹ năng mềm</option>
-                                                <option value="4">Chủ đề bất kỳ</option>
-                                                <option value="-1">Khác</option>
-                                            </select>
-                                        </div>
+                                        
                                         <div class="mb_10 col-md-3">
-                                            <input type="text" name="company" style="width: 180px;" value=""
+                                            <input type="text" name="professtion" style="width: 180px;" value=""
                                                    class="form-control" placeholder="Tên nghề nghiệp">
                                         </div>
                                         <div class="mb_10 col-md-3">
-                                            <input type="text" name="position" style="width: 180px;" value=""
+                                            <input type="text" name="service" style="width: 180px;" value=""
                                                    class="form-control" placeholder="Tên dịch vụ">
+                                        </div>
+                                        <div class="mb_10 col-md-3">
+                                            <input type="text" name="achievements" style="width: 180px;" value=""
+                                                   class="form-control" placeholder="Tên thành tựu">
                                         </div>
 
                                         <div class="col-md-3">                                          
@@ -189,7 +182,7 @@
                                                 </a>
                                             </div>-->
                                             <div class="carousel-item">
-                                                <a href="s/fmentoring.html#register" target="_blank">
+                                                <a href="#" target="_blank">
                                                     <img src="https://mentori.vn/assets/images/banner/search_mentor_ck_desktop.png?v=1" width="100%">
                                                     <div style="height: 50px">
                                                     </div>
@@ -197,7 +190,7 @@
                                             </div>
 
                                             <div class="carousel-item">
-                                                <a href="s/fmentoring.html#register" target="_blank">
+                                                <a href="#" target="_blank">
                                                     <img src="https://mentori.vn/assets/images/banner/bannerweb01.png" width="100%">
                                                     <div style="height: 50px">
                                                     </div>
@@ -236,9 +229,9 @@
                         
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-3 mt-3">
                             <div class="mentor_item mentor_item_custom wow fadeInUp">
-                                <a href="#">
+                                <a href="#ViewCvMentor?mentor_id=${p.mentor_id}">
                                     <div class="mentor_avatar">
-                                        <img src="${p.getInfor().getAvatar()}" alt="Quân Đặng">
+                                        <img src="${p.getInfor().getAvatar()}" alt="${p.getInfor().getFull_name()}">
                                     </div>
                                     <div class="mentor_info">
                                         <div style="min-height: 100px;">
@@ -304,18 +297,12 @@
                             <!-- Phân trang  -->
                             <div class="search_pagination mb-5 mt-5">
                                 <nav aria-label="Page navigation example">
+                                    <c:set var="page" value="${requestScope.num}"/>
                                     <ul class='pagination'>
-                                        <li class='page-item'><a class='page-link' href='mentor2679.html?page=1'>1</a></li>
-                                        <li class='page-item'><a class='page-link' href='mentor4658.html?page=2'>2</a></li>
-                                        <li class='page-item'><a class='page-link' href='mentor9ba9.html?page=3'>3</a></li>
-                                        <li class='page-item'><a class='page-link' href='mentorfdb0.html?page=4'>4</a></li>
-                                        <li class='page-item'><a class='page-link' href='mentoraf4d.html?page=5'>5</a></li>
-                                        <li class='page-item'><a class='page-link' title='>'
-                                                                 href='https://mentori.vn/mentor?page=1'><i class='icon-angle-right'
-                                                                                       aria-hidden='true'></i></a></li>
-                                        <li class='page-item'><a class='page-link' title='>>'
-                                                                 href='https://mentori.vn/mentor?page=35'><i class='icon-double-angle-right'
-                                                                                        aria-hidden='true'></i></a></li>
+                                        <c:forEach begin="${1}" end="${requestScope.num}" var="i" >
+                                            <li class='page-item'><a class='page-link' style="color: green; font-style:inherit "   href='viewListMentor?page=${i}'>${i}</a></li>
+                                        </c:forEach>
+
                                     </ul>
                                 </nav>
                             </div>
