@@ -1,28 +1,27 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.viewListMentor;
+package controller.mentee;
 
-import dao.MentorCVDAO;
-import dao.SkillDAO;
+import dao.FeedbackDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.CV_Mentor;
-import model.Skill;
+import jakarta.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
  * @author admin
  */
-@WebServlet(name="viewListMentorController", urlPatterns={"/viewListMentor"})
-public class viewListMentorController extends HttpServlet {
+@WebServlet(name="commentAndRateStartController", urlPatterns={"/commentAndRateStart"})
+public class commentAndRateStartController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,32 +33,16 @@ public class viewListMentorController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        //Get all list sklill
-        SkillDAO sk = new SkillDAO();
-        List<Skill> listS = sk.getAllSkillByStatus();
-        request.setAttribute("listS", listS);
-        //Get all list mentor 
-        MentorCVDAO cv = new MentorCVDAO();
-        List<CV_Mentor> list1 = cv.getAllListMentor();
-        //phan trang
-        int page,numperpage=8;
-        int size = list1.size();
-        int num =(size%8==0?(size/8):((size/8))+1);
-        String xpage = request.getParameter("page");
-        if(xpage == null){
-            page=1;
-        }else {
-            page= Integer.parseInt(xpage);
-            
-        }
-        int start,end;
-        start=(page-1)*numperpage;
-        end = Math.min(page*numperpage, size);
-        List<CV_Mentor> listM = cv.getListByPage(list1, start, end);
-        request.setAttribute("listM", listM);
-        request.setAttribute("page", page);
-        request.setAttribute("num", num);
-        request.getRequestDispatcher("common/viewListMentor.jsp").forward(request, response);
+        int rating = Integer.parseInt(request.getParameter("rating"));
+        String opinion = request.getParameter("opinion");
+        HttpSession session = request.getSession();
+        User abc = (User)session.getAttribute("acc");
+//        int user_id = Integer.parseInt(abc.getUser_id()) ;
+        int user_id = 3;
+        int mentor_id = Integer.parseInt(request.getParameter("mentor_id"));
+        
+        FeedbackDAO fb = new FeedbackDAO();
+        fb.insertFeedback(user_id, mentor_id, rating, opinion);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -74,7 +57,6 @@ public class viewListMentorController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-        
     } 
 
     /** 
