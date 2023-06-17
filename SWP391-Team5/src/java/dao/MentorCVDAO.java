@@ -22,7 +22,7 @@ import model.User;
 public class MentorCVDAO extends DBContext {
 
     public boolean createCV(int mentor_id, String fullName, String date_of_birth, int gender, String address,
-            String profession, String profession_intro, String service_des, String archivement, String programming, String[] skillId) throws SQLException {
+            String profession, String profession_intro, String service_des, String archivement, String archivement_des, String programming, String[] skillId) throws SQLException {
         try {
 
             connection.setAutoCommit(false);  // Vô hiệu hóa tự động xác nhận giao dịch
@@ -51,16 +51,18 @@ public class MentorCVDAO extends DBContext {
                     + "profession_introduction,\n"
                     + "service_description,\n"
                     + "achievements,\n"
+                    + "achievements_des,\n"
                     + "language)\n"
                     + "VALUES\n"
-                    + "(?,?,?,?,?,?);";
+                    + "(?,?,?,?,?,?,?);";
             PreparedStatement ps2 = connection.prepareStatement(sql2);
             ps2.setInt(1, mentor_id);
             ps2.setString(2, profession);
             ps2.setString(3, profession_intro);
             ps2.setString(4, service_des);
             ps2.setString(5, archivement);
-            ps2.setString(6, programming);
+            ps2.setString(6, archivement_des);
+            ps2.setString(7, programming);
             ps2.executeUpdate();
             // Câu lệnh INSERT vào table_B
             String sql3 = "INSERT INTO `swp391_group5`.`cv_skill`\n"
@@ -71,7 +73,7 @@ public class MentorCVDAO extends DBContext {
                     + "?);";
             PreparedStatement ps3 = connection.prepareStatement(sql3);
 
-            for (String id : skillId) { 
+            for (String id : skillId) {
                 int value_id = Integer.parseInt(id);
 
                 // Thiết lập các giá trị trong Prepared Statement
@@ -91,6 +93,26 @@ public class MentorCVDAO extends DBContext {
         }
 
     }
+    
+    public CV_Mentor getCvMentorById(String mentor_id) {
+
+        String sql = "select mentor_id ,full_name, avatar, email, username, phone, profession, profession_introduction,service_description, "
+                + "achievements,achievements_des, language from user join cv_of_mentor on user_id = mentor_id where mentor_id = ?";
+        try {
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, mentor_id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return new CV_Mentor(rs.getInt("mentor_id"), rs.getString("profession"), rs.getString("profession_introduction"),
+                        rs.getString("service_description"), rs.getString("achievements"), rs.getString("achievements_des"), rs.getString("language"),
+                        new User(rs.getString("avatar"), rs.getString("full_name"), rs.getString("email"), rs.getString("username"), rs.getString("phone")));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
 
    public List<CV_Mentor> getTopListMentor() {
         List<CV_Mentor> list = new ArrayList<>();
@@ -415,6 +437,97 @@ public class MentorCVDAO extends DBContext {
             }
             return list;
         } catch (Exception ex) {
+        }
+        return null;
+    }
+    
+    
+    public boolean updateCV(int mentor_id, String fullName, String date_of_birth, int gender, String address,
+            String profession, String profession_intro, String service_des, String archivement, String archivement_des, String programming, String[] skillId) throws SQLException {
+        try {
+
+            connection.setAutoCommit(false);  // Vô hiệu hóa tự động xác nhận giao dịch
+
+            //Câu lệnh Update Information user
+            String sql1 = "UPDATE `swp391_group5`.`user`\n"
+                    + "SET\n"
+                    + "`gender` = ?,\n"
+                    + "`full_name` = ?,\n"
+                    + "`date_of_birth` = ?,\n"
+                    + "`address` = ?\n"
+                    + "WHERE `user_id` = ?;";
+
+            PreparedStatement ps1 = connection.prepareStatement(sql1);
+            ps1.setInt(1, gender);
+            ps1.setString(2, fullName);
+            ps1.setDate(3, java.sql.Date.valueOf(date_of_birth));
+            ps1.setString(4, address);
+            ps1.setInt(5, mentor_id);
+            ps1.executeUpdate();
+
+            // Câu lệnh INSERT vào table_Cv of Mentor
+            String sql2 = "UPDATE `swp391_group5`.`cv_of_mentor`\n"
+                    + "SET\n"
+                    + "`profession` = ?,\n"
+                    + "`profession_introduction` = ?,\n"
+                    + "`service_description` = ?,\n"
+                    + "`achievements` = ?,\n"
+                    + "`achievements_des` = ?,\n"
+                    + "`language` = ?\n"
+                    + "WHERE `mentor_id` = ?;";
+            PreparedStatement ps2 = connection.prepareStatement(sql2);
+            ps2.setString(1, profession);
+            ps2.setString(2, profession_intro);
+            ps2.setString(3, service_des);
+            ps2.setString(4, archivement);
+            ps2.setString(5, archivement_des);
+            ps2.setString(6, programming);
+            ps2.setInt(7, mentor_id);
+            ps2.executeUpdate();
+            // Câu lệnh INSERT vào table_B
+//            String sql3 = "UPDATE `swp391_group5`.`cv_skill`\n"
+//                    + "SET `skill_id` = ?\n"
+//                    + "WHERE `mentor_id` = ?;";
+//            PreparedStatement ps3 = connection.prepareStatement(sql3);
+//
+//            for (String id : skillId) {
+//                int value_id = Integer.parseInt(id);
+//
+//                // Thiết lập các giá trị trong Prepared Statement
+//                ps3.setInt(1, value_id);
+//                ps3.setInt(2, mentor_id);
+//
+//                // Thực hiện câu lệnh cập nhật trong cơ sở dữ liệu
+//                ps3.executeUpdate();
+//            }
+
+            connection.commit();  // Áp dụng thay đổi vào cơ sở dữ liệu
+            return true;
+        } catch (Exception e) {
+            connection.rollback();  // Hủy bỏ giao dịch nếu có lỗi
+            return false;
+        } finally {
+            connection.setAutoCommit(true);  // Bật lại tự động xác nhận giao dịch
+        }
+
+    }
+    
+    
+    public CV_Mentor getInfoCvMentorById(String mentor_id) {
+
+        String sql = "select mentor_id ,username, gender, full_name, date_of_birth, email, address, profession, profession_introduction,service_description, "
+                + "achievements,achievements_des, language from user join cv_of_mentor on user_id = mentor_id where mentor_id = ?";
+        try {
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, mentor_id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return new CV_Mentor(rs.getInt("mentor_id"), rs.getString("profession"), rs.getString("profession_introduction"),
+                        rs.getString("service_description"), rs.getString("achievements"), rs.getString("achievements_des"), rs.getString("language"),
+                        new User(rs.getString("username"), rs.getInt("gender"), rs.getString("full_name"), rs.getDate("date_of_birth"), rs.getString("email"), rs.getString("address")));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
         }
         return null;
     }

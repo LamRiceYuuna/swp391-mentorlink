@@ -24,7 +24,7 @@
         <servlet-name>Temp</servlet-name>
         <servlet-class>controller.common.Temp</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>requestMentor</servlet-name>
         <servlet-class>controller.CreateRequest.requestMentor</servlet-class>
     </servlet>
@@ -43,6 +43,22 @@
     <servlet>
         <servlet-name>viewSkill</servlet-name>
         <servlet-class>controller.common.viewSkill</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListFollowingRequest</servlet-name>
+        <servlet-class>controller.mentor.ListFollowingRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCv</servlet-name>
+        <servlet-class>controller.mentor.UpdateCv</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCvMentor</servlet-name>
+        <servlet-class>controller.common.ViewCvMentor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListMenteeServlet</servlet-name>
+        <servlet-class>controller.mentee.ListMenteeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
@@ -87,6 +103,22 @@
     <servlet-mapping>
         <servlet-name>viewSkill</servlet-name>
         <url-pattern>/viewSkill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListFollowingRequest</servlet-name>
+        <url-pattern>/followingRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCv</servlet-name>
+        <url-pattern>/updatecv</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCvMentor</servlet-name>
+        <url-pattern>/viewcv</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListMenteeServlet</servlet-name>
+        <url-pattern>/listmentee</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

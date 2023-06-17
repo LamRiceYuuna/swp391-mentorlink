@@ -1,7 +1,6 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
-    Document   : createCV
-    Created on : May 28, 2023, 5:10:47 PM
+    Document   : updateCV
+    Created on : Jun 14, 2023, 2:51:32 AM
     Author     : Tuan Vinh
 --%>
 
@@ -11,7 +10,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Create CV</title>
+        <title>Update CV</title>
         <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
         <link rel="stylesheet" href="assets/css/createCV.css">
@@ -23,7 +22,7 @@
         <jsp:include page="../home/header.jsp"/>
         <header class="header1">
             <div class="col-md-12 title-cv text-center">
-                <h1 class="header__title" style="font-weight: 500; font-size: 40px;"><b>Create CV Of Mentor</b></h1>
+                <h1 class="header__title" style="font-weight: 500; font-size: 40px;"><b>Update CV Of Mentor</b></h1>
             </div>
         </header>
         <div class="content">
@@ -45,31 +44,31 @@
                     </div>
                     <div class="row">
                         <div class="col-12 col-lg-8 m-auto">
-                            <form class="multisteps-form__form" action="CreateCV" method="post">
+                            <form class="multisteps-form__form" action="updatecv" method="post">
                                 <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
                                     <h3 class="multisteps-form__title"><b>Your User Info</b></h3>
                                     <div class="multisteps-form__content">
                                         <div class="form-row mt-4">
                                             <div class="col-12 col-sm-6">
                                                 <label>Account Name</label>
-                                                <input class="multisteps-form__input form-control" type="text" value="${InfoU.getUsername()}" placeholder="Account Name" readonly/>
+                                                <input class="multisteps-form__input form-control" type="text" value="${cv.getInfor().getUsername()}" placeholder="Account Name" readonly/>
                                             </div>
                                             <div class="col-12 col-sm-6 mt-4 mt-sm-0">
                                                 <label>Full Name</label>
-                                                <input class="multisteps-form__input form-control" type="text" value="${InfoU.getFull_name()}" placeholder="Full Name" name="fullName"/>
+                                                <input class="multisteps-form__input form-control" type="text" value="${cv.getInfor().getFull_name()}" placeholder="Full Name" name="fullName"/>
                                             </div>
                                         </div>
                                         <div class="form-row mt-4">
                                             <div class="col-12 col-sm-6">
                                                 <label>Date Of Birth</label>
-                                                <input class="multisteps-form__input form-control" type="date" name="date_of_birth" value="${InfoU.getDate_of_birth()}"/>
+                                                <input class="multisteps-form__input form-control" type="date" name="date_of_birth" value="${cv.getInfor().getDate_of_birth()}"/>
                                             </div>
                                             <div class="col-12 col-sm-6 mt-4 mt-sm-0">
                                                 <div class="form-group">
                                                     <label for="gender">Gender</label>
                                                     <select class="form-control" id="gender" name="gender" >
-                                                        <option value="Male" ${InfoU.getGender() == 1 ? 'selected' : ''}>Nam</option>
-                                                        <option value="Female" ${InfoU.getGender() == 0 ? 'selected' : ''}>Nữ</option>
+                                                        <option value="Male" ${cv.getInfor().getGender() == 1 ? 'selected' : ''}>Nam</option>
+                                                        <option value="Female" ${cv.getInfor().getGender() == 0 ? 'selected' : ''}>Nữ</option>
                                                     </select>
                                                 </div>                                                   
                                                 <!--<input class="multisteps-form__input form-control" type="text" name="gender"/>-->
@@ -78,11 +77,11 @@
                                         <div class="form-row mt-4">
                                             <div class="col-12 col-sm-6">
                                                 <label>Email</label>
-                                                <input class="multisteps-form__input form-control" name="email" value="${InfoU.getEmail()}" type="email" placeholder="Email" readonly/>
+                                                <input class="multisteps-form__input form-control" name="email" value="${cv.getInfor().getEmail()}" type="email" placeholder="Email" readonly/>
                                             </div>
                                             <div class="col-12 col-sm-6 mt-4 mt-sm-0">
                                                 <label>Address</label>
-                                                <input class="multisteps-form__input form-control" type="text" placeholder="Address" name="address" value="${InfoU.getAddress()}"/>
+                                                <input class="multisteps-form__input form-control" type="text" placeholder="Address" name="address" value="${cv.getInfor().getAddress()}"/>
                                             </div>
                                         </div>
                                         <div class="button-row d-flex mt-4">
@@ -100,13 +99,13 @@
                                         <div class="form-row mt-4">
                                             <div class="col">
                                                 <label>Your Profession</label>
-                                                <input class="multisteps-form__input form-control" type="text" placeholder="Your Profession" name="profession"/>
+                                                <input class="multisteps-form__input form-control" value="${cv.getProfession()}" type="text" placeholder="Your Profession" name="profession"/>
                                             </div>
                                         </div>
                                         <div class="form-row mt-4">
                                             <label>Profession Introduction</label>
                                             <textarea class="multisteps-form__textarea form-control" placeholder="Service Description"
-                                                      rows="4" name="profession_intro" style="resize: none;"></textarea>
+                                                      rows="4" name="profession_intro" style="resize: none;">${cv.getProfession_introduction()}</textarea>
                                         </div>
 
                                         <h3 class="multisteps-form__title" style="margin-top: 50px;"><b>Archivement</b></h3>
@@ -115,13 +114,13 @@
                                         <div class="form-row mt-4">
                                             <div class="col">
                                                 <label>Your Archivement</label>
-                                                <input class="multisteps-form__input form-control" type="text" placeholder="Your Profession" name="archivement"/>
+                                                <input class="multisteps-form__input form-control" type="text" placeholder="Your Profession" name="archivement" value="${cv.getAchievements()}"/>
                                             </div>
                                         </div>
                                         <div class="form-row mt-4">
                                             <label>Archivement Descition</label>
                                             <textarea class="multisteps-form__textarea form-control" placeholder="Service Description"
-                                                      rows="4" name="archivement_des" style="resize: none;"></textarea>
+                                                      rows="4" name="archivement_des" style="resize: none;">${cv.getAchievements_des()}</textarea>
                                         </div>
                                         <div class="row">
                                             <div class="button-row d-flex mt-4 col-12">
@@ -179,7 +178,7 @@
                                     <div class="form-row mt-4">
                                         <label>Your Description</label>
                                         <textarea class="multisteps-form__textarea form-control" name="service_des" placeholder="Service Description"
-                                                  rows="4" style="resize: none;"></textarea>
+                                                  rows="4" style="resize: none;">${cv.getService_description()}</textarea>
                                     </div>
 
                                     <h3 class="multisteps-form__title" style="margin-top: 50px;"><b>The rogramming</b></h3>
@@ -188,7 +187,7 @@
                                     <div class="form-row mt-4">
                                         <label>The programming (Framework) you can training for the Mentee.</label>
                                         <textarea class="multisteps-form__textarea form-control" name="programming" placeholder="Service Description"
-                                                  rows="4" style="resize: none;"></textarea>
+                                                  rows="4" style="resize: none;" >${cv.getLanguage()}</textarea>
                                     </div>
                                     <div class="button-row d-flex mt-4">
                                         <button class="btn btn-back js-btn-prev" type="button" title="Prev" style="color: #fff;

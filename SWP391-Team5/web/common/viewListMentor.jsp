@@ -229,7 +229,7 @@
                         
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-3 mt-3">
                             <div class="mentor_item mentor_item_custom wow fadeInUp">
-                                <a href="#ViewCvMentor?mentor_id=${p.mentor_id}">
+                                <a href="viewcv?mentor_id=${p.mentor_id}">
                                     <div class="mentor_avatar">
                                         <img src="${p.getInfor().getAvatar()}" alt="${p.getInfor().getFull_name()}">
                                     </div>

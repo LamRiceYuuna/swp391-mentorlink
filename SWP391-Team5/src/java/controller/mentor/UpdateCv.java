@@ -7,7 +7,6 @@ package controller.mentor;
 
 import dao.MentorCVDAO;
 import dao.SkillDAO;
-import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,14 +15,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.CV_Mentor;
 import model.Skill;
-import model.User;
 
 /**
  *
  * @author Tuan Vinh
  */
-public class CreateCV extends HttpServlet {
+public class UpdateCv extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +39,10 @@ public class CreateCV extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CreateCV</title>");  
+            out.println("<title>Servlet UpdateCv</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CreateCV at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet UpdateCv at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,14 +59,13 @@ public class CreateCV extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        UserDAO daoU = new UserDAO();
-        SkillDAO dao = new SkillDAO();
-        ArrayList<Skill> list = dao.getAllSkillInfo();
-        User infoU = daoU.getUserById(3);
-        request.setAttribute("InfoU", infoU);
+        MentorCVDAO dao = new MentorCVDAO();
+        CV_Mentor cv = dao.getInfoCvMentorById("3");
+        SkillDAO dao1 = new SkillDAO();
+        ArrayList<Skill> list = dao1.getAllSkillInfo();
+        request.setAttribute("cv", cv);
         request.setAttribute("listSkill", list);
-        request.setAttribute("mess", "Error");
-        request.getRequestDispatcher("/mentor/createCV.jsp").forward(request, response);
+        request.getRequestDispatcher("mentor/updateCV.jsp").forward(request, response);
     } 
 
     /** 
@@ -103,7 +101,7 @@ public class CreateCV extends HttpServlet {
 
         boolean result;
         try {
-            result = dao.createCV(mentor_id, fullName, birthdate, gender, address, profession, profession_intro, 
+            result = dao.updateCV(mentor_id, fullName, birthdate, gender, address, profession, profession_intro, 
                     service_des, archivement, archivement_des, programming, skillId);
         } catch (SQLException e) {
             // Xử lý ngoại lệ ở đây

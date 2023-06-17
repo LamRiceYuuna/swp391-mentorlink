@@ -256,6 +256,10 @@
                                 <i class="fas fa-chart-bar"></i>
                                 <span class="nav-item">List-All-Mentor</span>
                             </a></li>
+                        <li><a href="listmentee">
+                                <i class="fas fa-chart-bar"></i>
+                                <span class="nav-item">List-All-Mentee</span>
+                            </a></li>
                         <li><a href="#">
                                 <i class="fas fa-comment"></i>
                                 <span class="nav-item">Attendance</span>

@@ -18,6 +18,7 @@ public class Feedback {
     private String feedback_comment;
     private Date create_date;
     private int fb_status;
+    private User infor;
 
     public Feedback(int user_id, int mentor_id, int rate_start, String feedback_comment, Date create_date, int fb_status) {
         this.user_id = user_id;
@@ -28,6 +29,27 @@ public class Feedback {
         this.fb_status = fb_status;
     }
 
+    public Feedback(int user_id, int mentor_id, int rate_start, String feedback_comment, Date create_date, int fb_status, User infor) {
+        this.user_id = user_id;
+        this.mentor_id = mentor_id;
+        this.rate_start = rate_start;
+        this.feedback_comment = feedback_comment;
+        this.create_date = create_date;
+        this.fb_status = fb_status;
+        this.infor = infor;
+    }
+    
+    
+
+    public User getInfor() {
+        return infor;
+    }
+
+    public void setInfor(User infor) {
+        this.infor = infor;
+    }
+
+    
     
     
     public Feedback() {

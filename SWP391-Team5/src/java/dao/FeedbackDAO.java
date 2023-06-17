@@ -9,6 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import model.Feedback;
+import model.User;
 
 /**
  *
@@ -20,9 +23,9 @@ public class FeedbackDAO extends DBContext {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public void insertFeedback(int user_id, int mentor_id, int rate_start, String feedback) {
-        long millis= System.currentTimeMillis();   
-        java.sql.Date date= new java.sql.Date(millis);   
+    public boolean insertFeedback(int user_id, int mentor_id, int rate_start, String feedback) {
+        long millis = System.currentTimeMillis();
+        java.sql.Date date = new java.sql.Date(millis);
         String sql = "INSERT INTO `swp391_group5`.`feedback`\n"
                 + "(`user_id`,\n"
                 + "`mentor_id`,\n"
@@ -42,11 +45,32 @@ public class FeedbackDAO extends DBContext {
             ps.setDate(5, date);
             ps.setInt(6, 1);
             ps.executeUpdate();
+            return true;
         } catch (SQLException e) {
             System.out.println(e);
         }
+        return false;
     }
-    
+
+    public ArrayList<Feedback> getAllFeedbackByStatus(int mentor_id) {
+
+        ArrayList<Feedback> list = new ArrayList<>();
+        String query = "SELECT email,full_name, avatar, feedback.user_id, mentor_id, rate_start, feedback_comment, "
+                + "feedback.create_date, fb_status FROM user join feedback on feedback.user_id = user.user_id where mentor_id = ?;";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, mentor_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Feedback(rs.getInt("user_id"), rs.getInt("mentor_id"), rs.getInt("rate_start"), rs.getString("feedback_comment"),
+                        rs.getDate("create_date"), rs.getInt("fb_status"), new User(rs.getString("avatar"), rs.getString("full_name"), rs.getString("email"))));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         FeedbackDAO fb = new FeedbackDAO();
         fb.insertFeedback(3, 1, 5, "Mentor good");

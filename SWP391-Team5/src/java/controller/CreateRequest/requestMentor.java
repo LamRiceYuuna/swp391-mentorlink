@@ -41,10 +41,10 @@ public class requestMentor extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
           
-            int id_mentor = 2;
+            String id_mentor = request.getParameter("mentor_id");
 
             requestDAO dao = new requestDAO();
-            List<Skill> list = dao.getAllskillBySkill_id(id_mentor);
+            List<Skill> list = dao.getAllskillBySkill_id(Integer.parseInt(id_mentor));
 
             // day data len jsp
             request.setAttribute("listp", list);
@@ -119,12 +119,12 @@ public class requestMentor extends HttpServlet {
                 requestDAO DAO = new requestDAO();
                 DAO.insert(tieude, batdau1, id_mentor, sessionUser_id, ketthuc1, sogiohoc, noidung, framework);
                  processRequest(request, response);
-                try {
-                    ml.send(mail, name, tieude, batdau1, ketthuc1, sogiohoc, noidung, skills, framework);
-                   
-                } catch (ParseException ex) {
-                    Logger.getLogger(requestMentor.class.getName()).log(Level.SEVERE, null, ex);
-                }
+//                try {
+//                    ml.send(mail, name, tieude, batdau1, ketthuc1, sogiohoc, noidung, skills, framework);
+//                   
+//                } catch (ParseException ex) {
+//                    Logger.getLogger(requestMentor.class.getName()).log(Level.SEVERE, null, ex);
+//                }
             }
 
         }

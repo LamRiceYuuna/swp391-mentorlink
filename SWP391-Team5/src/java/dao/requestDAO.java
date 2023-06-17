@@ -51,6 +51,35 @@ public class requestDAO extends DBContext {
         return list;
 
     }
+    
+    public List<Request> listRequestByMetorID(String mentor_id) {
+        List<Request> list1 = new ArrayList<>();
+        String sql = "SELECT * FROM swp391_group5.request where mentor_id=?;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, Integer.parseInt(mentor_id));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list1.add(new Request(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getTimestamp(7),
+                        rs.getTimestamp(8),
+                        rs.getTimestamp(9),
+                        rs.getInt(10)
+                ));
+            }
+
+        } catch (Exception e) {
+
+        }
+        return list1;
+
+    }
 
     public List<Request> listRequestByID(String mentee_id) {
         List<Request> list1 = new ArrayList<>();

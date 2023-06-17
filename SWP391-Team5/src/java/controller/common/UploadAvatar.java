@@ -115,7 +115,7 @@ public class UploadAvatar extends HttpServlet {
     }
 
     public File getFolderUpload() {
-        File folderUpload = new File("D:\\EPPETE_FU\\Semester_5_Summer2023\\SWP391\\Class\\New folder\\mentorlink_group5\\SWP391-Team5\\web\\assets\\upload");
+        File folderUpload = new File("mentorlink_group5\\SWP391-Team5\\web\\assets\\upload");
         if (!folderUpload.exists()) {
             folderUpload.mkdirs();
         }

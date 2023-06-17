@@ -54,6 +54,25 @@ public class User {
         this.cv_status = cv_status;
     }
     
+    public User(String username, int gender, String full_name, Date date_of_birth, String email, String address) {
+        this.username = username;
+        this.gender = gender;
+        this.full_name = full_name;
+        this.date_of_birth = date_of_birth;
+        this.email = email;
+        this.address = address;
+    }
+
+    
+    public User(String avatar, String full_name, String email, String username, String phone) {
+        this.avatar = avatar;
+        this.full_name = full_name;
+        this.email = email;
+        this.username = username;
+        this.phone = phone;
+    }
+    
+    
     
     public User(String username,int gender, String avatar, String full_name, Date date_of_birth, String email, String address, String phone) {
         this.username = username;

@@ -35,7 +35,7 @@ public class requestdeleteControl extends HttpServlet {
       
         requestDAO dao= new requestDAO();
         dao.deletebyID(request_id);
-        request.getRequestDispatcher("CreateRequest/listRequestByMe").forward(request, response);
+        request.getRequestDispatcher("/listRequestMenTee").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

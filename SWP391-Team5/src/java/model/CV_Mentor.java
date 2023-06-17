@@ -14,6 +14,7 @@ public class CV_Mentor {
     private String profession_introduction;
     private String service_description;
     private String achievements;
+    private String achievements_des;
     private String language;
     private int skill_id;
     private Date created_date;
@@ -39,7 +40,19 @@ public class CV_Mentor {
         this.infor = infor;
     }
 
+    public CV_Mentor(int mentor_id, String profession, String profession_introduction, String service_description, String achievements, String achievements_des, String language, User infor) {
+        this.mentor_id = mentor_id;
+        this.profession = profession;
+        this.profession_introduction = profession_introduction;
+        this.service_description = service_description;
+        this.achievements = achievements;
+        this.achievements_des = achievements_des;
+        this.language = language;
+        this.infor = infor;
+    }
     
+    
+
 
     public CV_Mentor(int mentor_id, String profession, String profession_introduction, String service_description, String achievements, String language, int skill_id, Date created_date) {
         this.mentor_id = mentor_id;
@@ -115,5 +128,15 @@ public class CV_Mentor {
     public void setCreated_date(Date created_date) {
         this.created_date = created_date;
     }
+
+    public String getAchievements_des() {
+        return achievements_des;
+    }
+
+    public void setAchievements_des(String achievements_des) {
+        this.achievements_des = achievements_des;
+    }
+    
+    
     
 }
