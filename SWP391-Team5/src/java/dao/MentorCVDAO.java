@@ -174,7 +174,6 @@ public class MentorCVDAO extends DBContext {
        if(achievements != null && !achievements.equals("")){
            sql += " and achievements like '%" + achievements +"%'  " ;
        }
-       //sql += " order by mentor_id  limit " + pageSize + " offset " + (index -1) * pageSize;
        
        try{
            PreparedStatement stm = connection.prepareStatement(sql);

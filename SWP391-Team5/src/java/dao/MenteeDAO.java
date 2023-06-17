@@ -20,7 +20,36 @@ public class MenteeDAO extends DBContext {
 //    private byte mentee_gender;
 //    private byte mentee_status;
 //    private int mentee_hours;
-    
+    public List<Mentee> getMentees() {
+        List<Mentee> t = new ArrayList<>();
+
+        try {
+            String sql = "select b.mentee_id, a.full_name, a.username, a.avatar, a.gender, a.user_status, sum(b.time_study) as time_study from user as a join request as b on a.user_id = b.mentee_id group by b.mentee_id order by a.full_name;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            int xMentee_id;
+            String xMentee_name, xMentee_account, xMentee_avatar_img;
+            byte xMentee_gender, xMentee_status;
+            int xMentee_hours;
+            Mentee x;
+            while (rs.next()) {
+                xMentee_id = rs.getInt("mentee_id");
+                xMentee_name = rs.getString("full_name");
+                xMentee_account = rs.getString("username");
+                xMentee_avatar_img = rs.getString("avatar");
+                xMentee_gender = rs.getByte("gender");
+                xMentee_status = rs.getByte("user_status");
+                xMentee_hours = rs.getInt("time_study");
+                x = new Mentee(xMentee_id, xMentee_name, xMentee_account, xMentee_avatar_img, xMentee_gender, xMentee_status, xMentee_hours);
+                t.add(x);
+            }
+            rs.close();
+            stm.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
 
     public List<SkillMentee> getSkillMentees() {
         List<SkillMentee> s = new ArrayList<>();
@@ -63,36 +92,6 @@ public class MenteeDAO extends DBContext {
         for (SkillMentee mentee : t) {
             System.out.println(mentee.getSkillName());
         }
-    }
-    public List<Mentee> getMentees() {
-        List<Mentee> t = new ArrayList<>();
-        //Test merge lan2
-        try {
-            String sql = "select b.mentee_id, a.full_name, a.username, a.avatar, a.gender, a.user_status, sum(b.time_study) as time_study from user as a join request as b on a.user_id = b.mentee_id group by b.mentee_id order by a.full_name;";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
-            int xMentee_id;
-            String xMentee_name, xMentee_account, xMentee_avatar_img;
-            byte xMentee_gender, xMentee_status;
-            int xMentee_hours;
-            Mentee x;
-            while (rs.next()) {
-                xMentee_id = rs.getInt("mentee_id");
-                xMentee_name = rs.getString("full_name");
-                xMentee_account = rs.getString("username");
-                xMentee_avatar_img = rs.getString("avatar");
-                xMentee_gender = rs.getByte("gender");
-                xMentee_status = rs.getByte("user_status");
-                xMentee_hours = rs.getInt("time_study");
-                x = new Mentee(xMentee_id, xMentee_name, xMentee_account, xMentee_avatar_img, xMentee_gender, xMentee_status, xMentee_hours);
-                t.add(x);
-            }
-            rs.close();
-            stm.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return (t);
     }
 
 }

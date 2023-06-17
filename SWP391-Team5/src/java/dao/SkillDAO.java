@@ -58,8 +58,6 @@ public class SkillDAO {
         List<Skill> list = new ArrayList<>();
         String query = "SELECT * FROM swp391_group5.skill";
         try {
-            
-            //Test merge
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
@@ -104,13 +102,7 @@ public class SkillDAO {
         }
     }
 
-   /**
-    * 
-    * @param id
-    * @param nameS
-    * @param statusS
-    * @param imgS 
-    */
+    //update
     public void updateSkill(String id, String nameS, int statusS, String imgS) {
         String query = "UPDATE swp391_group5.skill SET skill_name = ?, skill_img = ?, skill_status = ? WHERE skill_id = ?";
         try {
@@ -159,10 +151,7 @@ public class SkillDAO {
         }
         return list;
     }
-    /**
-     * 
-     * @return list
-     */
+    
     public ArrayList<Skill> getAllSkillInfo() {
         ArrayList<Skill> list = new ArrayList<>();
         try {
