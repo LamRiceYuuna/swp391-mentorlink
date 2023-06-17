@@ -12,6 +12,7 @@ import model.SkillMentee;
  * @author admin
  */
 //Test merge
+//Test tiep
 public class MenteeDAO extends DBContext {
 
 //    private int mentee_id;
