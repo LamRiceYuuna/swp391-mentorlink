@@ -87,7 +87,7 @@ public class UploadAvatar extends HttpServlet {
         Part part = request.getPart("file");
         String fileName = extractFileName(part);
         // refines the fileName in case it is an absolute path
-        fileName = new File(fileName).getName();
+        fileName = new File(fileName).getName();        
         part.write(this.getFolderUpload().getAbsolutePath() + File.separator + fileName);
         UserDAO dao = new UserDAO();
         dao.UpdateUserAvatar(fileName, 2);
