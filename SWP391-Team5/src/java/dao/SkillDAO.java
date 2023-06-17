@@ -58,6 +58,8 @@ public class SkillDAO {
         List<Skill> list = new ArrayList<>();
         String query = "SELECT * FROM swp391_group5.skill";
         try {
+            
+            //Test merge
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
