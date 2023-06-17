@@ -44,7 +44,7 @@
 
                             </li>
                             <li class="sub-menu">
-                                <a href="http://localhost:9999/SWP391-Team5/viewListMentor">
+                                <a href="viewListMentor">
                                     <div>Tìm kiếm Mentor</div>
                                 </a>
                             </li>

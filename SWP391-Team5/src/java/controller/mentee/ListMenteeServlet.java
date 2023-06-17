@@ -36,7 +36,15 @@ public class ListMenteeServlet extends HttpServlet {
 
         request.getRequestDispatcher("/admin/mentee.jsp").forward(request, response);
     }
-
+    
+    /**
+     * abc
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     * @return
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

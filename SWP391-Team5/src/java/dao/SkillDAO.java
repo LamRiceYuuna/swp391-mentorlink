@@ -104,7 +104,13 @@ public class SkillDAO {
         }
     }
 
-    //update
+   /**
+    * 
+    * @param id
+    * @param nameS
+    * @param statusS
+    * @param imgS 
+    */
     public void updateSkill(String id, String nameS, int statusS, String imgS) {
         String query = "UPDATE swp391_group5.skill SET skill_name = ?, skill_img = ?, skill_status = ? WHERE skill_id = ?";
         try {
@@ -153,7 +159,10 @@ public class SkillDAO {
         }
         return list;
     }
-    
+    /**
+     * 
+     * @return list
+     */
     public ArrayList<Skill> getAllSkillInfo() {
         ArrayList<Skill> list = new ArrayList<>();
         try {
