@@ -28,7 +28,7 @@
             <div id="header-wrap">
                 <div class="container-md header">
                     <div id="primary-menu-trigger" class="align-middle" style="opacity: 1; pointer-events: unset;"><!--mobile icon-->
-                        <a href="http://localhost:9999/SWP391-Team5/Home" class="standard-logo"><img src="temp/logo.png" alt="logo" class="main_logo"></a>
+                        <a href="home" class="standard-logo"><img src="temp/logo.png" alt="logo" class="main_logo"></a>
                         <span class="standard-logo mobile-icon"><i class="fa-solid fa-bars"></i></span>
                     </div>
                     <div id="logo">
@@ -84,7 +84,7 @@
                             <c:if test="${sessionScope.acc == null}">  
 
                                 <li class="login-box">
-                                    <a href="http://localhost:9999/SWP391-Team5/login" class="btn-info btn">Đăng nhập</a>
+                                    <a href="login" class="btn-info btn">Đăng nhập</a>
                                 </li>
                                 <li class="login-box">
                                     <a href="http://localhost:9999/SWP391-Team5/signupController" class="btn-info btn">Đăng ký</a>
