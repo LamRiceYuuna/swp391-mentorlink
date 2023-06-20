@@ -44,7 +44,7 @@
 
                             </li>
                             <li class="sub-menu">
-                                <a href="http://localhost:9999/SWP391-Team5/viewListMentor">
+                                <a href="viewListMentor">
                                     <div>Tìm kiếm Mentor</div>
                                 </a>
                             </li>
@@ -140,12 +140,12 @@
                                         <li><a class="pb-0">Cá nhân</a></li>
                                         <li class="dt-menu-item-parent"></li>
                                         <li>
-                                            <a href="http://localhost:9999/SWP391-Team5/requestMentor" class="pb-0" style="cursor: pointer;">
+                                            <a href="#" class="pb-0" style="cursor: pointer;">
                                                 <i class="fa fa-tag"></i>requestMentor
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="http://localhost:9999/SWP391-Team5/listRequestMenTee" class="pb-0" style="cursor: pointer;">
+                                            <a href="listRequestMenTee" class="pb-0" style="cursor: pointer;">
                                                 <i class="fa fa-shopping-cart"></i>list Request MenTee
                                             </a>
                                         </li>
