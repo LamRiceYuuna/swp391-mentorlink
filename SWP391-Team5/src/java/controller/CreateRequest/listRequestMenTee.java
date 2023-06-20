@@ -46,8 +46,9 @@ public class listRequestMenTee extends HttpServlet {
 
             List<Request> list = dao.listRequestByID(sessionUser_id);
             Date currentTime = new Date(); // Lấy thời gian hiện tại
-
+       
             for (Request request1 : list) {
+                if(request1.getRequest_status()==1){
                 Timestamp timeBeginString = request1.getTime_begin(); // Lấy giá trị time_begin từ cơ sở dữ liệu
 
                 if (timeBeginString.before(currentTime)) {
@@ -56,7 +57,7 @@ public class listRequestMenTee extends HttpServlet {
                 } else if (timeBeginString.after(currentTime)) {
                     // time_begin xảy ra sau thời gian hiện tại, set request_status = 3
                     request1.setRequest_status(1);
-                }
+                }}
             }
 
     // Cập nhật request_status trong cơ sở dữ liệu
