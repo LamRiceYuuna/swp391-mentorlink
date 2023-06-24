@@ -60,8 +60,8 @@ public class UpdateCv extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         MentorCVDAO dao = new MentorCVDAO();
-        CV_Mentor cv = dao.getInfoCvMentorById("3");
-        SkillDAO dao1 = new SkillDAO();
+        CV_Mentor cv = dao.getInfoCvMentorById("3");       
+        SkillDAO dao1 = new SkillDAO();    
         ArrayList<Skill> list = dao1.getAllSkillInfo();
         request.setAttribute("cv", cv);
         request.setAttribute("listSkill", list);

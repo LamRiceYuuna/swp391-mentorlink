@@ -51,7 +51,7 @@ public class requestDAO extends DBContext {
         return list;
 
     }
-    
+
     public List<Request> listRequestByMetorID(String mentor_id) {
         List<Request> list1 = new ArrayList<>();
         String sql = "SELECT * FROM swp391_group5.request where mentor_id=?;";
@@ -115,7 +115,7 @@ public class requestDAO extends DBContext {
         requestDAO dao = new requestDAO();
         int id_mentor = 2;
         String mentee_id = "3";
-        String id ="27";
+        String id = "27";
         dao.deletebyID(id);
         //List<Skill> list = dao.getAllskillBySkill_id(id_mentor);
 //        List<Request> list = dao.listRequestByID(mentee_id);
@@ -164,6 +164,87 @@ public class requestDAO extends DBContext {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public boolean insert1(String tieude, Timestamp batdau1, int id_mentor, String sessionUser_id, Timestamp ketthuc1,
+            String sogiohoc, String noidung, String framework, String[] skills) throws SQLException {
+
+        // Lấy thời gian hiện tại
+        LocalDateTime currentTime = LocalDateTime.now();
+        // Cộng thêm 12 giờ
+        LocalDateTime newTime = currentTime.plusHours(12);
+        // Định dạng lại chuỗi thời gian
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        String currentFormatted = currentTime.format(formatter);
+        String newFormatted = newTime.format(formatter);
+        LocalDateTime currentDateTime = LocalDateTime.parse(currentFormatted, formatter);
+        LocalDateTime newDateTime = LocalDateTime.parse(newFormatted, formatter);
+        // In ra kết quả
+        System.out.println("Thời gian hiện tại: " + currentDateTime);
+        System.out.println("Thời gian sau khi cộng 12 giờ: " + newDateTime);
+        // Chuyển đổi LocalDateTime thành Timestamp
+        Timestamp timestamp = Timestamp.valueOf(newDateTime);
+        //******************************************************
+        int request_status = 1;
+        int request_id = -1;
+        try {
+
+            connection.setAutoCommit(false);  // Vô hiệu hóa tự động xác nhận giao dịch
+
+            //Câu lệnh Insert Information Request vao Table Request
+            String sql = "INSERT INTO `swp391_group5`.`request` ( `mentor_id`, `mentee_id`,  "
+                    + "`title`, `request_content`, `time_study`, `time_begin`, `created_date`, `finish_date`, `request_status`)"
+                    + " VALUES ( ?, ?,  ?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement ps = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id_mentor);
+            ps.setInt(2, Integer.parseInt(sessionUser_id));
+            // ps.setInt(3,Integer.parseInt(skills));
+            ps.setString(3, tieude);
+            ps.setString(4, noidung);
+            ps.setInt(5, Integer.parseInt(sogiohoc));
+            ps.setTimestamp(6, timestamp);
+            ps.setTimestamp(7, batdau1);
+            ps.setTimestamp(8, ketthuc1);
+            ps.setInt(9, request_status);
+            ps.executeUpdate();
+
+            // Lấy request_id từ bảng A
+            ResultSet generatedKeys = ps.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                request_id = generatedKeys.getInt(1);
+            }
+            generatedKeys.close();
+            ps.close();
+
+            // Câu lệnh INSERT Skill vao Table request_skill
+            String sql2 = "INSERT INTO `swp391_group5`.`request_skill`\n"
+                    + "(`skill_id`,\n"
+                    + "`request_id`)\n"
+                    + "VALUES\n"
+                    + "(?,\n"
+                    + "?);";
+            PreparedStatement ps1 = connection.prepareStatement(sql2);
+
+            for (String id : skills) {
+                int value_id = Integer.parseInt(id);
+
+                // Thiết lập các giá trị trong Prepared Statement
+                ps1.setInt(1, value_id);
+                ps1.setInt(2, request_id);
+
+                // Thực hiện câu lệnh chèn vào cơ sở dữ liệu
+                ps1.executeUpdate();
+            }
+
+            connection.commit();  // Áp dụng thay đổi vào cơ sở dữ liệu
+            return true;
+        } catch (Exception e) {
+            connection.rollback();  // Hủy bỏ giao dịch nếu có lỗi
+            return false;
+        } finally {
+            connection.setAutoCommit(true);  // Bật lại tự động xác nhận giao dịch
         }
     }
 
