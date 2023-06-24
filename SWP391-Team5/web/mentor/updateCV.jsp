@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
     Document   : updateCV
     Created on : Jun 14, 2023, 2:51:32 AM
@@ -139,25 +140,16 @@
                                 <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                                     <h3 class="multisteps-form__title"><b>Select your skills.</b></h3>
                                     <div class="wrapper2">
-                                        <div class="container2">
-                                            <c:forEach var="s" items="${listSkill}">
-                                                <!--                                                <div class="form-element ">
-                                                                                                    <input type="checkbox" name="SkillId" value="${s.getSkill_id()}" id="${s.getSkill_name()}">
-                                                                                                    <label for="${s.getSkill_name()}">
-                                                                                                        <div class="title">
-                                                ${s.getSkill_name()}
-                                            </div>
-                                        </label>
-                                    </div>-->
-                                                <label class="option_item">
-                                                    <input type="checkbox" class="checkbox" name="SkillId" value="${s.getSkill_id()}">
-                                                    <div class="option_inner facebook">
-                                                        <div class="tickmark"></div>      
-                                                        <div class="name">${s.getSkill_name()}</div>
-                                                    </div>
-                                                </label>
-                                            </c:forEach>    
-
+                                        <div class="container2">                          
+                                                <c:forEach var="s" items="${listSkill}">
+                                                    <label class="option_item">
+                                                        <input type="checkbox" class="checkbox" name="SkillId" value="${s.getSkill_id()}">
+                                                        <div class="option_inner facebook">
+                                                            <div class="tickmark"></div>      
+                                                            <div class="name">${s.getSkill_name()}</div>
+                                                        </div>
+                                                    </label>
+                                                </c:forEach>
 
                                         </div>
                                         <div class="row">
