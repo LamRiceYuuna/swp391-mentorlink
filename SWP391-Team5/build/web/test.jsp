@@ -18,7 +18,7 @@
     <c:forEach var="s" items="${skills}">
         ${s}
     </c:forEach>      
-        <c:forEach var="s" items="${skills}">
+        <c:forEach var="s" items="${rqs}">
         ${s}
     </c:forEach>  
     </body>
