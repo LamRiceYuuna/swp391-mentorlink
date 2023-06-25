@@ -21,6 +21,7 @@ public class Request {
     private Timestamp created_date;
     private Timestamp finish_date;
     private int request_status;
+   
     
 
     public Request() {
