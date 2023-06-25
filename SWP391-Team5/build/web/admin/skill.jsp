@@ -412,11 +412,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
     </head>
     <body>
-        <c:if test="${sessionScope.acc == null}">
-            <div class="error-message">
-                <a href="Home" class="return-link">Ðã hết hạn đăng nhập, mời bạn đăng nhập lại.</a>
-            </div>
-        </c:if>
 
         <c:if test="${sessionScope.acc != null}">
             <div class="container">

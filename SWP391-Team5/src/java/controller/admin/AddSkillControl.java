@@ -22,13 +22,16 @@ public class AddSkillControl extends HttpServlet {
         String nameS = request.getParameter("skill_name");
         String imgS = request.getParameter("skill_img");
         String statusS_raw = request.getParameter("skill_status");
-
-       
+        try{
         int status = Integer.parseInt(statusS_raw );
         SkillDAO dao = new SkillDAO();
         dao.insertSkill(nameS, imgS, status);
         response.sendRedirect("skill");
-
+        
+        }catch(Exception ex) {
+            //Error 500
+            response.sendRedirect("security/error500.html");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

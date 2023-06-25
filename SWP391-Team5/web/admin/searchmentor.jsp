@@ -457,11 +457,6 @@
         <jsp:useBean id="a" class="dao.MentorCVDAO" scope = "request"></jsp:useBean>
         </head>
         <body>
-        <c:if test="${sessionScope.acc == null}">
-            <div class="error-message">
-                <a href="Home" class="return-link">Ðã hết hạn đăng nhập, mời bạn đăng nhập lại.</a>
-            </div>
-        </c:if>
 
         <c:if test="${sessionScope.acc != null}">
             <div class="container">
@@ -509,7 +504,7 @@
                             </form>   
 
                             <h1 class = "list-all">Search List All Mentor</h1>
-                            
+
                             <c:set var="searchValue" value="${requestScope.txtSearch}" />
                             <c:set var="numberPageSearcha" value="${a.getNumberPageSearch(searchValue)}"/>
                             <table class="table">
@@ -555,15 +550,15 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
-                            
-                            
+
+
                             <!-- Logic: SO LUONG TRANG -> MOI TRANG BAO NHIEU BAI -->
                             <!-- In ra so trang -->
                             <div class="pagination-custom">
                                 <!-- So trang dang dung JspUseBean: Doi tuong cua class CVDAO -->
                                 <!-- Lay gia tri tu ben servlet goi den phuong thuc class DAO-->
-                                
-                               
+
+
                                 <c:forEach begin="1" end="${numberPageSearcha}" var = "i">
                                     <!-- Lay ra vi tri trang dang dung -->
                                     <!-- Phai can ca gia tri index va txtSearch -->

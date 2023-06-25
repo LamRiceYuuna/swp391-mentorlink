@@ -43,7 +43,7 @@ public class UpdateStatusMentor extends HttpServlet {
     throws ServletException, IOException {
         String idMentor = request.getParameter("idmentor");
         String stt_raw = request.getParameter("stt");
-        
+        try{
         int stt = Integer.parseInt(stt_raw);
         int index = (int) Math.ceil(stt / 10.0);
          /*
@@ -63,8 +63,12 @@ public class UpdateStatusMentor extends HttpServlet {
             m.updateStatus(id_M, 1);
         }
         
-        String url = "http://localhost:9999/SWP391-Team5/listmentor?index=" + index;
+        String url = "../SWP391-Team5/listmentor?index=" + index;
         response.sendRedirect(url);
+        }catch(Exception e){
+            //Error 500
+            response.sendRedirect("security/error500.html");
+        }
     } 
 
     @Override
