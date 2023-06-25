@@ -86,7 +86,7 @@
                         <div class="gender-boxx">
                             <label style="font-size: 15px; font-weight: bold;">Skill</label>
                             <div class="gender-option ">
-                                <select name="skills" id="skills">
+                                <select name="skills" id="skills" multiple=>
                                     <c:forEach items="${listp}" var="o" varStatus="status">
                                         <option value="${o.getSkill_id()}">${o.skill_name}</option>
                                         <c:if test="${status.index % 4 == 3}">

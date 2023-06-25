@@ -447,9 +447,9 @@
                 background-color: #ffffff;
                 color: #333;
             }
-
-
-
+            
+            
+            
         </style>
 
 
@@ -460,9 +460,13 @@
         <jsp:useBean id="a" class="dao.MentorCVDAO" scope = "request"></jsp:useBean>
         </head>
         <body>
+        <c:if test="${sessionScope.acc == null}">
+            <div class="error-message">
+                <a href="/Home" class="return-link">Ðã hết hạn đăng nhập, mời bạn đăng nhập lại.</a>
+            </div>
+        </c:if>
 
-
-
+        <c:if test="${sessionScope.acc != null}">
             <div class="container">
                 <nav>
                     <ul>
@@ -506,7 +510,7 @@
                                 <input type="text" name="txtSearch" placeholder="Search by name ...">
                                 <button type="submit" value="search">Search</button>
                             </form>   
-
+                            
                             <h1 class = "list-all">List All Mentor</h1>
 
                             <table class="table">
@@ -526,45 +530,47 @@
                                 </div>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${listMentor}" var="o">
-                                    <tr>
-                                        <td>${o.stt}</td>
-                                        <td>${o.id}</td>
-                                        <td>${o.fullName}</td>
-                                        <td>${o.accountName}</td>
-                                        <td>${o.occupation}</td>
-                                        <td>${o.numberOfCurrently}</td>
-                                        <td>${o.percentageCompleted}</td>
-                                        <td>${o.averageStarRating}</td>
-                                        <td>
-                                            <a href="updatestatusmentor?idmentor=${o.id}&stt=${o.stt}" class="btn btn-${o.activeStatusOfAdvisor == 1 ? 'success' : 'danger'} status-btn">
-                                                <c:choose>
-                                                    <c:when test="${o.activeStatusOfAdvisor == 1}">
-                                                        Active
-                                                    </c:when>
-                                                    <c:when test="${o.activeStatusOfAdvisor == 0}">
-                                                        Inactive
-                                                    </c:when>
-                                                </c:choose>
-                                            </a>
-                                        </td
-                                    </tr>
+                                    <c:forEach items="${listMentor}" var="o">
+                                        <tr>
+                                            <td>${o.stt}</td>
+                                            <td>${o.id}</td>
+                                            <td>${o.fullName}</td>
+                                            <td>${o.accountName}</td>
+                                            <td>${o.occupation}</td>
+                                            <td>${o.numberOfCurrently}</td>
+                                            <td>${o.percentageCompleted}</td>
+                                            <td>${o.averageStarRating}</td>
+                                            <td>
+                                                <a href="updatestatusmentor?idmentor=${o.id}&stt=${o.stt}" class="btn btn-${o.activeStatusOfAdvisor == 1 ? 'success' : 'danger'} status-btn">
+                                                    <c:choose>
+                                                        <c:when test="${o.activeStatusOfAdvisor == 1}">
+                                                            Active
+                                                        </c:when>
+                                                        <c:when test="${o.activeStatusOfAdvisor == 0}">
+                                                            Inactive
+                                                        </c:when>
+                                                    </c:choose>
+                                                </a>
+                                            </td
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                            <!-- Logic: SO LUONG TRANG -> MOI TRANG BAO NHIEU BAI -->
+                            <!-- In ra so trang -->
+                            <div class="pagination-custom">
+                                <!-- So trang dang dung JspUseBean: Doi tuong cua class CVDAO -->
+                                <c:forEach begin="1" end="${a.getNumberPage()}" var = "i">
+                                    <!-- Lay ra vi tri trang dang dung -->
+                                    <a href="listmentor?index=${i}" class="${indexPagee == i ?  "active" : ""}">${i}</a>
                                 </c:forEach>
-                            </tbody>
-                        </table>
-                        <!-- Logic: SO LUONG TRANG -> MOI TRANG BAO NHIEU BAI -->
-                        <!-- In ra so trang -->
-                        <div class="pagination-custom">
-                            <!-- So trang dang dung JspUseBean: Doi tuong cua class CVDAO -->
-                            <c:forEach begin="1" end="${a.getNumberPage()}" var = "i">
-                                <!-- Lay ra vi tri trang dang dung -->
-                                <a href="listmentor?index=${i}" class="${indexPagee == i ?  "active" : ""}">${i}</a>
-                            </c:forEach>
+                            </div>
+
                         </div>
-                    </div>
+                    </section>
                 </section>
-            </section>
-        </div>
+            </div>
+        </c:if>
     </body>
 </html>
 
