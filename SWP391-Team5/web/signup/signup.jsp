@@ -121,7 +121,7 @@
 
                         </form>
                         <div class="mb_10 nobottommargin">
-                            Bạn đã có tài khoản? <a href="login" class="">Hãy click vào đây để đăng nhập</a>
+                            Bạn đã có tài khoản? <a href="../login/login.jsp" class="">Hãy click vào đây để đăng nhập</a>
                         </div>
                     </div>
                 </div>

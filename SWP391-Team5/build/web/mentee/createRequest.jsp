@@ -37,11 +37,11 @@
                     <div class="columnn">
                         <div class="input-boxx">
                             <label>Start Time</label>
-                            <input type="datetime-local"id="start-time" placeholder="Enter start time" name="batdau" required />
+                            <input type="datetime-local" id="start-time" placeholder="Enter start time" name="batdau" required />
                         </div>
                         <div class="input-boxx">
                             <label>End Time</label>
-                            <input type="datetime-local" id="end-time" placeholder="Enter end time"name="ketthuc" required />
+                            <input type="datetime-local" id="end-time" placeholder="Enter end time" name="ketthuc" required />
                         </div>
                     </div>
                     <script>
@@ -69,13 +69,24 @@
 
                             // Thiết lập giá trị tối thiểu cho input thời gian kết thúc
                             document.getElementById("end-time").setAttribute("min", minEndTime);
+
+                            // Kiểm tra điều kiện thời gian và hiển thị thông báo lỗi nếu chọn sai
+                            var endTimeInput = document.getElementById("end-time");
+                            var endTime = new Date(endTimeInput.value);
+
+                            if (endTime <= startTime) {
+                                endTimeInput.setCustomValidity("End time must be greater than start time.");
+                            } else {
+                                endTimeInput.setCustomValidity(""); // Xóa thông báo lỗi nếu hợp lệ
+                            }
                         });
                     </script>
+
                     <div class="gender-boxx">
                         <div class="gender-boxx">
                             <label style="font-size: 15px; font-weight: bold;">Skill</label>
                             <div class="gender-option ">
-                                <select name="skills" id="skills">
+                                <select name="skills" id="skills" multiple=>
                                     <c:forEach items="${listp}" var="o" varStatus="status">
                                         <option value="${o.getSkill_id()}">${o.skill_name}</option>
                                         <c:if test="${status.index % 4 == 3}">
@@ -107,9 +118,9 @@
 
                     <div class="input-boxx">
                         <label>Duration of the request</label>
-                        <div class="select-boxx" >
-                            <select name="sogiohoc">
-                                <option hidden >Choose time</option>
+                        <div class="select-boxx">
+                            <select name="sogiohoc" required>
+                                <option hidden>Choose time</option>
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -118,14 +129,36 @@
                             </select>
                         </div>
                     </div>
+                    <script>
+                        // Xử lý sự kiện khi giá trị thay đổi
+                        var selectElement = document.querySelector('select[name="sogiohoc"]');
+                        selectElement.addEventListener('change', function () {
+                            var selectedValue = parseInt(this.value);
+                            var startTimeInput = document.getElementById("start-time");
+                            var endTimeInput = document.getElementById("end-time");
+                            var startTime = new Date(startTimeInput.value);
+                            var endTime = new Date(endTimeInput.value);
+
+                            // Thêm số giờ học vào thời gian bắt đầu
+                            startTime.setHours(startTime.getHours() + selectedValue);
+
+                            // Kiểm tra điều kiện khoảng cách giữa bắt đầu và kết thúc
+                            if (endTime < startTime) {
+                                this.setCustomValidity("End time must be greater than or equal to the start time plus duration of the request.");
+                            } else {
+                                this.setCustomValidity(""); // Xóa thông báo lỗi nếu hợp lệ
+                            }
+                        });
+                    </script>
+
                     <div class="input-boxx ">
                         <label>Framework</label>
-                        <textarea placeholder="Framework you want to be trained"name="framework"></textarea>
+                        <textarea placeholder="Framework you want to be trained"name="framework" required></textarea>
                     </div>
 
                     <div class="input-boxx">
                         <label>Content</label><br>
-                        <textarea placeholder="Content required" name="noidung"></textarea>
+                        <textarea placeholder="Content required" name="noidung" required></textarea>
                     </div>
                     <c:if test="${requestScope.errE!=null}">
                         <h6 style="color: red">${requestScope.errE}</h6>

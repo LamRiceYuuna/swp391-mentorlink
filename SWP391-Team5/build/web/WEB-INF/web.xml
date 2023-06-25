@@ -1,66 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <!-- authorization: Not url .jsp -->
-    <filter>
-        <filter-name>ErrorJspFilter</filter-name>
-        <filter-class>filter.ErrorJspFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>ErrorJspFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    
-    <!-- authorization: acc != null role: 1 2 3 -> login -->
-    <filter>
-        <filter-name>RoleFilter</filter-name>
-        <filter-class>filter.RoleFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>RoleFilter</filter-name>
-        <url-pattern>/home</url-pattern>
-    </filter-mapping>
-    
-    <!-- authorization(Filter Login Admin): acc == null && acc.role != 3 -> login -->
-    <filter>
-        <filter-name>LoginFilter</filter-name>
-        <filter-class>filter.LoginFilter</filter-class>
-    </filter>
-    
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <url-pattern>/dashboard</url-pattern>
-        <url-pattern>/addskill</url-pattern>
-        <url-pattern>/delete</url-pattern>
-        <url-pattern>/listmentor</url-pattern>
-        <url-pattern>/searchControl</url-pattern>
-        <url-pattern>/skill</url-pattern>
-        <url-pattern>/updateskill</url-pattern>
-        <url-pattern>/updatestatusmentor</url-pattern>
-        <url-pattern>/updatestatusmentorsearch</url-pattern>
-        <url-pattern>/updatestatus</url-pattern>
-        <url-pattern>/listmentee</url-pattern>
-    </filter-mapping>
-    
-    <!-- authorization(Filter Login Mentor): acc == null && acc.role != 2 -> login -->
-    <filter>
-        <filter-name>LoginMentorFilter</filter-name>
-        <filter-class>filter.LoginMentorFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>LoginMentorFilter</filter-name>
-        <url-pattern>/CreateCV</url-pattern>
-    </filter-mapping>
-    
-    <!-- authorization(Filter Login Mentor): acc == null && acc.role != 1 -> login -->
-    <filter>
-        <filter-name>LoginMenteeFilter</filter-name>
-        <filter-class>filter.LoginMenteeFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>LoginMenteeFilter</filter-name>
-        <url-pattern>/requestMentor</url-pattern>
-    </filter-mapping>
-    
     <servlet>
         <servlet-name>HomePage</servlet-name>
         <servlet-class>controller.home.HomePage</servlet-class>
@@ -121,9 +60,13 @@
         <servlet-name>ListMenteeServlet</servlet-name>
         <servlet-class>controller.mentee.ListMenteeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListMentorSuggestion</servlet-name>
+        <servlet-class>controller.mentee.ListMentorSuggestion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
-        <url-pattern>/home</url-pattern>
+        <url-pattern>/Home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UploadAvatar</servlet-name>
@@ -180,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>ListMenteeServlet</servlet-name>
         <url-pattern>/listmentee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListMentorSuggestion</servlet-name>
+        <url-pattern>/mentorSuggestion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
