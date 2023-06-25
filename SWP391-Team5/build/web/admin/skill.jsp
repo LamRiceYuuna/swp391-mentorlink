@@ -523,7 +523,7 @@
                                             </td>
                                             <td > <div class="action">
                                                     <a href="updateskill?kid=${o.skill_id}">Update</a>
-                                                   <!-- <a href="#" onclick="doDelete('${o.skill_id}')">Delete</a> -->
+                                                    <a href="#" onclick="doDelete('${o.skill_id}')">Delete</a> 
                                                 </div>
                                             </td>
                                         </tr>
