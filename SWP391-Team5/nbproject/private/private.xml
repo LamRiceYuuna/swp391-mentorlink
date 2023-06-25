@@ -2,18 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/model/CV_Mentor.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/common/listMentorSuggestion.jsp</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/home/NewServlet.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/dao/MentorCVDAO.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/test.jsp</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/mentor/ListFollowingRequest.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/dao/requestSkillDAO.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/dao/DBContext.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/model/User.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/mentee/ListMentorSuggestion.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
