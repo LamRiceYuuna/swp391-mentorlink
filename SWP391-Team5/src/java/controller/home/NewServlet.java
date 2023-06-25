@@ -5,7 +5,6 @@
 
 package controller.home;
 
-import dao.requestSkillDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -54,7 +53,7 @@ public class NewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("common/listMentorSuggestion.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -67,7 +66,7 @@ public class NewServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("common/userProfile.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 

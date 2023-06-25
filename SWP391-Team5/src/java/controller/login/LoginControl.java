@@ -37,6 +37,7 @@ public class LoginControl extends HttpServlet {
             request.getSession().setAttribute("mess", "Invalid username or password!");
             response.sendRedirect("login");
         } else {       
+            //Kiem tra trang thai tai khoan
             if(u.getUser_status() == 0){
             request.getSession().setAttribute("mess", "Account has been locked!");
             response.sendRedirect("login");
@@ -59,7 +60,7 @@ public class LoginControl extends HttpServlet {
             session.setAttribute("acc",u);
             //Thoi gian ton tai cua session *minutes 30p
             session.setMaxInactiveInterval(30*60);
-            response.sendRedirect("Home");
+            response.sendRedirect("home");
         }
     }
 

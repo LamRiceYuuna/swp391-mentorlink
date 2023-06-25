@@ -18,7 +18,8 @@ import model.Skill;
 
 /**
  *
- * @author Tuan Vinh
+ * @author Tuan Vinh Dep Trai
+ * @anotation: url-pattern: home
  */
 public class HomePage extends HttpServlet {
    

@@ -50,12 +50,10 @@ public class CV_Mentor {
         this.language = language;
         this.infor = infor;
     }
-
-    public CV_Mentor(String profession, User infor) {
-        this.profession = profession;
-        this.infor = infor;
-    }
     
+    
+
+
     public CV_Mentor(int mentor_id, String profession, String profession_introduction, String service_description, String achievements, String language, int skill_id, Date created_date) {
         this.mentor_id = mentor_id;
         this.profession = profession;
