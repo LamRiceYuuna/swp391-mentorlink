@@ -132,11 +132,14 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="profile-action">
                                             <div class="profile_btn box-group box-group-custom" id="connect_mentor_pair">
                                                 <div class="box-group-custom-top">
-                                                    <a href="requestMentor?mentor_id=${mentor_id}"><button id="show-login" type="button" class="btn btn-info btn-box-top-lg"
-                                                               style="background-color: #175E4C; color: #fff; margin-top: 20px;">Tạo yêu cầu</button></a>
+                                                    <c:if test="${sessionScope.acc.role != 2}"> 
+                                                        <a href="requestMentor?mentor_id=${mentor_id}"><button id="show-login" type="button" class="btn btn-info btn-box-top-lg"
+                                                                                                               style="background-color: #175E4C; color: #fff; margin-top: 20px;">Tạo yêu cầu</button></a>
+                                                        </c:if>
                                                 </div>
                                             </div>
                                         </div>
