@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
     Document   : listMentorSuggestion
     Created on : Jun 24, 2023, 3:09:54 PM
@@ -131,95 +132,92 @@
                             line-height: 50px;
                             pointer-events: none;
                             color: var(--terthemecolor)
-                            
+
                         }
                     </style>
                     <div class="col-md-12 col-lg-8">
-                        <div class="dc-haslayout dc-parent-section">
-                            <div id="dc-twocolumns" class="dc-twocolumns dc-haslayout d-flex row dc-disabled">
-                                <div class="col-12 order-last">
-                                    <div class="dc-searchresult-holder">
-                                        <div class="dc-searchresult-grid dc-searchresult-list dc-searchvlistvtwo test">
-                                            <div class="dc-docpostholder dc-search-mentors">
-                                                <div class="mentor-widget">
-                                                    <div class="user-info-left">
-                                                        <div class="mentor-img">
-                                                            <a
-                                                                href="#">
-                                                                <img class="img-fluid user-image-res"
-                                                                     src="https://mentoring-wp.dreamguystech.com/wp-content/uploads/2022/07/user3-1-255x250.jpg"
-                                                                     alt="Carl Kelly">
-                                                                <!--                                                                <img class="img-fluid user-image-res-2x"
-                                                                                                                                     src="https://mentoring-wp.dreamguystech.com/wp-content/uploads/2022/07/user3-1.jpg"
-                                                                                                                                     alt="Carl Kelly">-->
-                                                            </a>
-                                                        </div>
-                                                        <div class="user-info-cont">
-                                                            <h3>
-                                                                <a
-                                                                    href="#">Ma Bảo Khánh</a>
-                                                                <i class="fas fa-check" data-toggle="tooltip"
-                                                                   title="Verified user"></i>
-                                                            </h3>
-                                                            <div class="user-tag">
-                                                                <a
-                                                                    href="#">@khanhmb88</a>
-                                                            </div>
-                                                            <div class="user-feedback">
-                                                                <!--                                                                <div class="empty-stars"></div>
-                                                                                                                                <div class="full-stars" style="width: 100%"></div>-->
-                                                                4.6 / 5 <i class="fa-sharp fa-solid fa-star" style="color: yellow"></i>
-                                                            </div>
-                                                            <div class="user-feedback">
-                                                                <span><i class="fa-solid fa-comment"></i>123 Feedback</span>
-                                                            </div>
-                                                            <div class="user-location">
-                                                                <span><i class="fa-sharp fa-solid fa-clipboard-question"></i>123 Request</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="user-info-right" style="min-width: 280px">
-                                                        <div class="user-infos">
-                                                            <ul>
-                                                                <li><i class="fa-solid fa-user"></i>Nghề Nghiệp: Giảng Viên tại Đại Học FPT</li>
-                                                                <li>
-                                                                    <i class="fa-solid fa-phone"></i>Phone : 0987654321
-                                                                </li>
-                                                                <li><i class="fa-solid fa-envelope"></i>
-                                                                    Email: tuandvhe163181@fpt.edu.vn</li>
-                                                                <li><i class="far fa-clipboard"></i>
-                                                                    <em class="dc-available">Available Today</em>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="user-booking">
-                                                            <a href="#" style="background: #175E4C; border: none">View
-                                                                Profile</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
+                        <div class="col-12 order-last">
+
+                            <c:forEach var="s" items="${listS}">
+                                <div class="mentor-widget">
+                                    <div class="user-info-left">
+                                        <div class="mentor-img">
+                                            <a
+                                                href="#">
+                                                <img class="img-fluid user-image-res" style="height: 100%; object-fit: cover; border-radius: 5.4rem" src="assets/upload/${s.getInfor().getAvatar()}" >
+                                                <!--                                                                <img class="img-fluid user-image-res-2x"
+                                                                                                                     src="https://mentoring-wp.dreamguystech.com/wp-content/uploads/2022/07/user3-1.jpg"
+                                                                                                                     alt="Carl Kelly">-->
+                                            </a>
+                                        </div>
+                                        <div class="user-info-cont">
+                                            <h3>
+                                                <a
+                                                    href="#">${s.getInfor().getFull_name()}</a>
+                                                <i class="fa fa-leaf" data-toggle="tooltip" style="width: 30px; height: 20px; margin-left: 1px; 
+                                                   line-height: 20px; font-size: 18px; color: #175E4C; background-color: white" title="Verified user"></i>
+                                            </h3>
+                                            <div class="user-tag">
+                                                <a
+                                                    href="#">@${s.getInfor().getUsername()}</a>
                                             </div>
-
-
-                                            <!-- <div class="dc-paginationvtwo">
-                                                    <nav class="dc-pagination">
-                                                        <ul>
-                                                            <li class="dc-prevpage"><a
-                                                                    href="https://mentoring-wp.dreamguystech.com/search-mentors/"><i
-                                                                        class="fas fa-angle-double-left"></i></i></a>
-                                                            </li>
-                                                            <li><a
-                                                                    href="https://mentoring-wp.dreamguystech.com/search-mentors/">1</a>
-                                                            </li>
-                                                            <li class="dc-active"><a href="javascript:;">2</a></li>
-                                                        </ul>
-                                                    </nav>
-                                                </div> -->
+                                            <div class="user-feedback">
+                                                <!--                                                                <div class="empty-stars"></div>
+                                                                                                                <div class="full-stars" style="width: 100%"></div>-->
+                                                4.6 / 5 <i class="fa-sharp fa-solid fa-star" style="color: yellow"></i>
+                                            </div>
+                                            <div class="user-feedback">
+                                                <span><i class="fa-solid fa-comment"></i>123 Feedback</span>
+                                            </div>
+                                            <div class="user-location">
+                                                <span><i class="fa-sharp fa-solid fa-clipboard-question"></i>123 Request</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="user-info-right" style="min-width: 280px">
+                                        <div class="user-infos">
+                                            <ul>
+                                                <li><i class="fa-solid fa-user"></i>Nghề Nghiệp: ${s.getProfession()}</li>
+                                                <li>
+                                                    <i class="fa-solid fa-phone"></i>Phone : ${s.getInfor().getPhone()}
+                                                </li>
+                                                <li><i class="fa-solid fa-envelope"></i>
+                                                    Email: ${s.getInfor().getEmail()}</li>
+                                                <li><i class="far fa-clipboard"></i>
+                                                    <em class="dc-available">Available Today</em>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="user-booking">
+                                            <a href="#" style="background: #175E4C; border: none">View
+                                                Profile</a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </c:forEach>
+
+
+
+                            <!-- <div class="dc-paginationvtwo">
+                                    <nav class="dc-pagination">
+                                        <ul>
+                                            <li class="dc-prevpage"><a
+                                                    href="https://mentoring-wp.dreamguystech.com/search-mentors/"><i
+                                                        class="fas fa-angle-double-left"></i></i></a>
+                                            </li>
+                                            <li><a
+                                                    href="https://mentoring-wp.dreamguystech.com/search-mentors/">1</a>
+                                            </li>
+                                            <li class="dc-active"><a href="javascript:;">2</a></li>
+                                        </ul>
+                                    </nav>
+                                </div> -->
+
+
                         </div>
+
+
                     </div>
                 </div>
             </div>
