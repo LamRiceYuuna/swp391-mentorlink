@@ -134,7 +134,7 @@
                         
                     </div>
                     <div class="home_title mentor_team_title text-center mt-3">
-                        <a href="http://localhost:9999/SWP391-Team5/viewListMentor">
+                        <a href="viewListMentor">
                         <button class="btn btn-info btn_search">Xem thêm</button>
                         </a>
                     </div>

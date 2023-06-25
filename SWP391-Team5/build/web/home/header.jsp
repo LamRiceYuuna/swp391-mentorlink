@@ -27,11 +27,11 @@
             <div id="header-wrap">
                 <div class="container-md header">
                     <div id="primary-menu-trigger" class="align-middle" style="opacity: 1; pointer-events: unset;"><!--mobile icon-->
-                        <a href="home" class="standard-logo"><img src="temp/logo.png" alt="logo" class="main_logo"></a>
+                        <a href="Home" class="standard-logo"><img src="temp/logo.png" alt="logo" class="main_logo"></a>
                         <span class="standard-logo mobile-icon"><i class="fa-solid fa-bars"></i></span>
                     </div>
                     <div id="logo">
-                        <a href="#" class="standard-logo"><img src="temp/logo.png" alt="logo" class="main_logo"></a>
+                        <a href="Home" class="standard-logo"><img src="temp/logo.png" alt="logo" class="main_logo"></a>
                     </div>
                     <div class="dt-menu-mega d-flex ">
                         <ul id="mobile-menu" class="dt-menu-mega d-flex justify-content-between mobile-menu-none"
@@ -86,7 +86,7 @@
                                     <a href="login" class="btn-info btn">Đăng nhập</a>
                                 </li>
                                 <li class="login-box">
-                                    <a href="http://localhost:9999/SWP391-Team5/signupController" class="btn-info btn">Đăng ký</a>
+                                    <a href="signupController" class="btn-info btn">Đăng ký</a>
                                 </li>
                             </c:if>
                         </ul>

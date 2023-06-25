@@ -38,7 +38,7 @@
                             <h3 class="title">Login</h3>
                         </div>
                         <div class="login-logo">
-                            <img src="https://scontent.fhan5-2.fna.fbcdn.net/v/t1.15752-9/346119165_204038079126623_4944693773758350157_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_ohc=59rA4Ca5SLQAX9FFAc0&_nc_ht=scontent.fhan5-2.fna&oh=03_AdR8zuD2Zpe0cMm5asRgOk5et4EV-YvzzYajyL2FY-qBqg&oe=6497C782" alt="ym">
+                            <img src="assets/images/logo2.png" alt="ym">
                         </div>
                         <div class="help-block show_err">
                         </div>
