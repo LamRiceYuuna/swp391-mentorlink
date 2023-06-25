@@ -412,147 +412,152 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
     </head>
     <body>
+        <c:if test="${sessionScope.acc == null}">
+            <div class="error-message">
+                <a href="Home" class="return-link">Ðã hết hạn đăng nhập, mời bạn đăng nhập lại.</a>
+            </div>
+        </c:if>
 
+        <c:if test="${sessionScope.acc != null}">
+            <div class="container">
+                <nav>
+                    <ul>
+                        <li><a href="#" class="logo">
+                                <img src="assets/images/avatar.jpg">
+                                <span class="nav-item">Admin</span>
+                            </a></li>
+                        <li><a href="dashboard">
+                                <i class="fas fa-menorah"></i>
+                                <span class="nav-item">Dashboard</span>
+                            </a></li>
+                        <li><a href="skill">
+                                <i class="fas fa-database"></i>
+                                <span class="nav-item">List-All-Skill</span>
+                            </a></li>
+                        <li><a href="listmentor">
+                                <i class="fas fa-chart-bar"></i>
+                                <span class="nav-item">List-All-Mentor</span>
+                            </a></li>
+                        <li><a href="#">
+                                <i class="fas fa-comment"></i>
+                                <span class="nav-item">Attendance</span>
+                            </a></li>
+                        <li><a href="#">
+                                <i class="fas fa-cog"></i>
+                                <span class="nav-item">Setting</span>
+                            </a></li>
 
+                        <li><a href="logout" class="logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span class="nav-item">Log out</span>
+                            </a></li>
+                    </ul>
+                </nav>
 
-        <div class="container">
-            <nav>
-                <ul>
-                    <li><a href="#" class="logo">
-                            <img src="assets/images/avatar.jpg">
-                            <span class="nav-item">Admin</span>
-                        </a></li>
-                    <li><a href="dashboard">
-                            <i class="fas fa-menorah"></i>
-                            <span class="nav-item">Dashboard</span>
-                        </a></li>
-                    <li><a href="skill">
-                            <i class="fas fa-database"></i>
-                            <span class="nav-item">List-All-Skill</span>
-                        </a></li>
-                    <li><a href="listmentor">
-                            <i class="fas fa-chart-bar"></i>
-                            <span class="nav-item">List-All-Mentor</span>
-                        </a></li>
-                    <li><a href="#">
-                            <i class="fas fa-comment"></i>
-                            <span class="nav-item">Attendance</span>
-                        </a></li>
-                    <li><a href="#">
-                            <i class="fas fa-cog"></i>
-                            <span class="nav-item">Setting</span>
-                        </a></li>
+                <section class="main">
+                    <section class="attendance">
+                        <div class="attendance-list">
 
-                    <li><a href="logout" class="logout">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <span class="nav-item">Log out</span>
-                        </a></li>
-                </ul>
-            </nav>
+                            <h1 class = "list-all">Manager List All Skills</h1>
 
-            <section class="main">
-                <section class="attendance">
-                    <div class="attendance-list">
+                            <div>
+                                <div id="add-skill-popup" style="display: none;">
+                                    <div class="add-skill-box">
 
-                        <h1 class = "list-all">Manager List All Skills</h1>
+                                        <form action="addskill" method="post">
 
-                        <div>
-                            <div id="add-skill-popup" style="display: none;">
-                                <div class="add-skill-box">
-
-                                    <form action="addskill" method="post">
-
-                                        <div class="form-group">
-                                            <label for="skill-name">Name of skill:</label>
-                                            <input type="text" id="skill-name" name="skill_name" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="skill-image">Image:</label>
-                                            <input type="text" id="skill-image" name="skill_img" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Status:</label>
-                                            <select name="skill_status">
-                                                <option value="1">Active</option>
-                                                <option value="0">Inactive</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit">Add Skill</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <button id="add-skill-button"  class="custom-button" >Add Skill</button>
-                        </div>
-
-
-                        <table class="table">
-                            <thead >
-                            <div> 
-                                <tr>
-                                    <th>STT</th>
-                                    <th>ID</th>
-                                    <th>Name Of Skill</th>
-                                    <th>Image</th>
-                                    <th >Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </div>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${listS}" var="o">
-
-                                    <tr >
-                                        <td>${o.skill_id}</td>
-                                        <td>${o.skill_id}</td>
-                                        <td>${o.skill_name}</td>
-
-                                        <td><img class="element" src="${o.skill_img}" alt="Skill Image"></td>
-                                        <td >
-                                            <a href="updatestatus?kid=${o.skill_id}" class="btn btn-${o.skill_status == 1 ? 'success' : 'danger'}">
-                                                <c:choose>
-                                                    <c:when test="${o.skill_status == 1}">
-                                                        Active
-                                                    </c:when>
-                                                    <c:when test="${o.skill_status == 0}">
-                                                        Inactive
-                                                    </c:when>
-                                                </c:choose>
-                                            </a>
-                                        </td>
-                                        <td > <div class="action">
-                                                <a href="updateskill?kid=${o.skill_id}">Update</a>
-                                               <!-- <a href="#" onclick="doDelete('${o.skill_id}')">Delete</a> -->
+                                            <div class="form-group">
+                                                <label for="skill-name">Name of skill:</label>
+                                                <input type="text" id="skill-name" name="skill_name" required>
                                             </div>
-                                        </td>
+                                            <div class="form-group">
+                                                <label for="skill-image">Image:</label>
+                                                <input type="text" id="skill-image" name="skill_img" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Status:</label>
+                                                <select name="skill_status">
+                                                    <option value="1">Active</option>
+                                                    <option value="0">Inactive</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit">Add Skill</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <button id="add-skill-button"  class="custom-button" >Add Skill</button>
+                            </div>
+
+
+                            <table class="table">
+                                <thead >
+                                <div> 
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>ID</th>
+                                        <th>Name Of Skill</th>
+                                        <th>Image</th>
+                                        <th >Status</th>
+                                        <th>Action</th>
                                     </tr>
+                                </div>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${listS}" var="o">
 
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
+                                        <tr >
+                                            <td>${o.skill_id}</td>
+                                            <td>${o.skill_id}</td>
+                                            <td>${o.skill_name}</td>
+
+                                            <td><img class="element" src="${o.skill_img}" alt="Skill Image"></td>
+                                            <td >
+                                                <a href="updatestatus?kid=${o.skill_id}" class="btn btn-${o.skill_status == 1 ? 'success' : 'danger'}">
+                                                    <c:choose>
+                                                        <c:when test="${o.skill_status == 1}">
+                                                            Active
+                                                        </c:when>
+                                                        <c:when test="${o.skill_status == 0}">
+                                                            Inactive
+                                                        </c:when>
+                                                    </c:choose>
+                                                </a>
+                                            </td>
+                                            <td > <div class="action">
+                                                    <a href="updateskill?kid=${o.skill_id}">Update</a>
+                                                   <!-- <a href="#" onclick="doDelete('${o.skill_id}')">Delete</a> -->
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
                 </section>
-            </section>
-        </div>
+            </div>
 
-        <script>
-            var addSkillButton = document.getElementById("add-skill-button");
-            var addSkillPopup = document.getElementById("add-skill-popup");
+            <script>
+                var addSkillButton = document.getElementById("add-skill-button");
+                var addSkillPopup = document.getElementById("add-skill-popup");
 
-            addSkillButton.onclick = function () {
-                addSkillPopup.style.display = "block";
-                document.body.classList.add("overlay");
-            }
-
-            addSkillPopup.onclick = function (event) {
-                if (event.target == addSkillPopup) {
-                    addSkillPopup.style.display = "none";
-                    document.body.classList.remove("overlay");
+                addSkillButton.onclick = function () {
+                    addSkillPopup.style.display = "block";
+                    document.body.classList.add("overlay");
                 }
-            }
-        </script>
 
+                addSkillPopup.onclick = function (event) {
+                    if (event.target == addSkillPopup) {
+                        addSkillPopup.style.display = "none";
+                        document.body.classList.remove("overlay");
+                    }
+                }
+            </script>
+
+        </c:if>
     </body>
 </html>

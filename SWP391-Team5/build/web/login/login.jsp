@@ -79,10 +79,10 @@
 
                         <div class="mb_10 nobottommargin tright mt-3">
 
-                            <a href="forgetPassword" class="">Quên mật khẩu</a>
+                            <a href="/SWP391-Team5/forgetPassword/forgetPassword.jsp" class="">Quên mật khẩu</a>
                         </div>
                         <div class="mb_10 nobottommargin">
-                            Bạn chưa có tài khoản? <a href="signupController" class="">Hãy click vào đây để đăng ký</a>
+                            Bạn chưa có tài khoản? <a href="/SWP391-Team5/signup/signup.jsp" class="">Hãy click vào đây để đăng ký</a>
                         </div>
                     </div>
                 </div>

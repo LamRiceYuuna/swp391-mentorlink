@@ -24,7 +24,7 @@ public class LogoutControl extends HttpServlet {
         HttpSession session = request.getSession();
         session.removeAttribute("acc");
         //Ðóng trình duyet di la session mat
-        response.sendRedirect("home");
+        response.sendRedirect("Home");
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
