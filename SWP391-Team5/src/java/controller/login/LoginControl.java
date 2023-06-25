@@ -59,6 +59,12 @@ public class LoginControl extends HttpServlet {
             session.setAttribute("acc",u);
             //Thoi gian ton tai cua session *minutes 30p
             session.setMaxInactiveInterval(30*60);
+            
+            // -> authorization: Role  1 2 3 -> 
+            if(u.getRole() == 3){
+                response.sendRedirect("dashboard");
+                return;
+            }
             response.sendRedirect("Home");
         }
     }
