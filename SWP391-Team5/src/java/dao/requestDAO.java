@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import model.Request;
+import model.Request_Skill;
 import model.Skill;
 import model.User;
 
@@ -51,7 +52,7 @@ public class requestDAO extends DBContext {
         return list;
 
     }
-
+    
     public List<Request> listRequestByMetorID(String mentor_id) {
         List<Request> list1 = new ArrayList<>();
         String sql = "SELECT * FROM swp391_group5.request where mentor_id=?;";
@@ -116,12 +117,16 @@ public class requestDAO extends DBContext {
         int id_mentor = 2;
         String mentee_id = "3";
         String id = "27";
+        String request_id ="6";
+        
         dao.deletebyID(id);
         //List<Skill> list = dao.getAllskillBySkill_id(id_mentor);
-//        List<Request> list = dao.listRequestByID(mentee_id);
-//        for (Request o : list) {
-//            System.out.println(o);
-//        }
+//       List<Request> list = dao.listRequestByID(mentee_id);
+         List<Request> list = dao.listbyRequest_ID(request_id);
+        //List<Request_Skill> list = dao.listRequest_SkillByID(request_id);
+        for (Request o : list) {
+            System.out.println(o);
+        }
 
     }
 
@@ -294,5 +299,55 @@ public class requestDAO extends DBContext {
         return name;
 
     }
+    public List<Request> listbyRequest_ID(String request_id){
+        
+        
+        List<Request> list1 = new ArrayList<>();
+        String sql = "SELECT * FROM swp391_group5.request where request_id=?;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, Integer.parseInt(request_id));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list1.add(new Request(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getTimestamp(7),
+                        rs.getTimestamp(8),
+                        rs.getTimestamp(9),
+                        rs.getInt(10)
+                ));
+            }
+
+        } catch (Exception e) {
+
+        }
+        return list1;
+        
+        
+    }
+    public List<Request_Skill>  listRequest_SkillByID(String request_id){
+        List<Request_Skill> list = new ArrayList<>();
+       String sql = "SELECT * FROM swp391_group5.request_skill where request_id = ?;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, Integer.parseInt(request_id));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                
+                
+            }
+
+        } catch (Exception e) {
+            System.out.println("listRequest_SkillByID : " + e.getMessage());
+        }
+        return list;
+        
+    }
+    
 
 }

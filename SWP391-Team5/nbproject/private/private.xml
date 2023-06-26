@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/msi/Documents/GitHub/mentorlink/SWP391-Team5/web/home/header.jsp</file>
-            <file>file:/C:/Users/msi/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/admin/AddSkillControl.java</file>
-            <file>file:/C:/Users/msi/Documents/GitHub/mentorlink/SWP391-Team5/web/common/viewCvMentor.jsp</file>
-            <file>file:/C:/Users/msi/Documents/GitHub/mentorlink/SWP391-Team5/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/damtu/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/mentee/updateRequest.java</file>
+            <file>file:/C:/Users/damtu/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/mentee/updateRequest.jsp</file>
+            <file>file:/C:/Users/damtu/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/CreateRequest/requestMentor.java</file>
+            <file>file:/C:/Users/damtu/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/common/Successfully.html</file>
         </group>
     </open-files>
 </project-private>

@@ -160,9 +160,11 @@
                         <label>Content</label><br>
                         <textarea placeholder="Content required" name="noidung" required></textarea>
                     </div>
+
                     <c:if test="${requestScope.errE!=null}">
                         <h6 style="color: red">${requestScope.errE}</h6>
                     </c:if>
+                    
 
                     <button style="border: 30px; background: #175E4C">Request</button>
                 </form>
