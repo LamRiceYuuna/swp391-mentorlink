@@ -45,6 +45,7 @@
                         </div>
                     </div>
                     <script>
+                        
                         // Lấy thời gian hiện tại
                         var currentTime = new Date();
 
@@ -79,8 +80,8 @@
                             } else {
                                 endTimeInput.setCustomValidity(""); // Xóa thông báo lỗi nếu hợp lệ
                             }
-                        });
-                    </script>
+                        }); 
+                    </script> 
 
                     <div class="gender-boxx">
                         <div class="gender-boxx">
@@ -160,11 +161,11 @@
                         <label>Content</label><br>
                         <textarea placeholder="Content required" name="noidung" required></textarea>
                     </div>
-
+                    
                     <c:if test="${requestScope.errE!=null}">
                         <h6 style="color: red">${requestScope.errE}</h6>
                     </c:if>
-                    
+                        <p></p>
 
                     <button style="border: 30px; background: #175E4C">Request</button>
                 </form>
