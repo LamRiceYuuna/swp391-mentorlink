@@ -31,7 +31,7 @@
                 <%-- Kiểm tra xem danh sách có tồn tại hay không --%>
 
                 <%-- Lặp qua từng đối tượng trong danh sách --%>
-                <c:forEach items="${list_request}" var="request">
+                
                     <form action="updateRequest" method="post" class="formm" >
                         <div class="input-boxx">
                             <label>Title</label>
@@ -51,19 +51,27 @@
                         <div class="gender-boxx">
                             <div class="gender-boxx">
                                 <label style="font-size: 15px; font-weight: bold;">Skill</label>
-                                <div class="gender-option ">
-                                    <select name="skills" id="skills" multiple=>
-                                        <c:forEach items="${list_Skill}" var="o" varStatus="status">
-                                            <option value="${o.getSkill_id()}">${o.skill_name}</option>
-                                            <c:if test="${status.index % 4 == 3}">
-                                                <div style="width: 100%; height: 0;"></div>
-                                            </c:if>
+                                <div class="gender-option">
+                                    <select name="skills" id="skills" multiple>
+                                        <c:forEach items="${list_Skill}" var="o">
+                                            <c:set var="isSelected" value="false" />
+                                            <c:forEach items="${List_skillRequest}" var="selectedSkill">
+                                                <c:if test="${selectedSkill.skill_name eq o.skill_name}">
+                                                    <c:set var="isSelected" value="true" />
+                                                </c:if>
+                                            </c:forEach>
+                                            <option value="${o.getSkill_id()}" ${isSelected ? 'selected' : ''}>
+                                                ${o.skill_name}
+                                            </option>
                                         </c:forEach>
                                     </select>
                                 </div>
                             </div>
-
                         </div>
+
+
+
+
                         <div class="input-boxx">
                             <label>Duration of the request</label>
                             <div class="select-boxx">
@@ -82,14 +90,16 @@
                             <textarea placeholder="Content required" name="noidung" required>${request.request_content}</textarea>
                         </div>
 
-                    </c:forEach>
+
 
 
                     <c:if test="${requestScope.errE!=null}">
                         <h6 style="color: red">${requestScope.errE}</h6>
                     </c:if>
-
-                    <button style="border: 30px; background: #175E4C">Request</button>
+                        
+                     <input type="hidden" name="request_id" value="${request.request_id}" />
+                     
+                    <button style="border: 30px; background: #175E4C" >UPDATE</button>
                 </form>
             </section>
         </div>

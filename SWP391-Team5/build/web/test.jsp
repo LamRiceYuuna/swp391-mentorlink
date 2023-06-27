@@ -14,12 +14,6 @@
     </head>
     <body>
         ${mess}
-        <h1>Hello World! </h1>
-    <c:forEach var="s" items="${skills}">
-        ${s}
-    </c:forEach>      
-        <c:forEach var="s" items="${rqs}">
-        ${s}
-    </c:forEach>  
+        
     </body>
 </html>

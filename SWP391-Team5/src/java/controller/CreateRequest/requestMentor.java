@@ -105,8 +105,11 @@ public class requestMentor extends HttpServlet {
                 || isEmpty(noidung) || skills == null || isEmpty(framework)) {
             request.setAttribute("errE", "Không được để trống thông tin nào!");
             processRequest(request, response);
-        } 
-            else if (khoangCach < soGioHoc1) {
+        } else if (skills == null || skills.length < 1 || skills.length > 3) {
+            System.out.println("Lỗi: Số lượng kỹ năng phải từ 1 đến 3");
+            request.setAttribute("errE", "Lỗi: Số lượng kỹ năng phải từ 1 đến 3");
+            processRequest(request, response);
+        } else if (khoangCach < soGioHoc1) {
             System.out.println("Lỗi: Thời gian bắt đầu và kết thúc phải lớn hơn hoạc bằng với số giờ học");
             request.setAttribute("errE", "Lỗi: Thời gian bắt đầu và kết thúc phải lớn hơn hoạc bằng với số giờ học");
             processRequest(request, response);
