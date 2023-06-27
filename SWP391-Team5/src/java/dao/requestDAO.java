@@ -4,7 +4,6 @@
  */
 package dao;
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Request;
 import model.Skill;
-
 
 /**
  *
@@ -196,7 +194,7 @@ public class requestDAO extends DBContext {
                     + "`title`, `request_content`, `time_study`, `time_begin`, `created_date`, `finish_date`, `request_status`)"
                     + " VALUES ( ?, ?,  ?, ?, ?, ?, ?, ?, ?)";
 
-            PreparedStatement ps = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id_mentor);
             ps.setInt(2, Integer.parseInt(sessionUser_id));
             // ps.setInt(3,Integer.parseInt(skills));
@@ -291,6 +289,25 @@ public class requestDAO extends DBContext {
             ex.printStackTrace();
         }
         return name;
+
+    }
+
+    public int getNumberOfRequest(int mentor_id) {
+        int count = 0;
+        try {
+            String sql = "SELECT COUNT(request_id) AS count FROM swp391_group5.request WHERE mentor_id = ?;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, mentor_id); // Thay mentorId bằng giá trị cụ thể của mentor_id mà bạn quan tâm
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                count = resultSet.getInt("count");
+                // Xử lý số lượng count tương ứng với mentor_id
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return count;
 
     }
 

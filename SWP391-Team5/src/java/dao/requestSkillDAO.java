@@ -21,6 +21,8 @@ public class requestSkillDAO extends DBContext {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
+    
+    //Lay ra ki nang ma mentee yeu cau.
     public Request_Skill getRequestSkillID() {
         String query = "SELECT distinct request_skill.skill_id FROM swp391_group5.request join swp391_group5.request_skill on "
                 + "request.request_id = request_skill.request_id where mentee_id = 3;";
