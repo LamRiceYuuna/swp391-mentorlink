@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import model.Request;
 import model.Skill;
@@ -293,6 +294,51 @@ public class requestDAO extends DBContext {
         }
         return name;
 
+    }
+    
+    
+    public void deletebyIDForMente(String request_id) {
+        String sql = "DELETE FROM swp391_group5.`request` WHERE request_id = ? ";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, Integer.parseInt(request_id));
+
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public boolean checkTime(Timestamp finish){
+        String sql = "SELECT TIMESTAMPADD(SQL_TSI_DAY, 2, '"+finish.toString()+"');";
+        Date current = new Date(); 
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+             return current.after(rs.getTimestamp(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public String GetNameSkillByRequestID(int request_id){
+         List<Request> list1 = new ArrayList<>();
+        String sql = "select b.skill_name from request_skill a join skill b on a.skill_id=b.skill_id where a.request_id= "+request_id+" ;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+
+        } catch (Exception e) {
+
+        }
+        return null;
     }
 
 }

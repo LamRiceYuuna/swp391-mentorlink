@@ -21,7 +21,7 @@ public class Request {
     private Timestamp created_date;
     private Timestamp finish_date;
     private int request_status;
-    
+    private String Skill_name;
 
     public Request() {
     }
@@ -124,6 +124,14 @@ public class Request {
 
     public void setRequest_status(int request_status) {
         this.request_status = request_status;
+    }
+    
+    public String getSkill_name() {
+        return Skill_name;
+    }
+
+    public void setSkill_name(String Skill_name) {
+        this.Skill_name = Skill_name;
     }
 
     @Override
