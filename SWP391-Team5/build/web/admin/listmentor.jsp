@@ -447,11 +447,7 @@
                 background-color: #ffffff;
                 color: #333;
             }
-            
-            
-            
         </style>
-
 
         <!-- Font Awesome Cdn Link -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
@@ -460,11 +456,7 @@
         <jsp:useBean id="a" class="dao.MentorCVDAO" scope = "request"></jsp:useBean>
         </head>
         <body>
-        <c:if test="${sessionScope.acc == null}">
-            <div class="error-message">
-                <a href="/Home" class="return-link">Ðã hết hạn đăng nhập, mời bạn đăng nhập lại.</a>
-            </div>
-        </c:if>
+
 
         <c:if test="${sessionScope.acc != null}">
             <div class="container">
@@ -510,7 +502,7 @@
                                 <input type="text" name="txtSearch" placeholder="Search by name ...">
                                 <button type="submit" value="search">Search</button>
                             </form>   
-                            
+
                             <h1 class = "list-all">List All Mentor</h1>
 
                             <table class="table">

@@ -15,12 +15,16 @@ import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
  * @author msi
  */
-public class Error404Filter implements Filter {
+public class RoleFilter implements Filter {
 
     private static final boolean debug = true;
 
@@ -29,12 +33,12 @@ public class Error404Filter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
 
-    public Error404Filter() {
+    public RoleFilter() {
     } 
 
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
 	throws IOException, ServletException {
-	if (debug) log("Error404Filter:DoBeforeProcessing");
+	if (debug) log("RoleFilter:DoBeforeProcessing");
 
 	// Write code here to process the request and/or response before
 	// the rest of the filter chain is invoked.
@@ -61,7 +65,7 @@ public class Error404Filter implements Filter {
 
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
 	throws IOException, ServletException {
-	if (debug) log("Error404Filter:DoAfterProcessing");
+	if (debug) log("RoleFilter:DoAfterProcessing");
 
 	// Write code here to process the request and/or response after
 	// the rest of the filter chain is invoked.
@@ -97,10 +101,25 @@ public class Error404Filter implements Filter {
                          FilterChain chain)
 	throws IOException, ServletException {
 
-	if (debug) log("Error404Filter:doFilter()");
+	if (debug) log("RoleFilter:doFilter()");
 
 	doBeforeProcessing(request, response);
 	
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+        HttpSession session = req.getSession();
+        User a = (User)session.getAttribute("acc");
+        // -> acc != null role -> login
+        if(session.getAttribute("acc") != null){
+            if (a.getRole() == 1){
+                request.getRequestDispatcher("Home").forward(request, response);
+            }else if(a.getRole() == 2){
+                request.getRequestDispatcher("Home").forward(request, response);
+            }else if(a.getRole() == 3){
+                request.getRequestDispatcher("dashboard").forward(request, response);
+            }
+        }
+        
 	Throwable problem = null;
 	try {
 	    chain.doFilter(request, response);
@@ -153,7 +172,7 @@ public class Error404Filter implements Filter {
 	this.filterConfig = filterConfig;
 	if (filterConfig != null) {
 	    if (debug) { 
-		log("Error404Filter:Initializing filter");
+		log("RoleFilter:Initializing filter");
 	    }
 	}
     }
@@ -163,8 +182,8 @@ public class Error404Filter implements Filter {
      */
     @Override
     public String toString() {
-	if (filterConfig == null) return ("Error404Filter()");
-	StringBuffer sb = new StringBuffer("Error404Filter(");
+	if (filterConfig == null) return ("RoleFilter()");
+	StringBuffer sb = new StringBuffer("RoleFilter(");
 	sb.append(filterConfig);
 	sb.append(")");
 	return (sb.toString());

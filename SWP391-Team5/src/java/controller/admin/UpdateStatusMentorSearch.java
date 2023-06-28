@@ -42,28 +42,33 @@ public class UpdateStatusMentorSearch extends HttpServlet {
         String idMentor = request.getParameter("idmentor");
         String txtSearch_raw = request.getParameter("txtSearch");
         String stt_raw = request.getParameter("stt");
-
-        int stt = Integer.parseInt(stt_raw);
-        int index = (int) Math.ceil(stt / 10.0);
-        /*
+        try {
+            int stt = Integer.parseInt(stt_raw);
+            int index = (int) Math.ceil(stt / 10.0);
+            /*
                  int index = stt/10;
                  if(stt%10!=0){
                  index++;
                   }
-                */
-        int id_M = Integer.parseInt(idMentor);
-        User u = new User();
-        MentorCVDAO m = new MentorCVDAO();
-        u = m.GetByIdMentor(id_M);
+             */
+            int id_M = Integer.parseInt(idMentor);
+            User u = new User();
+            MentorCVDAO m = new MentorCVDAO();
+            u = m.GetByIdMentor(id_M);
 
-        if (u.getUser_status() == 1) {
-            m.updateStatus(id_M, 0);
-        } else if (u.getUser_status() == 0) {
-            m.updateStatus(id_M, 1);
+            if (u.getUser_status() == 1) {
+                m.updateStatus(id_M, 0);
+            } else if (u.getUser_status() == 0) {
+                m.updateStatus(id_M, 1);
+            }
+            //Lay  duoc du lieu truyen lai
+            String url = "/searchControl?index=" + index + "&txtSearch=" + txtSearch_raw;
+            request.getRequestDispatcher(url).forward(request, response);
+        } catch (Exception e) {
+            //Error 500
+            response.sendRedirect("security/error500.html");
         }
-        //Lay  duoc du lieu truyen lai
-        String url = "/searchControl?index=" + index + "&txtSearch=" + txtSearch_raw;
-        request.getRequestDispatcher(url).forward(request, response);
+
     }
 
     @Override
