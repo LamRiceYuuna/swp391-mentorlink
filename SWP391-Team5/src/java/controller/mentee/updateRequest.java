@@ -2,17 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.CreateRequest;
+package controller.mentee;
 
+import controller.CreateRequest.Mail;
+import controller.CreateRequest.requestMentor;
+import dao.requestDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.User;
-import dao.requestDAO;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -20,14 +22,21 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Request;
 import model.Skill;
+import model.User;
+import model.skill_Request;
 
 /**
  *
  * @author damtu
  */
-public class requestMentor extends HttpServlet {
+@WebServlet(name = "updateRequest", urlPatterns = {"/updateRequest"})
+public class updateRequest extends HttpServlet {
+
     static int id_temp;
+    static int id_request;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,54 +48,84 @@ public class requestMentor extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        //   request.setAttribute("errE", "Lỗi: Thời điểm kết thúc nhỏ hơn thời điểm bắt đầu");
-       requestDAO dao = new requestDAO();
-        List<Skill> list = dao.getAllskillBySkill_id(id_temp);
-        // day data len jsp
-        request.setAttribute("listp", list);
-//            request.setAttribute("id", id_mentor);
-        request.getRequestDispatcher("mentee/createRequest.jsp").forward(request, response);
-       
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+
+        String request_id = "42";
+        requestDAO dao = new requestDAO();
+        //list request theo id
+        Request re = dao.listbyRequest_ID(request_id);
+        //list skill menter of request
+//             String id_mentor = request.getParameter("mentor_id");
+        String id_mentor = "2";
+        List<Skill> list_a = dao.getAllskillBySkill_id(Integer.parseInt(id_mentor));
+        List<skill_Request> list_b = dao.listRequest_SkillByID(request_id);
+        request.setAttribute("List_skillRequest", list_b);
+        request.setAttribute("request", re);
+        request.setAttribute("list_Skill", list_a);
+        request.getRequestDispatcher("/mentee/updateRequest.jsp").forward(request, response);
+
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id_mentor = request.getParameter("mentor_id");
-        id_temp = Integer.parseInt(id_mentor);
-        //   request.setAttribute("errE", "Lỗi: Thời điểm kết thúc nhỏ hơn thời điểm bắt đầu");
+//        String id_mentor = request.getParameter("mentor_id");
+//        id_temp = Integer.parseInt(id_mentor);
+//          String request_id = request.getParameter("request_id");
+//          id_request = Integer.parseInt(request_id);
+
+        String request_id = "42";
         requestDAO dao = new requestDAO();
-        List<Skill> list = dao.getAllskillBySkill_id(Integer.parseInt(id_mentor));
-        // day data len jsp
-        request.setAttribute("listp", list);
-//            request.setAttribute("id", id_mentor);
-        request.getRequestDispatcher("mentee/createRequest.jsp").forward(request, response);
+        //list request theo id
+        Request re= dao.listbyRequest_ID(request_id);
+        //list skill menter of request
+//             String id_mentor = request.getParameter("mentor_id");
+        String id_mentor = "2";
+        List<Skill> list_a = dao.getAllskillBySkill_id(Integer.parseInt(id_mentor));
+        List<skill_Request> list_b = dao.listRequest_SkillByID(request_id);
+        request.setAttribute("List_skillRequest", list_b);
+        request.setAttribute("request", re);
+        request.setAttribute("list_Skill", list_a);
+        request.getRequestDispatcher("/mentee/updateRequest.jsp").forward(request, response);
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         // lấy id của mentee
         HttpSession session = request.getSession();
         User sessionUser = (User) session.getAttribute("acc");
         String sessionUser_id = sessionUser.getUser_id();
-
         //lấy mail của mentee  
         String mail = sessionUser.getEmail();
         String name = sessionUser.getFull_name();
-        //lấy id mentor
-        // trước hết cứ mặc định là 2
-        int id_mentor = 2;
+        //String request_id ="46";
+        //String request_id = request.getParameter("request_id");
+        String Request_id = "42";
         String tieude = request.getParameter("tieude");
         String batdau = request.getParameter("batdau");
         String ketthuc = request.getParameter("ketthuc");
         String sogiohoc = request.getParameter("sogiohoc");
         String noidung = request.getParameter("noidung");
         String[] skills = request.getParameterValues("skills");
-        String framework = request.getParameter("framework");
         request.setAttribute("skills", skills);
         Mail ml = new Mail();
         //********************************************************
@@ -99,17 +138,12 @@ public class requestMentor extends HttpServlet {
         long khoangCach = ketthuc1.getTime() - batdau1.getTime();
         long soGioHoc1 = Long.parseLong(sogiohoc) * 3600000; // Chuyển số giờ học thành mili giây
         boolean result = false;
-
         //***********************************************************************
         if (isEmpty(tieude) || isEmpty(batdau) || isEmpty(ketthuc) || isEmpty(sogiohoc)
-                || isEmpty(noidung) || skills == null || isEmpty(framework)) {
+                || isEmpty(noidung) || skills == null) {
             request.setAttribute("errE", "Không được để trống thông tin nào!");
             processRequest(request, response);
-        } else if (skills == null || skills.length < 1 || skills.length > 3) {
-            System.out.println("Lỗi: Số lượng kỹ năng phải từ 1 đến 3");
-            request.setAttribute("errE", "Lỗi: Số lượng kỹ năng phải từ 1 đến 3");
-            processRequest(request, response);
-        } else if (khoangCach < soGioHoc1) {
+        }  else if (khoangCach < soGioHoc1) {
             System.out.println("Lỗi: Thời gian bắt đầu và kết thúc phải lớn hơn hoạc bằng với số giờ học");
             request.setAttribute("errE", "Lỗi: Thời gian bắt đầu và kết thúc phải lớn hơn hoạc bằng với số giờ học");
             processRequest(request, response);
@@ -129,15 +163,20 @@ public class requestMentor extends HttpServlet {
                 processRequest(request, response);
             } else {
                 requestDAO DAO = new requestDAO();
-//                DAO.insert1(tieude, batdau1, id_mentor, "2", ketthuc1, sogiohoc, noidung, framework, skills);
-
                 try {
-                    result = DAO.insert1(tieude, batdau1, id_mentor, sessionUser_id, ketthuc1, sogiohoc, noidung, framework, skills);
+                    result = DAO.update_request(Request_id, tieude, batdau1, ketthuc1, sogiohoc, noidung, skills); // Xử lý ngoại lệ ở đây
                     request.getRequestDispatcher("/common/Successfully.html").forward(request, response);
-                } catch (SQLException e) {
-                    // Xử lý ngoại lệ ở đây
-                    result = false; // hoặc thực hiện hành động khác khi có lỗi
+                    
+                    if(result== true){
+                        request.setAttribute("mess", "thanh cong ");
+                        
+                    }else{
+                         request.setAttribute("mess", "that bai  ");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(updateRequest.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                // hoặc thực hiện hành động khác khi có lỗi
 //                processRequest(request, response);
 //                try {
 //                    ml.send(mail, name, tieude, batdau1, ketthuc1, sogiohoc, noidung, skills, framework);
@@ -145,10 +184,13 @@ public class requestMentor extends HttpServlet {
 //                } catch (ParseException ex) {
 //                    Logger.getLogger(requestMentor.class.getName()).log(Level.SEVERE, null, ex);
 //                }
+                
             }
+            
 
         }
-        
+       
+
     }
 
     boolean isEmpty(String msg) {
@@ -175,5 +217,12 @@ public class requestMentor extends HttpServlet {
         }
         return null;
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    
 
 }

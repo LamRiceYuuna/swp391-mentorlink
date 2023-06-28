@@ -184,8 +184,8 @@
                                     <div class="div" id="user-avatar">
                                         <img alt="" class="img-circle avatar_header"
                                              style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
-                                             src="${sessionScope.acc.avatar}">
-                                        
+                                             src="assets/upload/${sessionScope.acc.avatar}">
+                                        <i class="fa fa-angle-down fa-lg" aria-hidden="true" style="color:#fff;"></i>
                                     </div>
                                     <ul class="select_user_box" id="select_user_box" >
                                         <li class="dt-menu-item-parent pt-2 pb-2">
@@ -195,7 +195,7 @@
                                                         <a href="/user/523868402" class="" title="Duy Dao">
                                                             <img alt="" class="img-circle avatar_header"
                                                                  style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
-                                                                 src="${sessionScope.acc.avatar}">
+                                                                 src="assets/upload/${sessionScope.acc.avatar}">
                                                         </a>
                                                     </div>
                                                     <div class="pl-0" style="width: 100%;">
