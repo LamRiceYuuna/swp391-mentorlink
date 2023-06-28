@@ -45,8 +45,7 @@
         <div class="sigma_subheader after-title text-left style-1 dark-overlay ">
             <div class="container" style="margin-top: 50px">
                 <div class="sigma_subheader-inner">
-                    <h1 class="page-title"> Search Mentors ${mes}
-                    </h1>
+                    <h1 class="page-title" style="font-weight: 600; font-size: 40px">List Mentor Suggestion</h1>
                     <div class="breadcrumb-nav">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb" itemscope itemtype="#">
@@ -54,7 +53,7 @@
                                     class="breadcrumb-item"><a itemprop="item"
                                                            href="#"><span
                                             itemprop="name">Home</span></a></li>
-                                <li class="breadcrumb-item-page"> ( Page 2 )</li>
+                                <li class="breadcrumb-item-page">(Page)</li>
                             </ol>
                         </nav>
                     </div>
@@ -165,13 +164,13 @@
                                             <div class="user-feedback">
                                                 <!--                                                                <div class="empty-stars"></div>
                                                                                                                 <div class="full-stars" style="width: 100%"></div>-->
-                                                4.6 / 5 <i class="fa-sharp fa-solid fa-star" style="color: yellow"></i>
+                                                <span style="font-weight:700;">${s.getRating()}/5 </span><i class="fa-sharp fa-solid fa-star" style="color: yellow"></i>
                                             </div>
                                             <div class="user-feedback">
                                                 <span><i class="fa-solid fa-comment"></i>123 Feedback</span>
                                             </div>
                                             <div class="user-location">
-                                                <span><i class="fa-sharp fa-solid fa-clipboard-question"></i>123 Request</span>
+                                                <span><i class="fa-sharp fa-solid fa-clipboard-question"></i>${s.getNumberRequest()} Request</span>
                                             </div>
                                         </div>
                                     </div>
@@ -190,8 +189,7 @@
                                             </ul>
                                         </div>
                                         <div class="user-booking">
-                                            <a href="#" style="background: #175E4C; border: none">View
-                                                Profile</a>
+                                            <a href="requestMentor?mentor_id=${s.getMentor_id()}" style="background: #175E4C; border: none">Tạo yêu cầu</a>
                                         </div>
                                     </div>
                                 </div>

@@ -4,13 +4,11 @@
  */
 package dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -551,6 +549,25 @@ public class requestDAO extends DBContext {
         } finally {
             connection.setAutoCommit(true);  // Bật lại tự động xác nhận giao dịch
         }
+
+    }
+
+    public int getNumberOfRequest(int mentor_id) {
+        int count = 0;
+        try {
+            String sql = "SELECT COUNT(request_id) AS count FROM swp391_group5.request WHERE mentor_id = ?;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, mentor_id); // Thay mentorId bằng giá trị cụ thể của mentor_id mà bạn quan tâm
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                count = resultSet.getInt("count");
+                // Xử lý số lượng count tương ứng với mentor_id
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return count;
 
     }
 

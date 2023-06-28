@@ -19,10 +19,31 @@ public class CV_Mentor {
     private int skill_id;
     private Date created_date;
     private User infor;
+    private int numberRequest;
+    private float rating;
 
     public User getInfor() {
         return infor;
     }
+
+    public int getNumberRequest() {
+        return numberRequest;
+    }
+
+    public void setNumberRequest(int numberRequest) {
+        this.numberRequest = numberRequest;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+    
+    
+    
 
     public void setInfor(User infor) {
         this.infor = infor;
@@ -51,7 +72,8 @@ public class CV_Mentor {
         this.infor = infor;
     }
 
-    public CV_Mentor(String profession, User infor) {
+    public CV_Mentor(int mentor_id, String profession, User infor) {
+        this.mentor_id = mentor_id;
         this.profession = profession;
         this.infor = infor;
     }
