@@ -675,7 +675,7 @@ img {
     margin-top: 5px !important;
     height: auto;
     z-index: 199;
-    top: 100%;
+    top: 92%;
     left: -180px;
     margin: 0;
     transition: all .2s ease-in-out;
@@ -753,4 +753,11 @@ ul#select_user_box>li:hover {
 ul#select_user_box>li>a:hover {
     color: #175e4c !important;
     text-decoration: none !important;
+}
+
+.select_user_box {
+    display: none;
+}
+#top-user:hover .select_user_box {
+    display: block;
 }

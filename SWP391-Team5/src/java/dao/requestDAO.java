@@ -14,7 +14,11 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import model.MentorRatingStats;
+import model.MentorRequest;
+import model.MentorRequestStats;
 import model.Request;
 import model.Request_Skill;
 import model.Skill;
@@ -257,6 +261,134 @@ public class requestDAO extends DBContext {
 
     }
 
+    public MentorRequestStats getStatisticByMentorId(int mentor_id) {
+
+        String sql = "SELECT \n"
+                + "  COUNT(CASE WHEN r.request_status IN (2, 4) THEN 1 END) AS num_accepted_requests,\n"
+                + "  COUNT(CASE WHEN r.request_status IN (1,2,3, 4) THEN 1 END) AS num_total_requests,\n"
+                + "  COUNT(CASE WHEN r.request_status = 3 THEN 1 END) AS num_canceled_requests,\n"
+                + "  CONCAT(ROUND(COUNT(CASE WHEN r.request_status = 3 THEN 1 END) * 100 / COUNT(CASE WHEN r.request_status IN (1,2,3,4) THEN 1 END), 2), '%') AS cancel_percentage,\n"
+                + "  CONCAT(ROUND(COUNT(CASE WHEN r.request_status = 4 THEN 1 END) * 100 / COUNT(CASE WHEN r.request_status IN (1,2,3,4) THEN 1 END), 2), '%') AS completed_percentage\n"
+                + "FROM request r \n"
+                + "LEFT JOIN feedback f ON r.mentee_id = f.user_id AND r.mentor_id = f.mentor_id \n"
+                + "LEFT JOIN request_status rs ON r.request_status = rs.status_id \n"
+                + "WHERE r.mentor_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, mentor_id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int numAcceptedRequests = rs.getInt("num_accepted_requests");
+                int numTotalRequests = rs.getInt("num_total_requests");
+                int numCanceledRequests = rs.getInt("num_canceled_requests");
+                String cancelPercentage = rs.getString("cancel_percentage");
+                String completedPercentage = rs.getString("completed_percentage");
+                MentorRequestStats mrs = new MentorRequestStats(numAcceptedRequests,
+                        numTotalRequests, numCanceledRequests, cancelPercentage, completedPercentage);
+                return mrs;
+            }
+        } catch (SQLException ex) {
+        }
+        return null;
+    }
+
+    public List<MentorRequest> getListRequestByMentorId(int mentor_id) {
+        List<MentorRequest> list = new ArrayList<>();
+        String sql = "SELECT ROW_NUMBER() OVER(ORDER BY r.created_date) AS STT,\n"
+                + "u.full_name AS name_mentee, r.title,\n"
+                + " r.request_content, r.created_date, r.finish_date, rs.status_name AS request_status\n"
+                + "FROM request r\n"
+                + "INNER JOIN user u ON r.mentee_id = u.user_id\n"
+                + "INNER JOIN request_status rs ON r.request_status = rs.status_id\n"
+                + "WHERE r.mentor_id = ?\n"
+                + "ORDER BY r.created_date ASC;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, mentor_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int stt = rs.getInt("STT");
+                String menteeName = rs.getString("name_mentee");
+                String title = rs.getString("title");
+                String requestContent = rs.getString("request_content");
+                Date createdDate = rs.getDate("created_date");
+                Date finishDate = rs.getDate("finish_date");
+                String requestStatus = rs.getString("request_status");
+                MentorRequest mr = new MentorRequest(stt,
+                        menteeName, title, requestContent, createdDate, finishDate, requestStatus);
+                list.add(mr);
+            }
+            return list;
+
+        } catch (SQLException ex) {
+        }
+        return null;
+    }
+
+    public int getTopRateAVGStarByMentorId(int mentor_id) {
+        int topRank = 0;
+        String sql = "Select TOP from  (SELECT\n"
+                + "ROW_NUMBER() OVER (ORDER BY AVG(f.rate_start) DESC) AS TOP,\n"
+                + "u.user_id,\n"
+                + "CONCAT(u.full_name) AS name_mentor,\n"
+                + "ROUND(AVG(f.rate_start),1) AS Rate_start\n"
+                + "FROM\n"
+                + "user u\n"
+                + "LEFT JOIN feedback f ON u.user_id = f.mentor_id\n"
+                + "LEFT JOIN role r ON u.role = r.role_id\n"
+                + "WHERE\n"
+                + "r.role_id = 2\n"
+                + "GROUP BY\n"
+                + "u.user_id\n"
+                + "ORDER BY\n"
+                + "Rate_start DESC) as Toplist WHERE Toplist.user_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, mentor_id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                topRank = rs.getInt("TOP");
+            }
+        } catch (SQLException ex) {
+
+        }
+        return topRank;
+    }
+
+    public List<MentorRatingStats> getListTopRankStar() {
+        List<MentorRatingStats> list = new ArrayList<>();
+        String sql = "SELECT\n"
+                + "ROW_NUMBER() OVER (ORDER BY AVG(f.rate_start) DESC) AS TOP,\n"
+                + "u.user_id,\n"
+                + "CONCAT(u.full_name) AS name_mentor,\n"
+                + "ROUND(AVG(f.rate_start),1) AS Rate_start\n"
+                + "FROM\n"
+                + "user u\n"
+                + "LEFT JOIN feedback f ON u.user_id = f.mentor_id\n"
+                + "LEFT JOIN role r ON u.role = r.role_id\n"
+                + "WHERE\n"
+                + "r.role_id = 2\n"
+                + "GROUP BY\n"
+                + "u.user_id\n"
+                + "ORDER BY\n"
+                + "Rate_start DESC";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int rank = rs.getInt("TOP");
+                int userId = rs.getInt("user_id");
+                String fullName = rs.getString("name_mentor");
+                double averageRating = rs.getDouble("Rate_start");
+                MentorRatingStats mrs = new MentorRatingStats(rank, userId, fullName, averageRating);
+                list.add(mrs);
+            }
+            return list;
+
+        } catch (SQLException ex) {
+        }
+        return null;
+    }
     public Request listbyRequest_ID(String request_id) {
 
         String sql = "SELECT * FROM swp391_group5.request where request_id=?;";

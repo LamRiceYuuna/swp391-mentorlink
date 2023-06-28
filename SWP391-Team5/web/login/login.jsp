@@ -59,7 +59,7 @@
 
                         <form id="login-account" name="login-account" class="nobottommargin" action="login" method="post">
                             <div class="mb_10">
-                                <label for="">Username:</label>
+                                <label for="">Username:</label> 
                                 <input type="text" value="${username}" name="user" required
                                        class="form-control not-dark login-form-username" />
                             </div>

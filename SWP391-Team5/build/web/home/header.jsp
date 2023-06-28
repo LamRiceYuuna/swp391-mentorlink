@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
               integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="temp/home.css">
+        <link rel="stylesheet" href="temp/home1.css">
     </head>
 
     <body> 
@@ -97,9 +97,9 @@
                                         <img alt="" class="img-circle avatar_header"
                                              style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
                                              src="https://mentori.vn/upload/images/57fe6df2f2dabd4566022d17622f7e05.jpg">
-                                        <i class="fa fa-angle-down fa-lg" aria-hidden="true" style="color:#fff;"></i>
+                                        
                                     </div>
-                                    <ul class="select_user_box" id="select_user_box" style=" display: none; ">
+                                    <ul class="select_user_box" id="select_user_box">
                                         <li class="dt-menu-item-parent pt-2 pb-2">
                                             <div class="div">
                                                 <div class="" style="display: flex">
@@ -187,7 +187,7 @@
                                              src="assets/upload/${sessionScope.acc.avatar}">
                                         <i class="fa fa-angle-down fa-lg" aria-hidden="true" style="color:#fff;"></i>
                                     </div>
-                                    <ul class="select_user_box" id="select_user_box" style=" display: none; ">
+                                    <ul class="select_user_box" id="select_user_box" >
                                         <li class="dt-menu-item-parent pt-2 pb-2">
                                             <div class="div">
                                                 <div class="" style="display: flex">
@@ -217,7 +217,7 @@
                                             <a href="CreateCV">
                                                 <i class="fa fa-leaf"></i>Tạo CV Cho Mentor
                                             </a>
-                                            <a data-modal-target="#popup-btn-rq-statistic" href="#">
+                                            <a href="#" data-modal-target="#popup-btn-rq-statistic" >
                                                 <div class="center">
                                                     <i class="fa fa-leaf"></i>List statistic request
                                                 </div>
@@ -229,7 +229,7 @@
                                         <li><a class="pb-0">Cá nhân</a></li>
                                         <li class="dt-menu-item-parent"></li>
                                         <li>
-                                            <a href="#" class="pb-0">
+                                            <a href="UserProfile" class="pb-0">
                                                 <i class="fa-solid fa-user"></i></i>Thông tin cá nhân </a>
                                         </li>
                                         <li>
@@ -262,9 +262,9 @@
                                         <img alt="" class="img-circle avatar_header"
                                              style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
                                              src="https://mentori.vn/upload/images/57fe6df2f2dabd4566022d17622f7e05.jpg">
-                                        <i class="fa fa-angle-down fa-lg" aria-hidden="true" style="color:#fff;"></i>
+                                        
                                     </div>
-                                    <ul class="select_user_box" id="select_user_box" style=" display: none; ">
+                                    <ul class="select_user_box" id="select_user_box" >
                                         <li class="dt-menu-item-parent pt-2 pb-2">
                                             <div class="div">
                                                 <div class="" style="display: flex">
