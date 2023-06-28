@@ -15,6 +15,11 @@ public class Request_Skill {
     private int request_id;
     private ArrayList<Integer> itg;
 
+    @Override
+    public String toString() {
+        return "Request_Skill{" + "request_id=" + request_id + ", itg=" + itg + '}';
+    }
+
     public Request_Skill() {
     }
 
