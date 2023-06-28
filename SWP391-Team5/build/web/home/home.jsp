@@ -15,6 +15,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="temp/logo2.png">
         <link rel="stylesheet" href="assets/popup.css"/>
+        <link rel="stylesheet" href="temp/home1.css">
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <title>MentorLink</title>   
     </head>
 
@@ -30,7 +33,7 @@
                 <div class="slider_content">
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
-                            <h1 style="color: #fff;">MentorLink - Nền tảng Kết nối Cố vấn và Học cùng Chuyên gia</h1>
+                            <h1 style="color: #fff;">MentorLink - Nền tảng Kết nối Cố vấn và Học cùng Chuyên gia </h1>
                             <p style="color: #fff; font-size: 18px;">Với sứ mệnh là nâng cao chất lượng nguồn nhân lực, giúp
                                 thanh niên Việt Nam định vị nghề nghiệp và tạo cơ hội phát triển</p>
                             <p>Các dịch vụ đến từ Vietnam:</p>
@@ -131,8 +134,6 @@
                                     </div>
                                 </div>
                             </c:forEach>    
-
-
                         </div>
                         <div class="home_title mentor_team_title text-center mt-3">
                             <a href="viewListMentor">
@@ -178,288 +179,71 @@
                 </section>
             </div>
         </section>
-        <!--    <section class="pt-5 pb-5">
-                <div class="container-md">
-                    <div class="row text-center">
-                        <h2 class="main-color bolder-weight mb-0 center" style="margin: auto;">Cách học nhanh và bền vững nhất
-                            chính là học hỏi từ chính những người đi trước</h2>
-                    </div>
-                    <div class="row mt-5">
-                        <div class="col-sm-12 col-md-4">
-                            <div class="box-number p-4 mt-3" style="background-color: #034D37; border-radius: 10px;">
-                                <h3 class="text-white center bolder-weight">90.000+</h3>
-                                <p class="text-white">Cộng đồng Vietnam Mentoring Network hiện tại trung bình hơn 90.000 thành
-                                    viên, tăng trưởng trung bình hơn 10.000 thành viên/tháng</p>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-4">
-                            <div class="box-number p-4 mt-3" style="background-color: #034D37; border-radius: 10px;">
-                                <h3 class="text-white center bolder-weight">90.000+</h3>
-                                <p class="text-white">Cộng đồng Vietnam Mentoring Network hiện tại trung bình hơn 90.000 thành
-                                    viên, tăng trưởng trung bình hơn 10.000 thành viên/tháng</p>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-4">
-                            <div class="box-number p-4 mt-3" style="background-color: #034D37; border-radius: 10px;">
-                                <h3 class="text-white center bolder-weight">90.000+</h3>
-                                <p class="text-white">Cộng đồng Vietnam Mentoring Network hiện tại trung bình hơn 90.000 thành
-                                    viên, tăng trưởng trung bình hơn 10.000 thành viên/tháng</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>-->
-        <!-- post body -->
-        <!--    <section class="pt-5 pb-5" style="background-color: #fff;">
-                <div class="posts_body">
-                    <div class="container-md">
-                        <div>
-                            <h2 class="text-center main-color bolder-weight">Bài viết chia sẻ từ các chuyên gia</h2>
-                        </div>
-                        <div class="row mt-2" style="margin-right: 0px; margin-left: 0px;">
-                            <div id="box-content-list-posts">
-                                <div style="border-top: 0.3px solid #E9E9E9;"></div>
-                                <div class="post_item col_full pt-4 mb-4">
-                                    <div class="row">
-                                        <div class="col-md-4 col-sm-12">
-                                            <div class="entry-image post_item_img vertical-middle">
-                                                <a href="#" target="_blank">
-                                                    <img class="image_fade" src="temp/mje1614241540.jpg"
-                                                        alt="TỔNG QUAN VỀ NGÀNH TÀI CHÍNH (FUNCTION AND INDUSTRY)">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-7 col-sm-12">
-                                            <div class="post_item_text">
-                                                <div class="">
-                                                    <a href="#" class="post_title t600" target="_blank">TỔNG QUAN VỀ NGÀNH TÀI
-                                                        CHÍNH
-                                                        (FUNCTION AND INDUSTRY)</a>
-        
-                                                    <div class="item-reviews pl-3">
-                                                        <a href="#" class="name_re">
-                                                            <div class="d-flex avt-box-post"
-                                                                style="margin-right: 0px; margin-left: 0px;">
-                                                                <img src="temp/gxn1610077596.jpg" alt="Avatar Image"
-                                                                    class="img-circle avatar_header" width="50" height="50">
-                                                                <div class="post_avt_des">
-                                                                    <p class="mb-1" style="font-size: 16px;">Nguyễn Quý
-                                                                        Tiến<span class="mb-1 ml-3"><i aria-hidden="true"
-                                                                                class="fa fa-pencil-square-o mr-1"></i>25-02-2021
-                                                                        </span></p>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <a href="#" class="post_teaser" style="-webkit-line-clamp: unset;"
-                                                        target="_blank">Rất nhiều sinh viên không phân biệt được Chức Năng Tài
-                                                        Chính (Finance Function) và Ngành Tài Chính (Finance Industry). Mình sẽ
-                                                        làm rõ vấn đề đó trong bài viết này.</a>
-                                                    <div class="row mt-1">
-                                                        <div class="col-2">
-                                                            <i class="fa fa-eye fa-lg"></i>
-                                                            3919
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <i class="fa-regular fa-comment-dots"></i>
-                                                            0
-                                                        </div>
-                                                        <div class="col-2" id="button-vote-63">
-                                                            <a class="share share-facebook btn-pointer" href="/login">
-                                                                <i class="fa-regular fa-heart"></i><span class="ml-1"
-                                                                    style="margin-left: 5px;" id="vote-score-63">19</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-3" id="button-save-63">
-                                                            <a class="share share-facebook btn-pointer" href="/login">
-                                                                <i class="fa-sharp fa-regular fa-bookmark"></i><span
-                                                                    style="margin-left: 5px;">Lưu</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <a class="share share-facebook" href="#">
-                                                                <i class="fa-solid fa-share"></i><span
-                                                                    style="font-size: 16px; margin-left: 5px;">Chia
-                                                                    sẻ</span></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-2" style="margin-right: 0px; margin-left: 0px;">
-                            <div id="box-content-list-posts">
-                                <div style="border-top: 0.3px solid #E9E9E9;"></div>
-                                <div class="post_item col_full pt-4 mb-4">
-                                    <div class="row">
-                                        <div class="col-md-4 col-sm-12">
-                                            <div class="entry-image post_item_img vertical-middle">
-                                                <a href="#" target="_blank">
-                                                    <img class="image_fade" src="temp/mje1614241540.jpg"
-                                                        alt="TỔNG QUAN VỀ NGÀNH TÀI CHÍNH (FUNCTION AND INDUSTRY)">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-7 col-sm-12">
-                                            <div class="post_item_text">
-                                                <div class="">
-                                                    <a href="#" class="post_title t600" target="_blank">TỔNG QUAN VỀ NGÀNH TÀI
-                                                        CHÍNH
-                                                        (FUNCTION AND INDUSTRY)</a>
-        
-                                                    <div class="item-reviews pl-3">
-                                                        <a href="#" class="name_re">
-                                                            <div class="d-flex avt-box-post"
-                                                                style="margin-right: 0px; margin-left: 0px;">
-                                                                <img src="temp/gxn1610077596.jpg" alt="Avatar Image"
-                                                                    class="img-circle avatar_header" width="50" height="50">
-                                                                <div class="post_avt_des">
-                                                                    <p class="mb-1" style="font-size: 16px;">Nguyễn Quý
-                                                                        Tiến<span class="mb-1 ml-3"><i aria-hidden="true"
-                                                                                class="fa fa-pencil-square-o mr-1"></i>25-02-2021
-                                                                        </span></p>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <a href="#" class="post_teaser" style="-webkit-line-clamp: unset;"
-                                                        target="_blank">Rất nhiều sinh viên không phân biệt được Chức Năng Tài
-                                                        Chính (Finance Function) và Ngành Tài Chính (Finance Industry). Mình sẽ
-                                                        làm rõ vấn đề đó trong bài viết này.</a>
-                                                    <div class="row mt-1">
-                                                        <div class="col-2">
-                                                            <i class="fa fa-eye fa-lg"></i>
-                                                            3919
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <i class="fa-regular fa-comment-dots"></i>
-                                                            0
-                                                        </div>
-                                                        <div class="col-2" id="button-vote-63">
-                                                            <a class="share share-facebook btn-pointer" href="/login">
-                                                                <i class="fa-regular fa-heart"></i><span class="ml-1"
-                                                                    style="margin-left: 5px;" id="vote-score-63">19</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-3" id="button-save-63">
-                                                            <a class="share share-facebook btn-pointer" href="/login">
-                                                                <i class="fa-sharp fa-regular fa-bookmark"></i><span
-                                                                    style="margin-left: 5px;">Lưu</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <a class="share share-facebook" href="#">
-                                                                <i class="fa-solid fa-share"></i><span
-                                                                    style="font-size: 16px; margin-left: 5px;">Chia
-                                                                    sẻ</span></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-2" style="margin-right: 0px; margin-left: 0px;">
-                            <div id="box-content-list-posts">
-                                <div style="border-top: 0.3px solid #E9E9E9;"></div>
-                                <div class="post_item col_full pt-4 mb-4">
-                                    <div class="row">
-                                        <div class="col-md-4 col-sm-12">
-                                            <div class="entry-image post_item_img vertical-middle">
-                                                <a href="#" target="_blank">
-                                                    <img class="image_fade" src="temp/mje1614241540.jpg"
-                                                        alt="TỔNG QUAN VỀ NGÀNH TÀI CHÍNH (FUNCTION AND INDUSTRY)">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-7 col-sm-12">
-                                            <div class="post_item_text">
-                                                <div class="">
-                                                    <a href="#" class="post_title t600" target="_blank">TỔNG QUAN VỀ NGÀNH TÀI
-                                                        CHÍNH
-                                                        (FUNCTION AND INDUSTRY)</a>
-        
-                                                    <div class="item-reviews pl-3">
-                                                        <a href="#" class="name_re">
-                                                            <div class="d-flex avt-box-post"
-                                                                style="margin-right: 0px; margin-left: 0px;">
-                                                                <img src="temp/gxn1610077596.jpg" alt="Avatar Image"
-                                                                    class="img-circle avatar_header" width="50" height="50">
-                                                                <div class="post_avt_des">
-                                                                    <p class="mb-1" style="font-size: 16px;">Nguyễn Quý
-                                                                        Tiến<span class="mb-1 ml-3"><i aria-hidden="true"
-                                                                                class="fa fa-pencil-square-o mr-1"></i>25-02-2021
-                                                                        </span></p>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <a href="#" class="post_teaser" style="-webkit-line-clamp: unset;"
-                                                        target="_blank">Rất nhiều sinh viên không phân biệt được Chức Năng Tài
-                                                        Chính (Finance Function) và Ngành Tài Chính (Finance Industry). Mình sẽ
-                                                        làm rõ vấn đề đó trong bài viết này.</a>
-                                                    <div class="row mt-1">
-                                                        <div class="col-2">
-                                                            <i class="fa fa-eye fa-lg"></i>
-                                                            3919
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <i class="fa-regular fa-comment-dots"></i>
-                                                            0
-                                                        </div>
-                                                        <div class="col-2" id="button-vote-63">
-                                                            <a class="share share-facebook btn-pointer" href="/login">
-                                                                <i class="fa-regular fa-heart"></i><span class="ml-1"
-                                                                    style="margin-left: 5px;" id="vote-score-63">19</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-3" id="button-save-63">
-                                                            <a class="share share-facebook btn-pointer" href="/login">
-                                                                <i class="fa-sharp fa-regular fa-bookmark"></i><span
-                                                                    style="margin-left: 5px;">Lưu</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <a class="share share-facebook" href="#">
-                                                                <i class="fa-solid fa-share"></i><span
-                                                                    style="font-size: 16px; margin-left: 5px;">Chia
-                                                                    sẻ</span></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="border-top: 0.3px solid #E9E9E9;"></div>
-                            </div>
-                        </div>
-        
-                        <div class="home_title mentor_team_title text-center mt-5">
-                            <button class="btn btn-info btn_search">Xem thêm</button>
-                        </div>
-                    </div>
-                </div>
-            </section>-->
+
         <!-- footer -->
         <div id="popup-btn-rq-statistic" class="popup-btn-rq-statistic">
             <div class="check-modal">
-                a
+                <h1>List statistic request</h1>
+                <button data-close-button class="popup-close-btn">
+                    <i class="fa-solid fa-x"></i>
+                </button>
             </div>
-            <button data-close-button>Aaaaaaaaaaaaaaaaaaaaaaaaaaa</button>
+            <div class="sum-of-requests">
+                <h5>The total number of request given you: ${object.getNumTotalRequests()}  request</h5>
+                <h5>The number of accept request: ${object.getNumAcceptedRequests()} request </h5>   
+                <h5>The number of cancel request: ${object.getNumCanceledRequests()} request </h5>
+                <h5>Percentage of accept request: ${object.getCancelPercentage()} </h5>
+                <h5>Percentage of cancel request: ${object.getCompletedPercentage()} </h5>
+                <table class="table">
+                    <th>List request for you</th>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mentee Name</th>
+                        <th>Title</th>
+                        <th>Request Content</th>
+                        <th>Created Date</th>
+                        <th>Finish Date</th>
+                        <th>Request Status</th>
+                    </tr>
+                    <c:forEach var="o" items="${listR}">
+                    
+                    <tr>
+                        <td>${o.getStt()}</td>
+                        <td>${o.getMenteeName()}</td>
+                        <td>${o.getTitle()}</td>
+                        <td>${o.getRequestContent()}</td>
+                        <td>${o.getCreatedDate()}</td>	
+                        <td>${o.getFinishDate()}</td>
+                        <td>${o.getRequestStatus()}</td>
+                    </tr>
+                    </c:forEach>
+                    
+                </table>
+                <h4> The rank average star of you : ${top} </h4>
+                
+                <table class="table">
+                    <th>List Top Rank Average Star for Mentor</th>
+                    <tr>
+                        <th>TOP</th>
+                        <th>Mentor Name</th>
+                        <th>Average Start</th>
+                    </tr>
+                    
+                    <c:forEach var="r" items="${listRS}">
+                    <tr>
+                        <td>${r.getRank()}</td>
+                        <td>${r.getFullName()}</td>
+                        <td>${r.getAverageRating()}</td>
+                    </tr>
+                    </c:forEach>
+                    
+                </table>
+            </div>
         </div>
         <div id="overlay"></div>
         <jsp:include page="../home/footer.jsp"/>
     </body>
     <script src="temp/home.js"></script>
-    <script src="assets/js/popup.js"></script>
+    <script src="assets/js/popup1.js"></script>
 
 </html>

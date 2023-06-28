@@ -16,9 +16,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import model.MentorRatingStats;
+import model.MentorRequest;
+import model.MentorRequestStats;
 import model.Request;
+import model.Request_Skill;
 import model.Skill;
 import model.User;
+import model.skill_Request;
 
 /**
  *
@@ -117,55 +122,15 @@ public class requestDAO extends DBContext {
         int id_mentor = 2;
         String mentee_id = "3";
         String id = "27";
+        String request_id = "42";
+
         dao.deletebyID(id);
         //List<Skill> list = dao.getAllskillBySkill_id(id_mentor);
-//        List<Request> list = dao.listRequestByID(mentee_id);
-//        for (Request o : list) {
-//            System.out.println(o);
-//        }
+//       List<Request> list = dao.listRequestByID(mentee_id);
+        Request re = dao.listbyRequest_ID(request_id);
+        // List<skill_Request> list = dao.listRequest_SkillByID(request_id);
+        System.out.println(re.getRequest_content());
 
-    }
-
-    public void insert(String tieude, Timestamp batdau1, int id_mentor, String sessionUser_id, Timestamp ketthuc1,
-            String sogiohoc, String noidung, String framework) {
-
-        // Lấy thời gian hiện tại
-        LocalDateTime currentTime = LocalDateTime.now();
-        // Cộng thêm 12 giờ
-        LocalDateTime newTime = currentTime.plusHours(12);
-        // Định dạng lại chuỗi thời gian
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-        String currentFormatted = currentTime.format(formatter);
-        String newFormatted = newTime.format(formatter);
-        LocalDateTime currentDateTime = LocalDateTime.parse(currentFormatted, formatter);
-        LocalDateTime newDateTime = LocalDateTime.parse(newFormatted, formatter);
-        // In ra kết quả
-        System.out.println("Thời gian hiện tại: " + currentDateTime);
-        System.out.println("Thời gian sau khi cộng 12 giờ: " + newDateTime);
-        // Chuyển đổi LocalDateTime thành Timestamp
-        Timestamp timestamp = Timestamp.valueOf(newDateTime);
-        //******************************************************
-        int request_status = 1;
-        String sql = "INSERT INTO `swp391_group5`.`request` ( `mentor_id`, `mentee_id`,  `title`, `request_content`, `time_study`, `time_begin`, `created_date`, `finish_date`, `request_status`)"
-                + " VALUES ( ?, ?,  ?, ?, ?, ?, ?, ?, ?)";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id_mentor);
-            ps.setInt(2, Integer.parseInt(sessionUser_id));
-            // ps.setInt(3,Integer.parseInt(skills));
-            ps.setString(3, tieude);
-            ps.setString(4, noidung);
-            ps.setInt(5, Integer.parseInt(sogiohoc));
-            ps.setTimestamp(6, timestamp);
-            ps.setTimestamp(7, batdau1);
-            ps.setTimestamp(8, ketthuc1);
-            ps.setInt(9, request_status);
-
-            ps.executeUpdate();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
     }
 
     public boolean insert1(String tieude, Timestamp batdau1, int id_mentor, String sessionUser_id, Timestamp ketthuc1,
@@ -198,7 +163,7 @@ public class requestDAO extends DBContext {
                     + "`title`, `request_content`, `time_study`, `time_begin`, `created_date`, `finish_date`, `request_status`)"
                     + " VALUES ( ?, ?,  ?, ?, ?, ?, ?, ?, ?)";
 
-            PreparedStatement ps = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id_mentor);
             ps.setInt(2, Integer.parseInt(sessionUser_id));
             // ps.setInt(3,Integer.parseInt(skills));
@@ -339,6 +304,254 @@ public class requestDAO extends DBContext {
 
         }
         return null;
+    }
+
+    public MentorRequestStats getStatisticByMentorId(int mentor_id) {
+
+        String sql = "SELECT \n"
+                + "  COUNT(CASE WHEN r.request_status IN (2, 4) THEN 1 END) AS num_accepted_requests,\n"
+                + "  COUNT(CASE WHEN r.request_status IN (1,2,3, 4) THEN 1 END) AS num_total_requests,\n"
+                + "  COUNT(CASE WHEN r.request_status = 3 THEN 1 END) AS num_canceled_requests,\n"
+                + "  CONCAT(ROUND(COUNT(CASE WHEN r.request_status = 3 THEN 1 END) * 100 / COUNT(CASE WHEN r.request_status IN (1,2,3,4) THEN 1 END), 2), '%') AS cancel_percentage,\n"
+                + "  CONCAT(ROUND(COUNT(CASE WHEN r.request_status = 4 THEN 1 END) * 100 / COUNT(CASE WHEN r.request_status IN (1,2,3,4) THEN 1 END), 2), '%') AS completed_percentage\n"
+                + "FROM request r \n"
+                + "LEFT JOIN feedback f ON r.mentee_id = f.user_id AND r.mentor_id = f.mentor_id \n"
+                + "LEFT JOIN request_status rs ON r.request_status = rs.status_id \n"
+                + "WHERE r.mentor_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, mentor_id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int numAcceptedRequests = rs.getInt("num_accepted_requests");
+                int numTotalRequests = rs.getInt("num_total_requests");
+                int numCanceledRequests = rs.getInt("num_canceled_requests");
+                String cancelPercentage = rs.getString("cancel_percentage");
+                String completedPercentage = rs.getString("completed_percentage");
+                MentorRequestStats mrs = new MentorRequestStats(numAcceptedRequests,
+                        numTotalRequests, numCanceledRequests, cancelPercentage, completedPercentage);
+                return mrs;
+            }
+        } catch (SQLException ex) {
+        }
+        return null;
+    }
+
+    public List<MentorRequest> getListRequestByMentorId(int mentor_id) {
+        List<MentorRequest> list = new ArrayList<>();
+        String sql = "SELECT ROW_NUMBER() OVER(ORDER BY r.created_date) AS STT,\n"
+                + "u.full_name AS name_mentee, r.title,\n"
+                + " r.request_content, r.created_date, r.finish_date, rs.status_name AS request_status\n"
+                + "FROM request r\n"
+                + "INNER JOIN user u ON r.mentee_id = u.user_id\n"
+                + "INNER JOIN request_status rs ON r.request_status = rs.status_id\n"
+                + "WHERE r.mentor_id = ?\n"
+                + "ORDER BY r.created_date ASC;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, mentor_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int stt = rs.getInt("STT");
+                String menteeName = rs.getString("name_mentee");
+                String title = rs.getString("title");
+                String requestContent = rs.getString("request_content");
+                Date createdDate = rs.getDate("created_date");
+                Date finishDate = rs.getDate("finish_date");
+                String requestStatus = rs.getString("request_status");
+                MentorRequest mr = new MentorRequest(stt,
+                        menteeName, title, requestContent, createdDate, finishDate, requestStatus);
+                list.add(mr);
+            }
+            return list;
+
+        } catch (SQLException ex) {
+        }
+        return null;
+    }
+
+    public int getTopRateAVGStarByMentorId(int mentor_id) {
+        int topRank = 0;
+        String sql = "Select TOP from  (SELECT\n"
+                + "ROW_NUMBER() OVER (ORDER BY AVG(f.rate_start) DESC) AS TOP,\n"
+                + "u.user_id,\n"
+                + "CONCAT(u.full_name) AS name_mentor,\n"
+                + "ROUND(AVG(f.rate_start),1) AS Rate_start\n"
+                + "FROM\n"
+                + "user u\n"
+                + "LEFT JOIN feedback f ON u.user_id = f.mentor_id\n"
+                + "LEFT JOIN role r ON u.role = r.role_id\n"
+                + "WHERE\n"
+                + "r.role_id = 2\n"
+                + "GROUP BY\n"
+                + "u.user_id\n"
+                + "ORDER BY\n"
+                + "Rate_start DESC) as Toplist WHERE Toplist.user_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, mentor_id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                topRank = rs.getInt("TOP");
+            }
+        } catch (SQLException ex) {
+
+        }
+        return topRank;
+    }
+
+    public List<MentorRatingStats> getListTopRankStar() {
+        List<MentorRatingStats> list = new ArrayList<>();
+        String sql = "SELECT\n"
+                + "ROW_NUMBER() OVER (ORDER BY AVG(f.rate_start) DESC) AS TOP,\n"
+                + "u.user_id,\n"
+                + "CONCAT(u.full_name) AS name_mentor,\n"
+                + "ROUND(AVG(f.rate_start),1) AS Rate_start\n"
+                + "FROM\n"
+                + "user u\n"
+                + "LEFT JOIN feedback f ON u.user_id = f.mentor_id\n"
+                + "LEFT JOIN role r ON u.role = r.role_id\n"
+                + "WHERE\n"
+                + "r.role_id = 2\n"
+                + "GROUP BY\n"
+                + "u.user_id\n"
+                + "ORDER BY\n"
+                + "Rate_start DESC";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int rank = rs.getInt("TOP");
+                int userId = rs.getInt("user_id");
+                String fullName = rs.getString("name_mentor");
+                double averageRating = rs.getDouble("Rate_start");
+                MentorRatingStats mrs = new MentorRatingStats(rank, userId, fullName, averageRating);
+                list.add(mrs);
+            }
+            return list;
+
+        } catch (SQLException ex) {
+        }
+        return null;
+    }
+    public Request listbyRequest_ID(String request_id) {
+
+        String sql = "SELECT * FROM swp391_group5.request where request_id=?;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, Integer.parseInt(request_id));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Request(
+                        rs.getInt("request_id"),
+                        rs.getString("title"),
+                        rs.getString("request_content"),
+                        rs.getInt("time_study"),
+                        rs.getTimestamp("time_begin"),
+                        rs.getTimestamp("created_date"),
+                        rs.getTimestamp("finish_date")
+                );
+            }
+
+        } catch (Exception e) {
+
+        }
+        return null;
+
+    }
+
+    public List<skill_Request> listRequest_SkillByID(String request_id) {
+        List<skill_Request> list = new ArrayList<>();
+        String sql = "SELECT request_skill.request_id,request_skill.skill_id,skill.skill_name "
+                + "FROM swp391_group5.request_skill JOIN skill ON request_skill.skill_id = skill.skill_id "
+                + "where request_id = ?;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, Integer.parseInt(request_id));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new skill_Request(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3)
+                ));
+
+            }
+
+        } catch (Exception e) {
+            System.out.println("listRequest_SkillByID : " + e.getMessage());
+        }
+        return list;
+
+    }
+
+    public boolean update_request(String request_id, String tieude, Timestamp batdau1, Timestamp ketthuc1, String sogiohoc, String noidung, String[] skills)
+            throws SQLException {
+        // Lấy thời gian hiện tại
+        LocalDateTime currentTime = LocalDateTime.now();
+        // Cộng thêm 12 giờ
+        LocalDateTime newTime = currentTime.plusHours(12);
+        // Định dạng lại chuỗi thời gian
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        String currentFormatted = currentTime.format(formatter);
+        String newFormatted = newTime.format(formatter);
+        LocalDateTime currentDateTime = LocalDateTime.parse(currentFormatted, formatter);
+        LocalDateTime newDateTime = LocalDateTime.parse(newFormatted, formatter);
+        // In ra kết quả
+        System.out.println("Thời gian hiện tại: " + currentDateTime);
+        System.out.println("Thời gian sau khi cộng 12 giờ: " + newDateTime);
+        // Chuyển đổi LocalDateTime thành Timestamp
+        Timestamp timestamp = Timestamp.valueOf(newDateTime);
+        //******************************************************
+        try {
+            String sql = "UPDATE `swp391_group5`.`request` SET `title` = ?, `request_content` = ?, `time_study` = ?, "
+                    + "`time_begin` = ?, `created_date` = ?, `finish_date` = ? WHERE (`request_id` = ?);";
+            PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+
+            ps.setString(1, tieude);
+            ps.setString(2, noidung);
+            ps.setInt(3, Integer.parseInt(sogiohoc));
+            ps.setTimestamp(4, timestamp);
+            ps.setTimestamp(5, batdau1);
+            ps.setTimestamp(6, ketthuc1);
+            ps.setInt(7, Integer.parseInt(request_id));
+            ps.executeUpdate();
+
+            String sql2 = "DELETE FROM `swp391_group5`.`request_skill`\n"
+                    + "WHERE request_id = ? ;";
+            PreparedStatement ps1 = connection.prepareStatement(sql2);
+            ps1.setInt(1, Integer.parseInt(request_id));
+            ps1.executeUpdate();
+            
+            String sql3 = "INSERT INTO `swp391_group5`.`request_skill`\n"
+                    + "(`skill_id`,\n"
+                    + "`request_id`)\n"
+                    + "VALUES\n"
+                    + "(?,\n"
+                    + "?);";
+
+            PreparedStatement ps2 = connection.prepareStatement(sql3);
+
+            for (String id : skills) {
+                int value_id = Integer.parseInt(id);
+
+                // Thiết lập các giá trị trong Prepared Statement
+                ps2.setInt(1, value_id);
+                ps2.setInt(2, Integer.parseInt(request_id));
+
+                // Thực hiện câu lệnh chèn vào cơ sở dữ liệu
+                ps2.executeUpdate();
+               
+            }
+
+            connection.commit();  // Áp dụng thay đổi vào cơ sở dữ liệu
+            return true;
+        } catch (Exception e) {
+            connection.rollback();  // Hủy bỏ giao dịch nếu có lỗi
+            return false;
+        } finally {
+            connection.setAutoCommit(true);  // Bật lại tự động xác nhận giao dịch
+        }
+
     }
 
 }

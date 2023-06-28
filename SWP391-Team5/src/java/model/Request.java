@@ -26,12 +26,21 @@ public class Request {
     public Request() {
     }
 
+    public Request(int request_id, String title, String request_content, int time_study, Timestamp time_begin, Timestamp created_date, Timestamp finish_date) {
+        this.request_id = request_id;
+        this.title = title;
+        this.request_content = request_content;
+        this.time_study = time_study;
+        this.time_begin = time_begin;
+        this.created_date = created_date;
+        this.finish_date = finish_date;
+    }
 
+    
     public Request(int request_id, int mentor_id, int mentee_id,  String title, String request_content, int time_study, Timestamp time_begin, Timestamp created_date, Timestamp finish_date, int request_status) {
         this.request_id = request_id;
         this.mentor_id = mentor_id;
         this.mentee_id = mentee_id;
-      
         this.title = title;
         this.request_content = request_content;
         this.time_study = time_study;
@@ -40,6 +49,8 @@ public class Request {
         this.finish_date = finish_date;
         this.request_status = request_status;
     }
+
+  
 
   
 
