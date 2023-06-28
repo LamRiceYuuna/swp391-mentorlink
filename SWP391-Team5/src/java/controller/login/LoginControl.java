@@ -1,5 +1,6 @@
 package controller.login;
 import dao.UserDAO;
+import dao.requestDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -72,6 +73,7 @@ public class LoginControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         //Lay ra cookie trong mang
         Cookie arr[] = request.getCookies();
         for(Cookie o : arr){

@@ -7,14 +7,20 @@ package controller.home;
 
 import dao.MentorCVDAO;
 import dao.SkillDAO;
+import dao.requestDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.CV_Mentor;
+import model.MentorRatingStats;
+import model.MentorRequest;
+import model.MentorRequestStats;
 import model.Skill;
+import model.User;
 
 /**
  *
@@ -39,6 +45,24 @@ public class HomePage extends HttpServlet {
         SkillDAO sk = new SkillDAO();
         List<Skill> listS = sk.getTop3Skill();
         request.setAttribute("listS", listS);
+        //Getdata request static
+        try{
+        HttpSession session = request.getSession();
+        User abc = (User) session.getAttribute("acc");
+        int user_id = Integer.parseInt(abc.getUser_id());
+        requestDAO rq = new requestDAO();
+        MentorRequestStats mrs = rq.getStatisticByMentorId(user_id);
+        List<MentorRequest> listR = rq.getListRequestByMentorId(user_id);
+        int topRank = rq.getTopRateAVGStarByMentorId(user_id);
+        List<MentorRatingStats> listRS = rq.getListTopRankStar();
+        request.setAttribute("object", mrs);
+        request.setAttribute("listR", listR);
+        request.setAttribute("top", topRank);
+        request.setAttribute("listRS", listRS);
+        }catch(Exception e){
+            System.out.println(e.fillInStackTrace());
+        }
+        
         request.getRequestDispatcher("home/home.jsp").forward(request, response);
     } 
 

@@ -71,7 +71,7 @@
         <filter-name>LoginMentorFilter</filter-name>
         <url-pattern>/CreateCV</url-pattern>
         <!-- ? viewStatistic-->
-        <url-pattern>/viewStatistic</url-pattern>
+        <url-pattern>/viewStatistic</url-pattern> 
         <url-pattern>/followingRequest</url-pattern>
         <url-pattern>/updatecv</url-pattern>
     </filter-mapping>
@@ -95,10 +95,10 @@
     </filter-mapping>
     
     <!-- error Status -->
-    <error-page>
+<!--    <error-page>
         <error-code>404</error-code>
         <location>/security/error404.html</location>
-    </error-page>
+    </error-page>-->
     <error-page>
         <error-code>500</error-code>
         <location>/security/error500.html</location>
