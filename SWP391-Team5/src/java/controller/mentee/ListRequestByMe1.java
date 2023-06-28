@@ -50,10 +50,12 @@ public class ListRequestByMe1 extends HttpServlet {
 //        }
         String request_id=request.getParameter("idDel");
         String idp = request.getParameter("id");
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("acc"); 
         requestDAO dao = new requestDAO();
-        String id = "3";
+        
+        HttpSession session = request.getSession();
+        User sessionUser = (User) session.getAttribute("acc");
+        String sessionUser_id = sessionUser.getUser_id();
+        
         Date currentTime = new Date(); 
         if(request_id!=null){
         dao.deletebyIDForMente(request_id);
@@ -65,7 +67,7 @@ public class ListRequestByMe1 extends HttpServlet {
             dao.update(4, idr);
             
         }
-        List<Request> list = dao.listRequestByID(id);
+        List<Request> list = dao.listRequestByID(sessionUser_id);
         sum=list.size();
         request.setAttribute("sum", sum);
         

@@ -23,12 +23,13 @@ public class requestSkillDAO extends DBContext {
 
     
     //Lay ra ki nang ma mentee yeu cau.
-    public Request_Skill getRequestSkillID() {
+    public Request_Skill getRequestSkillID(int mentee_id) {
         String query = "SELECT distinct request_skill.skill_id FROM swp391_group5.request join swp391_group5.request_skill on "
-                + "request.request_id = request_skill.request_id where mentee_id = 3;";
+                + "request.request_id = request_skill.request_id where mentee_id = ?;";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
+            ps.setInt(1, mentee_id);
             rs = ps.executeQuery();
 
             ArrayList<Integer> skillIds = new ArrayList<>();
@@ -46,18 +47,18 @@ public class requestSkillDAO extends DBContext {
         return null;
     }
 
-    public static void main(String[] args) {
-        requestSkillDAO obj = new requestSkillDAO(); // Thay YourClassName bằng tên lớp chứa phương thức getRequestSkillID()
-        Request_Skill requestSkill = obj.getRequestSkillID();
-
-        if (requestSkill != null) {
-            ArrayList<Integer> skillIds = requestSkill.getItg();
-            System.out.println("Skill IDs:");
-            for (int skillId : skillIds) {
-                System.out.println(skillId);
-            }
-        } else {
-            System.out.println("Không có kết quả trả về từ phương thức getRequestSkillID()");
-        }
-    }
+//    public static void main(String[] args) {
+//        requestSkillDAO obj = new requestSkillDAO(); // Thay YourClassName bằng tên lớp chứa phương thức getRequestSkillID()
+//        Request_Skill requestSkill = obj.getRequestSkillID();
+//
+//        if (requestSkill != null) {
+//            ArrayList<Integer> skillIds = requestSkill.getItg();
+//            System.out.println("Skill IDs:");
+//            for (int skillId : skillIds) {
+//                System.out.println(skillId);
+//            }
+//        } else {
+//            System.out.println("Không có kết quả trả về từ phương thức getRequestSkillID()");
+//        }
+//    }
 }

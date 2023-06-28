@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.CV_Mentor;
 import model.Request_Skill;
@@ -36,9 +37,13 @@ public class ListMentorSuggestion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         HttpSession session = request.getSession();
+        User sessionUser = (User) session.getAttribute("acc");
+        String sessionUser_id = sessionUser.getUser_id();
+        int mentee_id = Integer.parseInt(sessionUser_id);
         MentorCVDAO dao = new MentorCVDAO();
         requestSkillDAO obj = new requestSkillDAO();
-        Request_Skill requestSkill = obj.getRequestSkillID();
+        Request_Skill requestSkill = obj.getRequestSkillID(mentee_id);
         ArrayList<Integer> skillIds = requestSkill.getItg();
         ArrayList<CV_Mentor> list = dao.listMentorSuggestion(skillIds);
         request.setAttribute("listS", list);

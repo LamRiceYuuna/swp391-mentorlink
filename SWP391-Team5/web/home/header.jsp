@@ -44,6 +44,13 @@
                                     <div>Tìm kiếm Mentor</div>
                                 </a>
                             </li>
+                            <c:if test="${sessionScope.acc.role == 1}"> 
+                                <li class="sub-menu">
+                                    <a href="mentorSuggestion">
+                                        <div>Mentor Suggestion</div>
+                                    </a>
+                                </li>
+                            </c:if>
                             <li class="sub-menu dropdown_list">
                                 <a href="#">
                                     <div>Đối tác</div>
@@ -97,7 +104,7 @@
                                         <img alt="" class="img-circle avatar_header"
                                              style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
                                              src="https://mentori.vn/upload/images/57fe6df2f2dabd4566022d17622f7e05.jpg">
-                                        
+
                                     </div>
                                     <ul class="select_user_box" id="select_user_box">
                                         <li class="dt-menu-item-parent pt-2 pb-2">
@@ -137,18 +144,18 @@
                                         <li class="dt-menu-item-parent"></li>
                                         <li>
                                             <a href="#" class="pb-0" style="cursor: pointer;">
-                                                <i class="fa fa-tag"></i>requestMentor
+                                                <i class="fa fa-tag"></i>Request Mentor
                                             </a>
                                         </li>
                                         <li>
                                             <a href="listRequestMenTee" class="pb-0" style="cursor: pointer;">
-                                                <i class="fa fa-shopping-cart"></i>list Request MenTee
+                                                <i class="fa fa-shopping-cart"></i>List Request Mentee
                                             </a>
                                         </li>
                                         <li>
                                             <a data-toggle="modal" data-target="#add-interest-field" class="pb-0"
-                                               style="cursor: pointer;">
-                                                <i class="fa-solid fa-lightbulb"></i>Lĩnh vực quan tâm
+                                               style="cursor: pointer;" href="listrequestbyme1">
+                                                <i class="fa-solid fa-lightbulb"></i>List Request By Me
                                             </a>
                                         </li>
                                         <li>
@@ -262,7 +269,7 @@
                                         <img alt="" class="img-circle avatar_header"
                                              style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
                                              src="https://mentori.vn/upload/images/57fe6df2f2dabd4566022d17622f7e05.jpg">
-                                        
+
                                     </div>
                                     <ul class="select_user_box" id="select_user_box" >
                                         <li class="dt-menu-item-parent pt-2 pb-2">
