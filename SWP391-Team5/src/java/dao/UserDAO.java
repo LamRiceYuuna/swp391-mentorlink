@@ -172,12 +172,21 @@ public class UserDAO extends DBContext {
             stm.setString(1, username);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                return new User(rs.getString("username"), rs.getString("password"), rs.getString("email"));
+                return new User(rs.getString("avatar"), 
+                        rs.getString("full_name"), 
+                        rs.getString("email"),
+                        rs.getString("username"),
+                        rs.getString("phone"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    public static void main(String[] args) {
+        UserDAO dt = new UserDAO();
+        User a = dt.checkUserExisted("mentor1");
+        System.out.println(a.getUsername());
     }
 
     public void updatePassword(String username, String newpassword) {
@@ -194,6 +203,9 @@ public class UserDAO extends DBContext {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    
+
     public User getAccByUName(String username) {
         User acc = null;
         String sql = "SELECT * FROM swp391_group5.user where username   =?  ;";

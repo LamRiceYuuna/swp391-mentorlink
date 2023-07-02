@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        ${mess}
-        
+        ${username1}
+
     </body>
 </html>

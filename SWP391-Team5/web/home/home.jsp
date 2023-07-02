@@ -36,13 +36,8 @@
                             <h1 style="color: #fff;">MentorLink - Nền tảng Kết nối Cố vấn và Học cùng Chuyên gia </h1>
                             <p style="color: #fff; font-size: 18px;">Với sứ mệnh là nâng cao chất lượng nguồn nhân lực, giúp
                                 thanh niên Việt Nam định vị nghề nghiệp và tạo cơ hội phát triển</p>
-                            <p>Các dịch vụ đến từ Vietnam:</p>
                             <div class="row">
                                 <div>
-                                    <button class="btn btn-info btn_search pt-2 pb-2 btn-section">Tìm kiếm Chuyên
-                                        gia</button>
-                                    <button class="pt-2 pb-2 btn btn-info btn_search ml-4 btn-section2">Nền
-                                        tảng Mentoring</button>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +67,7 @@
 
                                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-3 mt-3">
                                     <div class="mentor_item mentor_item_custom wow fadeInUp">
-                                        <a href="ViewCvMentor?mentor_id=${p.mentor_id}">
+                                        <a href="viewcv?mentor_id=${p.mentor_id}">
                                             <div class="mentor_avatar">
                                                 <img src="${p.getInfor().getAvatar()}" alt="${p.getInfor().getFull_name()}">
                                             </div>

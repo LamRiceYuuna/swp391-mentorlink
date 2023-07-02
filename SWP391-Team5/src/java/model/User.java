@@ -95,6 +95,7 @@ public class User {
         this.full_name = full_name;
         this.email = email;
     }
+    
 
     
     
