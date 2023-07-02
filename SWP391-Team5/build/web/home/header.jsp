@@ -41,7 +41,7 @@
                             </li>
                             <li class="sub-menu">
                                 <a href="viewListMentor">
-                                    <div>Tìm kiếm Mentor</div>
+                                    <div>Find Mentor</div>
                                 </a>
                             </li>
                             <c:if test="${sessionScope.acc.role == 1}"> 
@@ -51,46 +51,13 @@
                                     </a>
                                 </li>
                             </c:if>
-                            <li class="sub-menu dropdown_list">
-                                <a href="#">
-                                    <div>Đối tác</div>
-                                </a>
-                                <ul id="mega2" class="mega_menu_box" style="display: none;"> <!--dropdown-menu-->
-                                    <li>
-                                        <a href="#" class="mega_menu_box_content" target="_blank">
-                                            <div style="">Rikkei Mentoring</div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="mega_menu_box_content" target="_blank">
-                                            <div style="text-transform: initial;">fMENTORING</div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="mega_menu_box_content" target="_blank">
-                                            <div>VNU-IS Mentoring</div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="mega_menu_box_content" target="_blank">
-                                            <div>Dynagen Mentoring</div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="mega_menu_box_content" target="_blank">
-                                            <div>Mentori</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
                             <c:if test="${sessionScope.acc == null}">  
 
                                 <li class="login-box">
-                                    <a href="login" class="btn-info btn">Đăng nhập</a>
+                                    <a href="login" class="btn-info btn">Login</a>
                                 </li>
                                 <li class="login-box">
-                                    <a href="signupController" class="btn-info btn">Đăng ký</a>
+                                    <a href="signupController" class="btn-info btn">Register</a>
                                 </li>
                             </c:if>
                         </ul>
@@ -124,7 +91,7 @@
                                                         </div>
                                                         <div>
                                                             <a href="UserProfile" class="" style="font-size: 12px;" title="Duy Dao">
-                                                                Xem hồ sơ của bạn
+                                                                My profile
                                                             </a>
                                                         </div>
                                                     </div>
@@ -134,13 +101,13 @@
                                         <li role="separator" class="divider"></li>
                                         <li>
                                             <a href="#">
-                                                <i class="fa fa-leaf"></i>Đăng ký làm Mentor
+                                                <i class="fa fa-leaf"></i>Register to become Mentor
                                             </a>
                                         </li>
                                         <li role="separator" class="divider"></li>
 
 
-                                        <li><a class="pb-0">Cá nhân</a></li>
+                                        <li><a class="pb-0">Individual</a></li>
                                         <li class="dt-menu-item-parent"></li>
                                         <li>
                                             <a href="#" class="pb-0" style="cursor: pointer;">
@@ -160,27 +127,23 @@
                                         </li>
                                         <li>
                                             <a href="#" class="pb-0">
-                                                <i class="fa-solid fa-user"></i></i>Thông tin cá nhân </a>
+                                                <i class="fa-solid fa-user"></i></i>My profile </a>
                                         </li>
                                         <li>
                                             <a href="#" class="">
-                                                <i class="fa fa-key"></i>Đổi mật khẩu
+                                                <i class="fa fa-key"></i>Change password
                                             </a>
                                         </li>
 
                                         <li role="separator" class="divider"></li>
 
-                                        <li>
-                                            <a href="#" target="_blank" class="pb-0">
-                                                <i class="fa fa-question-circle"></i>Trợ giúp và Hỗ trợ
-                                            </a>
-                                        </li>
+                                        
 
                                         <li>
                                             <a href="logout">
                                                 <i class="fa fa-sign-out" style=" -ms-transform: rotate(180deg); /* IE 9 */
                                                    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
-                                                   transform: rotate(180deg);"></i>Đăng xuất </a>
+                                                   transform: rotate(180deg);"></i>Logout </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -212,7 +175,7 @@
                                                         </div>
                                                         <div>
                                                             <a href="UserProfile" class="" style="font-size: 12px;" title="Duy Dao">
-                                                                Xem hồ sơ của bạn
+                                                                My profile
                                                             </a>
                                                         </div>
                                                     </div>
@@ -222,7 +185,7 @@
                                         <li role="separator" class="divider"></li>
                                         <li>
                                             <a href="CreateCV">
-                                                <i class="fa fa-leaf"></i>Tạo CV Cho Mentor
+                                                <i class="fa fa-leaf"></i>Create CV for Mentor
                                             </a>
                                             <a href="#" data-modal-target="#popup-btn-rq-statistic" >
                                                 <div class="center">
@@ -233,15 +196,15 @@
                                         <li role="separator" class="divider"></li>
 
 
-                                        <li><a class="pb-0">Cá nhân</a></li>
+                                        <li><a class="pb-0">Individual</a></li>
                                         <li class="dt-menu-item-parent"></li>
                                         <li>
                                             <a href="UserProfile" class="pb-0">
-                                                <i class="fa-solid fa-user"></i></i>Thông tin cá nhân </a>
+                                                <i class="fa-solid fa-user"></i></i>My profile</a>
                                         </li>
                                         <li>
                                             <a href="#" class="">
-                                                <i class="fa fa-key"></i>Đổi mật khẩu
+                                                <i class="fa fa-key"></i>Change password
                                             </a>
                                         </li>
 
@@ -256,7 +219,7 @@
                                             <a href="logout">
                                                 <i class="fa fa-sign-out" style=" -ms-transform: rotate(180deg); /* IE 9 */
                                                    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
-                                                   transform: rotate(180deg);"></i>Đăng xuất </a>
+                                                   transform: rotate(180deg);"></i>Logout </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -317,28 +280,7 @@
                             </c:if>
 
                         </c:if>
-                        <!-- icon after login-->
-                        <!--top cart-->
-                        <!--                        <div id="top-cart">
-                                                    <i class="fa-solid fa-calendar-days"><a href="#"></a></i>
-                                                </div>
-                                                top message
-                                                <div id="top-messenger">
-                                                    <i class="fa-brands fa-facebook-messenger"><a href="#"></a></i>
-                                                </div>
-                                                 notify
-                                                <div id="top-notify">
-                                                    <i class="fa-solid fa-earth-asia"><a href="#"></a></i>
-                        
-                                                </div>
-                                                 favorite
-                                                <div id="top-favorite" class="sub-menu">
-                                                    <i class="fa-solid fa-heart"><a href="#"></a></i>
-                                                </div>-->
-
-
                     </div>
-
                 </div>
             </div>
         </header>

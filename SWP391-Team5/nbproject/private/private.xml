@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/changePass/temp.java</file>
+            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/mentor/ListFollowingRequest.java</file>
+            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/CreateRequest/Mail.java</file>
+            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/changePassword/changePassword.jsp</file>
+            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/forgetPassword/forgetPassword.jsp</file>
+            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/login/LoginControl.java</file>
+            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/signup/signupController.java</file>
+            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/author/securityProcessorCore.java</file>
+            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/login/login.jsp</file>
+        </group>
     </open-files>
 </project-private>
