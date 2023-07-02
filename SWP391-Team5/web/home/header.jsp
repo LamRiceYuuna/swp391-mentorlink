@@ -34,9 +34,10 @@
                     <div class="dt-menu-mega d-flex ">
                         <ul id="mobile-menu" class="dt-menu-mega d-flex justify-content-between mobile-menu-none"
                             hide="true">
-                            <li class="sub-menu dropdown_list">
-                                <a href="viewSkill" target="_blank">
-                                    List skill
+                            
+                            <li class="sub-menu">
+                                <a href="viewSkill">
+                                    <div>List Skill</div>
                                 </a>
                             </li>
                             <li class="sub-menu">
