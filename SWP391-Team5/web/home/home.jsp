@@ -36,7 +36,6 @@
                             <h1 style="color: #fff;">MentorLink - Nền tảng Kết nối Cố vấn và Học cùng Chuyên gia </h1>
                             <p style="color: #fff; font-size: 18px;">Với sứ mệnh là nâng cao chất lượng nguồn nhân lực, giúp
                                 thanh niên Việt Nam định vị nghề nghiệp và tạo cơ hội phát triển</p>
-                            <p>Các dịch vụ đến từ Vietnam:</p>
                             <div class="row">
                                 <div>
                                 </div>
