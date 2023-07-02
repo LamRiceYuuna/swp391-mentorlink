@@ -20,7 +20,7 @@
 
         <div class="container3">
 
-            <section class="main">
+            <section class="main" style="min-height: 65vh;">
                 <section class="attendance">
                     <div class="attendance-list">
                         <h1 style="text-align: center;">List Following Request</h1>
@@ -30,9 +30,10 @@
                                     <th>STT</th>
                                     <th>Title</th>
                                     <th>Content</th>
+                                    <th>Skill</th>
                                     <th>Start Time</th>
                                     <th>End Time</th>
-                                    <th>Action</th>
+                                    <th style="text-align: center;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,13 +41,22 @@
                                     <tr>
                                         <td>${i + 1}</td>
                                         <td>${listR.get(i).getTitle()}</td>
-                                        <td>${listR.get(i).getRequest_content()}</td>
+                                        <td>${listR.get(i).getRequest_content()}</td>                                        
+                                        <td>
+                                            <c:forEach var="sk" items="${listR.get(i).getSkill_name()}">
+                                                ${sk} - 
+                                            </c:forEach>        
+                                        </td>
                                         <td>${listR.get(i).getCreated_date()}</td>
                                         <td>${listR.get(i).getFinish_date()}</td>
                                         <td>
-                                            <div>
-                                                <button>Accept</button>
-                                                <button>Reject</button>
+                                            <div style="text-align: center;">
+                                                <form action="followingRequest" method="post" style="display: inline">
+                                                    <button name="requestId_yes" value="${listR.get(i).getRequest_id()}">Accept</button>                                                   
+                                                </form>
+                                                <form action="followingRequest" method="post" style="display: inline">
+                                                    <button name="requestId_no" value="${listR.get(i).getRequest_id()}">Reject</button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
@@ -60,14 +70,15 @@
         <div id="footer">
             <jsp:include page="../home/footer.jsp"/>
         </div>
-        <style>
-            #footer {
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-            }
-        </style>
+        <!--        <style>
+                    #footer {
+                        position: absolute;
+                        left: 0;
+                        bottom: 0;
+                        width: 100%;
+                    }
+                </style>-->
+
 
     </body>
 </html>

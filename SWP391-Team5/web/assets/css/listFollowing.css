@@ -154,6 +154,7 @@ table thead tr{
     cursor: pointer;
     background: transparent;
     border: 1px solid #4AD489;
+    margin-top: 5px;
 }
 .table button:hover{
     background: #4AD489;
