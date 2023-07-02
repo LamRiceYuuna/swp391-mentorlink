@@ -18,7 +18,7 @@ import model.User;
  *
  * @author admin
  */
-@WebServlet(name = "changePasswordController", urlPatterns = {"/changePassword"})
+@WebServlet(name = "changePasswordController", urlPatterns = {"/resetPassword"})
 public class changePasswordController extends HttpServlet {
 
     

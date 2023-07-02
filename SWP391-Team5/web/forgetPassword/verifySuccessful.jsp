@@ -47,7 +47,7 @@
                         <div id="change-content">
                             <div class="center">
                             </div>
-                            <div class="mb_10 center mt-3"><a href="changePassword">
+                            <div class="mb_10 center mt-3"><a href="resetPassword">
                                     <button type="submit" class="btn btn-success"
                                             style="min-width: 200px;">Change password</button>
                                 </a></div>
