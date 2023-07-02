@@ -39,10 +39,6 @@
                             <p>Các dịch vụ đến từ Vietnam:</p>
                             <div class="row">
                                 <div>
-                                    <button class="btn btn-info btn_search pt-2 pb-2 btn-section">Tìm kiếm Chuyên
-                                        gia</button>
-                                    <button class="pt-2 pb-2 btn btn-info btn_search ml-4 btn-section2">Nền
-                                        tảng Mentoring</button>
                                 </div>
                             </div>
                         </div>

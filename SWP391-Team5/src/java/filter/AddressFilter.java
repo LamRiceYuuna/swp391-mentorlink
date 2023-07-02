@@ -109,8 +109,7 @@ public class AddressFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         String url = req.getServletPath();
-        if (url.endsWith(".jsp") && !(url.endsWith("forgetPassword/changePasswordSuccessful.jsp") 
-            || url.endsWith("forgetPassword/changePassword.jsp"))) {
+        if (url.endsWith(".jsp")) {
             req.getRequestDispatcher("security/error404.html").forward(request, response);
         }
         Throwable problem = null;
