@@ -38,28 +38,25 @@
                             </div>
                             <div class="help-block show_err">
                             </div>
-                            <form id="register-account" name="register-account" class="nobottommargin" action="#"
+                            ${error}
+                            <form id="register-account" name="register-account" class="nobottommargin" action="changePass"
                                   method="post">
                                 <div class="mb_10">
                                     <label for="">Username <span style="color: red">*</span></label>
-                                    <input type="text" name="email" value=""
-                                           class="form-control not-dark login-form-username" />
+                                    <input type="text" name="user" class="form-control not-dark login-form-username" />
                                 </div>
                                 <div class="mb_10">
                                     <label for="">Old Password <span style="color: red">*</span></label>
-                                    <input type="password" name="name" value=""
-                                           class="form-control not-dark login-form-username" />
+                                    <input type="password" name="oldp" class="form-control not-dark login-form-username" />
                                 </div>
 
                                 <div class="mb_10">
                                     <label for="">New Pasword <span style="color: red">*</span></label>
-                                    <input id="password" type="password" name="password" value=""
-                                           class="form-control not-dark login-form-password" />
+                                    <input id="password" type="password" name="newp" class="form-control not-dark login-form-password" />
                                 </div>
                                 <div class="mb_10">
                                     <label for="">Confirm Pasword <span style="color: red">*</span></label>
-                                    <input id="password" type="password" name="password" value=""
-                                           class="form-control not-dark login-form-password" />
+                                    <input id="password" type="password" name="verifyp" class="form-control not-dark login-form-password" />
                                 </div>
                                 <div class="mb_10 center">
                                     <button class="btn btn-success" type="submit">Change Password</button>

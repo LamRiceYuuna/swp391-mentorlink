@@ -37,7 +37,7 @@ public class ListMentorSuggestion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         User sessionUser = (User) session.getAttribute("acc");
         String sessionUser_id = sessionUser.getUser_id();
         int mentee_id = Integer.parseInt(sessionUser_id);

@@ -67,7 +67,7 @@
         <filter-name>LoginMentorFilter</filter-name>
         <url-pattern>/CreateCV</url-pattern>
         <!-- ? viewStatistic-->
-        <url-pattern>/viewStatistic</url-pattern> 
+        <url-pattern>/viewStatistic</url-pattern>
         <url-pattern>/followingRequest</url-pattern>
         <url-pattern>/updatecv</url-pattern>
     </filter-mapping>
@@ -88,7 +88,7 @@
         <url-pattern>/logout</url-pattern>
     </filter-mapping>
     <!-- error Status -->
-<!--    <error-page>
+    <!--    <error-page>
         <error-code>404</error-code>
         <location>/security/error404.html</location>
     </error-page>-->
@@ -165,6 +165,10 @@
         <servlet-name>ListRequestByMe1</servlet-name>
         <servlet-class>controller.mentee.ListRequestByMe1</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePassServlet</servlet-name>
+        <servlet-class>controller.common.ChangePassServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -232,6 +236,10 @@
     <servlet-mapping>
         <servlet-name>ListRequestByMe1</servlet-name>
         <url-pattern>/listrequestbyme1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassServlet</servlet-name>
+        <url-pattern>/changePass</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

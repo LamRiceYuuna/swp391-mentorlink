@@ -854,7 +854,7 @@ body.stretched #header.full-header .container{
 #header.transparent-header.full-header #primary-menu>ul{
     border-right-color:rgba(0,0,0,0.1)
 }
-#primary-menu-trigger,#page-submenu-trigger{
+/*#primary-menu-trigger,#page-submenu-trigger{
     opacity:0;
     pointer-events:none;
     cursor:pointer;
@@ -869,7 +869,7 @@ body.stretched #header.full-header .container{
     -webkit-transition:opacity 0.3s ease;
     -o-transition:opacity 0.3s ease;
     transition:opacity 0.3s ease
-}
+}*/
 #primary-menu ul{
     list-style:none;
     margin:0

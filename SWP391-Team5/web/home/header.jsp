@@ -223,11 +223,17 @@
                                         <li>
                                             <a href="CreateCV">
                                                 <i class="fa fa-leaf"></i>Tạo CV Cho Mentor
-                                            </a>
+                                            </a>                                            
+                                        </li>
+                                        <li>
                                             <a href="#" data-modal-target="#popup-btn-rq-statistic" >
-                                                <div class="center">
-                                                    <i class="fa fa-leaf"></i>List statistic request
-                                                </div>
+                                                <i class="fa fa-leaf"></i>
+                                                <div class="center"  style="display: inline">List statistic request</div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="followingRequest">
+                                                <i class="fa fa-leaf"></i>List following request
                                             </a>
                                         </li>
                                         <li role="separator" class="divider"></li>

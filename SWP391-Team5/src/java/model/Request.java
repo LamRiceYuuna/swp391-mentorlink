@@ -21,9 +21,10 @@ public class Request {
     private Timestamp created_date;
     private Timestamp finish_date;
     private int request_status;
-    private String Skill_name;
-
+    private ArrayList<String> skill_name;
+    
     public Request() {
+        
     }
 
     public Request(int request_id, String title, String request_content, int time_study, Timestamp time_begin, Timestamp created_date, Timestamp finish_date) {
@@ -35,9 +36,9 @@ public class Request {
         this.created_date = created_date;
         this.finish_date = finish_date;
     }
-
     
-    public Request(int request_id, int mentor_id, int mentee_id,  String title, String request_content, int time_study, Timestamp time_begin, Timestamp created_date, Timestamp finish_date, int request_status) {
+    public Request(int request_id, int mentor_id, int mentee_id,  String title, String request_content, int time_study, Timestamp time_begin, 
+            Timestamp created_date, Timestamp finish_date, int request_status) {
         this.request_id = request_id;
         this.mentor_id = mentor_id;
         this.mentee_id = mentee_id;
@@ -48,6 +49,22 @@ public class Request {
         this.created_date = created_date;
         this.finish_date = finish_date;
         this.request_status = request_status;
+    }
+
+    
+    public Request(int request_id, int mentor_id, int mentee_id,  String title, String request_content, int time_study, Timestamp time_begin, 
+            Timestamp created_date, Timestamp finish_date, int request_status, ArrayList<String> skill_name) {
+        this.request_id = request_id;
+        this.mentor_id = mentor_id;
+        this.mentee_id = mentee_id;
+        this.title = title;
+        this.request_content = request_content;
+        this.time_study = time_study;
+        this.time_begin = time_begin;
+        this.created_date = created_date;
+        this.finish_date = finish_date;
+        this.request_status = request_status;
+        this.skill_name = skill_name;
     }
 
   
@@ -137,14 +154,27 @@ public class Request {
         this.request_status = request_status;
     }
     
-    public String getSkill_name() {
-        return Skill_name;
+//    public String getSkill_name() {
+//        return Skill_name;
+//    }
+//
+//    public void setSkill_name(String Skill_name) {
+//        this.Skill_name = Skill_name;
+//    }
+
+    public Request(ArrayList<String> skill_name) {
+        this.skill_name = skill_name;
     }
 
-    public void setSkill_name(String Skill_name) {
-        this.Skill_name = Skill_name;
+    public ArrayList<String> getSkill_name() {
+        return skill_name;
     }
 
+    public void setSkill_name(ArrayList<String> skill_name) {
+        this.skill_name = skill_name;
+    }
+      
+    
     @Override
     public String toString() {
         return "Request{" + "request_id=" + request_id + ", mentor_id=" + mentor_id + ", mentee_id=" + mentee_id + ", title=" + title + ", request_content=" + request_content + ", time_study=" + time_study + ", time_begin=" + time_begin + ", created_date=" + created_date + ", finish_date=" + finish_date + ", request_status=" + request_status + '}';
