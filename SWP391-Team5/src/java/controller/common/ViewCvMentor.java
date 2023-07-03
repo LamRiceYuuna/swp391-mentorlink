@@ -64,7 +64,7 @@ public class ViewCvMentor extends HttpServlet {
         CV_Mentor cv = dao.getCvMentorById(mentor_id);
         List<CV_Mentor> list = dao.getAllListMentor();
         FeedbackDAO dao1 = new FeedbackDAO();
-        List<Feedback> listF = dao1.getAllFeedbackByStatus(Integer.parseInt(mentor_id));
+        List<Feedback> listF = dao1.getAllFeedbackOfMentor(Integer.parseInt(mentor_id));
         request.setAttribute("mentor_id", mentor_id);
         request.setAttribute("cv", cv);
         request.setAttribute("listMentor", list);

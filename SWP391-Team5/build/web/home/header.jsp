@@ -210,7 +210,7 @@
                                                 <i class="fa-solid fa-user"></i></i>My profile</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="">
+                                            <a href="changePass" class="">
                                                 <i class="fa fa-key"></i>Change password
                                             </a>
                                         </li>

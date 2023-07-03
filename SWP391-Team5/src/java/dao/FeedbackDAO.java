@@ -52,7 +52,7 @@ public class FeedbackDAO extends DBContext {
         return false;
     }
 
-    public ArrayList<Feedback> getAllFeedbackByStatus(int mentor_id) {
+    public ArrayList<Feedback> getAllFeedbackOfMentor(int mentor_id) {
 
         ArrayList<Feedback> list = new ArrayList<>();
         String query = "SELECT email,full_name, avatar, feedback.user_id, mentor_id, rate_start, feedback_comment, "

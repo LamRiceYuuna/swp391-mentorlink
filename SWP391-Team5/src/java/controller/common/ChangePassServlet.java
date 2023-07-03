@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
@@ -59,12 +60,7 @@ public class ChangePassServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("acc") == null) {
-            response.sendRedirect("list");
-        } else {
-            request.getRequestDispatcher("changePassword/changePassword.jsp").forward(request, response);
-        }
+         request.getRequestDispatcher("/changePassword/changePassword.jsp").forward(request, response);
     }
 
     /**
@@ -79,31 +75,31 @@ public class ChangePassServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String oldUsername = (String) session.getAttribute("username");
-        String user = request.getParameter("user");
+        User sessionUser = (User) session.getAttribute("acc");
+        String sessionUsername = sessionUser.getUsername();
+        String user = request.getParameter("username");
         String oldp = request.getParameter("oldpass");
         String newp = request.getParameter("newpass");
         String verifyp = request.getParameter("repass");
-        
         UserDAO d = new UserDAO();
         int id = d.getUserIDByUserAndPass(user, oldp);
-        if (!oldUsername.equals(user)) {
-            request.setAttribute("error", "User is not match!");
-            request.getRequestDispatcher("changePass.jsp").forward(request, response);
+        if (!sessionUsername.equalsIgnoreCase(user)) {
+            request.setAttribute("error", "Username must matched username logged!");
+            request.getRequestDispatcher("/changePassword/changePassword.jsp").forward(request, response);
         }
         if (!verifyp.equals(newp)) {
             request.setAttribute("error", "Password is not match!");
-            request.getRequestDispatcher("changePass.jsp").forward(request, response);
+            request.getRequestDispatcher("/changePassword/changePassword.jsp").forward(request, response);
+        }
+        if (id == -1) {
+
+            request.setAttribute("error", "Username or Password invalid");
+            request.getRequestDispatcher("/changePassword/changePassword.jsp").forward(request, response);
         } else {
-            if (id == -1) {
-                request.setAttribute("error", "username or password invalid");
-                request.getRequestDispatcher("changePass.jsp").forward(request, response);
-            } else {
-                d.changepass(id, newp);
-                session = request.getSession();
-                session.removeAttribute("acc");
-                request.getRequestDispatcher("changePass.jsp").forward(request, response);
-            }
+            d.changepass(id, newp);
+            session.removeAttribute("user");
+            request.setAttribute("noti", "You changed password successfully. Please login again!");
+            request.getRequestDispatcher("/login/login.jsp").forward(request, response);
         }
     }
 

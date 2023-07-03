@@ -126,6 +126,7 @@ public class UserDAO extends DBContext {
             ps.setInt(2, user_id);
             ps.executeUpdate(); 
         } catch (Exception e) {
+            
         }
     }
 

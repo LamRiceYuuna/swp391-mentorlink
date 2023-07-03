@@ -52,7 +52,7 @@ public class commentAndRateStartController extends HttpServlet {
             CV_Mentor cv = dao.getCvMentorById(String.valueOf(mentor_id));
             List<CV_Mentor> list = dao.getAllListMentor();
             FeedbackDAO dao1 = new FeedbackDAO();
-            List<Feedback> listF = dao1.getAllFeedbackByStatus(mentor_id);
+            List<Feedback> listF = dao1.getAllFeedbackOfMentor(mentor_id);
             request.setAttribute("mentor_id", mentor_id);
             request.setAttribute("cv", cv);
             request.setAttribute("listMentor", list);
