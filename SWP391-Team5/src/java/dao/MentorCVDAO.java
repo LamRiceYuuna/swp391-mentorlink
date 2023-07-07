@@ -114,7 +114,11 @@ public class MentorCVDAO extends DBContext {
         }
         return null;
     }
-
+    
+    /**
+     * 
+     *  @return 
+     */
     public List<CV_Mentor> getTopListMentor() {
         List<CV_Mentor> list = new ArrayList<>();
         String sql = "select *  from(select   mentor_id ,email,full_name, avatar, profession, profession_introduction,service_description, achievements \n"
@@ -132,7 +136,10 @@ public class MentorCVDAO extends DBContext {
         }
         return list;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public List<CV_Mentor> getAllListMentor() {
         List<CV_Mentor> list = new ArrayList<>();
         String sql = "select   mentor_id ,email,full_name, avatar, profession, profession_introduction,service_description, achievements \n"
@@ -150,7 +157,14 @@ public class MentorCVDAO extends DBContext {
         }
         return list;
     }
-
+    
+    /**
+     * 
+     * @param lisst
+     * @param start
+     * @param end
+     * @return 
+     */
     public List<CV_Mentor> getListByPage(List<CV_Mentor> lisst, int start, int end) {
         List<CV_Mentor> arr = new ArrayList<>();
         for (int i = start; i < end; i++) {
@@ -160,7 +174,14 @@ public class MentorCVDAO extends DBContext {
     }
 
     ;
-   
+   /**
+    * 
+    * @param keyword
+    * @param professtion
+    * @param service
+    * @param achievements
+    * @return 
+    */
    public List<CV_Mentor> search(String keyword, String professtion, String service, String achievements) {
         List<CV_Mentor> list = new ArrayList<>();
         String sql = "select   mentor_id ,email,full_name, avatar, profession, profession_introduction,service_description, achievements \n"

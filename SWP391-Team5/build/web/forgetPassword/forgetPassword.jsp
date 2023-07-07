@@ -35,7 +35,7 @@
                      style="max-width: 500px; background-color: rgba(255,255,255,0.93);">
                     <div class="card-body nopadding">
                         <div class="wrap-title">
-                            <h3 class="title">Forget Password</h3>
+                            <h3 class="title">If you've forgotten your password</h3>
                         </div>
                         <div class="login-logo">
                             <img src="assets/images/logo2.png" alt="ym">
@@ -55,7 +55,7 @@
 
                             <form id="show_lost_password" action="forgetPassword" method="POST" class="nobottommargin" name="" autocomplete="off">
                                 <div class="mb_10">
-                                    <label for="">Username:</label>
+                                    <label for="">Account:</label>
                                     <input type="text" name="username" value="" placeholder="Input my username"
                                            class="form-control not-dark login-form-username" />
                                 </div>
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="mb_10 center mt-3">
                                     <button type="submit" class="btn btn-success"
-                                            style="min-width: 200px;">Get password</button>
+                                            style="min-width: 200px;">Enter</button>
                                 </div>
                             </form>
 

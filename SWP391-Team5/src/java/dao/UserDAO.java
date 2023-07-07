@@ -165,6 +165,11 @@ public class UserDAO extends DBContext {
         return null;
     }
     
+    /**
+     * 
+     * @param username
+     * @return 
+     */
     public User checkUserExisted(String username) {
         String sql = "SELECT * FROM swp391_group5.user where username = ? and user_status = 1";
         try {
@@ -188,12 +193,16 @@ public class UserDAO extends DBContext {
         User a = dt.checkUserExisted("mentor1");
         System.out.println(a.getUsername());
     }
-
+    
+    /**
+     * 
+     * @param username
+     * @param newpassword 
+     */
     public void updatePassword(String username, String newpassword) {
         String sql = "UPDATE user \n"
                 + "SET `password` = ? \n"
                 + "WHERE `username` = ?";
-        securityProcessorCore spc = new securityProcessorCore();
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, newpassword);

@@ -48,6 +48,7 @@ public class forgetPasswordController extends HttpServlet {
         //Get information in form forgetpassword
         String username = request.getParameter("username");
         String email = request.getParameter("use_email");
+        //
         UserDAO userDao = new UserDAO();
         User acount = userDao.checkUserExisted(username);
 
@@ -71,14 +72,5 @@ public class forgetPasswordController extends HttpServlet {
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

@@ -272,7 +272,7 @@
                                                     <div class="row">
                                                         <div class="wrapper1 col-12">
                                                             <h3>Viết đánh giá cho Mentor</h3>
-                                                            <form action="commentAndRateStart?mentor_id=${mentor_id}" method="post">
+                                                            <form action="commentAndRateStart?mentor_id=${mentor_id}" method="POST">
                                                                 <div class="rating1">
                                                                     <input type="number" name="rating" hidden>
                                                                     <i class='bx bx-star star' style="--i: 1;"></i>
