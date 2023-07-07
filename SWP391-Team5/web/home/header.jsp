@@ -28,9 +28,9 @@
                         <a href="Home" class="standard-logo"><img src="temp/logo.png" alt="logo" class="main_logo"></a>
                         <span class="standard-logo mobile-icon"><i class="fa-solid fa-bars"></i></span>
                     </div>
-                    <div id="logo">
+<!--                    <div id="logo">
                         <a href="Home" class="standard-logo"><img src="temp/logo.png" alt="logo" class="main_logo"></a>
-                    </div>
+                    </div>-->
                     <div class="dt-menu-mega d-flex ">
                         <ul id="mobile-menu" class="dt-menu-mega d-flex justify-content-between mobile-menu-none"
                             hide="true">
@@ -71,7 +71,7 @@
                                     <div class="div" id="user-avatar">
                                         <img alt="" class="img-circle avatar_header"
                                              style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
-                                             src="https://mentori.vn/upload/images/57fe6df2f2dabd4566022d17622f7e05.jpg">
+                                             src="assets/upload/${sessionScope.acc.avatar}">
 
                                     </div>
                                     <ul class="select_user_box" id="select_user_box">
@@ -82,7 +82,7 @@
                                                         <a href="/user/523868402" class="" title="Duy Dao">
                                                             <img alt="" class="img-circle avatar_header"
                                                                  style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
-                                                                 src="https://mentori.vn/upload/images/57fe6df2f2dabd4566022d17622f7e05.jpg">
+                                                                 src="assets/upload/${sessionScope.acc.avatar}">
                                                         </a>
                                                     </div>
                                                     <div class="pl-0" style="width: 100%;">
@@ -100,11 +100,11 @@
                                             </div>
                                         </li>
                                         <li role="separator" class="divider"></li>
-                                        <li>
-                                            <a href="#">
+<!--                                        <li>
+                                            <a href="">
                                                 <i class="fa fa-leaf"></i>Register to become Mentor
                                             </a>
-                                        </li>
+                                        </li>-->
                                         <li role="separator" class="divider"></li>
 
 
@@ -131,7 +131,7 @@
                                                 <i class="fa-solid fa-user"></i></i>My profile </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="">
+                                            <a href="UserProfile" class="">
                                                 <i class="fa fa-key"></i>Change password
                                             </a>
                                         </li>
@@ -156,14 +156,14 @@
                                         <img alt="" class="img-circle avatar_header"
                                              style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
                                              src="assets/upload/${sessionScope.acc.avatar}">
-                                        <i class="fa fa-angle-down fa-lg" aria-hidden="true" style="color:#fff;"></i>
+<!--                                        <i class="fa fa-angle-down fa-lg" aria-hidden="true" style="color:#fff;"></i>-->
                                     </div>
                                     <ul class="select_user_box" id="select_user_box" >
                                         <li class="dt-menu-item-parent pt-2 pb-2">
                                             <div class="div">
                                                 <div class="" style="display: flex">
                                                     <div class="pr-2" style="width: 54px;">
-                                                        <a href="/user/523868402" class="" title="Duy Dao">
+                                                        <a href="#" class="" title="Duy Dao">
                                                             <img alt="" class="img-circle avatar_header"
                                                                  style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
                                                                  src="assets/upload/${sessionScope.acc.avatar}">
@@ -171,7 +171,7 @@
                                                     </div>
                                                     <div class="pl-0" style="width: 100%;">
                                                         <div>
-                                                            <a href="#" class="" style="font-size: 14px;" title="Duy Dao">
+                                                            <a href="UserProfile" class="" style="font-size: 14px;" title="Duy Dao">
                                                                 Mentor:   ${sessionScope.acc.username} </a>
                                                         </div>
                                                         <div>
@@ -184,11 +184,20 @@
                                             </div>
                                         </li>
                                         <li role="separator" class="divider"></li>
+                                        <c:if test="${sessionScope.acc.cv_status == 0}"> 
                                         <li>
                                             <a href="CreateCV">
                                                 <i class="fa fa-leaf"></i>Tạo CV Cho Mentor
                                             </a>                                            
                                         </li>
+                                        </c:if>
+                                        <c:if test="${sessionScope.acc.cv_status == 1}"> 
+                                        <li>
+                                            <a href="viewcv?mentor_id=${sessionScope.acc.user_id}">
+                                                <i class="fa fa-leaf"></i>Xem CV Của Bạn
+                                            </a>                                            
+                                        </li>
+                                        </c:if>
                                         <li>
                                             <a href="#" data-modal-target="#popup-btn-rq-statistic" >
                                                 <i class="fa fa-leaf"></i>
@@ -238,7 +247,7 @@
                                     <div class="div" id="user-avatar">
                                         <img alt="" class="img-circle avatar_header"
                                              style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
-                                             src="https://mentori.vn/upload/images/57fe6df2f2dabd4566022d17622f7e05.jpg">
+                                             src="assets/upload/${sessionScope.acc.avatar}">
 
                                     </div>
                                     <ul class="select_user_box" id="select_user_box" >
@@ -249,7 +258,7 @@
                                                         <a href="/user/523868402" class="" title="Duy Dao">
                                                             <img alt="" class="img-circle avatar_header"
                                                                  style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
-                                                                 src="https://mentori.vn/upload/images/57fe6df2f2dabd4566022d17622f7e05.jpg">
+                                                                 src="assets/upload/${sessionScope.acc.avatar}">
                                                         </a>
                                                     </div>
                                                     <div class="pl-0" style="width: 100%;">

@@ -59,12 +59,16 @@ public class ViewCvMentor extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         MentorCVDAO dao = new MentorCVDAO();
+        //Lấy thông tin mentor_id khi người dùng click vào xem CV
         String mentor_id = request.getParameter("mentor_id");
-//        String id = "1";
         CV_Mentor cv = dao.getCvMentorById(mentor_id);
+        //Lấy ra list mentor
         List<CV_Mentor> list = dao.getAllListMentor();
         FeedbackDAO dao1 = new FeedbackDAO();
+        //Lấy ra Feedback về mentor
         List<Feedback> listF = dao1.getAllFeedbackOfMentor(Integer.parseInt(mentor_id));
+        
+        //Truyền dữ liều từ servlet sang jsp để hiển thị
         request.setAttribute("mentor_id", mentor_id);
         request.setAttribute("cv", cv);
         request.setAttribute("listMentor", list);

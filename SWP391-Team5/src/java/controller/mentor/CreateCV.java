@@ -14,6 +14,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Skill;
@@ -60,10 +61,21 @@ public class CreateCV extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        // Lấy thông tin người dùng từ session lưu trữ trong thuộc tính có tên "acc"
+        User sessionUser = (User) session.getAttribute("acc");
+        // Lấy user_id từ đối tượng User lấy từ session
+        String sessionUser_id = sessionUser.getUser_id();
+        
+        //Khởi tạo đối tượng
         UserDAO daoU = new UserDAO();
         SkillDAO dao = new SkillDAO();
+        //Lấy ra các skill mà hệ thống có để cho mentor chọn
         ArrayList<Skill> list = dao.getAllSkillInfo();
-        User infoU = daoU.getUserById(3);
+        //Lấy ra thông tin cơ bản của mentor.
+        User infoU = daoU.getUserById(Integer.parseInt(sessionUser_id));
+       
+        //Truyền các dữ liệu từ servlet sang JSP
         request.setAttribute("InfoU", infoU);
         request.setAttribute("listSkill", list);
         request.setAttribute("mess", "Error");
@@ -80,17 +92,23 @@ public class CreateCV extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int mentor_id = 3;
+        HttpSession session = request.getSession();
+        // Lấy thông tin người dùng từ session lưu trữ trong thuộc tính có tên "acc"
+        User sessionUser = (User) session.getAttribute("acc");
+        // Lấy user_id từ đối tượng User lấy từ session
+        String sessionUser_id = sessionUser.getUser_id();             
+        int mentor_id = Integer.parseInt(sessionUser_id);
+        
+        
+        //Lấy các thông tin người dùng nhập vào
+        String username = request.getParameter("username");
         String fullName = request.getParameter("fullName");
         String birthdate = request.getParameter("date_of_birth");
         int gender = "Male".equals(request.getParameter("gender")) ? 1 : 0;
         String address = request.getParameter("address");
-        
-        request.setAttribute("fullName", fullName);
-        request.setAttribute("gender", gender);
-        request.setAttribute("address", address);
-        request.setAttribute("date", birthdate);
+       
 
+        //Lấy các thông tin người dùng nhập vào
         String profession = request.getParameter("profession");
         String profession_intro = request.getParameter("profession_intro");
         String archivement = request.getParameter("archivement");
@@ -99,26 +117,22 @@ public class CreateCV extends HttpServlet {
         String programming = request.getParameter("programming");
         String[] skillId = request.getParameterValues("SkillId");
 
+        //Khởi tạo đối tượng
         MentorCVDAO dao = new MentorCVDAO();
 
         boolean result;
         try {
-            result = dao.createCV(mentor_id, fullName, birthdate, gender, address, profession, profession_intro, 
+            //Gọi đến hàm tạo CV
+            result = dao.createCV(username, mentor_id, fullName, birthdate, gender, address, profession, profession_intro, 
                     service_des, archivement, archivement_des, programming, skillId);
         } catch (SQLException e) {
             // Xử lý ngoại lệ ở đây
             result = false; // hoặc thực hiện hành động khác khi có lỗi
         }
-
-//        result = dao.insetSKill(mentor_id, skillId);
+          
         
-        if(result == true) {
-            request.setAttribute("m", "OK");
-        } else  {
-            request.setAttribute("m", "Failed");
-            }
-        request.setAttribute("skillId", skillId);
-        request.getRequestDispatcher("test.jsp").forward(request, response);
+        request.setAttribute("mentor_id", mentor_id);
+        request.getRequestDispatcher("/mentor/cvSuccessfull.jsp").forward(request, response);
     }
 
     /** 

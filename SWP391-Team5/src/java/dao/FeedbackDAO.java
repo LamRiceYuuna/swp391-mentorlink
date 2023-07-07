@@ -52,6 +52,12 @@ public class FeedbackDAO extends DBContext {
         return false;
     }
 
+    /**
+     * Lấy ra tất cả những feedback của mentee cho mentor để hiển thị lên trang CV dựa trên mentor_id
+     * 
+     * @param mentor_id
+     * @return List
+     */
     public ArrayList<Feedback> getAllFeedbackOfMentor(int mentor_id) {
 
         ArrayList<Feedback> list = new ArrayList<>();

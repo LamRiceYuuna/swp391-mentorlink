@@ -13,10 +13,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.CV_Mentor;
 import model.Skill;
+import model.User;
 
 /**
  *
@@ -59,8 +61,13 @@ public class UpdateCv extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+         HttpSession session = request.getSession();
+        // Lấy thông tin người dùng từ session lưu trữ trong thuộc tính có tên "acc"
+        User sessionUser = (User) session.getAttribute("acc");
+        // Lấy user_id từ đối tượng User lấy từ session
+        String sessionUser_id = sessionUser.getUser_id();
         MentorCVDAO dao = new MentorCVDAO();
-        CV_Mentor cv = dao.getInfoCvMentorById("3");       
+        CV_Mentor cv = dao.getInfoCvMentorById(sessionUser_id);       
         SkillDAO dao1 = new SkillDAO();    
         ArrayList<Skill> list = dao1.getAllSkillInfo();
         request.setAttribute("cv", cv);
@@ -78,7 +85,14 @@ public class UpdateCv extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int mentor_id = 3;
+         HttpSession session = request.getSession();
+        // Lấy thông tin người dùng từ session lưu trữ trong thuộc tính có tên "acc"
+        User sessionUser = (User) session.getAttribute("acc");
+        // Lấy user_id từ đối tượng User lấy từ session
+        String sessionUser_id = sessionUser.getUser_id();
+        int mentor_id = Integer.parseInt(sessionUser_id);
+        
+        
         String fullName = request.getParameter("fullName");
         String birthdate = request.getParameter("date_of_birth");
         int gender = "Male".equals(request.getParameter("gender")) ? 1 : 0;

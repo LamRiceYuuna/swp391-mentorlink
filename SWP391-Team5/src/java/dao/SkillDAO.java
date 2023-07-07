@@ -151,7 +151,11 @@ public class SkillDAO {
         }
         return list;
     }
-    
+    /**
+     * Lấy ra tất cả các skill mà hệ thống có
+     * 
+     * @return list
+     */
     public ArrayList<Skill> getAllSkillInfo() {
         ArrayList<Skill> list = new ArrayList<>();
         try {

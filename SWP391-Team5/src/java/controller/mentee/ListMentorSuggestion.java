@@ -24,7 +24,6 @@ import model.User;
  */
 public class ListMentorSuggestion extends HttpServlet {
 
-    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -38,13 +37,19 @@ public class ListMentorSuggestion extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        // Lấy thông tin người dùng từ session lưu trữ trong thuộc tính có tên "acc"
         User sessionUser = (User) session.getAttribute("acc");
+        // Lấy user_id từ đối tượng User lấy từ session
         String sessionUser_id = sessionUser.getUser_id();
         int mentee_id = Integer.parseInt(sessionUser_id);
+        //Khoi tao cac doi tuong tuong ung
         MentorCVDAO dao = new MentorCVDAO();
         requestSkillDAO obj = new requestSkillDAO();
+        //Lay thong tin ve ki nang ma mentee da request truoc do
         Request_Skill requestSkill = obj.getRequestSkillID(mentee_id);
+        //Lay ra ki nang
         ArrayList<Integer> skillIds = requestSkill.getItg();
+        //Ham list ra cac mentor phu hop voi ki nang ma mentee da yeu cau
         ArrayList<CV_Mentor> list = dao.listMentorSuggestion(skillIds);
         request.setAttribute("listS", list);
         request.getRequestDispatcher("common/listMentorSuggestion.jsp").forward(request, response);
@@ -61,7 +66,31 @@ public class ListMentorSuggestion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        //Loai sap xep ma nguoi dung chon ben jsp
+        String typeSort = request.getParameter("sort");
+        HttpSession session = request.getSession();
+        // Lấy thông tin người dùng từ session lưu trữ trong thuộc tính có tên "acc"
+        User sessionUser = (User) session.getAttribute("acc");
+        // Lấy user_id từ đối tượng User lấy từ session
+        String sessionUser_id = sessionUser.getUser_id();
+        int mentee_id = Integer.parseInt(sessionUser_id);
+
+        MentorCVDAO dao = new MentorCVDAO();
+        requestSkillDAO obj = new requestSkillDAO();
+        //Lay thong tin ve ki nang ma mentee da request truoc do
+        Request_Skill requestSkill = obj.getRequestSkillID(mentee_id);
+        ArrayList<Integer> skillIds = requestSkill.getItg();
+
+        //Kiem tra loai sap xep ma nguoi dung chon va goi den ham xu li sap xep
+        if (typeSort.equals("default")) {
+            ArrayList<CV_Mentor> list = dao.listMentorSuggestion(skillIds);
+            request.setAttribute("listS", list);
+        } else {         
+            ArrayList<CV_Mentor> list = dao.listMentorSuggestionSort(skillIds, typeSort);
+            request.setAttribute("listS", list);
+        }         
+
+        request.getRequestDispatcher("common/listMentorSuggestion.jsp").forward(request, response);
     }
 
     /**

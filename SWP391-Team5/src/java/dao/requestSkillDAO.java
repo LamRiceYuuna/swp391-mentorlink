@@ -22,7 +22,11 @@ public class requestSkillDAO extends DBContext {
     ResultSet rs = null;
 
     
-    //Lay ra ki nang ma mentee yeu cau.
+    /**
+     * Lay ra cac ki nang ma mentee da yeu cau de dua ra cac mentor suggestion phu hop
+     * @param mentee_id
+     * @return Request_Skill
+     */
     public Request_Skill getRequestSkillID(int mentee_id) {
         String query = "SELECT distinct request_skill.skill_id FROM swp391_group5.request join swp391_group5.request_skill on "
                 + "request.request_id = request_skill.request_id where mentee_id = ?;";

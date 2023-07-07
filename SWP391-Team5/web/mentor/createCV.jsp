@@ -45,24 +45,24 @@
                     </div>
                     <div class="row">
                         <div class="col-12 col-lg-8 m-auto">
-                            <form class="multisteps-form__form" action="CreateCV" method="post">
+                            <form id="formId" class="multisteps-form__form" action="CreateCV" method="post">
                                 <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
                                     <h3 class="multisteps-form__title"><b>Your User Info</b></h3>
                                     <div class="multisteps-form__content">
                                         <div class="form-row mt-4">
                                             <div class="col-12 col-sm-6">
                                                 <label>Account Name</label>
-                                                <input class="multisteps-form__input form-control" type="text" value="${InfoU.getUsername()}" placeholder="Account Name" readonly/>
+                                                <input class="multisteps-form__input form-control" type="text" value="${InfoU.getUsername()}" placeholder="Account Name" name="username" required=""/>
                                             </div>
                                             <div class="col-12 col-sm-6 mt-4 mt-sm-0">
                                                 <label>Full Name</label>
-                                                <input class="multisteps-form__input form-control" type="text" value="${InfoU.getFull_name()}" placeholder="Full Name" name="fullName"/>
+                                                <input class="multisteps-form__input form-control" type="text" value="${InfoU.getFull_name()}" placeholder="Full Name" name="fullName" required=""/>
                                             </div>
                                         </div>
                                         <div class="form-row mt-4">
                                             <div class="col-12 col-sm-6">
                                                 <label>Date Of Birth</label>
-                                                <input class="multisteps-form__input form-control" type="date" name="date_of_birth" value="${InfoU.getDate_of_birth()}"/>
+                                                <input class="multisteps-form__input form-control" max="<%=java.time.LocalDate.now()%>" type="date" name="date_of_birth" value="${InfoU.getDate_of_birth()}"/>
                                             </div>
                                             <div class="col-12 col-sm-6 mt-4 mt-sm-0">
                                                 <div class="form-group">
@@ -82,7 +82,7 @@
                                             </div>
                                             <div class="col-12 col-sm-6 mt-4 mt-sm-0">
                                                 <label>Address</label>
-                                                <input class="multisteps-form__input form-control" type="text" placeholder="Address" name="address" value="${InfoU.getAddress()}"/>
+                                                <input class="multisteps-form__input form-control" type="text" placeholder="Address" name="address" value="${InfoU.getAddress()}" required=""/>
                                             </div>
                                         </div>
                                         <div class="button-row d-flex mt-4">
@@ -100,13 +100,13 @@
                                         <div class="form-row mt-4">
                                             <div class="col">
                                                 <label>Your Profession</label>
-                                                <input class="multisteps-form__input form-control" type="text" placeholder="Your Profession" name="profession"/>
+                                                <input class="multisteps-form__input form-control" type="text" placeholder="Your Profession" name="profession" required=""/>
                                             </div>
                                         </div>
                                         <div class="form-row mt-4">
                                             <label>Profession Introduction</label>
                                             <textarea class="multisteps-form__textarea form-control" placeholder="Service Description"
-                                                      rows="4" name="profession_intro" style="resize: none;"></textarea>
+                                                      rows="4" name="profession_intro" style="resize: none;" required=""></textarea>
                                         </div>
 
                                         <h3 class="multisteps-form__title" style="margin-top: 50px;"><b>Archivement</b></h3>
@@ -115,13 +115,13 @@
                                         <div class="form-row mt-4">
                                             <div class="col">
                                                 <label>Your Archivement</label>
-                                                <input class="multisteps-form__input form-control" type="text" placeholder="Your Profession" name="archivement"/>
+                                                <input class="multisteps-form__input form-control" type="text" placeholder="Your Profession" name="archivement" required=""/>
                                             </div>
                                         </div>
                                         <div class="form-row mt-4">
                                             <label>Archivement Descition</label>
                                             <textarea class="multisteps-form__textarea form-control" placeholder="Service Description"
-                                                      rows="4" name="archivement_des" style="resize: none;"></textarea>
+                                                      rows="4" name="archivement_des" style="resize: none;" required=""></textarea>
                                         </div>
                                         <div class="row">
                                             <div class="button-row d-flex mt-4 col-12">
@@ -179,7 +179,7 @@
                                     <div class="form-row mt-4">
                                         <label>Your Description</label>
                                         <textarea class="multisteps-form__textarea form-control" name="service_des" placeholder="Service Description"
-                                                  rows="4" style="resize: none;"></textarea>
+                                                  rows="4" style="resize: none;" required=""></textarea>
                                     </div>
 
                                     <h3 class="multisteps-form__title" style="margin-top: 50px;"><b>The rogramming</b></h3>
@@ -188,7 +188,7 @@
                                     <div class="form-row mt-4">
                                         <label>The programming (Framework) you can training for the Mentee.</label>
                                         <textarea class="multisteps-form__textarea form-control" name="programming" placeholder="Service Description"
-                                                  rows="4" style="resize: none;"></textarea>
+                                                  rows="4" style="resize: none;" required=""></textarea>
                                     </div>
                                     <div class="button-row d-flex mt-4">
                                         <button class="btn btn-back js-btn-prev" type="button" title="Prev" style="color: #fff;

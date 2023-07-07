@@ -21,9 +21,9 @@ import model.User;
  * @author admin
  */
 public class UserDAO extends DBContext {
-    
-     public void changepass(int id, String password){
-        
+
+    public void changepass(int id, String password) {
+
         try {
             String sql = "UPDATE `swp391_group5`.`user` SET `password` = ? WHERE (`user_id` = ?)";
             PreparedStatement st = connection.prepareStatement(sql);
@@ -33,8 +33,9 @@ public class UserDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
-     }
-      public int getUserIDByUserAndPass(String user, String pass) {
+    }
+
+    public int getUserIDByUserAndPass(String user, String pass) {
         String sql = "SELECT * FROM swp391_group5.user where username = ? and password = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -51,6 +52,13 @@ public class UserDAO extends DBContext {
         return -1;
     }
 
+    /**
+     * Lấy thông tin của một người dùng từ cơ sở dữ liệu dựa trên user_id.
+     *
+     * @param id 
+     * @return Đối tượng User chứa thông tin của người dùng hoặc null nếu không
+     * tìm thấy
+     */
     public User getUserById(int id) {
         String sql = "SELECT username, gender, avatar, full_name, date_of_birth, email, address, phone FROM swp391_group5.user where user_id = ?";
         try {
@@ -58,7 +66,7 @@ public class UserDAO extends DBContext {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                return new User(rs.getString("username"), rs.getInt("gender") ,rs.getString("avatar"), rs.getString("full_name"), rs.getDate("date_of_birth"),
+                return new User(rs.getString("username"), rs.getInt("gender"), rs.getString("avatar"), rs.getString("full_name"), rs.getDate("date_of_birth"),
                         rs.getString("email"), rs.getString("address"), rs.getString("phone"));
             }
         } catch (Exception e) {
@@ -67,8 +75,23 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public boolean UpdateUser(int gender, String full_name, String date_of_birth, String email, String address, String phone, int user_id) {
+    
+    /**
+     * Update thông tin của một người dùng vào cơ sở dữ liệu dựa trên user_id.
+     * 
+     * @param username
+     * @param gender
+     * @param full_name
+     * @param date_of_birth
+     * @param email
+     * @param address
+     * @param phone
+     * @param user_id
+     * @return Đối tượng User chứa thông tin của người dùng hoặc null.
+     */
+    public boolean UpdateUser(String username, int gender, String full_name, String date_of_birth, String email, String address, String phone, int user_id) {
         String sql = " UPDATE User SET \n"
+                + "    username = ?,\n"
                 + "    gender = ?,\n"
                 + "    full_name = ?,\n"
                 + "    date_of_birth = ?,\n"
@@ -78,21 +101,21 @@ public class UserDAO extends DBContext {
                 + "    WHERE user_id = ?;";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, gender);
-            ps.setString(2, full_name);
-            ps.setDate(3, java.sql.Date.valueOf(date_of_birth));
-            ps.setString(4, email);
-            ps.setString(5, address);
-            ps.setString(6, phone);
-            ps.setInt(7, user_id);
+            ps.setString(1, username);
+            ps.setInt(2, gender);
+            ps.setString(3, full_name);
+            ps.setDate(4, java.sql.Date.valueOf(date_of_birth));
+            ps.setString(5, email);
+            ps.setString(6, address);
+            ps.setString(7, phone);
+            ps.setInt(8, user_id);
             ps.executeUpdate();
             return true;
         } catch (Exception e) {
             return false;
         }
     }
-    
-    
+
     public boolean UpdateUser2(int gender, String full_name, String date_of_birth, String email, String address, int user_id) {
         String sql = " UPDATE User SET \n"
                 + "    gender = ?,\n"
@@ -116,24 +139,30 @@ public class UserDAO extends DBContext {
         }
     }
 
+    /**
+     * Update thông tin đường dẫn ảnh vào database
+     * 
+     * @param avatar
+     * @param user_id 
+     */
     public void UpdateUserAvatar(String avatar, int user_id) {
         String sql = " UPDATE User SET \n"
                 + "    avatar = ?\n"
                 + "WHERE user_id = ?;";
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);           
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, avatar);
             ps.setInt(2, user_id);
-            ps.executeUpdate(); 
+            ps.executeUpdate();
         } catch (Exception e) {
-            
+
         }
     }
 
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-    
+
     public User Login(String user, String pass) throws SQLException {
         String query = "select * from user"
                 + " where username = ?"
@@ -148,24 +177,24 @@ public class UserDAO extends DBContext {
                 return new User(rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getInt(4), 
-                        rs.getString(5), 
-                        rs.getString(6), 
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getString(6),
                         rs.getDate(7),
                         rs.getString(8),
                         rs.getString(9),
                         rs.getString(10),
                         rs.getInt(11),
-                        rs.getInt(12), 
+                        rs.getInt(12),
                         rs.getDate(13),
                         rs.getInt(14));
             }
-        } catch(Exception e) {
-            
+        } catch (Exception e) {
+
         }
         return null;
     }
-    
+
     public User checkUserExisted(String username) {
         String sql = "SELECT * FROM swp391_group5.user where username = ? and user_status = 1";
         try {
@@ -173,8 +202,8 @@ public class UserDAO extends DBContext {
             stm.setString(1, username);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                return new User(rs.getString("avatar"), 
-                        rs.getString("full_name"), 
+                return new User(rs.getString("avatar"),
+                        rs.getString("full_name"),
                         rs.getString("email"),
                         rs.getString("username"),
                         rs.getString("phone"));
@@ -184,6 +213,7 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
+
     public static void main(String[] args) {
         UserDAO dt = new UserDAO();
         User a = dt.checkUserExisted("mentor1");
@@ -205,8 +235,6 @@ public class UserDAO extends DBContext {
         }
     }
 
-    
-
     public User getAccByUName(String username) {
         User acc = null;
         String sql = "SELECT * FROM swp391_group5.user where username   =?  ;";
@@ -218,8 +246,7 @@ public class UserDAO extends DBContext {
                 acc = new User(
                         rs.getString("username"), rs.getString("email")
                 );
-                       
-                
+
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -227,7 +254,7 @@ public class UserDAO extends DBContext {
 
         return acc;
     }
-    
+
     public User getAccByEmail(String email) {
         User acc = null;
         String sql = "SELECT * FROM swp391_group5.user where email  = ?   ";
@@ -237,7 +264,7 @@ public class UserDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 acc = new User(
-                       rs.getString("username"), rs.getString("email")
+                        rs.getString("username"), rs.getString("email")
                 );
             }
         } catch (SQLException ex) {
@@ -245,10 +272,10 @@ public class UserDAO extends DBContext {
         }
         return acc;
     }
-    
+
     public void insert(String username, String password, String email, String role, String name, String date, String address, String gender, String phone) {
         String sql = "INSERT INTO `swp391_group5`.`user` (`username`, `password`, `gender`, `full_name`, `date_of_birth`, `email`, `address`, `phone`, `role`, `user_status`) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
-       // chuye sang date
+        // chuye sang date
         Date birthdate = null;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -258,7 +285,7 @@ public class UserDAO extends DBContext {
         }
         java.sql.Date sqlBirthdate = new java.sql.Date(birthdate.getTime());
         //:
-        int user_status =1;
+        int user_status = 1;
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, username);

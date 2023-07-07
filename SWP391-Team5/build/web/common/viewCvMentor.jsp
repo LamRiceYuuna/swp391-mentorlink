@@ -82,8 +82,8 @@
                                             <div class="wrap-profile-avatar">
                                                 <div class="profile_avatar_other profile_avatar img-circle">
                                                     <!-- Cho phep nguoi dung xem anh chi tiet khi click vao -->
-                                                    <a href="../upload/images/xsb1675068015.jpg" data-lightbox="avatar-1">
-                                                        <img src="assets/images/avatar.jpg" alt="Tuan Anh Hoang"
+                                                    <a href="#" data-lightbox="avatar-1">
+                                                        <img src="assets/upload/${cv.getInfor().getAvatar()}"
                                                              onerror="this.onerror=null; this.src='../assets/images/avatar.jpg'">
                                                     </a>
                                                 </div>
@@ -153,7 +153,7 @@
                                             </li>
                                             <li class="first_tab">
                                                 <a href="#review" role="tab" data-toggle="tab_profile"
-                                                   data-get="review">Đánh giá (12)</a>
+                                                   data-get="review">Đánh giá</a>
                                             </li>
                                         </ul>
                                         <div class="tab-container mt-4" style="clear: both;">
@@ -270,31 +270,43 @@
 
                                                 <div class="pb-4 pt-4 pl-3 pr-3">
                                                     <div class="row">
-                                                        <div class="wrapper1 col-12">
-                                                            <h3>Viết đánh giá cho Mentor</h3>
-                                                            <form action="commentAndRateStart?mentor_id=${mentor_id}" method="post">
-                                                                <div class="rating1">
-                                                                    <input type="number" name="rating" hidden>
-                                                                    <i class='bx bx-star star' style="--i: 1;"></i>
-                                                                    <i class='bx bx-star star' style="--i: 2;"></i>
-                                                                    <i class='bx bx-star star' style="--i: 3;"></i>
-                                                                    <i class='bx bx-star star' style="--i: 4;"></i>
-                                                                    <i class='bx bx-star star' style="--i: 5;"></i>
-                                                                </div>
-                                                                <textarea name="opinion" cols="30" rows="5" placeholder="Your opinion..." 
-                                                                          style="outline: none;resize: none;width: 80%"></textarea>
-                                                                <div class="btn-group">
-                                                                    <button type="submit" class="btn submit">Submit</button>
-                                                                    <button class="btn cancel">Cancel</button>
-                                                                </div>
-                                                            </form>
+                                                        <div class="wrapper1  row">
+                                                            <h3>Kĩ năng</h3> 
+                                                            <div class="col-6" style="margin-bottom: 20px">
+                                                                <h5 style="display: inline">HTML: 4.6/5</h5>                                                          
+                                                                <i class="fa fa-star yellow-star" style="font-size: 22px"></i>
+                                                            </div>
+                                                            <div class="col-6" style="margin-bottom: 20px">
+                                                                <h5 style="display: inline">C#: 4.6/5</h5>                                                          
+                                                                <i class="fa fa-star yellow-star" style="font-size: 22px"></i>
+                                                            </div>
+                                                            <div class="col-6" style="margin-bottom: 20px">
+                                                                <h5 style="display: inline">Python: 4.6/5</h5>                                                          
+                                                                <i class="fa fa-star yellow-star" style="font-size: 22px"></i>
+                                                            </div>
+                                                            <div class="col-6" style="margin-bottom: 20px">
+                                                                <h5 style="display: inline">Java: 4.6/5</h5>                                                          
+                                                                <i class="fa fa-star yellow-star" style="font-size: 22px"></i>
+                                                            </div>
+                                                            <div class="col-6" style="margin-bottom: 20px">
+                                                                <h5 style="display: inline">Ruby: 4.6/5</h5>                                                          
+                                                                <i class="fa fa-star yellow-star" style="font-size: 22px"></i>
+                                                            </div>
+                                                            
+                                                            
+
+                                                            
+
                                                         </div>
 
                                                     </div>
                                                 </div>
 
+                                                
+                                                <div style="text-align: center; background: #175E4C; border-radius: 8px;">
+                                                    <h3 style="color: white">Đánh Từ Mentee</h3>
+                                                </div>
                                                 <div style="border-top: 0.3px solid #E9E9E9;" class=""></div>
-
                                                 <c:forEach var="i" items="${listF}">
                                                     <div class="pb-4 pt-4 pl-3 pr-3">
                                                         <div class="row">
@@ -320,7 +332,7 @@
                                                                                                                                                     <i class="far fa-star"></i>
                                                                                                                                                     <i class="far fa-star"></i>
                                                                                                                                                     <i class="far fa-star"></i>
-                                                                                                                                                </div>-->
+                                                                            i.getRate_start()                                                                    </div>-->
                                                                         <c:choose>
                                                                             <c:when test="${i.getRate_start() > 0}">
                                                                                 <c:set var="yellowStars" value="${i.getRate_start()}" />
@@ -350,14 +362,14 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-2 pl-0 pr-0 tright">
-                                                                <a class="info-review" href="523865357.html">
+                                                                <a class="info-review">
                                                                     <img class="avt-review"
-                                                                         src="../upload/images/ngv1670126599.jpg"
+                                                                         src="assets/upload/${i.getInfor().getAvatar()}"
                                                                          onerror="this.onerror=null; this.src='../assets/images/avatar.jpg'">
                                                                 </a>
                                                             </div>
                                                             <div class="col-7">
-                                                                <a class="info-review" href="523865357.html">${i.getInfor().getFull_name()}</a>
+                                                                <a class="info-review" href="#">${i.getInfor().getFull_name()}</a>
                                                             </div>
 
                                                         </div>
@@ -383,12 +395,11 @@
                                             <div class="carousel-inner">
 
                                                 <div class="carousel-item active">
-                                                    <a href="https://www.facebook.com/photo/?fbid=105645419111663&amp;set=a.103057569370448"
-                                                       target="_blank">
-                                                        <img src="assets/images/banner_right.jpg" width="100%">
-                                                        <div style="height: 30px">
-                                                        </div>
-                                                    </a>
+
+                                                    <img src="assets/images/banner_right.jpg" width="100%">
+                                                    <div style="height: 30px">
+                                                    </div>
+
                                                 </div>
 
                                             </div>
@@ -398,7 +409,7 @@
                                     </h4>
                                     <c:forEach var="i" begin="1" end="5">
                                         <div class="mentor_right_item pb-3">
-                                            <a class="user_avatar_name" href="523866403.html#posts">
+                                            <a class="user_avatar_name" href="viewcv?mentor_id=${listMentor.get(i).getMentor_id()}">
                                                 <div class="row">
                                                     <div class="col-3 pr-1">
                                                         <div class="mentor_page" style="margin-top: 0px;">
@@ -412,8 +423,7 @@
 
                                                                         <div class="">
                                                                             <img onerror="this.onerror=null; this.src='../assets/images/avatar.jpg'"
-                                                                                 src="assets/images/avatar.jpg"
-                                                                                 alt="Nguyen Pham"
+                                                                                 src="assets/upload/${listMentor.get(i).getInfor().getAvatar()}"                                                                                
                                                                                  class="img-circle avatar_header" width="50"
                                                                                  height="50">
                                                                         </div>
@@ -842,7 +852,6 @@
 <script src="assets/js/star-rating.js"></script>
 <!-- Hien thi review -->
 <script src="assets/js/functions.js"></script>
-<script src="assets/js/ratecomment.js"></script>
 
 <jsp:include page="../home/footer.jsp"/>
 </body>

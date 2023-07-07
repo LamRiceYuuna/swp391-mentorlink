@@ -56,6 +56,11 @@ public class requestDAO extends DBContext {
 
     }
 
+    /**
+     * Lấy ra các request mà mentor hiện đang có
+     * @param mentor_id
+     * @return List
+     */
     public List<Request> listRequestByMetorID(String mentor_id) {
         List<Request> list1 = new ArrayList<>();
         String sql = "SELECT * FROM swp391_group5.request where mentor_id = ? and request_status = 1;";
@@ -101,6 +106,11 @@ public class requestDAO extends DBContext {
 
     }
 
+    /**
+     * Update trang thai request cua mentee dua tren hanh dong cua mentor
+     * @param request_status
+     * @param requestId 
+     */
     public void update_Request_Status(int request_status, String requestId) {
         String sql = "UPDATE `swp391_group5`.`request` SET `request_status` = ? WHERE `request_id` = ?;";
         try {

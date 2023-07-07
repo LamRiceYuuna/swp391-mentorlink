@@ -55,21 +55,20 @@
                                 <i class="fa fa-home text-center mr-1 icon"></i>
                                 Account
                             </a>
-                            <a class="nav-link link" id="password-tab" data-toggle="pill" href="#password" role="tab"
+                            <a class="nav-link link" id="password-tab" data-toggle="pill" href="changePass" role="tab"
                                aria-controls="password" aria-selected="false">
                                 <i class="fa fa-key text-center mr-1 icon"></i>
-                                Password
+                                Change Password
                             </a>
-                            <a class="nav-link link" id="security-tab" data-toggle="pill" href="#security" role="tab"
+                            
+                            <c:if test="${sessionScope.acc.cv_status == 1}">
+                                <a class="nav-link link" id="security-tab" data-toggle="pill" href="viewcv?mentor_id=${sessionScope.acc.getUser_id()}" role="tab"
                                aria-controls="security" aria-selected="false">
                                 <i class="fa fa-user text-center mr-1 icon"></i>
-                                Create CV
+                                View CV
                             </a>
-                            <a class="nav-link link" id="security-tab" data-toggle="pill" href="#security" role="tab"
-                               aria-controls="security" aria-selected="false">
-                                <i class="fa fa-user text-center mr-1 icon"></i>
-                                Update CV
-                            </a>
+                            </c:if>
+                            
                         </div>
                     </div>
                     <form id="form2" action="UserProfile" method="post">                       
@@ -79,6 +78,13 @@
                                     <h3 class="mb-4">User Profile</h3>
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-6">                                      
+                                        <div class="form-group">
+                                            <label class="lab">Account Name</label>
+                                            <input type="text" class="form-control" name="account_name" value="${InfoUser.username}" required>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="col-md-6">                                      
                                         <div class="form-group">
                                             <label class="lab">Full Name</label>
@@ -101,7 +107,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="lab">Birth Date</label>
-                                            <input type="date" class="form-control" name="birthdate" value="${InfoUser.getDate_of_birth()}" required>
+                                            <input type="date" max="<%=java.time.LocalDate.now()%>" class="form-control" name="birthdate" value="${InfoUser.getDate_of_birth()}" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
