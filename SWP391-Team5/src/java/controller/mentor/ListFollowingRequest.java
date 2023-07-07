@@ -34,11 +34,22 @@ public class ListFollowingRequest extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        // Lấy thông tin người dùng từ session lưu trữ trong thuộc tính có tên "acc"
         User sessionUser = (User) session.getAttribute("acc");
+        // Lấy user_id từ đối tượng User lấy từ session
         String sessionUser_id = sessionUser.getUser_id();
-        requestDAO dao = new requestDAO();
+        requestDAO dao = new requestDAO(); 
+        //Lay ra tat cac cac request tu mentee gui den mentor
         List<Request> listR = dao.listRequestByMetorID(sessionUser_id);
-        request.setAttribute("listR", listR);
+        
+        //Kiem tra danh sach nay
+        if(listR != null) {
+            request.setAttribute("listR", listR);
+        } 
+        if(listR.isEmpty()) {
+            request.setAttribute("mess", "Bạn chưa có yêu cầu nào được gửi đến!");
+
+        }
         request.getRequestDispatcher("mentor/listFollowingRequest.jsp").forward(request, response);
     }
 
@@ -69,8 +80,10 @@ public class ListFollowingRequest extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         requestDAO dao = new requestDAO();
+        //Lay ve yeu cau cua mentor tu ben jsp khi chon tu choi hoac chap nhan yeu cau
         String requestId_yes = request.getParameter("requestId_yes");
         String requestId_no = request.getParameter("requestId_no");
+        //Kiem tra hanh dong cua mentor va goi den ham de xu li trong DTB
         if (requestId_yes != null) {
             dao.update_Request_Status(2, requestId_yes);
             processRequest(request, response);

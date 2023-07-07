@@ -66,47 +66,47 @@
                     <div class="col-md-12 col-lg-4">
                         <div class="card search-filter search_block">
                             <div class="card-header">
-                                <h4 class="card-title mb-0">Search Filter</h4>
+                                <h4 class="card-title mb-0">Filter</h4>
                             </div>
                             <div class="card-body">
-                                <form action="NewServlet" method="post">
+                                <form action="mentorSuggestion" method="post">
                                     <div class="dc-innerbanner">
                                         <div class="dc-formtheme dc-form-advancedsearch">
-                                            <div class="form-group">
+<!--                                            <div class="form-group">
                                                 <input type="hidden" name="searchby" class="form-control"
                                                        value="both">
                                                 <input type="text" name="keyword" class="form-control"
                                                        placeholder="Search" value>
-                                            </div>
+                                            </div>-->
                                             <div class="form-group">
-                                                <h4>Location</h4>
+                                                <h4>Rating</h4>
                                                 <div class="dc-select">
-
-                                                    <select name="location" class="chosen-select">
-                                                        <option value>Select a location</option>
-                                                        <option data-flag class=" level-0" value="australia">
-                                                            Australia</option>
-                                                        <option data-flag class=" level-0" value="england">
-                                                            England</option>
-                                                        <option data-flag class=" level-0" value="india">India
-                                                        </option>
+                                                    <select name="sort" class="chosen-select">
+                                                        <option value="default">Select a sort</option>
+                                                        <option data-flag class=" level-0" value="default">
+                                                            Default</option>    
+                                                        <option data-flag class=" level-0" value="asc">
+                                                            Sort increase</option>
+                                                        <option data-flag class=" level-0" value="desc">
+                                                            Sort reduction</option>    
+                                                        
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <h4>Courses</h4>
+<!--                                            <div class="form-group">
+                                                <h4>Request</h4>
                                                 <div class="dc-select">
-                                                    <select name="courses" class="chosen-select">
-                                                        <option value>Select courses</option>
-                                                        <option data-flag class=" level-0" value="asp-net">
-                                                            ASP.NET</option>
-                                                        <option data-flag class=" level-0" value="digital-marketer">
-                                                            Digital Marketer</option>
-                                                        <option data-flag class=" level-0" value="web-developer">Web
-                                                            Developer</option>
+                                                    <select name="request_sort" class="chosen-select">
+                                                        <option value>Select a sort</option>
+                                                        <option data-flag class=" level-0" value="default">
+                                                            Default</option>    
+                                                        <option data-flag class=" level-0" value="asc">
+                                                            Sort increase</option>
+                                                        <option data-flag class=" level-0" value="desc">
+                                                            Sort reduction</option> 
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                             <div class="dc-btnarea">
                                                 <input type="submit" value="Submit" style="background: #175E4C; border: none">
                                             </div>
@@ -143,7 +143,7 @@
                                     <div class="user-info-left">
                                         <div class="mentor-img">
                                             <a
-                                                href="#">
+                                                href="viewcv?mentor_id=${s.getMentor_id()}">
                                                 <img class="img-fluid user-image-res" style="height: 100%; object-fit: cover; border-radius: 5.4rem" src="assets/upload/${s.getInfor().getAvatar()}" >
                                                 <!--                                                                <img class="img-fluid user-image-res-2x"
                                                                                                                      src="https://mentoring-wp.dreamguystech.com/wp-content/uploads/2022/07/user3-1.jpg"
@@ -153,7 +153,7 @@
                                         <div class="user-info-cont">
                                             <h3>
                                                 <a
-                                                    href="#">${s.getInfor().getFull_name()}</a>
+                                                    href="viewcv?mentor_id=${s.getMentor_id()}">${s.getInfor().getFull_name()}</a>
                                                 <i class="fa fa-leaf" data-toggle="tooltip" style="width: 30px; height: 20px; margin-left: 1px; 
                                                    line-height: 20px; font-size: 18px; color: #175E4C; background-color: white" title="Verified user"></i>
                                             </h3>

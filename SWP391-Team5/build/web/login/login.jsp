@@ -33,7 +33,7 @@
                 <div class="card card_login divcenter noradius noborder allmargin modal-padding card-login-custom"
                      style="max-width: 500px; background-color: rgba(255,255,255,0.93);">
                     <div class="card-body nopadding">
-                        <h3 style="text-align: center">${requestScope.noti}</h3>
+                        
                         <div class="wrap-title">
                             <h3 class="title">Login</h3>
                         </div>
@@ -50,13 +50,13 @@
                         %>
                         <div class="text-danger alert alert-danger">
                             <div class="centered-text"><%= mess %></div>
-                        </div>
+                        </div>                       
                         <% 
                             // Sau khi hiển thị thông báo lỗi, xóa nó khỏi session
                             request.getSession().removeAttribute("mess");
                             }
                         %>
-
+                        <h4 style="text-align: center">${requestScope.noti}</h4>
                         <form id="login-account" name="login-account" class="nobottommargin" action="login" method="post">
                             <div class="mb_10">
                                 <label for="">Username:</label> 

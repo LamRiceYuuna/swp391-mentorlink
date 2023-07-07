@@ -24,6 +24,9 @@
                 <section class="attendance">
                     <div class="attendance-list">
                         <h1 style="text-align: center;">List Following Request</h1>
+                        <div style="text-align: center">
+                            <h4 style="padding: 20px 0px;">${mess}</h4>
+                        </div>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -63,9 +66,12 @@
                                 </c:forEach>                                         
                             </tbody>
                         </table>
+
                     </div>
-                </section>
+                </section> 
+                    
             </section>
+
         </div>
         <div id="footer">
             <jsp:include page="../home/footer.jsp"/>

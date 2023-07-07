@@ -23,7 +23,25 @@ import model.User;
  */
 public class MentorCVDAO extends DBContext {
 
-    public boolean createCV(int mentor_id, String fullName, String date_of_birth, int gender, String address,
+    /**
+     * Create CV cho mentor
+     * 
+     * @param mentor_id
+     * @param fullName
+     * @param date_of_birth
+     * @param gender
+     * @param address
+     * @param profession
+     * @param profession_intro
+     * @param service_des
+     * @param archivement
+     * @param archivement_des
+     * @param programming
+     * @param skillId
+     * @return true or false
+     * @throws SQLException 
+     */
+    public boolean createCV(String username, int mentor_id, String fullName, String date_of_birth, int gender, String address,
             String profession, String profession_intro, String service_des, String archivement, String archivement_des, String programming, String[] skillId) throws SQLException {
         try {
 
@@ -32,18 +50,21 @@ public class MentorCVDAO extends DBContext {
             //Câu lệnh Update Information user
             String sql1 = "UPDATE `swp391_group5`.`user`\n"
                     + "SET\n"
+                    + "`username` = ?,\n"
                     + "`gender` = ?,\n"
                     + "`full_name` = ?,\n"
                     + "`date_of_birth` = ?,\n"
-                    + "`address` = ?\n"
+                    + "`address` = ?,\n"
+                    + "`cv_status` = 1\n"
                     + "WHERE `user_id` = ?;";
 
             PreparedStatement ps1 = connection.prepareStatement(sql1);
-            ps1.setInt(1, gender);
-            ps1.setString(2, fullName);
-            ps1.setDate(3, java.sql.Date.valueOf(date_of_birth));
-            ps1.setString(4, address);
-            ps1.setInt(5, mentor_id);
+            ps1.setString(1, username);
+            ps1.setInt(2, gender);
+            ps1.setString(3, fullName);
+            ps1.setDate(4, java.sql.Date.valueOf(date_of_birth));
+            ps1.setString(5, address);
+            ps1.setInt(6, mentor_id);
             ps1.executeUpdate();
 
             // Câu lệnh INSERT vào table_Cv of Mentor
@@ -66,7 +87,7 @@ public class MentorCVDAO extends DBContext {
             ps2.setString(6, archivement_des);
             ps2.setString(7, programming);
             ps2.executeUpdate();
-            // Câu lệnh INSERT vào table_B
+            // Câu lệnh INSERT vào table_cv_skill
             String sql3 = "INSERT INTO `swp391_group5`.`cv_skill`\n"
                     + "(`mentor_id`,\n"
                     + "`skill_id`)\n"
@@ -96,6 +117,11 @@ public class MentorCVDAO extends DBContext {
 
     }
 
+    /**
+     * Lấy ra thông tin của CV mentor dựa trên mentor_id được truyền vào
+     * @param mentor_id
+     * @return CV_Mentor
+     */
     public CV_Mentor getCvMentorById(String mentor_id) {
 
         String sql = "select mentor_id ,full_name, avatar, email, username, phone, profession, profession_introduction,service_description, "
@@ -114,10 +140,11 @@ public class MentorCVDAO extends DBContext {
         }
         return null;
     }
-    
+
     /**
+     * Lấy ra 4 mentor để hiện thị trên sider
      * 
-     *  @return 
+     * @return List
      */
     public List<CV_Mentor> getTopListMentor() {
         List<CV_Mentor> list = new ArrayList<>();
@@ -505,21 +532,21 @@ public class MentorCVDAO extends DBContext {
             ps2.setInt(7, mentor_id);
             ps2.executeUpdate();
             // Câu lệnh INSERT vào table_B
-//            String sql3 = "UPDATE `swp391_group5`.`cv_skill`\n"
-//                    + "SET `skill_id` = ?\n"
-//                    + "WHERE `mentor_id` = ?;";
-//            PreparedStatement ps3 = connection.prepareStatement(sql3);
-//
-//            for (String id : skillId) {
-//                int value_id = Integer.parseInt(id);
-//
-//                // Thiết lập các giá trị trong Prepared Statement
-//                ps3.setInt(1, value_id);
-//                ps3.setInt(2, mentor_id);
-//
-//                // Thực hiện câu lệnh cập nhật trong cơ sở dữ liệu
-//                ps3.executeUpdate();
-//            }
+            String sql3 = "UPDATE `swp391_group5`.`cv_skill`\n"
+                    + "SET `skill_id` = ?\n"
+                    + "WHERE `mentor_id` = ?;";
+            PreparedStatement ps3 = connection.prepareStatement(sql3);
+
+            for (String id : skillId) {
+                int value_id = Integer.parseInt(id);
+
+                // Thiết lập các giá trị trong Prepared Statement
+                ps3.setInt(1, value_id);
+                ps3.setInt(2, mentor_id);
+
+                // Thực hiện câu lệnh cập nhật trong cơ sở dữ liệu
+                ps3.executeUpdate();
+            }
 
             connection.commit();  // Áp dụng thay đổi vào cơ sở dữ liệu
             return true;
@@ -551,7 +578,11 @@ public class MentorCVDAO extends DBContext {
         return null;
     }
 
-    //Lay ra thong tin mentor co skill phu hop voi skill ma mentee da yeu cau.
+    /**
+     * Lay ra cac mentor co skill phu hop voi skill ma mentee da yeu cau
+     * @param itg
+     * @return ArrayList
+     */
     public ArrayList<CV_Mentor> listMentorSuggestion(ArrayList<Integer> itg) {
         ArrayList<CV_Mentor> list = new ArrayList<>();
         try {
@@ -596,7 +627,81 @@ public class MentorCVDAO extends DBContext {
                     int count = countRs.getInt("count");
                     mentor.setNumberRequest(count);
                 }
-                
+
+                //Lay ra rating cua moi mentor
+                ratingStm.setInt(1, mentorId);
+                ratingStm.setInt(2, mentorId);
+                ratingStm.setInt(3, mentorId);
+                ratingStm.setInt(4, mentorId);
+                ResultSet ratingRs = ratingStm.executeQuery();
+                if (ratingRs.next()) {
+                    float rating = ratingRs.getFloat("rating");
+                    mentor.setRating(rating);
+                }
+                list.add(mentor);
+            }
+            return list;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    /**
+     * Lay ra cac mentor co skill phu hop voi skill ma mentee da yeu cau va theo sap xep cua mentee
+     * @param itg
+     * @return ArrayList
+     */
+    public ArrayList<CV_Mentor> listMentorSuggestionSort(ArrayList<Integer> itg, String typeSort) {
+        ArrayList<CV_Mentor> list = new ArrayList<>();
+        try {
+            String sql = "SELECT cv_of_mentor.mentor_id, username, avatar, full_name, email, phone, cv_of_mentor.profession,\n"
+                    + "       GROUP_CONCAT(DISTINCT cv_skill.skill_id) AS skill_ids,\n"
+                    + "       ROUND((SELECT SUM(rate_start) FROM swp391_group5.feedback WHERE mentor_id = cv_of_mentor.mentor_id) / \n"
+                    + "             (SELECT COUNT(rate_start) FROM swp391_group5.feedback WHERE mentor_id = cv_of_mentor.mentor_id), 1) AS rating\n"
+                    + "FROM swp391_group5.user\n"
+                    + "JOIN swp391_group5.cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
+                    + "JOIN swp391_group5.cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id\n"
+                    + "WHERE cv_skill.skill_id IN (" + String.join(",", Collections.nCopies(itg.size(), "?")) + ") "
+                    + "GROUP BY cv_of_mentor.mentor_id, avatar, email, phone, cv_of_mentor.profession\n"
+                    + "ORDER BY rating " + typeSort + ";";
+           
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            String countSql = "SELECT COUNT(request_id) AS count FROM swp391_group5.request WHERE mentor_id = ?";
+            PreparedStatement countStm = connection.prepareStatement(countSql);
+
+            String ratingSql = "SELECT (SELECT SUM(rate_start) FROM swp391_group5.feedback WHERE mentor_id = ?) AS totalStar,\n"
+                    + "       (SELECT COUNT(rate_start) FROM swp391_group5.feedback WHERE mentor_id = ?) AS numberStar,\n"
+                    + "       ROUND((SELECT SUM(rate_start) FROM swp391_group5.feedback WHERE mentor_id = ?) / (SELECT COUNT(rate_start) "
+                    + "FROM swp391_group5.feedback WHERE mentor_id = ?), 1) AS rating";
+            PreparedStatement ratingStm = connection.prepareStatement(ratingSql);
+
+            for (int i = 0; i < itg.size(); i++) {
+                stm.setInt(i + 1, itg.get(i));
+            }
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                CV_Mentor mentor = new CV_Mentor(
+                        rs.getInt("mentor_id"),
+                        rs.getString("profession"),
+                        new User(
+                                rs.getString("avatar"),
+                                rs.getString("full_name"),
+                                rs.getString("email"),
+                                rs.getString("username"),
+                                rs.getString("phone")
+                        )
+                );
+                //Lay ra request cua moi mentor
+                int mentorId = rs.getInt("mentor_id");
+                countStm.setInt(1, mentorId);
+                ResultSet countRs = countStm.executeQuery();
+                if (countRs.next()) {
+                    int count = countRs.getInt("count");
+                    mentor.setNumberRequest(count);
+                }
+
                 //Lay ra rating cua moi mentor
                 ratingStm.setInt(1, mentorId);
                 ratingStm.setInt(2, mentorId);

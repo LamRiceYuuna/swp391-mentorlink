@@ -43,20 +43,20 @@
                                   method="post">
                                 <div class="mb_10">
                                     <label for="">Username <span style="color: red">*</span></label>
-                                    <input type="text" name="user" class="form-control not-dark login-form-username" />
+                                    <input type="text" name="username" class="form-control not-dark login-form-username" />
                                 </div>
                                 <div class="mb_10">
                                     <label for="">Old Password <span style="color: red">*</span></label>
-                                    <input type="password" name="oldp" class="form-control not-dark login-form-username" />
+                                    <input type="password" name="oldpass" class="form-control not-dark login-form-username" />
                                 </div>
 
                                 <div class="mb_10">
                                     <label for="">New Pasword <span style="color: red">*</span></label>
-                                    <input id="password" type="password" name="newp" class="form-control not-dark login-form-password" />
+                                    <input id="password" type="password" name="newpass" class="form-control not-dark login-form-password" />
                                 </div>
                                 <div class="mb_10">
                                     <label for="">Confirm Pasword <span style="color: red">*</span></label>
-                                    <input id="password" type="password" name="verifyp" class="form-control not-dark login-form-password" />
+                                    <input id="password" type="password" name="repass" class="form-control not-dark login-form-password" />
                                 </div>
                                 <div class="mb_10 center">
                                     <button class="btn btn-success" type="submit">Change Password</button>
