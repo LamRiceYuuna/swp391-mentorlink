@@ -61,7 +61,7 @@ public class commentAndRateStartController extends HttpServlet {
 
             // Retrieve the list of feedback for the mentor
             FeedbackDAO dao1 = new FeedbackDAO();
-            List<Feedback> listF = dao1.getAllFeedbackByStatus(mentor_id);
+            List<Feedback> listF = dao1.getAllFeedbackOfMentor(mentor_id);
 
             // Set attributes in the request for further processing
             request.setAttribute("mentor_id", mentor_id);
