@@ -54,7 +54,7 @@ public class NewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("common/listMentorSuggestion.jsp").forward(request, response);
+        request.getRequestDispatcher("mentee/listrequestbyme.jsp").forward(request, response);
     } 
 
     /** 
