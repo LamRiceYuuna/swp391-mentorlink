@@ -84,7 +84,7 @@
     <filter-mapping>
         <filter-name>AccountFilter</filter-name>
         <url-pattern>/changePass</url-pattern>
-<!--        <url-pattern>/forgetPass</url-pattern>-->
+        <!--        <url-pattern>/forgetPass</url-pattern>-->
         <url-pattern>/logout</url-pattern>
     </filter-mapping>
     <!-- error Status -->
@@ -92,7 +92,7 @@
         <error-code>404</error-code>
         <location>/security/error404.html</location>
     </error-page>-->
-<!--    <error-page>
+    <!--    <error-page>
         <error-code>500</error-code>
         <location>/security/error500.html</location>
     </error-page>-->
@@ -127,7 +127,7 @@
     </servlet>
     <servlet>
         <servlet-name>listRequestMenTee</servlet-name>
-        <servlet-class>controller.CreateRequest.listRequestMenTee</servlet-class>
+        <servlet-class>controller.CreateRequest.statisticRequestByMe</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>signupController</servlet-name>
