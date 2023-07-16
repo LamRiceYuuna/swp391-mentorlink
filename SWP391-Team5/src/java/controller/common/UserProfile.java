@@ -70,7 +70,7 @@ public class UserProfile extends HttpServlet {
         User userIf = dao.getUserById(Integer.parseInt(sessionUser_id));
         request.setAttribute("InfoUser", userIf);
 //        request.getRequestDispatcher("/common/userProfile.jsp").forward(request, response);
-        request.getRequestDispatcher("/mentee/feedbackmentor.jsp").forward(request, response);
+        request.getRequestDispatcher("/common/userProfile.jsp").forward(request, response);
     }
 
     /**

@@ -50,16 +50,15 @@ public class updateRequest extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-
-        String request_id = "42";
+        // gọi đến đối tượng requestDAO
         requestDAO dao = new requestDAO();
-        //list request theo id
-        Request re = dao.listbyRequest_ID(request_id);
+        //list request theo id_request
+        Request re = dao.listbyRequest_ID(id_request);
         //list skill menter of request
-//             String id_mentor = request.getParameter("mentor_id");
-        String id_mentor = "2";
-        List<Skill> list_a = dao.getAllskillBySkill_id(Integer.parseInt(id_mentor));
-        List<skill_Request> list_b = dao.listRequest_SkillByID(request_id);
+        List<Skill> list_a = dao.getAllskillBySkill_id(id_temp);
+        // list request_skill theo id 
+        List<skill_Request> list_b = dao.listRequest_SkillByID(id_request);
+        // đẩy dự liệu lên cho người dùng 
         request.setAttribute("List_skillRequest", list_b);
         request.setAttribute("request", re);
         request.setAttribute("list_Skill", list_a);
@@ -79,20 +78,17 @@ public class updateRequest extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        String id_mentor = request.getParameter("mentor_id");
-//        id_temp = Integer.parseInt(id_mentor);
-//          String request_id = request.getParameter("request_id");
-//          id_request = Integer.parseInt(request_id);
+        String request_id = request.getParameter("request_id");
+        id_request = Integer.parseInt(request_id);
+        String id_mentor = request.getParameter("mentor_id");
+        id_temp = Integer.parseInt(id_mentor);
 
-        String request_id = "42";
         requestDAO dao = new requestDAO();
         //list request theo id
-        Request re= dao.listbyRequest_ID(request_id);
+        Request re = dao.listbyRequest_ID(id_request);
         //list skill menter of request
-//             String id_mentor = request.getParameter("mentor_id");
-        String id_mentor = "2";
         List<Skill> list_a = dao.getAllskillBySkill_id(Integer.parseInt(id_mentor));
-        List<skill_Request> list_b = dao.listRequest_SkillByID(request_id);
+        List<skill_Request> list_b = dao.listRequest_SkillByID(id_request);
         request.setAttribute("List_skillRequest", list_b);
         request.setAttribute("request", re);
         request.setAttribute("list_Skill", list_a);
@@ -117,9 +113,7 @@ public class updateRequest extends HttpServlet {
         //lấy mail của mentee  
         String mail = sessionUser.getEmail();
         String name = sessionUser.getFull_name();
-        //String request_id ="46";
-        //String request_id = request.getParameter("request_id");
-        String Request_id = "42";
+        // nhận thông tin trên jsp
         String tieude = request.getParameter("tieude");
         String batdau = request.getParameter("batdau");
         String ketthuc = request.getParameter("ketthuc");
@@ -129,25 +123,33 @@ public class updateRequest extends HttpServlet {
         request.setAttribute("skills", skills);
         Mail ml = new Mail();
         //********************************************************
+        // đổi time nhận tưf trên jsp từu string sang timestamp
         requestMentor rq = new requestMentor();
         Timestamp batdau1 = rq.convertToTimestamp(batdau);
-        System.out.println(batdau);
-        System.out.println(ketthuc);
         Timestamp ketthuc1 = rq.convertToTimestamp(ketthuc);
         //***********************************************************************
+        // tính khoảng cách của thời gian bắt đầu với thời gian kết thúc
         long khoangCach = ketthuc1.getTime() - batdau1.getTime();
         long soGioHoc1 = Long.parseLong(sogiohoc) * 3600000; // Chuyển số giờ học thành mili giây
         boolean result = false;
         //***********************************************************************
+        // kiểm tra xem người dùng có nhập thiếu trường thông tin nào không 
         if (isEmpty(tieude) || isEmpty(batdau) || isEmpty(ketthuc) || isEmpty(sogiohoc)
                 || isEmpty(noidung) || skills == null) {
             request.setAttribute("errE", "Không được để trống thông tin nào!");
             processRequest(request, response);
-        }  else if (khoangCach < soGioHoc1) {
+        }// kiểm tra số ký năng mà người dùng chọn phải >=1 và <=3
+        else if (skills == null || skills.length < 1 || skills.length > 3) {
+            System.out.println("Lỗi: Số lượng kỹ năng phải từ 1 đến 3");
+            request.setAttribute("errE", "Lỗi: Số lượng kỹ năng phải từ 1 đến 3");
+            processRequest(request, response);
+        }// khoảng cách lớn hơn hoặc bằng với số giừ học 
+        else if (khoangCach < soGioHoc1) {
             System.out.println("Lỗi: Thời gian bắt đầu và kết thúc phải lớn hơn hoạc bằng với số giờ học");
             request.setAttribute("errE", "Lỗi: Thời gian bắt đầu và kết thúc phải lớn hơn hoạc bằng với số giờ học");
             processRequest(request, response);
-        } else if (ketthuc1.before(batdau1)) {
+        } //so sánh thời gian kết thcs với thời gian bắtd dầu
+        else if (ketthuc1.before(batdau1)) {
             System.out.println("Lỗi: Thời điểm kết thúc nhỏ hơn thời điểm bắt đầu ");
             request.setAttribute("errE", "Lỗi: Thời điểm kết thúc nhỏ hơn thời điểm bắt đầu");
             processRequest(request, response);
@@ -156,7 +158,7 @@ public class updateRequest extends HttpServlet {
             long diffInMillies = ketthuc1.getTime() - batdau1.getTime();
             long diffInHours = diffInMillies / (60 * 60 * 1000);
             // Chuyển đổi milliseconds sang giờ
-
+            // thờ gian kết thúc phải cachs thười gian bắt dầu ít nhất 1 giờ
             if (diffInHours < 1) {
                 System.out.println("Lỗi: Thời điểm kết thúc phải cách bắt đầu ít nhất 1 giờ");
                 request.setAttribute("errE", "Lỗi: Thời điểm kết thúc phải cách bắt đầu ít nhất 1 giờ!");
@@ -164,35 +166,30 @@ public class updateRequest extends HttpServlet {
             } else {
                 requestDAO DAO = new requestDAO();
                 try {
-                    result = DAO.update_request(Request_id, tieude, batdau1, ketthuc1, sogiohoc, noidung, skills); // Xử lý ngoại lệ ở đây
-                    request.getRequestDispatcher("/common/Successfully.html").forward(request, response);
-                    
-                    if(result== true){
-                        request.setAttribute("mess", "thanh cong ");
-                        
-                    }else{
-                         request.setAttribute("mess", "that bai  ");
-                    }
-                } catch (SQLException ex) {
+                    //update cá thông tin mà người dùng muốn cập nhật xuống database
+                    result = DAO.update_request(id_request, tieude, batdau1, ketthuc1, sogiohoc, noidung, skills); // Xử lý ngoại lệ ở đây
+                    // gửi mail cho người dùng 
+                    ml.send(mail, name, tieude, batdau1, ketthuc1, sogiohoc, noidung, skills);
+                } catch (SQLException e) {
+                    // Xử lý ngoại lệ ở đây
+                    result = false; // hoặc thực hiện hành động khác khi có lỗi
+                } catch (ParseException ex) {
                     Logger.getLogger(updateRequest.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                // hoặc thực hiện hành động khác khi có lỗi
-//                processRequest(request, response);
-//                try {
-//                    ml.send(mail, name, tieude, batdau1, ketthuc1, sogiohoc, noidung, skills, framework);
-//                   
-//                } catch (ParseException ex) {
-//                    Logger.getLogger(requestMentor.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-                
+
             }
-            
 
         }
-       
+        request.getRequestDispatcher("/common/Successfully.html").forward(request, response);
 
     }
 
+    /**
+     * kiểm tra xem có gia strij nào br trống
+     *
+     * @param msg Tham số đầu vào của hàm (nếu có)
+     * @return trả về boolean result
+     */
     boolean isEmpty(String msg) {
         boolean result = false;
         if (msg.isEmpty()) {
@@ -201,6 +198,12 @@ public class updateRequest extends HttpServlet {
         return result;
     }
 
+    /**
+     * chuyển đởi thời gian từu dạng string sang dạn timestamp
+     *
+     * @param timestampString
+     * @return timestamp
+     */
     public static Timestamp convertToTimestamp(String timestampString) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
@@ -223,6 +226,4 @@ public class updateRequest extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-    
-
 }

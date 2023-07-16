@@ -2,6 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "model.Mentee" %>
 <%@page import = "model.SkillMentee" %>
+<%@page import = "dao.requestDAO" %>
 <%@page import = "java.util.*" %>
 
 <!DOCTYPE html>
@@ -396,61 +397,66 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach var="o" items="${lista}">  
-                                                <tr role="row" class="odd">
-                                                    <td>${o.title}</td>
-                                                    <td>${o.request_content}</td>
-                                                    <td>${o.created_date}</td>
-                                                    <td>${o.finish_date}</td>
-                                                    <td>${o.getSkill_name()}</td>
-                                                    <c:choose>
-                                                        <c:when test="${o.request_status == 1}">
-                                                            <td>
-                                                                Mở
-                                                            </td>
-                                                            <td>
-                                                                <a href="listrequestbyme1?idDel=${o.request_id}">Xóa</a>
-                                                            </td>
-                                                            <td>
-                                                                <a href="#">Update</a>
-                                                            </td>
-                                                        </c:when>
-                                                        <c:when test="${o.request_status == 2}">
-                                                            <td>
-                                                                Đang xử lý
-                                                            </td>
-                                                            <td>
-                                                                <a href="listrequestbyme1?idDel=${o.request_id}">Xóa</a>
-                                                            </td>
-                                                        </c:when>
-                                                        <c:when test="${o.request_status == 3}">
-                                                            <td>
-                                                                Đóng
-                                                            </td>
-                                                            <td>
-                                                                <a href="listrequestbyme1?idDel=${o.request_id}">Xóa</a>
-                                                            </td>
-                                                        </c:when>
-                                                        <c:when test="${o.request_status == 4}">
-                                                            <td>
-                                                                Đã Hoàn Thành
-                                                            </td>
-                                                            <td>
-                                                                <a href="listrequestbyme1?idDel=${o.request_id}">Xóa</a>
-                                                            </td>
-                                                        </c:when>
-                                                        <c:when test="${o.request_status == 5}">
-                                                            <td>
-                                                                <a href="listrequestbyme1?id=${o.request_id}">Kết Thúc</a>
-                                                            </td>
-                                                            <td>
-                                                                <a href="listrequestbyme1?idDel=${o.request_id}">Xóa</a>
-                                                            </td>
-                                                        </c:when>
-                                                        <c:otherwise>Không xác định</c:otherwise>
-                                                    </c:choose>
-                                                </tr>
-                                            </c:forEach>
+                                        <p>sang</p>
+                                        <c:forEach var="o" items="${lista}">  
+                                            <tr role="row" class="odd">
+                                                <td>${o.title}</td>
+                                                <td>${o.request_content}</td>
+                                                <td>${o.created_date}</td>
+                                                <td>${o.finish_date}</td>
+                                                <td>
+                                                    <c:forEach items="${o.getSkill_name()}" var="s">
+                                                       <img src="${s.skill_img}">
+                                                    </c:forEach>
+                                                </td>
+                                                <c:choose>
+                                                    <c:when test="${o.request_status == 1}">
+                                                        <td>
+                                                            Mở
+                                                        </td>
+                                                        <td>
+                                                            <a href="listrequestbyme1?idDel=${o.request_id}">Xóa</a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="updateRequest?request_id=${o.request_id}&mentor_id=${o.mentor_id}">Update</a>
+                                                        </td>
+                                                    </c:when>
+                                                    <c:when test="${o.request_status == 2}">
+                                                        <td>
+                                                            Đang xử lý
+                                                        </td>
+                                                        <td>
+                                                            <a href="listrequestbyme1?idDel=${o.request_id}">Xóa</a>
+                                                        </td>
+                                                    </c:when>
+                                                    <c:when test="${o.request_status == 3}">
+                                                        <td>
+                                                            Hủy
+                                                        </td>
+                                                        <td>
+                                                            <a href="listrequestbyme1?idDel=${o.request_id}">Xóa</a>
+                                                        </td>
+                                                    </c:when>
+                                                    <c:when test="${o.request_status == 4}">
+                                                        <td>
+                                                            Đã Hoàn Thành
+                                                        </td>
+                                                        <td>
+                                                            <a href="listrequestbyme1?idDel=${o.request_id}">Xóa</a>
+                                                        </td>
+                                                    </c:when>
+                                                    <c:when test="${o.request_status == 5}">
+                                                        <td>
+                                                            <a href="listrequestbyme1?id=${o.request_id}">Kết Thúc</a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="listrequestbyme1?idDel=${o.request_id}">Xóa</a>
+                                                        </td>
+                                                    </c:when>
+                                                    <c:otherwise>Không xác định</c:otherwise>
+                                                </c:choose>
+                                            </tr>
+                                        </c:forEach>
 
                                         </tbody>
                                     </table>

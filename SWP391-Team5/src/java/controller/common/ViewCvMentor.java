@@ -6,6 +6,7 @@
 package controller.common;
 
 import dao.FeedbackDAO;
+import dao.FeedbackSkillDAO;
 import dao.MentorCVDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,9 +14,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import model.CV_Mentor;
 import model.Feedback;
+import model.Feedback_Skill;
 
 /**
  *
@@ -59,21 +62,26 @@ public class ViewCvMentor extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         MentorCVDAO dao = new MentorCVDAO();
-        //Lấy thông tin mentor_id khi người dùng click vào xem CV
+        //Lấy thông tin dựa trên mentor_id khi người dùng click vào xem CV
         String mentor_id = request.getParameter("mentor_id");
         CV_Mentor cv = dao.getCvMentorById(mentor_id);
-        //Lấy ra list mentor
+        //Lấy ra list mentor để gợi ý cho mentee
         List<CV_Mentor> list = dao.getAllListMentor();
         FeedbackDAO dao1 = new FeedbackDAO();
         //Lấy ra Feedback về mentor
         List<Feedback> listF = dao1.getAllFeedbackOfMentor(Integer.parseInt(mentor_id));
-        
+        //Lấy ra đánh ra cho mỗi skill mà mentor nhận được.
+        FeedbackSkillDAO fbs = new FeedbackSkillDAO();
+        //Lay ra skill cua mentor kem danh gia
+        ArrayList<Feedback_Skill> listFS = fbs.getStarRateSkill(mentor_id);
         //Truyền dữ liều từ servlet sang jsp để hiển thị
         request.setAttribute("mentor_id", mentor_id);
         request.setAttribute("cv", cv);
         request.setAttribute("listMentor", list);
-        request.setAttribute("listF", listF);
+        request.setAttribute("listF", listF);      
+        request.setAttribute("listFS", listFS);      
         request.getRequestDispatcher("common/viewCvMentor.jsp").forward(request, response);
+
     } 
 
     /** 

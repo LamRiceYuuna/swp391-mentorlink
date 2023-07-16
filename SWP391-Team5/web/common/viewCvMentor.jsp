@@ -272,37 +272,21 @@
                                                     <div class="row">
                                                         <div class="wrapper1  row">
                                                             <h3>Kĩ năng</h3> 
-                                                            <div class="col-6" style="margin-bottom: 20px">
-                                                                <h5 style="display: inline">HTML: 4.6/5</h5>                                                          
-                                                                <i class="fa fa-star yellow-star" style="font-size: 22px"></i>
-                                                            </div>
-                                                            <div class="col-6" style="margin-bottom: 20px">
-                                                                <h5 style="display: inline">C#: 4.6/5</h5>                                                          
-                                                                <i class="fa fa-star yellow-star" style="font-size: 22px"></i>
-                                                            </div>
-                                                            <div class="col-6" style="margin-bottom: 20px">
-                                                                <h5 style="display: inline">Python: 4.6/5</h5>                                                          
-                                                                <i class="fa fa-star yellow-star" style="font-size: 22px"></i>
-                                                            </div>
-                                                            <div class="col-6" style="margin-bottom: 20px">
-                                                                <h5 style="display: inline">Java: 4.6/5</h5>                                                          
-                                                                <i class="fa fa-star yellow-star" style="font-size: 22px"></i>
-                                                            </div>
-                                                            <div class="col-6" style="margin-bottom: 20px">
-                                                                <h5 style="display: inline">Ruby: 4.6/5</h5>                                                          
-                                                                <i class="fa fa-star yellow-star" style="font-size: 22px"></i>
-                                                            </div>
-                                                            
-                                                            
-
-                                                            
+                                                            <c:forEach var="f" items="${listFS}">
+                                                                <div class="col-6" style="margin-bottom: 20px">
+                                                                    <h5 style="display: inline">${f.getSkill().getSkill_name()}: ${f.getStar_rate_skill()}/5</h5>                                                          
+                                                                    <i class="fa fa-star yellow-star" style="font-size: 22px"></i>
+                                                                </div>
+                                                            </c:forEach>
+                                                                
+                                                          
 
                                                         </div>
 
                                                     </div>
                                                 </div>
 
-                                                
+
                                                 <div style="text-align: center; background: #175E4C; border-radius: 8px;">
                                                     <h3 style="color: white">Đánh Từ Mentee</h3>
                                                 </div>
