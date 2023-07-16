@@ -11,7 +11,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>Dashboard </title>
-        <!-- <link rel="stylesheet" href="../assets/css/styledashboard.css" /> --> 
+        <!-- <link rel="stylesheet" href="../assets/css/styledashboard.css" /> -->
         <style>
             /*  import google fonts */
             @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
@@ -200,8 +200,8 @@
             .table th,
             .table td {
                 padding: 13px 15px;
-            }
 
+            }
 
 
             .table tbody tr{
@@ -354,6 +354,8 @@
                 color: forestgreen
             }
 
+
+
             .btn {
                 display: inline-block;
                 padding: 0.3rem 0.6rem; /* Giảm kích thước nút */
@@ -394,35 +396,67 @@
                 border-color: #bd2130; /* Thay đổi màu viền khi hover */
             }
 
-            .indexxx{
-                text-align: center;
-            }
-            
-            
-            th, td,  .action {
-                text-align: center;
-            }
-            .action {
+
+            form {
                 display: flex;
-                flex-direction: column;
-                justify-content: center;
                 align-items: center;
+                justify-content: center;
             }
 
-        </style>
-        <script src="../assets/js/boxupskill.js"></script>
-        <script type="text/javascript">
-            function doDelete(id) {
-                if (confirm("are you sure delete category with id=" + id + "?")) {
-                    window.location = "delete?kid=" + id;
-                }
+            input[type="text"] {
+                padding: 10px;
+                border-radius: 5px;
+                border: none;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
             }
-        </script>
+
+            button[type="submit"] {
+                background-color: #28a745;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+
+
+            .pagination-custom a {
+                color: #333;
+                text-decoration: none;
+                padding: 8px 10px;
+                margin: 0 5px;
+                border: 1px solid #ddd;
+                border-radius: 3px;
+                display: inline-block;
+                font-size: 12px;
+                width: 2%;
+            }
+
+            .pagination-custom a:hover {
+                background-color: #ddd;
+            }
+
+            .pagination-custom a.active {
+                background-color: #1e7e34;
+                color: #fff;
+            }
+
+            /* Luật CSS mới để áp dụng màu khác cho các nút có class "current" */
+            .pagination-custom a.current {
+                background-color: #ffffff;
+                color: #333;
+            }
+        </style>
 
         <!-- Font Awesome Cdn Link -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-    </head>
-    <body>
+
+        <!-- Dung cho phan Trang: Doi tuong cua class MentorCVDAO. De dung instance method class  MentorCVDAO-->
+        <jsp:useBean id="a" class="dao.MentorCVDAO" scope = "request"></jsp:useBean>
+        </head>
+        <body>
+
 
         <c:if test="${sessionScope.acc != null}">
             <div class="container">
@@ -464,39 +498,12 @@
                     <section class="attendance">
                         <div class="attendance-list">
 
-                            <h1 class = "list-all">Manager List All Skills</h1>
+                            <form action="searchControl" method="get">
+                                <input type="text" name="txtSearch" placeholder="Search by name ...">
+                                <button type="submit" value="search">Search</button>
+                            </form>   
 
-                            <div>
-                                <div id="add-skill-popup" style="display: none;">
-                                    <div class="add-skill-box">
-
-                                        <form action="addskill" method="post">
-
-                                            <div class="form-group">
-                                                <label for="skill-name">Name of skill:</label>
-                                                <input type="text" id="skill-name" name="skill_name" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="skill-image">Image:</label>
-                                                <input type="text" id="skill-image" name="skill_img" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Status:</label>
-                                                <select name="skill_status">
-                                                    <option value="1">Active</option>
-                                                    <option value="0">Inactive</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit">Add Skill</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <button id="add-skill-button"  class="custom-button" >Add Skill</button>
-                            </div>
-
+                            <h1 class = "list-all">List All Mentee</h1>
 
                             <table class="table">
                                 <thead >
@@ -504,66 +511,41 @@
                                     <tr>
                                         <th>STT</th>
                                         <th>ID</th>
-                                        <th>Name Of Skill</th>
-                                        <th>Image</th>
-                                        <th >Status</th>
-                                        <th>Action</th>
+                                        <th>Full Name</th>
+                                        <th>Account Name</th>
+                                        <th>Total Hours</th>
+                                        <th>Total number of skills</th>
                                     </tr>
                                 </div>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${listS}" var="o">
-
-                                        <tr >
-                                            <td>${o.skill_id}</td>
-                                            <td>${o.skill_id}</td>
-                                            <td>${o.skill_name}</td>
-
-                                            <td><img class="element" src="${o.skill_img}" alt="Skill Image"></td>
-                                            <td >
-                                                <a href="updatestatus?kid=${o.skill_id}" class="btn btn-${o.skill_status == 1 ? 'success' : 'danger'}">
-                                                    <c:choose>
-                                                        <c:when test="${o.skill_status == 1}">
-                                                            Active
-                                                        </c:when>
-                                                        <c:when test="${o.skill_status == 0}">
-                                                            Inactive
-                                                        </c:when>
-                                                    </c:choose>
-                                                </a>
-                                            </td>
-                                            <td > <div class="action">
-                                                    <a href="updateskill?kid=${o.skill_id}">Update</a>
-                                                    <a href="#" onclick="doDelete('${o.skill_id}')">Delete</a> 
-                                                </div>
-                                            </td>
+                                    <%--<c:forEach items="${listMentor}" var="o">--%>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>12</td>
+                                            <td>Ma Bao Khanh</td>
+                                            <td>khanhmb88</td>
+                                            <td>12</td>
+                                            <td>20</td>                                      
                                         </tr>
-
-                                    </c:forEach>
+                                    <%--</c:forEach>--%>
                                 </tbody>
                             </table>
+                            <!-- Logic: SO LUONG TRANG -> MOI TRANG BAO NHIEU BAI -->
+                            <!-- In ra so trang -->
+                            <div class="pagination-custom">
+                                <!-- So trang dang dung JspUseBean: Doi tuong cua class CVDAO -->
+                                <c:forEach begin="1" end="${a.getNumberPage()}" var = "i">
+                                    <!-- Lay ra vi tri trang dang dung -->
+                                    <a href="listmentor?index=${i}" class="${indexPagee == i ?  "active" : ""}">${i}</a>
+                                </c:forEach>
+                            </div>
+
                         </div>
                     </section>
                 </section>
             </div>
-
-            <script>
-                var addSkillButton = document.getElementById("add-skill-button");
-                var addSkillPopup = document.getElementById("add-skill-popup");
-
-                addSkillButton.onclick = function () {
-                    addSkillPopup.style.display = "block";
-                    document.body.classList.add("overlay");
-                }
-
-                addSkillPopup.onclick = function (event) {
-                    if (event.target == addSkillPopup) {
-                        addSkillPopup.style.display = "none";
-                        document.body.classList.remove("overlay");
-                    }
-                }
-            </script>
-
         </c:if>
     </body>
 </html>
+

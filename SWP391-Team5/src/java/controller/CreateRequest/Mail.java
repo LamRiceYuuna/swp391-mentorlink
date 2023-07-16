@@ -26,7 +26,7 @@ public class Mail {
     final String username = "mentorlinkswp391@gmail.com";
     final String password = "ogwkxdjdmqepnjxz";
 
-    public void send(String toEmail, String name, String tieude, Timestamp batdau1, Timestamp ketthuc1, String sogiohoc, String noidung, String []skills, String framework) throws ParseException {
+    public void send(String toEmail, String name, String tieude, Timestamp batdau1, Timestamp ketthuc1, String sogiohoc, String noidung, String []skills) throws ParseException {
 
         //Thiết lập thuộc tính
         Properties prop = new Properties();
@@ -65,9 +65,8 @@ public class Mail {
                     + "\nEnd time ...: " + ketthuc1
                     + "\nDuration of study: " + sogiohoc
                     + "\ncontent: " + noidung
-                    + "\nskills: " + skills
-                    + "\nprogramming language(framework) : " + framework
-                    + "\nYêu cầu sẽ được duêtj muộn nhất sau 12 tiếng");
+                   
+                    + "\nyeu cau se dc duyet muon nhat sa 12 tieng");
 
             //Gửi tin nhắns đi
             Transport.send(message);

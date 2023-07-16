@@ -18,6 +18,7 @@ import model.MentorRatingStats;
 import model.MentorRequest;
 import model.MentorRequestStats;
 import model.Request;
+import model.RequestName;
 import model.Request_Skill;
 import model.Skill;
 import model.User;
@@ -58,6 +59,7 @@ public class requestDAO extends DBContext {
 
     /**
      * Lấy ra các request mà mentor hiện đang có
+     *
      * @param mentor_id
      * @return List
      */
@@ -70,7 +72,7 @@ public class requestDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, Integer.parseInt(mentor_id));
             ResultSet rs = ps.executeQuery();
-           
+
             while (rs.next()) {
                 int request_id = rs.getInt("request_id"); // Lấy request_id từ ResultSet
                 ArrayList<String> skill_name = new ArrayList<>(); // Khởi tạo ArrayList skill_name cho mỗi bản ghi trong rs
@@ -108,8 +110,9 @@ public class requestDAO extends DBContext {
 
     /**
      * Update trang thai request cua mentee dua tren hanh dong cua mentor
+     *
      * @param request_status
-     * @param requestId 
+     * @param requestId
      */
     public void update_Request_Status(int request_status, String requestId) {
         String sql = "UPDATE `swp391_group5`.`request` SET `request_status` = ? WHERE `request_id` = ?;";
@@ -122,28 +125,28 @@ public class requestDAO extends DBContext {
             ex.printStackTrace();
         }
     }
-
-    public List<Request> listRequestByID(String mentee_id) {
-        List<Request> list1 = new ArrayList<>();
-        String sql = "SELECT * FROM swp391_group5.request where mentee_id=?;";
+    public List<RequestName> listRequestByID(String mentee_id) {
+        List<RequestName> list1 = new ArrayList<>();
+        String sql = "SELECT * FROM swp391_group5.request where mentee_id= " + mentee_id + ";";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, Integer.parseInt(mentee_id));
+            //ps.setInt(1, Integer.parseInt(mentee_id));
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list1.add(new Request(
-                        rs.getInt(1),
-                        rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getInt(6),
-                        rs.getTimestamp(7),
-                        rs.getTimestamp(8),
-                        rs.getTimestamp(9),
-                        rs.getInt(10)
-                ));
+                RequestName rn = new RequestName();
+                rn.setRequest_id(rs.getInt(1));
+                rn.setMentor_id(rs.getInt(2));
+                rn.setMentee_id(rs.getInt(3));
+                rn.setTitle(rs.getString(4));
+                rn.setRequest_content(rs.getString(5));
+                rn.setTime_study(rs.getInt(6));
+                rn.setTime_begin(rs.getTimestamp(7));
+                rn.setCreated_date(rs.getTimestamp(8));
+                rn.setFinish_date(rs.getTimestamp(9));
+                rn.setRequest_status(rs.getInt(10));
+                rn.setSkill_name(getAllSkillByRequestID(rn.getRequest_id()));
+                list1.add(rn);
             }
 
         } catch (Exception e) {
@@ -152,6 +155,54 @@ public class requestDAO extends DBContext {
         return list1;
 
     }
+    public List<Skill> getAllSkillByRequestID(int request_id) {
+
+        List<Skill> list1 = new ArrayList<>();
+        String sql = "select b.* from request_skill a join skill b on a.skill_id=b.skill_id where request_id = " + request_id + "";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            //ps.setInt(1, Integer.parseInt(mentee_id));
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list1.add(new Skill(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
+            }
+
+        } catch (Exception e) {
+
+        }
+        return list1;
+    }
+
+//    public List<Request> listRequestByID(String mentee_id) {
+//        List<Request> list1 = new ArrayList<>();
+//        String sql = "SELECT * FROM swp391_group5.request where mentee_id=?;";
+//        try {
+//            PreparedStatement ps = connection.prepareStatement(sql);
+//            ps.setInt(1, Integer.parseInt(mentee_id));
+//
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                list1.add(new Request(
+//                        rs.getInt(1),
+//                        rs.getInt(2),
+//                        rs.getInt(3),
+//                        rs.getString(4),
+//                        rs.getString(5),
+//                        rs.getInt(6),
+//                        rs.getTimestamp(7),
+//                        rs.getTimestamp(8),
+//                        rs.getTimestamp(9),
+//                        rs.getInt(10)
+//                ));
+//            }
+//
+//        } catch (Exception e) {
+//
+//        }
+//        return list1;
+//
+//    }
 
     public static void main(String[] args) {
         requestDAO rq = new requestDAO();
@@ -324,6 +375,17 @@ public class requestDAO extends DBContext {
         }
     }
 
+    public void DeleteRequestSkill(String request_id) {
+        String sql = "delete from swp391_group5.request_skill where request_id = " + request_id + "";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public boolean checkTime(Timestamp finish) {
         String sql = "SELECT TIMESTAMPADD(SQL_TSI_DAY, 2, '" + finish.toString() + "');";
         Date current = new Date();
@@ -485,12 +547,12 @@ public class requestDAO extends DBContext {
         return null;
     }
 
-    public Request listbyRequest_ID(String request_id) {
+    public Request listbyRequest_ID(int request_id) {
 
         String sql = "SELECT * FROM swp391_group5.request where request_id=?;";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, Integer.parseInt(request_id));
+            ps.setInt(1, request_id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 return new Request(
@@ -511,14 +573,14 @@ public class requestDAO extends DBContext {
 
     }
 
-    public List<skill_Request> listRequest_SkillByID(String request_id) {
+    public List<skill_Request> listRequest_SkillByID(int request_id) {
         List<skill_Request> list = new ArrayList<>();
         String sql = "SELECT request_skill.request_id,request_skill.skill_id,skill.skill_name "
                 + "FROM swp391_group5.request_skill JOIN skill ON request_skill.skill_id = skill.skill_id "
                 + "where request_id = ?;";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, Integer.parseInt(request_id));
+            ps.setInt(1, request_id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new skill_Request(rs.getInt(1),
@@ -535,7 +597,7 @@ public class requestDAO extends DBContext {
 
     }
 
-    public boolean update_request(String request_id, String tieude, Timestamp batdau1, Timestamp ketthuc1, String sogiohoc, String noidung, String[] skills)
+    public boolean update_request(int  request_id, String tieude, Timestamp batdau1, Timestamp ketthuc1, String sogiohoc, String noidung, String[] skills)
             throws SQLException {
         // Lấy thời gian hiện tại
         LocalDateTime currentTime = LocalDateTime.now();
@@ -564,13 +626,13 @@ public class requestDAO extends DBContext {
             ps.setTimestamp(4, timestamp);
             ps.setTimestamp(5, batdau1);
             ps.setTimestamp(6, ketthuc1);
-            ps.setInt(7, Integer.parseInt(request_id));
+            ps.setInt(7,request_id);
             ps.executeUpdate();
 
             String sql2 = "DELETE FROM `swp391_group5`.`request_skill`\n"
                     + "WHERE request_id = ? ;";
             PreparedStatement ps1 = connection.prepareStatement(sql2);
-            ps1.setInt(1, Integer.parseInt(request_id));
+            ps1.setInt(1, request_id);
             ps1.executeUpdate();
 
             String sql3 = "INSERT INTO `swp391_group5`.`request_skill`\n"
@@ -587,7 +649,7 @@ public class requestDAO extends DBContext {
 
                 // Thiết lập các giá trị trong Prepared Statement
                 ps2.setInt(1, value_id);
-                ps2.setInt(2, Integer.parseInt(request_id));
+                ps2.setInt(2, request_id);
 
                 // Thực hiện câu lệnh chèn vào cơ sở dữ liệu
                 ps2.executeUpdate();
@@ -623,5 +685,53 @@ public class requestDAO extends DBContext {
         return count;
 
     }
+    /**
+     * tính tổng của số giờ học
+     *
+     * @param sessionUser_id
+     * @return sum
+     */
+    public int sumTime_Study(String sessionUser_id) {
+        int sum = 0;
+        try {
+            String sql = "SELECT SUM(time_study) As sum FROM swp391_group5.request where mentee_id=?;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, Integer.parseInt(sessionUser_id)); // Thay mentorId bằng giá trị cụ thể của mentor_id mà bạn quan tâm
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                sum = resultSet.getInt("sum");
+                // Xử lý số lượng count tương ứng với mentor_id
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return sum;
+    }
+
+    /**
+     * đếm số mentor mà mentee đã gửi yêu cầu
+     *
+     * @param sessionUser_id
+     * @return count_Mentor
+     */
+    public int count_Mentor(String sessionUser_id) {
+        int count = 0;
+        try {
+            String sql = "SELECT COUNT(DISTINCT mentor_id) As count FROM swp391_group5.request where mentee_id=?;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, Integer.parseInt(sessionUser_id)); // Thay mentorId bằng giá trị cụ thể của mentor_id mà bạn quan tâm
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                count = resultSet.getInt("count");
+                // Xử lý số lượng count tương ứng với mentor_id
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
+
 
 }

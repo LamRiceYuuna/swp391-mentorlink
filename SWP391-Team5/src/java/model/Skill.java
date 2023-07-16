@@ -18,6 +18,10 @@ public class Skill {
     public Skill() {
     }
 
+    public Skill(String skill_name) {
+        this.skill_name = skill_name;
+    }    
+
     public Skill(int skill_id, String skill_name, String skill_img, int skill_status) {
         this.skill_id = skill_id;
         this.skill_name = skill_name;

@@ -25,8 +25,10 @@ public class ListMenteeServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         MenteeDAO u = new MenteeDAO();
+        //Lấy ra các thông tin liên quan đến mentee.
         List<Mentee> lst = u.getMentees();
         List<SkillMentee> list = u.getSkillMentees();
+        //Đếm số lượng mentee.
         int sum = u.sumMentee(lst);
         request.setAttribute("lst", lst);
         request.setAttribute("sum", sum);

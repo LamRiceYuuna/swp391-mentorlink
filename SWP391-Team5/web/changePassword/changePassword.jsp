@@ -38,7 +38,12 @@
                             </div>
                             <div class="help-block show_err">
                             </div>
-                            ${error}
+
+                            <div class="text-danger alert alert-danger">
+                                <div class="centered-text">${error}</div>
+                            </div> 
+
+
                             <form id="register-account" name="register-account" class="nobottommargin" action="changePass"
                                   method="post">
                                 <div class="mb_10">

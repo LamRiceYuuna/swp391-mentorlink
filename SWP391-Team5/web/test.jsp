@@ -13,7 +13,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        ${username1}
+        <c:forEach var="f" items="${listFS}">
+            ${f.getSkill().getSkill_name()} ${f.getStar_rate_skill()}/5
+        </c:forEach>
 
     </body>
 </html>

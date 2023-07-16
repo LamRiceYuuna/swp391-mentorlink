@@ -2,29 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.CreateRequest;
+package controller.changePass;
 
-import dao.requestDAO;
+import dao.FeedbackSkillDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import model.Request;
-import model.Skill;
-import model.User;
+import model.Feedback_Skill;
 
 /**
  *
- * @author damtu
+ * @author Tuan Vinh
  */
-public class listRequestMenTee extends HttpServlet {
+@WebServlet(name = "NewServlet11", urlPatterns = {"/testt"})
+public class NewServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,36 +34,16 @@ public class listRequestMenTee extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            User sessionUser = (User) session.getAttribute("acc");
-            String sessionUser_id = sessionUser.getUser_id();
-            requestDAO dao = new requestDAO();
-
-            List<Request> list = dao.listRequestByID(sessionUser_id);
-            Date currentTime = new Date(); // Lấy thời gian hiện tại
-       
-            for (Request request1 : list) {
-                if(request1.getRequest_status()==1){
-                Timestamp timeBeginString = request1.getTime_begin(); // Lấy giá trị time_begin từ cơ sở dữ liệu
-
-                if (timeBeginString.before(currentTime)) {
-                    // time_begin xảy ra trước thời gian hiện tại, set request_status = 1
-                    request1.setRequest_status(3);
-                } else if (timeBeginString.after(currentTime)) {
-                    // time_begin xảy ra sau thời gian hiện tại, set request_status = 3
-                    request1.setRequest_status(1);
-                }}
-            }
-
-    // Cập nhật request_status trong cơ sở dữ liệu
-            for (Request request1 : list) {
-                
-                dao.update(request1.getRequest_status(),request1.getRequest_id());
-            }
-
-            request.setAttribute("lista", list);
-            request.getRequestDispatcher("/mentee/ListRequestByMe.jsp").forward(request, response);
-
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet NewServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet NewServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -84,7 +59,11 @@ public class listRequestMenTee extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        FeedbackSkillDAO fbs = new FeedbackSkillDAO();
+//        Feedback_Skill listFS = fbs.getStarRateSkill("2");
+//        request.setAttribute("lol", listFS);      
+//        request.getRequestDispatcher("test.jsp").forward(request, response);
+request.getRequestDispatcher("admin/listmentee.jsp").forward(request, response);
     }
 
     /**
@@ -98,7 +77,6 @@ public class listRequestMenTee extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         processRequest(request, response);
     }
 

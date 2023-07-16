@@ -397,6 +397,17 @@
             .indexxx{
                 text-align: center;
             }
+            
+            
+            th, td,  .action {
+                text-align: center;
+            }
+            .action {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
 
         </style>
         <script src="../assets/js/boxupskill.js"></script>
