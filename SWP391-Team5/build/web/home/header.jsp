@@ -91,7 +91,7 @@
                                                                 Mentee: ${sessionScope.acc.username} </a>
                                                         </div>
                                                         <div>
-                                                            <a href="UserProfile" class="" style="font-size: 12px;" title="Duy Dao">
+                                                            <a href="commentAndRateStart" class="" style="font-size: 12px;" title="Duy Dao">
                                                                 My profile
                                                             </a>
                                                         </div>

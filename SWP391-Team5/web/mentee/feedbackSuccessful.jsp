@@ -35,7 +35,7 @@
                      style="max-width: 500px; background-color: rgba(255,255,255,0.93);">
                     <div class="card-body nopadding">
                         <div class="wrap-title">
-                            <h3 class="title">Change password successfully</h3>
+                            <h3 class="title">Thanks for your feedback ! </h3>
                         </div>
                         <div class="login-logo">
                             <img src="assets/images/logo2.png" alt="ym">
@@ -46,7 +46,7 @@
                             <div class="center">
                             </div>
                             <div class="mb_10 nobottommargin center">
-                                <a href="Home" class="">Back to login</a>
+                                <a href="login" class="">Back to home page</a>
                             </div>
                         </div>
                     </div>

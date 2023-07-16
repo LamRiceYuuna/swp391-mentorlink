@@ -25,7 +25,21 @@ import model.User;
  */
 @WebServlet(name = "commentAndRateStartController", urlPatterns = {"/commentAndRateStart"})
 public class commentAndRateStartController extends HttpServlet {
-
+    
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
+     @Override
+     protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+         request.getRequestDispatcher("/mentee/feedbackmentor.jsp").forward(request, response);
+     }
+     
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -70,7 +84,7 @@ public class commentAndRateStartController extends HttpServlet {
             request.setAttribute("listF", listF);
 
             // Forward the request to the specified JSP file for rendering
-            request.getRequestDispatcher("common/viewCvMentor.jsp").forward(request, response);
+            request.getRequestDispatcher("feedbacksuccess").forward(request, response);
         }
 
     }
