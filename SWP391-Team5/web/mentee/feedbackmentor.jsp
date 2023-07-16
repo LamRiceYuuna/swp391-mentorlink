@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
     Document   : feedbackmentor
     Created on : Jul 7, 2023, 3:47:22 PM
@@ -31,46 +32,23 @@
                     </div>
                     <h3>Please rate the skills you have learned</h3>
                     <div class="row">
+                        
                         <div class="row">
+                            <c:forEach var="s" items="${listSkill}">
                             <div class="col-6">
-                                <h3></h3>
-                            </div>
-                            <div class="rating rt1 col-6" style="font-size: 1.5rem">
-                                <input type="number" name="rating" hidden>
-                                <i class='bx bxs-star star skill1 active' style="--i: 0;"></i>
-                                <i class='bx bx-star star skill1' style="--i: 1;"></i>
-                                <i class='bx bx-star star skill1' style="--i: 2;"></i>
-                                <i class='bx bx-star star skill1' style="--i: 3;"></i>
-                                <i class='bx bx-star star skill1' style="--i: 4;"></i>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <h3>C#</h3>
+                                <h3>${s.skill_name}</h3>
                             </div>
                             <div class="rating rt2 col-6" style="font-size: 1.5rem">
-                                <input type="number" name="rating" hidden>
-                                <i class='bx bxs-star skill2 active' style="--i: 0;"></i>
-                                <i class='bx bx-star skill2' style="--i: 1;"></i>
+                                <input type="number" name="ratingskill" hidden>
+                                <i class='bx bxs-star skill2 active' style="--i: 1;"></i>
                                 <i class='bx bx-star skill2' style="--i: 2;"></i>
                                 <i class='bx bx-star skill2' style="--i: 3;"></i>
                                 <i class='bx bx-star skill2' style="--i: 4;"></i>
+                                <i class='bx bx-star skill2' style="--i: 5;"></i>
                             </div>
+                            </c:forEach>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <h3>Java</h3>
-                            </div>
-                            <div class="rating rt3 col-6" style="font-size: 1.5rem">
-                                <input type="number" name="rating" hidden>
-                                <i class='bx bxs-star skill3 active' style="--i: 0;"></i>
-                                <i class='bx bx-star skill3' style="--i: 1;"></i>
-                                <i class='bx bx-star skill3' style="--i: 2;"></i>
-                                <i class='bx bx-star skill3' style="--i: 3;"></i>
-                                <i class='bx bx-star skill3' style="--i: 4;"></i>
-                            </div>
-                        </div>
-
+                        
                     </div>
                     <div style="margin-top: 20px;">
                         <div
@@ -79,12 +57,12 @@
                         <h2>General assessment</h2>
 
                         <div class="rating rtmain" style="font-size: 3rem;">
-                            <input type="number" name="rating" hidden>
-                            <i class='bx bxs-star  mainstar active' style="--i: 0;"></i>
-                            <i class='bx bx-star  mainstar' style="--i: 1;"></i>
+                            <input type="number"  name="rating" hidden>
+                            <i class='bx bxs-star  mainstar active' style="--i: 1;"></i>
                             <i class='bx bx-star  mainstar' style="--i: 2;"></i>
                             <i class='bx bx-star  mainstar' style="--i: 3;"></i>
                             <i class='bx bx-star  mainstar' style="--i: 4;"></i>
+                            <i class='bx bx-star  mainstar' style="--i: 5;"></i>
                         </div>
                         <textarea name="opinion" style="outline: none;resize: none;" cols="30" rows="5"
                                   placeholder="Your opinion..."></textarea>
@@ -92,9 +70,9 @@
                             <button type="submit" class="btn submit">Submit</button>
 
                         </div>
-                </form>
+                
             </div>
-
+            </form>        
         </div>
     </div>
     <script src="assets/js/feedback.js"></script>

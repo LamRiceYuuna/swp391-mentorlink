@@ -155,6 +155,34 @@ public class requestDAO extends DBContext {
         return list1;
 
     }
+    public RequestName getRequestByID(int id){
+        String sql = "select * from request where request_id = "+id+"";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            //ps.setInt(1, Integer.parseInt(mentee_id));
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                RequestName rn = new RequestName();
+                rn.setRequest_id(rs.getInt(1));
+                rn.setMentor_id(rs.getInt(2));
+                rn.setMentee_id(rs.getInt(3));
+                rn.setTitle(rs.getString(4));
+                rn.setRequest_content(rs.getString(5));
+                rn.setTime_study(rs.getInt(6));
+                rn.setTime_begin(rs.getTimestamp(7));
+                rn.setCreated_date(rs.getTimestamp(8));
+                rn.setFinish_date(rs.getTimestamp(9));
+                rn.setRequest_status(rs.getInt(10));
+                rn.setSkill_name(getAllSkillByRequestID(rn.getRequest_id()));
+                return rn;
+            }
+
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
     public List<Skill> getAllSkillByRequestID(int request_id) {
 
         List<Skill> list1 = new ArrayList<>();
