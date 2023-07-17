@@ -31,7 +31,7 @@ public class commentAndRateStartController extends HttpServlet {
     int mentor_id;
     String [] skillId;
     int size;
-    int requeset_id;
+    //int requeset_id;
     /**
      * 
      * @param request
@@ -46,7 +46,7 @@ public class commentAndRateStartController extends HttpServlet {
          skillId = request.getParameterValues("skillId");
          size = skillId.length;
          SkillDAO kd = new SkillDAO();
-         requeset_id =Integer.parseInt(request.getParameter("requestId")) ;
+         //requeset_id =Integer.parseInt(request.getParameter("requestId")) ;
          mentor_id = Integer.parseInt(request.getParameter("mentorId")) ;
          List<Skill> skillList = new ArrayList<Skill>();
          for (String st : skillId) {
