@@ -4,6 +4,7 @@
  */
 package dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,6 +31,10 @@ import model.skill_Request;
  */
 public class requestDAO extends DBContext {
 
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    
     public List<Skill> getAllskillBySkill_id(int id_mentor) {
 
         List<Skill> list = new ArrayList<>();
@@ -105,7 +110,6 @@ public class requestDAO extends DBContext {
 
         }
         return list1;
-
     }
 
     /**
@@ -259,6 +263,32 @@ public class requestDAO extends DBContext {
 
             System.out.println("-----------------------------");
         }
+    }
+    
+    
+    //Lấy ra số lượng trang n /  trên tổng số trang.
+    public int getNumberPage1() {
+        String query = "Select count(*) from swp391_group5.user where user.role = 1";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                //Tổng số bản ghi mentor được lấy ra.
+                int total = rs.getInt(1);
+                int countPage = 0;
+                //Tổng số bản ghi mentor được lấy ra / Số lượng bản ghi sẽ có trên một trang. 
+                // Lay Ra So luong trang ( Moi trang la 10 bang ghi).
+                countPage = total / 10;
+                if (total % 10 != 0) {
+                    countPage++;
+                }
+                return countPage;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
     }
 
     public boolean insert1(String tieude, Timestamp batdau1, int id_mentor, String sessionUser_id, Timestamp ketthuc1,
