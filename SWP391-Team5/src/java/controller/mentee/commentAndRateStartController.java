@@ -76,12 +76,12 @@ public class commentAndRateStartController extends HttpServlet {
 
         // Retrieve mentor_id from the request
         int mentor_id = temp;
-        if(rating == null){
+        if(rating.isEmpty()){
             request.setAttribute("mess", "Errror");
         }else{
             request.setAttribute("mess", rating);
         }
-        response.sendRedirect("feedbacksuccess?rating");
+        request.getRequestDispatcher("/mentee/feedbackSuccessful.jsp").forward(request, response);
         // Insert feedback into the database
 //        FeedbackDAO fb = new FeedbackDAO();
 //        if (fb.insertFeedback(user_id, mentor_id, rating, opinion)) {

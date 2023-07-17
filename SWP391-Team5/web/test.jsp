@@ -13,9 +13,17 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <c:forEach var="f" items="${listFS}">
-            ${f.getSkill().getSkill_name()} ${f.getStar_rate_skill()}/5
+        Hello       
+        
+        ${mess1}
+        ${mess2}        
+        ${mess4} 
+        ${mess}
+        Mang
+        <c:forEach var="i" items="${ratingSkill}">
+            <p>Rating: ${i}</p>
         </c:forEach>
-
+            
+        Result: ${m}
     </body>
 </html>

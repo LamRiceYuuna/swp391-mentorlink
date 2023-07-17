@@ -53,8 +53,9 @@ public class FeedbackDAO extends DBContext {
     }
 
     /**
-     * Lấy ra tất cả những feedback của mentee cho mentor để hiển thị lên trang CV dựa trên mentor_id
-     * 
+     * Lấy ra tất cả những feedback của mentee cho mentor để hiển thị lên trang
+     * CV dựa trên mentor_id
+     *
      * @param mentor_id
      * @return List
      */
@@ -75,6 +76,35 @@ public class FeedbackDAO extends DBContext {
         } catch (Exception e) {
         }
         return list;
+    }
+
+    public boolean insertFeedbackSkill(int mentee_id, int mentor_id, int[] nbRateStar, String[] skillId) {
+
+        String sql = "INSERT INTO `swp391_group5`.`feedback_skill`\n"
+                + "(`mentee_id`,\n"
+                + "`mentor_id`,\n"
+                + "`skill_id`,\n"
+                + "`rate_skill`)\n"
+                + "VALUES\n"
+                + "(?,?,?,?);";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            for (int i = 0; i < skillId.length; i++) {
+                for (int j = 0; j < nbRateStar.length; j++) {
+                   ps.setInt(1, mentee_id); 
+                   ps.setInt(2, mentor_id); 
+                   ps.setString(3, skillId[i]); 
+                   ps.setInt(4, nbRateStar[i]); 
+                   ps.executeUpdate();
+                   break;
+                }
+            }           
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
     }
 
     public static void main(String[] args) {

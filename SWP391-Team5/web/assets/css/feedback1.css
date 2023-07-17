@@ -17,6 +17,9 @@
 	--shadow: 8px 8px 30px rgba(0,0,0,.05);
 }
 
+
+
+
 .containerr {
     background: var(--light);
 	display: flex;
@@ -26,10 +29,6 @@
 	padding: 1rem;
         margin-top: 20px;
 }
-
-
-
-
 
 
 
@@ -47,6 +46,9 @@
 	font-weight: 600;
 	margin-bottom: 1rem;
 }
+
+/* danh gia chung */
+
 .rating {
 	display: flex;
 	justify-content: center;
@@ -56,38 +58,10 @@
 	color: var(--yellow);
 	margin-bottom: 2rem;
 }
-.rtmain .mainstar {
+.rating .star {
 	cursor: pointer;
 }
-.rating .skill1 {
-	cursor: pointer;
-}
-
-.rating .skill2 {
-	cursor: pointer;
-}
-
-.rating .skill3 {
-	cursor: pointer;
-}
-
-.rtmain .mainstar.active {
-	opacity: 0;
-	animation: animate .5s calc(var(--i) * .1s) ease-in-out forwards;
-}
-
-
-.rt1 .skill1.active {
-	opacity: 0;
-	animation: animate .5s calc(var(--i) * .1s) ease-in-out forwards;
-}
-
-.rt2 .skill2.active {
-	opacity: 0;
-	animation: animate .5s calc(var(--i) * .1s) ease-in-out forwards;
-}
-
-.rt3 .skill3.active {
+.rating .star.active {
 	opacity: 0;
 	animation: animate .5s calc(var(--i) * .1s) ease-in-out forwards;
 }
@@ -107,18 +81,127 @@
 	}
 }
 
-
-.rating .skill1:hover {
+.rating .star:hover {
 	transform: scale(1.1);
 }
 
-.rating .skill2:hover {
+
+/* dang gia skill 1 */
+
+.rating1 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	grid-gap: .5rem;
+	font-size: 2rem;
+	color: var(--yellow);
+	margin-bottom: 2rem;
+}
+.rating1 .star1 {
+	cursor: pointer;
+}
+.rating1 .star1.active {
+	opacity: 0;
+	animation: animate .5s calc(var(--i) * .1s) ease-in-out forwards;
+}
+
+@keyframes animate {
+	0% {
+		opacity: 0;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+.rating1 .star1:hover {
 	transform: scale(1.1);
 }
 
-.rating .skill3:hover {
+/* danh gia skill 2 */
+
+.rating2 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	grid-gap: .5rem;
+	font-size: 2rem;
+	color: var(--yellow);
+	margin-bottom: 2rem;
+}
+.rating2 .star2 {
+	cursor: pointer;
+}
+.rating2 .star2.active {
+	opacity: 0;
+	animation: animate .5s calc(var(--i) * .1s) ease-in-out forwards;
+}
+
+@keyframes animate {
+	0% {
+		opacity: 0;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+.rating2 .star2:hover {
 	transform: scale(1.1);
 }
+
+/* danh gia skill 3 */
+
+.rating3 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	grid-gap: .5rem;
+	font-size: 2rem;
+	color: var(--yellow);
+	margin-bottom: 2rem;
+}
+.rating3 .star3 {
+	cursor: pointer;
+}
+.rating3 .star3.active {
+	opacity: 0;
+	animation: animate .5s calc(var(--i) * .1s) ease-in-out forwards;
+}
+
+@keyframes animate {
+	0% {
+		opacity: 0;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+.rating3 .star3:hover {
+	transform: scale(1.1);
+}
+ 
+/* ket thuc */
+
 textarea {
 	width: 100%;
 	background: var(--light);
@@ -143,6 +226,7 @@ textarea {
 	font-size: .875rem;
 	font-weight: 500;
 }
+
 .btn-group .btn.submit {
 	background: var(--blue);
 	color: var(--white);

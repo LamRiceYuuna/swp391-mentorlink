@@ -116,8 +116,8 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="listRequestMenTee" class="pb-0" style="cursor: pointer;">
-                                                    <i class="fa fa-shopping-cart"></i>List Request Mentee
+                                                <a href="satisticsRequest" class="pb-0" style="cursor: pointer;">
+                                                    <i class="fa fa-shopping-cart"></i>Statistic Request Mentee
                                                 </a>
                                             </li>
                                             <li>

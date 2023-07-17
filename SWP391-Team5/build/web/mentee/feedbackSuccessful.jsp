@@ -36,7 +36,7 @@
                     <div class="card-body nopadding">
                         <div class="wrap-title">
                             <h3 class="title">Thanks for your feedback ! </h3>
-                        </div>${mess}
+                        </div>
                         <div class="login-logo">
                             <img src="assets/images/logo2.png" alt="ym">
                         </div>
