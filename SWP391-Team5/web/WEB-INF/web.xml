@@ -154,10 +154,6 @@
         <servlet-class>controller.common.ViewCvMentor</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ListMenteeServlet</servlet-name>
-        <servlet-class>controller.mentee.ListMenteeServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ListMentorSuggestion</servlet-name>
         <servlet-class>controller.mentee.ListMentorSuggestion</servlet-class>
     </servlet>
@@ -168,6 +164,10 @@
     <servlet>
         <servlet-name>ChangePassServlet</servlet-name>
         <servlet-class>controller.common.ChangePassServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListMenteeControl</servlet-name>
+        <servlet-class>controller.admin.ListMenteeControl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
@@ -226,10 +226,6 @@
         <url-pattern>/viewcv</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ListMenteeServlet</servlet-name>
-        <url-pattern>/listmentee</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ListMentorSuggestion</servlet-name>
         <url-pattern>/mentorSuggestion</url-pattern>
     </servlet-mapping>
@@ -240,6 +236,10 @@
     <servlet-mapping>
         <servlet-name>ChangePassServlet</servlet-name>
         <url-pattern>/changePass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListMenteeControl</servlet-name>
+        <url-pattern>/listmentee</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
