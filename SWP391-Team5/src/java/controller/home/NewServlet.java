@@ -72,7 +72,7 @@ public class NewServlet extends HttpServlet {
              skillList.add(e);
          }
          request.setAttribute("listSkill", skillList);
-        request.getRequestDispatcher("mentee/statisticRequestByMe.jsp").forward(request, response);
+        request.getRequestDispatcher("mentee/listrequestbyme.jsp").forward(request, response);
     }
 
     /**

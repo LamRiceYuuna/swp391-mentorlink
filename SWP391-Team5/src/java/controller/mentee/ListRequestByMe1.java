@@ -90,7 +90,7 @@ public class ListRequestByMe1 extends HttpServlet {
                 dao.update(request1.getRequest_status(),request1.getRequest_id());
             }
         request.setAttribute("lista", list1);
-        request.getRequestDispatcher("/mentee/ListRequestByMe1.jsp").forward(request, response);
+        request.getRequestDispatcher("/mentee/listrequestbyme.jsp").forward(request, response);
 
     }
 
