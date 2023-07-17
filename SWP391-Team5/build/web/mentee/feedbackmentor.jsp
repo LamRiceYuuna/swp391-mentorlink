@@ -23,7 +23,7 @@
         <jsp:include page="../home/header.jsp"/>
         <div class="containerr">
             <div class="wrapper">
-                <form action="NewServlet" method="post">
+                <form action="commentAndRateStart" method="post">
                     <div
                         style="height: 50px; width: 500px; background-color: #175E4C; margin-bottom: 20px; color: white; border-radius: 6px;">
                         <h1>Feedback For Mentor</h1>

@@ -286,7 +286,7 @@
                                             <li role="separator" class="divider"></li>
 
                                             <li>
-                                                <a href="http://localhost:9999/SWP391-Team5/logout">
+                                                <a href="logout">
                                                     <i class="fa fa-sign-out" style=" -ms-transform: rotate(180deg); /* IE 9 */
                                                        -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
                                                        transform: rotate(180deg);"></i>Đăng xuất </a>

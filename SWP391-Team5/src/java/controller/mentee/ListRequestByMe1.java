@@ -58,7 +58,7 @@ public class ListRequestByMe1 extends HttpServlet {
             int MenTorID = rn.getMentor_id();
             List<Skill> ls = rn.getSkill_name();
 //            String url = "commentAndRateStart?mentorId="+MenTorID;
-            String url = "commentAndRateStart?mentorId="+MenTorID;
+            String url = "commentAndRateStart?mentorId="+MenTorID+"?requestId="+request_id;
             for (Skill l : ls) {
                 url+="&skillId="+l.getSkill_id();
             }

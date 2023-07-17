@@ -28,7 +28,10 @@ import model.User;
  */
 @WebServlet(name = "commentAndRateStartController", urlPatterns = {"/commentAndRateStart"})
 public class commentAndRateStartController extends HttpServlet {
-    int temp;
+    int mentor_id;
+    String [] skillId;
+    int size;
+    int requeset_id;
     /**
      * 
      * @param request
@@ -40,9 +43,11 @@ public class commentAndRateStartController extends HttpServlet {
      protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          
-         String [] skillId = request.getParameterValues("skillId");
+         skillId = request.getParameterValues("skillId");
+         size = skillId.length;
          SkillDAO kd = new SkillDAO();
-         temp = Integer.parseInt(request.getParameter("mentorId")) ;
+         requeset_id =Integer.parseInt(request.getParameter("requestId")) ;
+         mentor_id = Integer.parseInt(request.getParameter("mentorId")) ;
          List<Skill> skillList = new ArrayList<Skill>();
          for (String st : skillId) {
              Skill e = kd.getSkillById(st);
@@ -65,8 +70,7 @@ public class commentAndRateStartController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Retrieve rating and opinion from the request
-        String rating = request.getParameter("rating");
-        
+        int rating = Integer.parseInt(request.getParameter("rating")) ;
         String opinion = request.getParameter("opinion");
         
         // Retrieve user_id from the session
@@ -75,13 +79,30 @@ public class commentAndRateStartController extends HttpServlet {
         int user_id = Integer.parseInt(abc.getUser_id());
 
         // Retrieve mentor_id from the request
-        int mentor_id = temp;
-        if(rating.isEmpty()){
-            request.setAttribute("mess", "Errror");
-        }else{
-            request.setAttribute("mess", rating);
+        
+        String rating1 = request.getParameter("rating1");
+        String rating2 = request.getParameter("rating2");
+        String rating3 = request.getParameter("rating3");
+        
+        int ratingSkill[] = new int[size];
+        if(rating1 != null) {
+            ratingSkill[0] = Integer.parseInt(rating1);
+        } 
+        if(rating2 != null) {
+            ratingSkill[1] = Integer.parseInt(rating2);
         }
-        request.getRequestDispatcher("/mentee/feedbackSuccessful.jsp").forward(request, response);
+        if(rating3 != null) {
+            ratingSkill[2] = Integer.parseInt(rating3);
+        }
+        FeedbackDAO dao = new FeedbackDAO();
+        if(dao.insertFeedbackSkill(user_id, mentor_id, ratingSkill, skillId) == true && dao.insertFeedback(user_id, mentor_id, rating, opinion)) {
+            request.getRequestDispatcher("/mentee/feedbackSuccessful.jsp").forward(request, response);
+        }else{
+            request.setAttribute("error", "Loi roi be oi");
+            request.getRequestDispatcher("/mentee/feedbackSuccessful.jsp").forward(request, response);
+        }
+        
+        
         // Insert feedback into the database
 //        FeedbackDAO fb = new FeedbackDAO();
 //        if (fb.insertFeedback(user_id, mentor_id, rating, opinion)) {
