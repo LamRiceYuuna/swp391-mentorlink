@@ -48,7 +48,7 @@
 
                             </div>
 
-                            <form id="show_lost_password" action="changePassword" method="POST" class="nobottommargin" name="" autocomplete="off">
+                            <form id="show_lost_password" action="resetPassword" method="POST" class="nobottommargin" name="" autocomplete="off">
                                 <div class="mb_10">
                                     <label for="">New password:</label>
                                     <input type="password" name="password"  

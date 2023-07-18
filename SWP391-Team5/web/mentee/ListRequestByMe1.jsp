@@ -397,7 +397,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <p>sang</p>
+                                        <p></p>
                                         <c:forEach var="o" items="${lista}">  
                                             <tr role="row" class="odd">
                                                 <td>${o.title}</td>
@@ -412,10 +412,10 @@
                                                 <c:choose>
                                                     <c:when test="${o.request_status == 1}">
                                                         <td>
-                                                            Mở
+                                                            Open
                                                         </td>
                                                         <td>
-                                                            <a href="listrequestbyme1?idDel=${o.request_id}">Xóa</a>
+                                                            <a href="listrequestbyme1?idDel=${o.request_id}">Delete</a>
                                                         </td>
                                                         <td>
                                                             <a href="updateRequest?request_id=${o.request_id}&mentor_id=${o.mentor_id}">Update</a>
@@ -423,34 +423,34 @@
                                                     </c:when>
                                                     <c:when test="${o.request_status == 2}">
                                                         <td>
-                                                            Đang xử lý
+                                                            Processing
                                                         </td>
                                                         <td>
-                                                            <a href="listrequestbyme1?idDel=${o.request_id}">Xóa</a>
+                                                            <a href="listrequestbyme1?idDel=${o.request_id}">Delete</a>
                                                         </td>
                                                     </c:when>
                                                     <c:when test="${o.request_status == 3}">
                                                         <td>
-                                                            Hủy
+                                                            Cancel
                                                         </td>
                                                         <td>
-                                                            <a href="listrequestbyme1?idDel=${o.request_id}">Xóa</a>
+                                                            <a href="listrequestbyme1?idDel=${o.request_id}">Delete</a>
                                                         </td>
                                                     </c:when>
                                                     <c:when test="${o.request_status == 4}">
                                                         <td>
-                                                            Đã Hoàn Thành
+                                                            <a href="listrequestbyme1?id=${o.request_id}">Closed</a>
                                                         </td>
                                                         <td>
-                                                            <a href="listrequestbyme1?idDel=${o.request_id}">Xóa</a>
+                                                            <a href="listrequestbyme1?idDel=${o.request_id}">Delete</a>
                                                         </td>
                                                     </c:when>
                                                     <c:when test="${o.request_status == 5}">
                                                         <td>
-                                                            <a href="listrequestbyme1?id=${o.request_id}">Kết Thúc</a>
+                                                            Finish
                                                         </td>
                                                         <td>
-                                                            <a href="listrequestbyme1?idDel=${o.request_id}">Xóa</a>
+                                                            <a href="listrequestbyme1?idDel=${o.request_id}">Delete</a>
                                                         </td>
                                                     </c:when>
                                                     <c:otherwise>Không xác định</c:otherwise>

@@ -42,7 +42,7 @@
                         </div>
                         <div class="help-block show_err">
                         </div>
-                        <!--<p style="color: red" class="text-danger">${mess}</p>-->
+                        <p class="mess"> ${alertTitle}</p>
                         <p class="mess"> Account confirmation via email successfully!</p>
                         <div id="change-content">
                             <div class="center">

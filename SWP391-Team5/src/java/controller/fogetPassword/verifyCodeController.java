@@ -20,19 +20,6 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet(name = "verifyCodeController", urlPatterns = {"/verifyCode"})
 public class verifyCodeController extends HttpServlet {
 
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -45,17 +32,15 @@ public class verifyCodeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        //Get inform verify code form by user 
         String verifyCode = request.getParameter("confirm").trim();
-        
+        //Get verify code from Session 
         HttpSession verifyPremium = request.getSession();
         String Code = String.valueOf(verifyPremium.getAttribute("verifyCode"));
-
         request.setAttribute("tk", "Thank you!");
         //Code confirm match vs code
         if (verifyCode.equals(Code)) {
             request.setAttribute("alertTitle", "Thank you!");
-
             request.getRequestDispatcher("forgetPassword/verifySuccessful.jsp").forward(request, response);
         //Code confirm doesn't match vs code
         } else {

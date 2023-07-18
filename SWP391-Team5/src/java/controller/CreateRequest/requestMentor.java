@@ -79,7 +79,6 @@ public class requestMentor extends HttpServlet {
         String name = sessionUser.getFull_name();
         //lấy id mentor
         // trước hết cứ mặc định là 2
-        int id_mentor = 2;
         String tieude = request.getParameter("tieude");
         String batdau = request.getParameter("batdau");
         String ketthuc = request.getParameter("ketthuc");
@@ -132,19 +131,19 @@ public class requestMentor extends HttpServlet {
 //                DAO.insert1(tieude, batdau1, id_mentor, "2", ketthuc1, sogiohoc, noidung, framework, skills);
 
                 try {
-                    result = DAO.insert1(tieude, batdau1, id_mentor, sessionUser_id, ketthuc1, sogiohoc, noidung, framework, skills);
+                    result = DAO.insert1(tieude, batdau1, id_temp, sessionUser_id, ketthuc1, sogiohoc, noidung, framework, skills);
                     request.getRequestDispatcher("/common/Successfully.html").forward(request, response);
                 } catch (SQLException e) {
                     // Xử lý ngoại lệ ở đây
                     result = false; // hoặc thực hiện hành động khác khi có lỗi
                 }
-//                processRequest(request, response);
-//                try {
-//                    ml.send(mail, name, tieude, batdau1, ketthuc1, sogiohoc, noidung, skills, framework);
-//                   
-//                } catch (ParseException ex) {
-//                    Logger.getLogger(requestMentor.class.getName()).log(Level.SEVERE, null, ex);
-//                }
+                //processRequest(request, response);
+                try {
+                    ml.send(mail, name, tieude, batdau1, ketthuc1, sogiohoc, noidung);
+                   
+                } catch (ParseException ex) {
+                    Logger.getLogger(requestMentor.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         }

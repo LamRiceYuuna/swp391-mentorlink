@@ -4,6 +4,7 @@
  */
 package dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,6 +31,10 @@ import model.skill_Request;
  */
 public class requestDAO extends DBContext {
 
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    
     public List<Skill> getAllskillBySkill_id(int id_mentor) {
 
         List<Skill> list = new ArrayList<>();
@@ -61,16 +66,18 @@ public class requestDAO extends DBContext {
      * Lấy ra các request mà mentor hiện đang có
      *
      * @param mentor_id
+     * @param index
      * @return List
      */
-    public List<Request> listRequestByMetorID(String mentor_id) {
+    public List<Request> listRequestByMetorID(String mentor_id, int index) {
         List<Request> list1 = new ArrayList<>();
-        String sql = "SELECT * FROM swp391_group5.request where mentor_id = ? and request_status = 1;";
+        String sql = "SELECT *  FROM swp391_group5.request where mentor_id = ? and request_status = 1 limit 2 offset ?;";
         String sql2 = "select skill.skill_name from swp391_group5.request_skill join swp391_group5.skill on skill.skill_id = request_skill.skill_id "
                 + "where request_skill.request_id = ?;";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, Integer.parseInt(mentor_id));
+            ps.setInt(2, (index - 1) * 2);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -105,7 +112,6 @@ public class requestDAO extends DBContext {
 
         }
         return list1;
-
     }
 
     /**
@@ -154,6 +160,34 @@ public class requestDAO extends DBContext {
         }
         return list1;
 
+    }
+    public RequestName getRequestByID(int id){
+        String sql = "select * from request where request_id = "+id+"";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            //ps.setInt(1, Integer.parseInt(mentee_id));
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                RequestName rn = new RequestName();
+                rn.setRequest_id(rs.getInt(1));
+                rn.setMentor_id(rs.getInt(2));
+                rn.setMentee_id(rs.getInt(3));
+                rn.setTitle(rs.getString(4));
+                rn.setRequest_content(rs.getString(5));
+                rn.setTime_study(rs.getInt(6));
+                rn.setTime_begin(rs.getTimestamp(7));
+                rn.setCreated_date(rs.getTimestamp(8));
+                rn.setFinish_date(rs.getTimestamp(9));
+                rn.setRequest_status(rs.getInt(10));
+                rn.setSkill_name(getAllSkillByRequestID(rn.getRequest_id()));
+                return rn;
+            }
+
+        } catch (Exception e) {
+
+        }
+        return null;
     }
     public List<Skill> getAllSkillByRequestID(int request_id) {
 
@@ -205,32 +239,59 @@ public class requestDAO extends DBContext {
 //    }
 
     public static void main(String[] args) {
-        requestDAO rq = new requestDAO();
-
-        // Gọi phương thức listRequestByMetorID để lấy danh sách các request
-        List<Request> requests = rq.listRequestByMetorID("2");
-
-        // In thông tin các request
-        for (Request request : requests) {
-            System.out.println("Name: " + request.getTitle());
-            System.out.println("Name: " + request.getRequest_id());
-            System.out.println("Mentor ID: " + request.getMentor_id());
-            // In thông tin các trường khác của request
-
-            // In thông tin skill_name
-            List<String> skillNames = request.getSkill_name();
-
-            System.out.println("Skill Names:");
-            if (skillNames.isEmpty()) {
-                System.out.println("No skills found.");
-            } else {
-                for (String skillName : skillNames) {
-                    System.out.println(skillName);
+//        requestDAO rq = new requestDAO();
+//
+//        // Gọi phương thức listRequestByMetorID để lấy danh sách các request
+//        List<Request> requests = rq.listRequestByMetorID("2");
+//
+//        // In thông tin các request
+//        for (Request request : requests) {
+//            System.out.println("Name: " + request.getTitle());
+//            System.out.println("Name: " + request.getRequest_id());
+//            System.out.println("Mentor ID: " + request.getMentor_id());
+//            // In thông tin các trường khác của request
+//
+//            // In thông tin skill_name
+//            List<String> skillNames = request.getSkill_name();
+//
+//            System.out.println("Skill Names:");
+//            if (skillNames.isEmpty()) {
+//                System.out.println("No skills found.");
+//            } else {
+//                for (String skillName : skillNames) {
+//                    System.out.println(skillName);
+//                }
+//            }
+//
+//            System.out.println("-----------------------------");
+//        }
+    }
+    
+    
+    //Lấy ra số lượng trang n /  trên tổng số trang. của trang list following request
+    public int getNumberPage(int mentor_id) {
+        String query = "SELECT count(*) as Total FROM swp391_group5.request where mentor_id = ? and request_status = 1;";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, mentor_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                //Tổng số bản ghi mentor được lấy ra.
+                int total = rs.getInt(1);
+                int countPage = 0;
+                //Tổng số bản ghi mentor được lấy ra / Số lượng bản ghi sẽ có trên một trang. 
+                // Lay Ra So luong trang ( Moi trang la 10 bang ghi).
+                countPage = total / 10;
+                if (total % 10 != 0) {
+                    countPage++;
                 }
+                return countPage;
             }
-
-            System.out.println("-----------------------------");
+        } catch (Exception e) {
+            System.out.println(e);
         }
+        return 0;
     }
 
     public boolean insert1(String tieude, Timestamp batdau1, int id_mentor, String sessionUser_id, Timestamp ketthuc1,

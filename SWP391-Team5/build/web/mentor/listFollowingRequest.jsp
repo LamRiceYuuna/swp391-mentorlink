@@ -13,8 +13,10 @@
         <title>Following Request</title>
         <link rel="stylesheet" href="assets/css/listFollowing.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    </head>
-    <body>
+        <jsp:useBean id="a" class="dao.requestDAO" scope = "request"></jsp:useBean>
+
+        </head>
+        <body>
         <jsp:include page="../home/header.jsp"/>
 
 
@@ -66,10 +68,44 @@
                                 </c:forEach>                                         
                             </tbody>
                         </table>
+                        <div class="pagination-custom">
+                            <!-- So trang dang dung JspUseBean: Doi tuong cua class CVDAO -->
+                            <c:forEach begin="1" end="${a.getNumberPage()}" var = "i">
+                                <!-- Lay ra vi tri trang dang dung -->
+                                <a href="followingRequest?index=${i}" class="${indexPagee == i ?  "active" : ""}">${i}</a>
+                            </c:forEach>
+                        </div>  
+                        <style>
+                            .pagination-custom a {
+                                color: #333;
+                                text-decoration: none;
+                                padding: 8px 10px;
+                                margin: 0 5px;
+                                border: 1px solid #ddd;
+                                border-radius: 3px;
+                                display: inline-block;
+                                font-size: 12px;
+                                width: 2%;
+                            }
 
+                            .pagination-custom a:hover {
+                                background-color: #ddd;
+                            }
+
+                            .pagination-custom a.active {
+                                background-color: #1e7e34;
+                                color: #fff;
+                            }
+
+                            /* Luật CSS mới để áp dụng màu khác cho các nút có class "current" */
+                            .pagination-custom a.current {
+                                background-color: #ffffff;
+                                color: #333;
+                            }
+                        </style>
                     </div>
                 </section> 
-                    
+
             </section>
 
         </div>

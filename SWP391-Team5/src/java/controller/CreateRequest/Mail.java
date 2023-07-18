@@ -26,7 +26,7 @@ public class Mail {
     final String username = "mentorlinkswp391@gmail.com";
     final String password = "ogwkxdjdmqepnjxz";
 
-    public void send(String toEmail, String name, String tieude, Timestamp batdau1, Timestamp ketthuc1, String sogiohoc, String noidung, String []skills) throws ParseException {
+    public void send(String toEmail, String name, String tieude, Timestamp batdau1, Timestamp ketthuc1, String sogiohoc, String noidung) throws ParseException {
 
         //Thiết lập thuộc tính
         Properties prop = new Properties();

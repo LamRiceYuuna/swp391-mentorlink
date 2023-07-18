@@ -37,32 +37,38 @@ public class HomePage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        //Get data top mentor 
+        // Create a MentorCVDAO object
         MentorCVDAO cv = new MentorCVDAO();
+        // Get the top list of CV_Mentor objects using the MentorCVDAO object
         List<CV_Mentor> listT = cv.getTopListMentor();
+        // Set the "listT" attribute on the request object to pass the listT to another page
         request.setAttribute("listT", listT);
-        //Get data top skill
+        
+        // Create a SkillDAO object
         SkillDAO sk = new SkillDAO();
+        // Get the top 3 Skill objects using the SkillDAO object
         List<Skill> listS = sk.getTop3Skill();
+        // Set the "listS" attribute on the request object to pass the listS to another page
         request.setAttribute("listS", listS);
+        
         //Getdata request static
-        try{
-        HttpSession session = request.getSession();
-        User abc = (User) session.getAttribute("acc");
-        int user_id = Integer.parseInt(abc.getUser_id());
-        requestDAO rq = new requestDAO();
-        MentorRequestStats mrs = rq.getStatisticByMentorId(user_id);
-        List<MentorRequest> listR = rq.getListRequestByMentorId(user_id);
-        int topRank = rq.getTopRateAVGStarByMentorId(user_id);
-        List<MentorRatingStats> listRS = rq.getListTopRankStar();
-        request.setAttribute("object", mrs);
-        request.setAttribute("listR", listR);
-        request.setAttribute("top", topRank);
-        request.setAttribute("listRS", listRS);
-        }catch(Exception e){
+        try {
+            HttpSession session = request.getSession();
+            User abc = (User) session.getAttribute("acc");
+            int user_id = Integer.parseInt(abc.getUser_id());
+            requestDAO rq = new requestDAO();
+            MentorRequestStats mrs = rq.getStatisticByMentorId(user_id);
+            List<MentorRequest> listR = rq.getListRequestByMentorId(user_id);
+            int topRank = rq.getTopRateAVGStarByMentorId(user_id);
+            List<MentorRatingStats> listRS = rq.getListTopRankStar();
+            request.setAttribute("object", mrs);
+            request.setAttribute("listR", listR);
+            request.setAttribute("top", topRank);
+            request.setAttribute("listRS", listRS);
+        } catch (Exception e) {
             System.out.println(e.fillInStackTrace());
         }
-        
+        // Forward the current request and response objects to the "home/home.jsp" page for further processing and rendering
         request.getRequestDispatcher("home/home.jsp").forward(request, response);
     } 
 

@@ -38,12 +38,19 @@ public class ListFollowingRequest extends HttpServlet {
         User sessionUser = (User) session.getAttribute("acc");
         // Lấy user_id từ đối tượng User lấy từ session
         String sessionUser_id = sessionUser.getUser_id();
+        String index = request.getParameter("index");
+        //Do luc dau chay chua co gia tri -> Nen phai gan gia tri = 1 tuc la trang dau tien. De lan dau chay o trang 1 va khac null
+        if (index == null) {
+            index = "1";
+        }
+        int indexPage = Integer.parseInt(index);
         requestDAO dao = new requestDAO(); 
         //Lay ra tat cac cac request tu mentee gui den mentor
-        List<Request> listR = dao.listRequestByMetorID(sessionUser_id);
+        List<Request> listR = dao.listRequestByMetorID(sessionUser_id, indexPage);
         
         //Kiem tra danh sach nay
         if(listR != null) {
+            request.setAttribute("indexPagee", indexPage);
             request.setAttribute("listR", listR);
         } 
         if(listR.isEmpty()) {

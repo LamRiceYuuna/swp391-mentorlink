@@ -67,12 +67,14 @@ public class changePasswordController extends HttpServlet {
         if (!newPass.equals(newCfPass)) {
             request.setAttribute("mess2", "Password mismatch. Please re-enter!");
             request.getRequestDispatcher("forgetPassword/changePassword.jsp").forward(request, response);
+         //new password match with new password confirm   
         } else {
+            //new password match with regex
             if (newPass.matches(passwordRegex)) {
                 UserDAO account = new UserDAO();
                 account.updatePassword(username, newPass);
                 request.getRequestDispatcher("changePassSuccess").forward(request, response);
-                
+            //new password doesn't match with regex password    
             } else {
                 request.setAttribute("mess1", "Passwords must include 8 or more characters and must include uppercase, lowercase, numbers 0 through 9, and include special characters");
                 request.getRequestDispatcher("forgetPassword/changePassword.jsp").forward(request, response);

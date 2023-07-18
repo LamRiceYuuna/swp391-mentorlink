@@ -48,7 +48,7 @@
                             <div class="center">
 
                             </div>
-
+                            <p class="mess"> ${alertTitle}</p>
                             <div class="mb_10 center mt-3"><a href="forgetPassword">
                                     <button type="submit" class="btn btn-success"
                                             style="min-width: 200px;">Retry</button>

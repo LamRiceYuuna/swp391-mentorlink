@@ -453,7 +453,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 
         <!-- Dung cho phan Trang: Doi tuong cua class MentorCVDAO. De dung instance method class  MentorCVDAO-->
-        <jsp:useBean id="a" class="dao.MentorCVDAO" scope = "request"></jsp:useBean>
+        <jsp:useBean id="a" class="dao.MenteeDAO" scope = "request"></jsp:useBean>
         </head>
         <body>
 
@@ -474,6 +474,18 @@
                                 <i class="fas fa-chart-bar"></i>
                                 <span class="nav-item">List-All-Mentor</span>
                             </a></li>
+                        <li><a href="listmentee">
+                                <i class="fas fa-chart-bar"></i>
+                                <span class="nav-item">List-All-Mentor</span>
+                            </a></li>
+                        <li><a href="#">
+                                <i class="fas fa-comment"></i>
+                                <span class="nav-item">Attendance</span>
+                            </a></li>
+                        <li><a href="#">
+                                <i class="fas fa-cog"></i>
+                                <span class="nav-item">Setting</span>
+                            </a></li>
 
                         <li><a href="logout" class="logout">
                                 <i class="fas fa-sign-out-alt"></i>
@@ -486,10 +498,6 @@
                     <section class="attendance">
                         <div class="attendance-list">
 
-                            <form action="searchControl" method="get">
-                                <input type="text" name="txtSearch" placeholder="Search by name ...">
-                                <button type="submit" value="search">Search</button>
-                            </form>   
 
                             <h1 class = "list-all">List All Mentee</h1>
 
@@ -507,16 +515,16 @@
                                 </div>
                                 </thead>
                                 <tbody>
-                                    <%--<c:forEach items="${listMentor}" var="o">--%>
+                                    <c:forEach begin="1" end="${listMentee.size() - 1}" step="1" var="i">
                                         <tr>
-                                            <td>1</td>
-                                            <td>12</td>
-                                            <td>Ma Bao Khanh</td>
-                                            <td>khanhmb88</td>
-                                            <td>12</td>
-                                            <td>20</td>                                      
+                                            <td>${i}</td>
+                                            <td>${listMentee.get(i).getMentee_id()}</td>
+                                            <td>${listMentee.get(i).getMentee_name()}</td>
+                                            <td>${listMentee.get(i).getMentee_account()}</td>
+                                            <td>${listMentee.get(i).getTime_study()}</td>
+                                            <td>${listMentee.get(i).getTotal_skill()}</td>                                      
                                         </tr>
-                                    <%--</c:forEach>--%>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                             <!-- Logic: SO LUONG TRANG -> MOI TRANG BAO NHIEU BAI -->
@@ -525,7 +533,7 @@
                                 <!-- So trang dang dung JspUseBean: Doi tuong cua class CVDAO -->
                                 <c:forEach begin="1" end="${a.getNumberPage()}" var = "i">
                                     <!-- Lay ra vi tri trang dang dung -->
-                                    <a href="listmentor?index=${i}" class="${indexPagee == i ?  "active" : ""}">${i}</a>
+                                    <a href="listmentee?index=${i}" class="${indexPagee == i ?  "active" : ""}">${i}</a>
                                 </c:forEach>
                             </div>
 

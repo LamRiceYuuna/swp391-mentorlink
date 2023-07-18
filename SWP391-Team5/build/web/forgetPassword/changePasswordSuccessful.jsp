@@ -46,7 +46,7 @@
                             <div class="center">
                             </div>
                             <div class="mb_10 nobottommargin center">
-                                <a href="login" class="">Back to login</a>
+                                <a href="Home" class="">Back to login</a>
                             </div>
                         </div>
                     </div>

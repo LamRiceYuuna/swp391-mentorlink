@@ -49,9 +49,11 @@ public class sendMailController extends HttpServlet {
         /* "[a-zA-Z]{2,}": This is a character group allowed in the domain extension.
         It includes both uppercase and lowercase letters and must have at least two characters.*/
         String regexEmail = "\\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\\b";
+        //Get User forget password from session
         User newUser = (User) req.getAttribute("userForgetPass");
+        //Get email of user forget password
         String recipient = newUser.getEmail();
-        //
+        //Check email matches with regex email
         if (recipient.matches(regexEmail)) {
             
             // Get recipient email address and message from form data

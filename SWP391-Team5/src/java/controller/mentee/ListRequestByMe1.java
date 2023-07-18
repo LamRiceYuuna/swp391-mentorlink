@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 import model.Request;
 import model.RequestName;
+import model.Skill;
 import model.User;
 
 /**
@@ -50,11 +51,19 @@ public class ListRequestByMe1 extends HttpServlet {
         dao.DeleteRequestSkill(request_id);
         dao.deletebyIDForMente(request_id);
         }
-        
         int sum=0;
         if(idp!=null){
             int idr = Integer.parseInt(idp);
-            dao.update(4, idr);  
+            RequestName rn = dao.getRequestByID(idr);
+            int MenTorID = rn.getMentor_id();
+            List<Skill> ls = rn.getSkill_name();
+//            String url = "commentAndRateStart?mentorId="+MenTorID;
+            String url = "commentAndRateStart?mentorId="+MenTorID;
+            for (Skill l : ls) {
+                url+="&skillId="+l.getSkill_id();
+            }
+            dao.update(5, idr);
+            response.sendRedirect(url);
         }
         List<RequestName> list1 = dao.listRequestByID(sessionUser_id);
         
@@ -81,7 +90,7 @@ public class ListRequestByMe1 extends HttpServlet {
                 dao.update(request1.getRequest_status(),request1.getRequest_id());
             }
         request.setAttribute("lista", list1);
-        request.getRequestDispatcher("/mentee/ListRequestByMe1.jsp").forward(request, response);
+        request.getRequestDispatcher("/mentee/listrequestbyme.jsp").forward(request, response);
 
     }
 

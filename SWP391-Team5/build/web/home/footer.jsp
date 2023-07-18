@@ -19,11 +19,11 @@
                         <h4>Thông tin liên hệ</h4>
                     </div>
                     <div class="footer_contact">
-                        <p>Điện thoại: <strong>036 3385579</strong></p>
-                        <p>Email: contact@mentori.vn</p>
+                        <p>Điện thoại: <strong>0974600871</strong></p>
+                        <p>Email: mentorlinkswp391@gmail.com</p>
 
-                        <p>CÔNG TY CỔ PHẦN GIẢI PHÁP KẾT NỐI MENTORI VIỆT NAM</p>
-                        <p>Địa chỉ trụ sở chính: Satom Office - Trung Kính - Cầu Giấy - Hà Nội</p>
+                        <p>Dự án môn học swp391 - fpt university</p>
+                        <p>Địa chỉ : Đại học FPT- cơ sở Hòa Lạc</p>
 
                     </div>
                 </div>
@@ -48,21 +48,7 @@
                         </div>
                         <div class="col-sm-6 col-md-4">
                             <div class="footer_col">
-                                <div class="footer_heading">
-                                    <h4>Khoá học</h4>
-                                </div>
-                                <div class="footer_list_item">
-                                    <ul class="list-group">
-
-                                        <li><a href="#" title="Khóa học của tôi">Khóa học của tôi</a></li>
-                                        <li><a href="#" target="_blank" title="Dành cho bạn">Dành cho bạn</a>
-                                        </li>
-                                        <li><a href="#" target="_blank" title="Chính sách hoàn tiền">Chính sách hoàn
-                                                tiền</a>
-                                        </li>
-
-                                    </ul>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-4">
@@ -74,7 +60,6 @@
                                     <ul class="list-group">
                                         <li><a href="#" title="Danh sách mentor">Danh sách mentor</a></li>
                                         <li><a href="#" title="Lĩnh vực">Lĩnh vực</a></li>
-                                        <li><a href="#" title="Chủ đề">Chủ đề</a></li>
                                         <li><a href="#" target="_blank" title="Mentor Blog">Mentor Blog</a>
                                         </li>
                                         <li><a href="#" target="_blank" title="Đăng ký làm mentor">Đăng ký
@@ -90,7 +75,6 @@
 
         <div class="copyrights">
             <div class="container-md">
-                <p>Bản quyền 2020 thuộc về Mentori</p>
             </div>
         </div>
     </footer>

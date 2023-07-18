@@ -32,7 +32,13 @@ public class SkillDAO {
         }
         return null;
     }
-
+    
+    
+    
+    /**
+     * 
+     * @return 
+     */
     public List<Skill> getAllSkillByStatus() {
 
         List<Skill> list = new ArrayList<>();
@@ -131,7 +137,10 @@ public class SkillDAO {
 
         }
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public List<Skill> getTop3Skill() {
 
         List<Skill> list = new ArrayList<>();
