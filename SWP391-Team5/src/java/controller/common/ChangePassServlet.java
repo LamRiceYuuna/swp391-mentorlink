@@ -88,6 +88,10 @@ public class ChangePassServlet extends HttpServlet {
             request.setAttribute("error", "Username must matched username logged!");
             request.getRequestDispatcher("/changePassword/changePassword.jsp").forward(request, response);
         }
+        if (oldp.equals(newp)) {
+            request.setAttribute("error", "The new password cannot be the same as the old password!");
+            request.getRequestDispatcher("/changePassword/changePassword.jsp").forward(request, response);
+        }
         if (!verifyp.equals(newp)) {
             request.setAttribute("error", "Password is not match!");
             request.getRequestDispatcher("/changePassword/changePassword.jsp").forward(request, response);
