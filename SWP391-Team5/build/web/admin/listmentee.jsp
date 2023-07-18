@@ -453,7 +453,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 
         <!-- Dung cho phan Trang: Doi tuong cua class MentorCVDAO. De dung instance method class  MentorCVDAO-->
-        <jsp:useBean id="a" class="dao.requestDAO" scope = "request"></jsp:useBean>
+        <jsp:useBean id="a" class="dao.MenteeDAO" scope = "request"></jsp:useBean>
         </head>
         <body>
 
@@ -535,7 +535,7 @@
                             <!-- In ra so trang -->
                             <div class="pagination-custom">
                                 <!-- So trang dang dung JspUseBean: Doi tuong cua class CVDAO -->
-                                <c:forEach begin="1" end="${a.getNumberPage1()}" var = "i">
+                                <c:forEach begin="1" end="${a.getNumberPage()}" var = "i">
                                     <!-- Lay ra vi tri trang dang dung -->
                                     <a href="listmentee?index=${i}" class="${indexPagee == i ?  "active" : ""}">${i}</a>
                                 </c:forEach>
