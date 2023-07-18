@@ -71,13 +71,13 @@ public class requestDAO extends DBContext {
      */
     public List<Request> listRequestByMetorID(String mentor_id, int index) {
         List<Request> list1 = new ArrayList<>();
-        String sql = "SELECT *  FROM swp391_group5.request where mentor_id = ? and request_status = 1 limit 2 offset ?;";
+        String sql = "SELECT *  FROM swp391_group5.request where mentor_id = ? and request_status = 1 limit 10 offset ?;";
         String sql2 = "select skill.skill_name from swp391_group5.request_skill join swp391_group5.skill on skill.skill_id = request_skill.skill_id "
                 + "where request_skill.request_id = ?;";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, Integer.parseInt(mentor_id));
-            ps.setInt(2, (index - 1) * 2);
+            ps.setInt(2, (index - 1) * 10);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -269,7 +269,7 @@ public class requestDAO extends DBContext {
     
     
     //Lấy ra số lượng trang n /  trên tổng số trang. của trang list following request
-    public int getNumberPage(int mentor_id) {
+    public int getNumberPage1(int mentor_id) {
         String query = "SELECT count(*) as Total FROM swp391_group5.request where mentor_id = ? and request_status = 1;";
         try {
             conn = new DBContext().getConnection();

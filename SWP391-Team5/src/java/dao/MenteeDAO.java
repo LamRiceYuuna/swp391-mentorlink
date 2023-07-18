@@ -123,7 +123,7 @@ public class MenteeDAO extends DBContext {
     }
     
     //Lấy ra số lượng trang n /  trên tổng số trang. của trang listmentee (admin)
-    public int getNumberPage() {
+    public int getNumberPage2() {
         String query = "Select count(*) from swp391_group5.user where user.role = 1";
         try {
             conn = new DBContext().getConnection();

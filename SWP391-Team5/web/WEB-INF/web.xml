@@ -42,7 +42,6 @@
     <!-- authorization(Filter Login Admin): acc == null && acc.role != 3 -> login -->
     <filter-mapping>
         <filter-name>LoginAdminFilter</filter-name>
-        <url-pattern>/dashboard</url-pattern>
         <url-pattern>/addskill</url-pattern>
         <url-pattern>/delete</url-pattern>
         <url-pattern>/listmentor</url-pattern>

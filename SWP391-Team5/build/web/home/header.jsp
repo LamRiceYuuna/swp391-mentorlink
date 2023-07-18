@@ -240,60 +240,7 @@
                                         </ul>
                                     </div>
                                 </c:if>
-                                <!-- Admin -->
-                                <c:if test="${sessionScope.acc.role == 3}"> 
-
-                                    <div id="top-user">
-                                        <div class="div" id="user-avatar">
-                                            <img alt="" class="img-circle avatar_header"
-                                                 style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
-                                                 src="assets/upload/${sessionScope.acc.avatar}">
-
-                                        </div>
-                                        <ul class="select_user_box" id="select_user_box" >
-                                            <li class="dt-menu-item-parent pt-2 pb-2">
-                                                <div class="div">
-                                                    <div class="" style="display: flex">
-                                                        <div class="pr-2" style="width: 54px;">
-                                                            <a href="/user/523868402" class="" title="Duy Dao">
-                                                                <img alt="" class="img-circle avatar_header"
-                                                                     style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
-                                                                     src="assets/upload/${sessionScope.acc.avatar}">
-                                                            </a>
-                                                        </div>
-                                                        <div class="pl-0" style="width: 100%;">
-                                                            <div>
-                                                                <a href="#" class="" style="font-size: 14px;" title="Duy Dao">
-                                                                    Admin: ${sessionScope.acc.username} </a>
-                                                            </div>
-                                                            <div>
-                                                                <a href="#" class="" style="font-size: 12px;" title="Duy Dao">
-                                                                    Xem hồ sơ của bạn
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li role="separator" class="divider"></li>
-                                            <li>
-                                                <a href="http://localhost:9999/SWP391-Team5/dashboard">
-                                                    <i class="fa fa-leaf"></i>DashBoard
-                                                </a>
-                                            </li>
-
-
-                                            <li role="separator" class="divider"></li>
-
-                                            <li>
-                                                <a href="logout">
-                                                    <i class="fa fa-sign-out" style=" -ms-transform: rotate(180deg); /* IE 9 */
-                                                       -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
-                                                       transform: rotate(180deg);"></i>Đăng xuất </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </c:if>
+                                
 
                             </c:if>
                         </div>

@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.User;
 
+
 /**
  *
  * @author Tuan Vinh
@@ -96,11 +97,13 @@ public class ChangePassServlet extends HttpServlet {
             request.setAttribute("error", "Username or Password invalid");
             request.getRequestDispatcher("/changePassword/changePassword.jsp").forward(request, response);
         } else if(!newp.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")){
-            System.out.println("mật khảu phải từ 8-20 ký tự , 1 chữ hoa, 1 số , 1 ký tự đặc biệt");
-            request.setAttribute(verifyp, d);
+            //System.out.println("mật khảu phải từ 8-20 ký tự , 1 chữ hoa, 1 số , 1 ký tự đặc biệt");
+            request.setAttribute("error", "Password is Invalid!");
+            request.getRequestDispatcher("/changePassword/changePassword.jsp").forward(request, response);
         }else {
             d.changepass(id, newp);
             session.removeAttribute("user");
+            session.removeAttribute("acc");
             request.setAttribute("noti", "You changed password successfully. Please login again!");
             request.getRequestDispatcher("/login/login.jsp").forward(request, response);
         }

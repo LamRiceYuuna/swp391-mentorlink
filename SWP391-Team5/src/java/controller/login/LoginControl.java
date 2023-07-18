@@ -63,7 +63,7 @@ public class LoginControl extends HttpServlet {
             
             // -> authorization: Role  1 2 3 -> 
             if(u.getRole() == 3){
-                response.sendRedirect("dashboard");
+                response.sendRedirect("skill");
                 return;
             }
             response.sendRedirect("Home");

@@ -3,7 +3,7 @@
     Created on : Jun 11, 2023, 10:51:52 PM
     Author     : Tuan Vinh
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -39,9 +39,20 @@
                             <div class="help-block show_err">
                             </div>
 
-                            <div class="text-danger alert alert-danger">
+                            <c:if test="${sessionScope.acc != null}"> 
+                                    <c:if test="${error != null}">
+                                <div class="text-danger alert alert-danger">
                                 <div class="centered-text">${error}</div>
                             </div> 
+                            </c:if>
+                                    <c:if test="${noti != null}">
+                                <div class="text-danger alert alert-success">
+                                <div class="centered-text">${noti}</div>
+                            </div> 
+                            </c:if>
+                                </c:if>
+                            
+                            
 
 
                             <form id="register-account" name="register-account" class="nobottommargin" action="changePass"

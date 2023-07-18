@@ -107,7 +107,7 @@ public class UploadAvatar extends HttpServlet {
         UserDAO dao = new UserDAO();
         
         //Cập nhật avatar người dùng trong cơ sở dữ liệu
-        dao.UpdateUserAvatar(fileName, Integer.parseInt(sessionUser_id));
+        dao.UpdateUserAvatar(fileName, Integer.parseInt(sessionUser_id));       
     }
 
     /**

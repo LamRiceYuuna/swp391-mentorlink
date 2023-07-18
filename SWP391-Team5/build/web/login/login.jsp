@@ -33,7 +33,7 @@
                 <div class="card card_login divcenter noradius noborder allmargin modal-padding card-login-custom"
                      style="max-width: 500px; background-color: rgba(255,255,255,0.93);">
                     <div class="card-body nopadding">
-                        
+
                         <div class="wrap-title">
                             <h3 class="title">Login</h3>
                         </div>
@@ -56,7 +56,13 @@
                             request.getSession().removeAttribute("mess");
                             }
                         %>
-                        <h4 style="text-align: center">${requestScope.noti}</h4>
+
+                        <c:if test="${requestScope.noti != null}">
+                            <div class="text-danger alert alert-success">
+                                <div class="centered-text" style="color: black;">${requestScope.noti}</div>
+                            </div> 
+                        </c:if>
+
                         <form id="login-account" name="login-account" class="nobottommargin" action="login" method="post">
                             <div class="mb_10">
                                 <label for="">Username:</label> 
@@ -79,10 +85,10 @@
 
                         <div class="mb_10 nobottommargin tright mt-3">
 
-                            <a href="forgetPassword" class="">Quên mật khẩu</a>
+                            <a href="forgetPassword" class="">Forgot password</a>
                         </div>
                         <div class="mb_10 nobottommargin">
-                            Bạn chưa có tài khoản? <a href="signupController" class="">Hãy click vào đây để đăng ký</a>
+                            Do not have an account? <a href="signupController" class="">Please click here to register</a>
                         </div>
                     </div>
                 </div>

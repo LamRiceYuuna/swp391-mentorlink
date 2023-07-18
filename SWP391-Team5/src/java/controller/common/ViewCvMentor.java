@@ -81,7 +81,6 @@ public class ViewCvMentor extends HttpServlet {
         request.setAttribute("listF", listF);      
         request.setAttribute("listFS", listFS);      
         request.getRequestDispatcher("common/viewCvMentor.jsp").forward(request, response);
-
     } 
 
     /** 
