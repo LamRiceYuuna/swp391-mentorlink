@@ -35,7 +35,7 @@
                     <div class="card-body nopadding">
                         
                         <div class="wrap-title">
-                            <h3 class="title">Login</h3>
+                            <h3 class="title">Sign In</h3>
                         </div>
                         <div class="login-logo">
                             <img src="assets/images/logo2.png" alt="ym">
@@ -79,10 +79,10 @@
 
                         <div class="mb_10 nobottommargin tright mt-3">
 
-                            <a href="forgetPassword" class="">Quên mật khẩu</a>
+                            <a href="forgetPassword" class="">Forgot password</a>
                         </div>
                         <div class="mb_10 nobottommargin">
-                            Bạn chưa có tài khoản? <a href="signupController" class="">Hãy click vào đây để đăng ký</a>
+                            Do not have an account? <a href="signupController" class="">Please click here to register</a>
                         </div>
                     </div>
                 </div>
