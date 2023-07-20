@@ -121,5 +121,30 @@ public class MenteeDAO extends DBContext {
             System.out.println(mentee.getSkillName());
         }
     }
+    
+    //Lấy ra số lượng trang n /  trên tổng số trang. của trang listmentee (admin)
+    public int getNumberPage2() {
+        String query = "Select count(*) from swp391_group5.user where user.role = 1";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                //Tổng số bản ghi mentor được lấy ra.
+                int total = rs.getInt(1);
+                int countPage = 0;
+                //Tổng số bản ghi mentor được lấy ra / Số lượng bản ghi sẽ có trên một trang. 
+                // Lay Ra So luong trang ( Moi trang la 10 bang ghi).
+                countPage = total / 10;
+                if (total % 10 != 0) {
+                    countPage++;
+                }
+                return countPage;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
 
 }

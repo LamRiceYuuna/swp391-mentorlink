@@ -38,12 +38,19 @@ public class ListFollowingRequest extends HttpServlet {
         User sessionUser = (User) session.getAttribute("acc");
         // Lấy user_id từ đối tượng User lấy từ session
         String sessionUser_id = sessionUser.getUser_id();
+        String index = request.getParameter("index");
+        //Do luc dau chay chua co gia tri -> Nen phai gan gia tri = 1 tuc la trang dau tien. De lan dau chay o trang 1 va khac null
+        if (index == null) {
+            index = "1";
+        }
+        int indexPage = Integer.parseInt(index);
         requestDAO dao = new requestDAO(); 
         //Lay ra tat cac cac request tu mentee gui den mentor
-        List<Request> listR = dao.listRequestByMetorID(sessionUser_id);
+        List<Request> listR = dao.listRequestByMetorID(sessionUser_id, indexPage);
         
         //Kiem tra danh sach nay
         if(listR != null) {
+            request.setAttribute("indexPagee", indexPage);
             request.setAttribute("listR", listR);
         } 
         if(listR.isEmpty()) {
@@ -83,6 +90,7 @@ public class ListFollowingRequest extends HttpServlet {
         //Lay ve yeu cau cua mentor tu ben jsp khi chon tu choi hoac chap nhan yeu cau
         String requestId_yes = request.getParameter("requestId_yes");
         String requestId_no = request.getParameter("requestId_no");
+        String requestId_Fi = request.getParameter("requestId_Fi");
         //Kiem tra hanh dong cua mentor va goi den ham de xu li trong DTB
         if (requestId_yes != null) {
             dao.update_Request_Status(2, requestId_yes);
@@ -90,6 +98,11 @@ public class ListFollowingRequest extends HttpServlet {
         }
         if (requestId_no != null) {
             dao.update_Request_Status(3, requestId_no);
+            processRequest(request, response);
+        }
+        
+        if(requestId_Fi != null) {
+            dao.update_Request_Status_Finish(requestId_Fi);
             processRequest(request, response);
         }
     }

@@ -79,7 +79,7 @@ tr:hover td {
     background-color: #ffffff;
 }
 
-td button {
+td a button {
     border: none;
     padding: 7px 20px;
     border-radius: 20px;

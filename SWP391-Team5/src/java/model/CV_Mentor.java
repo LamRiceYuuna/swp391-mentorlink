@@ -41,9 +41,6 @@ public class CV_Mentor {
     public void setRating(float rating) {
         this.rating = rating;
     }
-    
-    
-    
 
     public void setInfor(User infor) {
         this.infor = infor;

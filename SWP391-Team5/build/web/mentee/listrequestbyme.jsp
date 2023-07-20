@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
     Document   : listrequestbyme
     Created on : Jul 16, 2023, 5:05:05 PM
@@ -44,6 +45,8 @@
             background-color: #175E4C;
             text-align: center;
             font-size: 70px;
+
+
         }
 
     </style>
@@ -58,92 +61,77 @@
                 </div>
             </div>
             <div class="num">
-                <h4>Total number of requests: 15</h4>
+                <h4>Total number of requests: ${sum}</h4>
             </div>
             <table>
                 <thead>
                     <tr>
-                        <th>S No.</th>
-                        <th>Image</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Department</th>
+                        <th>STT</th>
+                        <th>Skill</th>
+                        <th>Title</th>
+                        <th>Content</th>
+                        <th>Finish Date</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>
-                            <img src=https://drive.google.com/uc?export=view&id=1qw3KUJnYgvnJHQP-yY13u_rXrJO8ZbL_ />
-                            <img src=https://drive.google.com/uc?export=view&id=1qw3KUJnYgvnJHQP-yY13u_rXrJO8ZbL_ />
-                            <img src=https://drive.google.com/uc?export=view&id=1qw3KUJnYgvnJHQP-yY13u_rXrJO8ZbL_ />
-                        </td>
-                        <td>Rakhi Gupta</td>
-                        <td>rakhigupta@gmail.com</td>
-                        <td>Engineering</td>
-                        <td>
-                            <button>View</button>
-                            <button>View</button>
-                            <button>View</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><img src=https://drive.google.com/uc?export=view&id=1KV8Ob2wXIcobIvayGGDB1qUpQn_iZKIp /></td>
-                        <td>Anjali</td>
-                        <td>anjali@gmail.com</td>
-                        <td>Engineering</td>
-                        <td><button>View</button></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><img src=https://drive.google.com/uc?export=view&id=1ock7haLmYaAbHe8yn9H8ZGgkaGY9lcB0 /></td>
-                        <td>Vejata Gupta</td>
-                        <td>Vejata@gmail.com</td>
-                        <td>Engineering</td>
-                        <td><button>View</button></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><img src=https://drive.google.com/uc?export=view&id=1MbkS3AwaCNaKfMTmCQMHD1okQEubCdnt /></td>
-                        <td>Shweta</td>
-                        <td>Shweta@gmail.com</td>
-                        <td>Engineering</td>
-                        <td><button>View</button></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td><img src=https://drive.google.com/uc?export=view&id=1oztRYJUSZ5txDbaAAGg0O8_Ek6nzLAId /></td>
-                        <td>Adarsh</td>
-                        <td>Adarsh@gmail.com</td>
-                        <td>Engineering</td>
-                        <td><button>View</button></td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td><img src=https://drive.google.com/uc?export=view&id=1ysB5QChCSLpz3igUoDzalENFsjJEe8H7 /></td>
-                        <td>Monti</td>
-                        <td>Monti@gmail.com</td>
-                        <td>Engineering</td>
-                        <td><button>View</button></td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td><img src=https://drive.google.com/uc?export=view&id=1fCtvhYFy1roieanYeXua1jKJyfUhiDS6 /></td>
-                        <td>Arpit</td>
-                        <td>Arpit@gmail.com</td>
-                        <td>Engineering</td>
-                        <td><button>View</button></td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td><img src=https://drive.google.com/uc?export=view&id=1ZHPBm7fBxfbW2qV8pLTeDvMreXzqcW-x /></td>
-                        <td>Priya</td>
-                        <td>priya@gmail.com</td>
-                        <td>Engineering</td>
-                        <td><button>View</button></td>
-                    </tr>
+                    <c:forEach begin="0" end="${lista.size()-1}" step="1" var="i">
+                        <tr>
+                            <td>${i + 1}</td>
+                            <td>
+                                <c:forEach items="${lista.get(i).getSkill_name()}" var="s">
+                                    <img src="${s.skill_img}">
+                                </c:forEach>
+                            </td>
+                            <td>${lista.get(i).title}</td>
+                            <td>${lista.get(i).request_content}</td>
+                            <td>${lista.get(i).finish_date}</td>
+                            <c:choose>
+                                <c:when test="${lista.get(i).request_status == 1}">
+                                    <td>
+                                        Open
+                                    </td>
+                                    <td>                                                                                                                                                                                
+                                        <a href="updateRequest?request_id=${lista.get(i).request_id}&mentor_id=${lista.get(i).mentor_id}"><button>Update</button></a>
+                                        <a href="listrequestbyme1?idCancel=${lista.get(i).request_id}"><button>Cancel</button></a>
+                                    </td>
+                                </c:when>
+                                <c:when test="${lista.get(i).request_status == 2}">
+                                    <td>
+                                        Processing
+                                    </td>
+                                    <td>                                        
+                                    </td>
+                                </c:when>
+                                <c:when test="${lista.get(i).request_status == 3}">
+                                    <td>
+                                        Cancel
+                                    </td>
+                                    <td>
+                                        <a href="listrequestbyme1?idDel=${lista.get(i).request_id}"><button>Delete</button></a>
+                                    </td>
+                                </c:when>
+                                <c:when test="${lista.get(i).request_status == 4}">
+                                    <td>
+                                        Closed
+                                    </td>
+                                    <td>
+                                        <a href="listrequestbyme1?idAcc=${lista.get(i).request_id}"><button>Accept</button></a>
+                                        <a href="listrequestbyme1?idRej=${lista.get(i).request_id}"><button>Reject</button></a>
+                                    </td>
+                                </c:when>
+                                <c:when test="${lista.get(i).request_status == 5}">
+                                    <td>
+                                        Finish
+                                    </td>
+                                    <td>                                        
+                                    </td>
+                                </c:when>
+                                <c:otherwise></c:otherwise>
+                            </c:choose>
+                        </tr>      
+                    </c:forEach>            
                 </tbody>
             </table>
         </div>

@@ -1,6 +1,6 @@
 
 const mobileMenu = document.getElementById('mobile-menu');
-const btnClick = document.getElementById('primary-menu-trigger');
+const btnClick = document.getElementById('primary-menu-trigger1');
 
 function hideMenu() {
     console.log(mobileMenu.style.display);

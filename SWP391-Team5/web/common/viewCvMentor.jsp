@@ -37,7 +37,7 @@
         <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="assets/css/ratecomment.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
 
         <title>${cv.getInfor().getFull_name()}</title>
@@ -827,13 +827,13 @@
 <!--<div id="gotoTop" ><i class="fa-light fa-chevron-up"></i></div>-->
 
 
-<script src="assets/js/plugins.js"></script>
+<!--<script src="assets/js/plugins.js"></script>-->
 
 
 <!-- Hover : co the ban biet -->
-<script src="assets/js/headere5bf.js?v=12"></script>
+<!--<script src="assets/js/headere5bf.js?v=12"></script>-->
 <!-- Hover : co the ban biet -->
-<script src="assets/js/star-rating.js"></script>
+<!--<script src="assets/js/star-rating.js"></script>-->
 <!-- Hien thi review -->
 <script src="assets/js/functions.js"></script>
 

@@ -24,12 +24,9 @@
 
 
     <body class="stretched side-push-panel no-transition">
-        <jsp:include page="../home/header.jsp"/>       
-        <section id="content" style="position: relative;
-                 overflow: hidden;
-                 min-height: 67vh;
-                 background-color: #FFF;
-                 margin-top: 50px;">
+        <jsp:include page="../home/header.jsp"/>
+
+        <section id="content">
             <div class="content-wrap nopadding">
                 <div class="login_container"
                      style=" background: url() center center no-repeat; background-size: cover;">
@@ -49,17 +46,17 @@
                         <div id="change-content">
                             <div class="center">
                                 <h4 style="margin-bottom: 50px">
-                                    Chúc mừng bạn đã tạo CV thành công. Chúng tôi mong rằng bạn sẽ có thật nhiều đóng góp cho nền tảng.
+                                    Your request has been successfully completed. We sincerely hope you will continue to contribute meaningfully to the platform.
                                 </h4>
                             </div>
 
 
 
                             <div class="mb_10 center mt-3">
-                                <!--                                <button type="submit" class="btn btn-success"
-                                                                        style="min-width: 200px;">CV của bạn</button>-->
-                                <a href="viewcv?mentor_id=${mentor_id}" class="btn btn-success"
-                                   style="min-width: 200px;">CV của bạn</a>
+<!--                                <button type="submit" class="btn btn-success"
+                                        style="min-width: 200px;">CV của bạn</button>-->
+                                <a href="Home" class="btn btn-success"
+                                   style="min-width: 200px;">Back to Home</a>
                             </div>
 
                             <!--                            <div class="mb_10 nobottommargin center">

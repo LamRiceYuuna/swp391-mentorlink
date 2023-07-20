@@ -194,6 +194,28 @@ public class MentorCVDAO extends DBContext {
         return list;
     }
 
+    public List<CV_Mentor> getAllListMentorByskill_id(int skill_id) {
+        List<CV_Mentor> list = new ArrayList<>();
+        String sql = "SELECT cv_of_mentor.mentor_id, email, full_name, avatar, profession, profession_introduction, service_description, achievements\n"
+                + "FROM user\n"
+                + "JOIN cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
+                + "JOIN cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id where skill_id = ?";
+        try {
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, skill_id);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                list.add(new CV_Mentor(rs.getInt("mentor_id"), rs.getString("profession"),
+                        rs.getString("profession_introduction"), rs.getString("service_description"), rs.getString("achievements"),
+                        new User(rs.getString("avatar"), rs.getString("full_name"), rs.getString("email"))));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     /**
      *
      * @param lisst
@@ -736,21 +758,26 @@ public class MentorCVDAO extends DBContext {
     public static void main(String[] args) {
         MentorCVDAO obj = new MentorCVDAO();
         // Tạo danh sách các skill ID
-        ArrayList<Integer> skillIds = new ArrayList<>();
-        skillIds.add(1);
-        skillIds.add(2);
-        skillIds.add(3);
+//        ArrayList<Integer> skillIds = new ArrayList<>();
+//        skillIds.add(1);
+//        skillIds.add(2);
+//        skillIds.add(3);
+//
+//        // Gọi phương thức listMentorSuggestion
+//        ArrayList<CV_Mentor> mentors = obj.listMentorSuggestion(skillIds);
+//
+//        // Hiển thị thông tin mentor và count
+//        for (CV_Mentor mentor : mentors) {
+//            System.out.println("Profession: " + mentor.getProfession());
+//            System.out.println("Number of Requests: " + mentor.getNumberRequest());
+//            System.out.println("Rating: " + mentor.getRating());
+//            System.out.println("-------------------------------------");
+//        }
+        int skill_id = 4;
+        List<CV_Mentor> listMentor = obj.getAllListMentor();
+        for (CV_Mentor mentor : listMentor) {
+            System.out.println(mentor);        }
 
-        // Gọi phương thức listMentorSuggestion
-        ArrayList<CV_Mentor> mentors = obj.listMentorSuggestion(skillIds);
-
-        // Hiển thị thông tin mentor và count
-        for (CV_Mentor mentor : mentors) {
-            System.out.println("Profession: " + mentor.getProfession());
-            System.out.println("Number of Requests: " + mentor.getNumberRequest());
-            System.out.println("Rating: " + mentor.getRating());
-            System.out.println("-------------------------------------");
-        }
     }
 
 }

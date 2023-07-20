@@ -129,8 +129,9 @@ public class UpdateCv extends HttpServlet {
         } else  {
             request.setAttribute("m", "Failed");
             }
+        request.setAttribute("mentor_id", mentor_id);
         request.setAttribute("skillId", skillId);
-        request.getRequestDispatcher("test.jsp").forward(request, response);
+        request.getRequestDispatcher("/mentor/cvSuccessfull.jsp").forward(request, response);
     }
 
     /** 

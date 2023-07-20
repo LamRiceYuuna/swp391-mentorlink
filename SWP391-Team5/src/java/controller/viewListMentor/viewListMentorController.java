@@ -39,7 +39,7 @@ public class viewListMentorController extends HttpServlet {
         SkillDAO sk = new SkillDAO();
         List<Skill> listS = sk.getAllSkillByStatus();
         request.setAttribute("listS", listS);
-
+        
         // Get all list mentor
         MentorCVDAO cv = new MentorCVDAO();
         List<CV_Mentor> listMentor = cv.getAllListMentor();
@@ -59,7 +59,7 @@ public class viewListMentorController extends HttpServlet {
         int start, end;
         start = (page - 1) * numPerPage;
         end = Math.min(page * numPerPage, size);
-
+        
         // Get the mentors list for the current page
         List<CV_Mentor> listM = cv.getListByPage(listMentor, start, end);
 

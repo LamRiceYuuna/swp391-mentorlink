@@ -453,7 +453,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 
         <!-- Dung cho phan Trang: Doi tuong cua class MentorCVDAO. De dung instance method class  MentorCVDAO-->
-        <jsp:useBean id="a" class="dao.requestDAO" scope = "request"></jsp:useBean>
+        <jsp:useBean id="a" class="dao.MenteeDAO" scope = "request"></jsp:useBean>
         </head>
         <body>
 
@@ -466,10 +466,6 @@
                                 <img src="assets/images/avatar.jpg">
                                 <span class="nav-item">Admin</span>
                             </a></li>
-                        <li><a href="dashboard">
-                                <i class="fas fa-menorah"></i>
-                                <span class="nav-item">Dashboard</span>
-                            </a></li>
                         <li><a href="skill">
                                 <i class="fas fa-database"></i>
                                 <span class="nav-item">List-All-Skill</span>
@@ -480,15 +476,7 @@
                             </a></li>
                         <li><a href="listmentee">
                                 <i class="fas fa-chart-bar"></i>
-                                <span class="nav-item">List-All-Mentor</span>
-                            </a></li>
-                        <li><a href="#">
-                                <i class="fas fa-comment"></i>
-                                <span class="nav-item">Attendance</span>
-                            </a></li>
-                        <li><a href="#">
-                                <i class="fas fa-cog"></i>
-                                <span class="nav-item">Setting</span>
+                                <span class="nav-item">List-All-Mentee</span>
                             </a></li>
 
                         <li><a href="logout" class="logout">
@@ -535,7 +523,7 @@
                             <!-- In ra so trang -->
                             <div class="pagination-custom">
                                 <!-- So trang dang dung JspUseBean: Doi tuong cua class CVDAO -->
-                                <c:forEach begin="1" end="${a.getNumberPage1()}" var = "i">
+                                <c:forEach begin="1" end="${a.getNumberPage2()}" var = "i">
                                     <!-- Lay ra vi tri trang dang dung -->
                                     <a href="listmentee?index=${i}" class="${indexPagee == i ?  "active" : ""}">${i}</a>
                                 </c:forEach>

@@ -466,10 +466,6 @@
                                 <img src="assets/images/avatar.jpg">
                                 <span class="nav-item">Admin</span>
                             </a></li>
-                        <li><a href="dashboard">
-                                <i class="fas fa-menorah"></i>
-                                <span class="nav-item">Dashboard</span>
-                            </a></li>
                         <li><a href="skill">
                                 <i class="fas fa-database"></i>
                                 <span class="nav-item">List-All-Skill</span>
@@ -478,13 +474,9 @@
                                 <i class="fas fa-chart-bar"></i>
                                 <span class="nav-item">List-All-Mentor</span>
                             </a></li>
-                        <li><a href="#">
-                                <i class="fas fa-comment"></i>
-                                <span class="nav-item">Attendance</span>
-                            </a></li>
-                        <li><a href="#">
-                                <i class="fas fa-cog"></i>
-                                <span class="nav-item">Setting</span>
+                        <li><a href="listmentee">
+                                <i class="fas fa-chart-bar"></i>
+                                <span class="nav-item">List-All-Mentee</span>
                             </a></li>
 
                         <li><a href="logout" class="logout">

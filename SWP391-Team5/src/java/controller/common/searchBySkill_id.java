@@ -5,26 +5,25 @@
 
 package controller.common;
 
-import dao.FeedbackDAO;
-import dao.FeedbackSkillDAO;
 import dao.MentorCVDAO;
+import dao.SkillDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 import model.CV_Mentor;
-import model.Feedback;
-import model.Feedback_Skill;
+import model.Skill;
 
 /**
  *
- * @author Tuan Vinh
+ * @author damtu
  */
-public class ViewCvMentor extends HttpServlet {
+@WebServlet(name="searchBySkill_id", urlPatterns={"/searchBySkillid"})
+public class searchBySkill_id extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,19 +35,41 @@ public class ViewCvMentor extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ViewCvMentor</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ViewCvMentor at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        int skill_id = Integer.parseInt(request.getParameter("skill_id")) ;
+        
+        // Get all list skill
+        SkillDAO sk = new SkillDAO();
+        List<Skill> listS = sk.getAllSkillByStatus();
+        request.setAttribute("listS", listS);
+
+        // Get all list mentor
+        MentorCVDAO cv = new MentorCVDAO();
+        List<CV_Mentor> listMentor = cv.getAllListMentorByskill_id(skill_id);
+
+        // Pagination
+        int page, numPerPage = 8;
+        int size = listMentor.size();
+        int num = (size % 8 == 0) ? (size / 8) : ((size / 8) + 1);
+        String xpage = request.getParameter("page");
+
+        // Check if the "page" parameter is null, set the default page to 1
+        if (xpage == null) {
+            page = 1;
+        } else {
+            page = Integer.parseInt(xpage);
         }
-    } 
+        int start, end;
+        start = (page - 1) * numPerPage;
+        end = Math.min(page * numPerPage, size);
+
+        // Get the mentors list for the current page
+        List<CV_Mentor> listM = cv.getListByPage(listMentor, start, end);
+
+        // Set attributes in the request to pass them to the JSP
+        request.setAttribute("listM", listM);
+        request.setAttribute("page", page);
+        request.setAttribute("num", num);
+        request.getRequestDispatcher("common/viewListMentor.jsp").forward(request, response);    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -61,26 +82,7 @@ public class ViewCvMentor extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        MentorCVDAO dao = new MentorCVDAO();
-        //Lấy thông tin dựa trên mentor_id khi người dùng click vào xem CV
-        String mentor_id = request.getParameter("mentor_id");
-        CV_Mentor cv = dao.getCvMentorById(mentor_id);
-        //Lấy ra list mentor để gợi ý cho mentee
-        List<CV_Mentor> list = dao.getAllListMentor();
-        FeedbackDAO dao1 = new FeedbackDAO();
-        //Lấy ra Feedback về mentor
-        List<Feedback> listF = dao1.getAllFeedbackOfMentor(Integer.parseInt(mentor_id));
-        //Lấy ra đánh ra cho mỗi skill mà mentor nhận được.
-        FeedbackSkillDAO fbs = new FeedbackSkillDAO();
-        //Lay ra skill cua mentor kem danh gia
-        ArrayList<Feedback_Skill> listFS = fbs.getStarRateSkill(mentor_id);
-        //Truyền dữ liều từ servlet sang jsp để hiển thị
-        request.setAttribute("mentor_id", mentor_id);
-        request.setAttribute("cv", cv);
-        request.setAttribute("listMentor", list);
-        request.setAttribute("listF", listF);      
-        request.setAttribute("listFS", listFS);      
-        request.getRequestDispatcher("common/viewCvMentor.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 

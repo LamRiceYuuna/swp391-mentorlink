@@ -90,8 +90,11 @@
             <c:forEach items="${listp}" var="o" varStatus="status">
                 <div class="skill-card">
                     <div class="skill-number">${status.index + 1}</div>
-                    <img class="skill-image" src="${o.skill_img}" alt="Skill Image">
-                    <h3><a href="#">${o.skill_name}</a></h3>
+                    <!-- Đặt href để chuyển hướng sang servlet MyServlet -->
+                    <a href="searchBySkillid?skill_id=${o.skill_id}">
+                        <img class="skill-image" src="${o.skill_img}" alt="Skill Image">
+                        <h3>${o.skill_name}</h3>
+                    </a>
                 </div>
                 <c:if test="${status.index % 4 == 3}">
                     <div style="width: 100%; height: 0;"></div>
