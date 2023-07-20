@@ -136,22 +136,22 @@ public class updateRequest extends HttpServlet {
         // kiểm tra xem người dùng có nhập thiếu trường thông tin nào không 
         if (isEmpty(tieude) || isEmpty(batdau) || isEmpty(ketthuc) || isEmpty(sogiohoc)
                 || isEmpty(noidung) || skills == null) {
-            request.setAttribute("errE", "Không được để trống thông tin nào!");
+            request.setAttribute("errE", "No information can be left blank!");
             processRequest(request, response);
         }// kiểm tra số ký năng mà người dùng chọn phải >=1 và <=3
         else if (skills == null || skills.length < 1 || skills.length > 3) {
             System.out.println("Lỗi: Số lượng kỹ năng phải từ 1 đến 3");
-            request.setAttribute("errE", "Lỗi: Số lượng kỹ năng phải từ 1 đến 3");
+            request.setAttribute("errE", "Error: The number of skills must be from 1 to 3");
             processRequest(request, response);
         }// khoảng cách lớn hơn hoặc bằng với số giừ học 
         else if (khoangCach < soGioHoc1) {
             System.out.println("Lỗi: Thời gian bắt đầu và kết thúc phải lớn hơn hoạc bằng với số giờ học");
-            request.setAttribute("errE", "Lỗi: Thời gian bắt đầu và kết thúc phải lớn hơn hoạc bằng với số giờ học");
+            request.setAttribute("errE", "Error: The start and end times must be greater than or equal to the number of hours");
             processRequest(request, response);
         } //so sánh thời gian kết thcs với thời gian bắtd dầu
         else if (ketthuc1.before(batdau1)) {
             System.out.println("Lỗi: Thời điểm kết thúc nhỏ hơn thời điểm bắt đầu ");
-            request.setAttribute("errE", "Lỗi: Thời điểm kết thúc nhỏ hơn thời điểm bắt đầu");
+            request.setAttribute("errE", "Error: End time is less than start time");
             processRequest(request, response);
         } else {
             // Kiểm tra nếu kết thúc cách bắt đầu ít nhất 1 giờ
@@ -161,7 +161,7 @@ public class updateRequest extends HttpServlet {
             // thờ gian kết thúc phải cachs thười gian bắt dầu ít nhất 1 giờ
             if (diffInHours < 1) {
                 System.out.println("Lỗi: Thời điểm kết thúc phải cách bắt đầu ít nhất 1 giờ");
-                request.setAttribute("errE", "Lỗi: Thời điểm kết thúc phải cách bắt đầu ít nhất 1 giờ!");
+                request.setAttribute("errE", "Error: End time must be at least 1 hour from start!");
                 processRequest(request, response);
             } else {
                 requestDAO DAO = new requestDAO();
@@ -180,7 +180,7 @@ public class updateRequest extends HttpServlet {
             }
 
         }
-        request.getRequestDispatcher("/common/Successfully.html").forward(request, response);
+        request.getRequestDispatcher("/common/successfully.jsp").forward(request, response);
 
     }
 

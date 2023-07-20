@@ -151,12 +151,6 @@
                             }
                         });
                     </script>
-
-                    <div class="input-boxx ">
-                        <label>Framework</label>
-                        <textarea placeholder="Framework you want to be trained"name="framework" required></textarea>
-                    </div>
-
                     <div class="input-boxx">
                         <label>Content</label><br>
                         <textarea placeholder="Content required" name="noidung" required></textarea>
