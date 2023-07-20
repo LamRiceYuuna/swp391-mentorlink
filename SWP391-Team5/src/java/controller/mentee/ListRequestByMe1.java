@@ -39,7 +39,10 @@ public class ListRequestByMe1 extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        String request_id=request.getParameter("idDel");
+        String request_idDel = request.getParameter("idDel");
+        String request_idCan = request.getParameter("idCancel");
+        String idAcc = request.getParameter("idAcc");
+        String idRej = request.getParameter("idRej");
         String idp = request.getParameter("id");
         requestDAO dao = new requestDAO();
         //User sessionUser = (User) session.getAttribute("acc");
@@ -47,9 +50,20 @@ public class ListRequestByMe1 extends HttpServlet {
         String sessionUser_id = sessionUser.getUser_id();
         //String sessionUser_id = "3";
         Date currentTime = new Date(); 
-        if(request_id!=null){
-        dao.DeleteRequestSkill(request_id);
-        dao.deletebyIDForMente(request_id);
+        
+        if(request_idDel!=null){
+        dao.DeleteRequestSkill(request_idDel);
+        dao.deletebyIDForMente(request_idDel);
+        }
+        
+        if(request_idCan != null){
+        dao.cancelRequest(request_idCan);
+        }
+        if(idAcc != null){
+        dao.acceptOrRejectRequest(idAcc, 5);
+        }
+        if(idRej != null){
+        dao.acceptOrRejectRequest(idRej, 2);
         }
         int sum=0;
         if(idp!=null){
@@ -67,7 +81,7 @@ public class ListRequestByMe1 extends HttpServlet {
         }
         List<RequestName> list1 = dao.listRequestByID(sessionUser_id);
         
-        sum=list1.size();
+        sum = list1.size();
         request.setAttribute("sum", sum);
         
         for (RequestName request1 : list1) {
