@@ -138,12 +138,12 @@ public class requestMentor extends HttpServlet {
                     result = false; // hoặc thực hiện hành động khác khi có lỗi
                 }
                 //processRequest(request, response);
-                try {
-                    ml.send(mail, name, tieude, batdau1, ketthuc1, sogiohoc, noidung);
-                   
-                } catch (ParseException ex) {
-                    Logger.getLogger(requestMentor.class.getName()).log(Level.SEVERE, null, ex);
-                }
+//                try {
+//                    ml.send(mail, name, tieude, batdau1, ketthuc1, sogiohoc, noidung);
+//                   
+//                } catch (ParseException ex) {
+//                    Logger.getLogger(requestMentor.class.getName()).log(Level.SEVERE, null, ex);
+//                }
             }
 
         }

@@ -92,21 +92,16 @@
                                     <td>
                                         Open
                                     </td>
-                                    <td>                                                                                                         
-                                        <a href="listrequestbyme1?idDel=${lista.get(i).request_id}"><button>Delete</button></a>
+                                    <td>                                                                                                                                                                                
                                         <a href="updateRequest?request_id=${lista.get(i).request_id}&mentor_id=${lista.get(i).mentor_id}"><button>Update</button></a>
+                                        <a href="listrequestbyme1?idCancel=${lista.get(i).request_id}"><button>Cancel</button></a>
                                     </td>
-
-<!--                                    <td>
-                                        
-                                    </td>-->
                                 </c:when>
                                 <c:when test="${lista.get(i).request_status == 2}">
                                     <td>
                                         Processing
                                     </td>
-                                    <td>
-                                        <a href="listrequestbyme1?idDel=${lista.get(i).request_id}"><button>Delete</button></a>
+                                    <td>                                        
                                     </td>
                                 </c:when>
                                 <c:when test="${lista.get(i).request_status == 3}">
@@ -122,18 +117,15 @@
                                         Closed
                                     </td>
                                     <td>
-                                        <a href="listrequestbyme1?idDel=${lista.get(i).request_id}"><button>Delete</button></a>
-                                        <a href="listrequestbyme1?id=${lista.get(i).request_id}"><button>Closed</button></a>
+                                        <a href="listrequestbyme1?idAcc=${lista.get(i).request_id}"><button>Accept</button></a>
+                                        <a href="listrequestbyme1?idRej=${lista.get(i).request_id}"><button>Reject</button></a>
                                     </td>
                                 </c:when>
                                 <c:when test="${lista.get(i).request_status == 5}">
                                     <td>
                                         Finish
                                     </td>
-                                    <td>
-                                        <a href="listrequestbyme1?idDel=${lista.get(i).request_id}">
-                                            <button>Delete</button>
-                                        </a>
+                                    <td>                                        
                                     </td>
                                 </c:when>
                                 <c:otherwise></c:otherwise>

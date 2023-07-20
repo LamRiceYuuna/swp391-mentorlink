@@ -169,8 +169,6 @@
                                             setTimeout(function () {
                                                 alertDiv.hide();
                                             }, 3000);
-                                            console.log("A");
-                                            location.reload();
                                         } else {
                                             // Hiển thị alert lỗi bằng Bootstrap
                                             var alertDiv = $("#alertDiv");
