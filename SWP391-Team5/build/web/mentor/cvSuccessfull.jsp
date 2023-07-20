@@ -24,9 +24,12 @@
 
 
     <body class="stretched side-push-panel no-transition">
-        <jsp:include page="../home/header.jsp"/>
-
-        <section id="content">
+        <jsp:include page="../home/header.jsp"/>       
+        <section id="content" style="position: relative;
+                 overflow: hidden;
+                 min-height: 67vh;
+                 background-color: #FFF;
+                 margin-top: 50px;">
             <div class="content-wrap nopadding">
                 <div class="login_container"
                      style=" background: url() center center no-repeat; background-size: cover;">
@@ -53,8 +56,8 @@
 
 
                             <div class="mb_10 center mt-3">
-<!--                                <button type="submit" class="btn btn-success"
-                                        style="min-width: 200px;">CV của bạn</button>-->
+                                <!--                                <button type="submit" class="btn btn-success"
+                                                                        style="min-width: 200px;">CV của bạn</button>-->
                                 <a href="viewcv?mentor_id=${mentor_id}" class="btn btn-success"
                                    style="min-width: 200px;">CV của bạn</a>
                             </div>

@@ -34,7 +34,7 @@ public class requestDAO extends DBContext {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-    
+
     public List<Skill> getAllskillBySkill_id(int id_mentor) {
 
         List<Skill> list = new ArrayList<>();
@@ -71,7 +71,7 @@ public class requestDAO extends DBContext {
      */
     public List<Request> listRequestByMetorID(String mentor_id, int index) {
         List<Request> list1 = new ArrayList<>();
-        String sql = "SELECT *  FROM swp391_group5.request where mentor_id = ? and request_status = 1 limit 10 offset ?;";
+        String sql = "SELECT * FROM swp391_group5.request where mentor_id = ? and request_status in (1, 2) limit 10 offset ?;";
         String sql2 = "select skill.skill_name from swp391_group5.request_skill join swp391_group5.skill on skill.skill_id = request_skill.skill_id "
                 + "where request_skill.request_id = ?;";
         try {
@@ -131,9 +131,21 @@ public class requestDAO extends DBContext {
             ex.printStackTrace();
         }
     }
+    
+    public void update_Request_Status_Finish(String requestId) {
+        String sql = "UPDATE `swp391_group5`.`request` SET `request_status` = 4 WHERE `request_id` = ?;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, requestId);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public List<RequestName> listRequestByID(String mentee_id) {
         List<RequestName> list1 = new ArrayList<>();
-        String sql = "SELECT * FROM swp391_group5.request where mentee_id= " + mentee_id + ";";
+        String sql = "SELECT * FROM swp391_group5.request where mentee_id= " + mentee_id + " order by request_id desc;";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             //ps.setInt(1, Integer.parseInt(mentee_id));
@@ -161,8 +173,9 @@ public class requestDAO extends DBContext {
         return list1;
 
     }
-    public RequestName getRequestByID(int id){
-        String sql = "select * from request where request_id = "+id+"";
+
+    public RequestName getRequestByID(int id) {
+        String sql = "select * from request where request_id = " + id + "";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             //ps.setInt(1, Integer.parseInt(mentee_id));
@@ -189,6 +202,7 @@ public class requestDAO extends DBContext {
         }
         return null;
     }
+
     public List<Skill> getAllSkillByRequestID(int request_id) {
 
         List<Skill> list1 = new ArrayList<>();
@@ -237,7 +251,6 @@ public class requestDAO extends DBContext {
 //        return list1;
 //
 //    }
-
     public static void main(String[] args) {
 //        requestDAO rq = new requestDAO();
 //
@@ -266,11 +279,10 @@ public class requestDAO extends DBContext {
 //            System.out.println("-----------------------------");
 //        }
     }
-    
-    
+
     //Lấy ra số lượng trang n /  trên tổng số trang. của trang list following request
     public int getNumberPage1(int mentor_id) {
-        String query = "SELECT count(*) as Total FROM swp391_group5.request where mentor_id = ? and request_status = 1;";
+        String query = "SELECT count(*) as Total FROM swp391_group5.request where mentor_id = ? and request_status in (1, 2);";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -423,7 +435,7 @@ public class requestDAO extends DBContext {
     }
 
     public void deletebyIDForMente(String request_id) {
-        String sql = "DELETE FROM swp391_group5.`request` WHERE request_id = ? ";
+        String sql = "DELETE FROM swp391_group5.`request` WHERE request_id = ?";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -440,6 +452,36 @@ public class requestDAO extends DBContext {
         String sql = "delete from swp391_group5.request_skill where request_id = " + request_id + "";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void cancelRequest(String request_idCan) {
+        String sql = "UPDATE `swp391_group5`.`request`\n"
+                + "SET\n"
+                + "`request_status` = 3\n"
+                + "WHERE `request_id` = " + request_idCan + ";";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void acceptOrRejectRequest(String request_idCan, int status) {
+        String sql = "UPDATE `swp391_group5`.`request`\n"
+                + "SET\n"
+                + "`request_status` = ?\n"
+                + "WHERE `request_id` = ?;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, status);
+            ps.setString(2, request_idCan);
             ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -658,7 +700,7 @@ public class requestDAO extends DBContext {
 
     }
 
-    public boolean update_request(int  request_id, String tieude, Timestamp batdau1, Timestamp ketthuc1, String sogiohoc, String noidung, String[] skills)
+    public boolean update_request(int request_id, String tieude, Timestamp batdau1, Timestamp ketthuc1, String sogiohoc, String noidung, String[] skills)
             throws SQLException {
         // Lấy thời gian hiện tại
         LocalDateTime currentTime = LocalDateTime.now();
@@ -687,7 +729,7 @@ public class requestDAO extends DBContext {
             ps.setTimestamp(4, timestamp);
             ps.setTimestamp(5, batdau1);
             ps.setTimestamp(6, ketthuc1);
-            ps.setInt(7,request_id);
+            ps.setInt(7, request_id);
             ps.executeUpdate();
 
             String sql2 = "DELETE FROM `swp391_group5`.`request_skill`\n"
@@ -746,6 +788,7 @@ public class requestDAO extends DBContext {
         return count;
 
     }
+
     /**
      * tính tổng của số giờ học
      *
@@ -793,6 +836,5 @@ public class requestDAO extends DBContext {
         }
         return count;
     }
-
 
 }

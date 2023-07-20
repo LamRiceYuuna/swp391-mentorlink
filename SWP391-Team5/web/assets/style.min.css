@@ -2189,9 +2189,7 @@ body:not(.device-touch) #page-menu nav li a{
         transition:right 0.4s ease
     }
 }
-body.side-push-panel{
-    overflow-x:hidden
-}
+
 #side-panel{
     position:fixed;
     top:0;
