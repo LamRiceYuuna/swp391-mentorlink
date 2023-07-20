@@ -532,6 +532,9 @@ public class MentorCVDAO extends DBContext {
             ps2.setString(6, programming);
             ps2.setInt(7, mentor_id);
             ps2.executeUpdate();
+            
+//            String sqlDel = 
+            
             // Câu lệnh INSERT vào table_B
             String sql3 = "UPDATE `swp391_group5`.`cv_skill`\n"
                     + "SET `skill_id` = ?\n"
