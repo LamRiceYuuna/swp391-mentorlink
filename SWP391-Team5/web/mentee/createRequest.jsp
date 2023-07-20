@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <script>
-                        
+
                         // Lấy thời gian hiện tại
                         var currentTime = new Date();
 
@@ -80,7 +80,7 @@
                             } else {
                                 endTimeInput.setCustomValidity(""); // Xóa thông báo lỗi nếu hợp lệ
                             }
-                        }); 
+                        });
                     </script> 
 
                     <div class="gender-boxx">
@@ -122,11 +122,11 @@
                         <div class="select-boxx">
                             <select name="sogiohoc" required>
                                 <option hidden>Choose time</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <option value="1">1 hour</option>
+                                <option value="2">2 hour</option>
+                                <option value="3">3 hour</option>
+                                <option value="4">4 hour</option>
+                                <option value="5">5 hour</option>
                             </select>
                         </div>
                     </div>
@@ -151,21 +151,15 @@
                             }
                         });
                     </script>
-
-                    <div class="input-boxx ">
-                        <label>Framework</label>
-                        <textarea placeholder="Framework you want to be trained"name="framework" required></textarea>
-                    </div>
-
                     <div class="input-boxx">
                         <label>Content</label><br>
                         <textarea placeholder="Content required" name="noidung" required></textarea>
                     </div>
-                    
+
                     <c:if test="${requestScope.errE!=null}">
                         <h6 style="color: red">${requestScope.errE}</h6>
                     </c:if>
-                        <p></p>
+                    <p></p>
 
                     <button style="border: 30px; background: #175E4C">Request</button>
                 </form>

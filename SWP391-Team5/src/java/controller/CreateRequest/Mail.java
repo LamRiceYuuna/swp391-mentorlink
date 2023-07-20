@@ -66,7 +66,7 @@ public class Mail {
                     + "\nDuration of study: " + sogiohoc
                     + "\ncontent: " + noidung
                    
-                    + "\nyeu cau se dc duyet muon nhat sa 12 tieng");
+                    + "\nRequests will be approved at the latest 12 hours");
 
             //Gửi tin nhắns đi
             Transport.send(message);
