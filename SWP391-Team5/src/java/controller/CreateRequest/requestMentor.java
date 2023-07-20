@@ -99,7 +99,7 @@ public class requestMentor extends HttpServlet {
 
         //***********************************************************************
         if (isEmpty(tieude) || isEmpty(batdau) || isEmpty(ketthuc) || isEmpty(sogiohoc)
-                || isEmpty(noidung) || skills == null || isEmpty(framework)) {
+                || isEmpty(noidung) || skills == null ) {
             request.setAttribute("errE", "No information can be left blank!");
             processRequest(request, response);
         } else if (skills == null || skills.length < 1 || skills.length > 3) {
