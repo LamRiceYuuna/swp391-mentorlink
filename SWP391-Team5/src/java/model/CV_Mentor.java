@@ -51,8 +51,18 @@ public class CV_Mentor {
 
     public CV_Mentor() {
     }
+    
+    public CV_Mentor(int mentor_id, String profession, String profession_introduction, String service_description, String achievements,int numberRequestSuccess ,User infor) {
+        this.mentor_id = mentor_id;
+        this.profession = profession;
+        this.profession_introduction = profession_introduction;
+        this.service_description = service_description;
+        this.achievements = achievements;
+        this.numberRequest = numberRequestSuccess;
+        this.infor = infor;
+    }
 
-    public CV_Mentor(int mentor_id, String profession, String profession_introduction, String service_description, String achievements, User infor) {
+    public CV_Mentor(int mentor_id, String profession, String profession_introduction, String service_description,String achievements,User infor) {
         this.mentor_id = mentor_id;
         this.profession = profession;
         this.profession_introduction = profession_introduction;

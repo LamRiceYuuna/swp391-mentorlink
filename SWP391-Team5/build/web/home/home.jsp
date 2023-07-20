@@ -86,7 +86,7 @@
                                                             <img src="temp/ic-mentee.png"
                                                                  style="width: auto; height: 18px; margin-bottom: 2px;"
                                                                  data-toggle="tooltip" data-placement="bottom" title=""
-                                                                 data-original-title="Số Mentee"> <span class="wrap-number">
+                                                                 data-original-title="Số Mentee">${p.numberRequest} <span class="wrap-number">
                                                             </span>
                                                         </div>
                                                     </div>
@@ -122,7 +122,9 @@
                                                 </p>
                                                 <div class="line line2"></div>
                                                 <div class="text-center">
+                                                    <a href="viewcv?mentor_id=${p.mentor_id}">
                                                     <span class="mentor_detail_link notopmargin mb-1">Xem chi tiết</span>
+                                                    </a>
                                                 </div>
                                             </a>
                                         </div>
@@ -143,7 +145,7 @@
                     <div class="container">
                         <div>
                             <div>
-                                <h4 class="primary-color mb-2">Các ngôn ngữ cơ bản phổ biến nhất</h4>
+                                <h4 class="primary-color mb-2">The good language for beginner </h4>
 
                             </div>
                             <div class="row">
