@@ -41,7 +41,6 @@ public class searchController extends HttpServlet {
         request.setAttribute("listS", listS);
 
 // Retrieve search parameters from the request
-        int skill_id =Integer.parseInt(request.getParameter("skill_id"))  ;
         String keyword = request.getParameter("keyword");
         String profession = request.getParameter("profession");
         String service = request.getParameter("service");
@@ -49,7 +48,7 @@ public class searchController extends HttpServlet {
 
         // Search mentors based on the provided parameters
         MentorCVDAO cv = new MentorCVDAO();
-        List<CV_Mentor> listM = cv.search(skill_id,keyword, profession, service, achievements);
+        List<CV_Mentor> listM = cv.search(keyword, profession, service, achievements);
         request.setAttribute("listM", listM);
 
         // Pagination
