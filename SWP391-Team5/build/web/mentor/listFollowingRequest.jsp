@@ -102,9 +102,16 @@
                                         <td>${listR.get(i).getCreated_date()}</td>
                                         <td>${listR.get(i).getFinish_date()}</td>
                                         <td>
-                                            <div class="status">
-                                                <span>Processing</span>
-                                            </div>
+                                            <c:if test="${listR.get(i).getRequest_status() == 1}">
+                                                <div class="status">
+                                                    <span>Open</span>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${listR.get(i).getRequest_status() == 2}">
+                                                <div class="status">
+                                                    <span>Processing</span>
+                                                </div>
+                                            </c:if>
                                         </td>
                                         <td>
                                             <div style="text-align: center;">
