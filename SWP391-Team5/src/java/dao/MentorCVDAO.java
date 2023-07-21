@@ -415,6 +415,36 @@ public class MentorCVDAO extends DBContext {
         }
         return 0;
     }
+    
+    //Lấy ra số lượng trang n /  trên tổng số trang Listmentor suggestion.
+    public int getNumberPage3() {
+        String query = "SELECT count(*) as total\n"
+                + "FROM swp391_group5.user\n"
+                + "JOIN swp391_group5.cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
+                + "JOIN swp391_group5.cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id\n"
+                + "WHERE cv_skill.skill_id IN (2,3,4,5,6)\n"
+                + "GROUP BY cv_of_mentor.mentor_id, username,avatar, full_name, email, phone, cv_of_mentor.profession;";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                //Tổng số bản ghi mentor được lấy ra.
+                int total = rs.getInt(1);
+                int countPage = 0;
+                //Tổng số bản ghi mentor được lấy ra / Số lượng bản ghi sẽ có trên một trang. 
+                // Lay Ra So luong trang ( Moi trang la 10 bang ghi).
+                countPage = total / 2;
+                if (total % 10 != 0) {
+                    countPage++;
+                }
+                return countPage;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
 
     //List all mentor -> Da Phan Trang -> Vi tri trang.
     public List<MentorInfo> GetListMentorPagingAdm(int index) {
