@@ -123,7 +123,7 @@
                                                 <div class="line line2"></div>
                                                 <div class="text-center">
                                                     <a href="viewcv?mentor_id=${p.mentor_id}">
-                                                    <span class="mentor_detail_link notopmargin mb-1">Xem chi tiết</span>
+                                                        <span class="mentor_detail_link notopmargin mb-1">View details</span>
                                                     </a>
                                                 </div>
                                             </a>
@@ -160,8 +160,9 @@
 
                                                 </div>
                                                 <h4 class="t600 mb-3 mt-3">${s.skill_name}</h4>
-                                                <p class="mb-3 course-desciption" style="color: #949BA1">Especially for beginners who are passionate about programming.</p>
                                             </a>
+                                            <p class="mb-3 course-desciption" style="color: #949BA1">Especially for beginners who are passionate about programming.</p>
+
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -202,21 +203,21 @@
                         <th>Request Status</th>
                     </tr>
                     <c:forEach var="o" items="${listR}">
-                    
-                    <tr>
-                        <td>${o.getStt()}</td>
-                        <td>${o.getMenteeName()}</td>
-                        <td>${o.getTitle()}</td>
-                        <td>${o.getRequestContent()}</td>
-                        <td>${o.getCreatedDate()}</td>	
-                        <td>${o.getFinishDate()}</td>
-                        <td>${o.getRequestStatus()}</td>
-                    </tr>
+
+                        <tr>
+                            <td>${o.getStt()}</td>
+                            <td>${o.getMenteeName()}</td>
+                            <td>${o.getTitle()}</td>
+                            <td>${o.getRequestContent()}</td>
+                            <td>${o.getCreatedDate()}</td>	
+                            <td>${o.getFinishDate()}</td>
+                            <td>${o.getRequestStatus()}</td>
+                        </tr>
                     </c:forEach>
-                    
+
                 </table>
                 <h4> The rank average star of you : ${top} </h4>
-                
+
                 <table class="table">
                     <th>List Top Rank Average Star for Mentor</th>
                     <tr>
@@ -224,15 +225,15 @@
                         <th>Mentor Name</th>
                         <th>Average Start</th>
                     </tr>
-                    
+
                     <c:forEach var="r" items="${listRS}">
-                    <tr>
-                        <td>${r.getRank()}</td>
-                        <td>${r.getFullName()}</td>
-                        <td>${r.getAverageRating()}</td>
-                    </tr>
+                        <tr>
+                            <td>${r.getRank()}</td>
+                            <td>${r.getFullName()}</td>
+                            <td>${r.getAverageRating()}</td>
+                        </tr>
                     </c:forEach>
-                    
+
                 </table>
             </div>
         </div>
