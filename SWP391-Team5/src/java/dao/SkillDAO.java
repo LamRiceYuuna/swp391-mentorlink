@@ -32,12 +32,10 @@ public class SkillDAO {
         }
         return null;
     }
-    
-    
-    
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public List<Skill> getAllSkillByStatus() {
 
@@ -137,9 +135,10 @@ public class SkillDAO {
 
         }
     }
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public List<Skill> getTop3Skill() {
 
@@ -160,9 +159,10 @@ public class SkillDAO {
         }
         return list;
     }
+
     /**
      * Lấy ra tất cả các skill mà hệ thống có
-     * 
+     *
      * @return list
      */
     public ArrayList<Skill> getAllSkillInfo() {
@@ -180,13 +180,30 @@ public class SkillDAO {
         return list;
     }
 
+    public List<String> getSkillByMentor_id(int mentor_id) {
+        List<String> listSkill = new ArrayList<>();
+        String sql = "select s.skill_name from cv_of_mentor as cv join cv_skill as sk \n"
+                + "	on cv.mentor_id = sk.mentor_id\n"
+                + "    join skill as s on s.skill_id = sk.skill_id  \n"
+                + "    where cv.mentor_id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, mentor_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listSkill.add(rs.getString("skill_name"));
+            }
+        } catch (Exception e) {
+        }
+        return listSkill;
+    }
+
     public static void main(String[] args) {
         SkillDAO dao = new SkillDAO();
-        List<Skill> list = dao.getAllSkill();
-        for (Skill o : list) {
-            System.out.println(o);
+        List<String> list = dao.getSkillByMentor_id(2);
+        for (String sk : list) {
+            System.out.println(sk);
         }
-        Skill s = dao.getSkillById("11");
-        System.out.println(s);
     }
 }

@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%-- 
     Document   : viewListMentor
     Created on : Jun 11, 2023, 6:18:19 PM
@@ -41,7 +42,7 @@
         <title>List Mentor</title>
 
 
-
+        <jsp:useBean id="sk" class="dao.SkillDAO" scope = "request"></jsp:useBean>
     </head>
 
     <body class="stretched side-push-panel no-transition mentor">
@@ -163,24 +164,6 @@
                                                     </div>
                                                 </a>
                                             </div>
-                                            <!--                                            <div class="carousel-item">
-                                                                                            <a href="#"
-                                                                                               target="_blank">
-                                                                                                <div class="d-none d-md-block">
-                                                                                                    <img src="https://mentori.vn/assets/images/banner/search_mentor_ck_desktop.png?v=1"
-                                                                                                         width="100%">
-                                                                                                    <div style="height: 50px">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="d-lg-block">
-                                                                                                    <img src="https://mentori.vn/assets/images/banner/search_mentor_ck_mobile.png?v=1"
-                                                                                                         width="100%">
-                                                                                                    <div style="height: 50px">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                
-                                                                                            </a>
-                                                                                        </div>-->
                                             <div class="carousel-item">
                                                 <a href="#" target="_blank">
                                                     <img src="https://mentori.vn/assets/images/banner/search_mentor_ck_desktop.png?v=1" width="100%">
@@ -225,8 +208,9 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    
                                     <c:forEach var="p" items="${listM}">
-
+                                        
                                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-3 mt-3">
                                             <div class="mentor_item mentor_item_custom wow fadeInUp">
                                                 <a href="viewcv?mentor_id=${p.mentor_id}">
@@ -241,6 +225,9 @@
                                                                     ${p.profession} <span
                                                                         class="field"></span> </span>
                                                             </div>
+                                                                    <c:forEach var="i" items="${sk.getSkillByMentor_id(p.mentor_id)}">
+                                                                        <span>${i},</span>
+                                                                    </c:forEach>           
                                                         </div>
                                                         <div class="row mt-1">
                                                             <div class="user-rate col-6">

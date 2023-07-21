@@ -11,19 +11,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-    </head>
-    <body>
-        Hello       
-        
-        ${mess1}
-        ${mess2}        
-        ${mess4} 
-        ${mess}
-        Mang
-        <c:forEach var="i" items="${ratingSkill}">
-            <p>Rating: ${i}</p>
-        </c:forEach>
-            
-        Result: ${m}
+        <jsp:useBean id="sk" class="dao.SkillDAO" scope = "request"></jsp:useBean>
+        </head>
+        <body>
+            Hello       
+
+        <c:forEach var="i" items="${sk.getSkillById(2)}">
+            <span>${i}</span>
+        </c:forEach>  
     </body>
 </html>

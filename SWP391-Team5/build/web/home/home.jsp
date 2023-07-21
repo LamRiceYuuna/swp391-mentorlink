@@ -18,7 +18,8 @@
         <link rel="stylesheet" href="temp/home1.css">
         <!-- font awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <title>MentorLink</title>   
+        <title>MentorLink</title>
+        <jsp:useBean id="sk" class="dao.SkillDAO" scope = "request"></jsp:useBean>
     </head>
 
     <body>
@@ -73,13 +74,16 @@
                                             </div>
                                             <div class="mentor_info">
                                                 <div style="min-height: 100px;">
-                                                    <div class="name">${p.getInfor().getFull_name()} </div>
-                                                    <div class="">
-                                                        <span class="jobs">
-                                                            ${p.profession} <span
-                                                                class="field"></span> </span>
-                                                    </div>
-                                                </div>
+                                                            <div class="name">${p.getInfor().getFull_name()} </div>
+                                                            <div class="">
+                                                                <span class="jobs">
+                                                                    ${p.profession} <span
+                                                                        class="field"></span> </span>
+                                                            </div>
+                                                                    <c:forEach var="i" items="${sk.getSkillByMentor_id(p.mentor_id)}">
+                                                                        <span>${i},</span>
+                                                                    </c:forEach>           
+                                                        </div>
                                                 <div class="row mt-1">
                                                     <div class="user-rate col-6">
                                                         <div class="wrap-star">
