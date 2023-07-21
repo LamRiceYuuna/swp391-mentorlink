@@ -169,13 +169,11 @@ public class updateRequest extends HttpServlet {
                     //update cá thông tin mà người dùng muốn cập nhật xuống database
                     result = DAO.update_request(id_request, tieude, batdau1, ketthuc1, sogiohoc, noidung, skills); // Xử lý ngoại lệ ở đây
                     // gửi mail cho người dùng 
-                    ml.send(mail, name, tieude, batdau1, ketthuc1, sogiohoc, noidung);
+                   
                 } catch (SQLException e) {
                     // Xử lý ngoại lệ ở đây
                     result = false; // hoặc thực hiện hành động khác khi có lỗi
-                } catch (ParseException ex) {
-                    Logger.getLogger(updateRequest.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                } 
 
             }
 
