@@ -137,7 +137,6 @@
                     <div class="col-md-12 col-lg-8">
 
                         <div class="col-12 order-last">
-
                             <c:forEach var="s" items="${listS}">
                                 <div class="mentor-widget">
                                     <div class="user-info-left">
