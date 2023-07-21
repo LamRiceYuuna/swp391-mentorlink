@@ -91,8 +91,6 @@ public class requestMentor extends HttpServlet {
         //********************************************************
         requestMentor rq = new requestMentor();
         Timestamp batdau1 = rq.convertToTimestamp(batdau);
-        System.out.println(batdau);
-        System.out.println(ketthuc);
         Timestamp ketthuc1 = rq.convertToTimestamp(ketthuc);
         //***********************************************************************
         long khoangCach = ketthuc1.getTime() - batdau1.getTime();
@@ -101,20 +99,20 @@ public class requestMentor extends HttpServlet {
 
         //***********************************************************************
         if (isEmpty(tieude) || isEmpty(batdau) || isEmpty(ketthuc) || isEmpty(sogiohoc)
-                || isEmpty(noidung) || skills == null || isEmpty(framework)) {
-            request.setAttribute("errE", "Không được để trống thông tin nào!");
+                || isEmpty(noidung) || skills == null ) {
+            request.setAttribute("errE", "No information can be left blank!");
             processRequest(request, response);
         } else if (skills == null || skills.length < 1 || skills.length > 3) {
             System.out.println("Lỗi: Số lượng kỹ năng phải từ 1 đến 3");
-            request.setAttribute("errE", "Lỗi: Số lượng kỹ năng phải từ 1 đến 3");
+            request.setAttribute("errE", "Error: The number of skills must be from 1 to 3");
             processRequest(request, response);
         } else if (khoangCach < soGioHoc1) {
             System.out.println("Lỗi: Thời gian bắt đầu và kết thúc phải lớn hơn hoạc bằng với số giờ học");
-            request.setAttribute("errE", "Lỗi: Thời gian bắt đầu và kết thúc phải lớn hơn hoạc bằng với số giờ học");
+            request.setAttribute("errE", "Error: The start and end times must be greater than or equal to the number of hours");
             processRequest(request, response);
         } else if (ketthuc1.before(batdau1)) {
             System.out.println("Lỗi: Thời điểm kết thúc nhỏ hơn thời điểm bắt đầu ");
-            request.setAttribute("errE", "Lỗi: Thời điểm kết thúc nhỏ hơn thời điểm bắt đầu");
+            request.setAttribute("errE", "Error: End time is less than start time");
             processRequest(request, response);
         } else {
             // Kiểm tra nếu kết thúc cách bắt đầu ít nhất 1 giờ
@@ -124,7 +122,7 @@ public class requestMentor extends HttpServlet {
 
             if (diffInHours < 1) {
                 System.out.println("Lỗi: Thời điểm kết thúc phải cách bắt đầu ít nhất 1 giờ");
-                request.setAttribute("errE", "Lỗi: Thời điểm kết thúc phải cách bắt đầu ít nhất 1 giờ!");
+                request.setAttribute("errE", "Error: End time must be at least 1 hour from start!");
                 processRequest(request, response);
             } else {
                 requestDAO DAO = new requestDAO();
@@ -132,7 +130,7 @@ public class requestMentor extends HttpServlet {
 
                 try {
                     result = DAO.insert1(tieude, batdau1, id_temp, sessionUser_id, ketthuc1, sogiohoc, noidung, framework, skills);
-                    request.getRequestDispatcher("/common/Successfully.html").forward(request, response);
+                    request.getRequestDispatcher("/common/successfully.jsp").forward(request, response);
                 } catch (SQLException e) {
                     // Xử lý ngoại lệ ở đây
                     result = false; // hoặc thực hiện hành động khác khi có lỗi

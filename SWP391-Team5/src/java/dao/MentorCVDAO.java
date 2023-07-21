@@ -25,7 +25,7 @@ public class MentorCVDAO extends DBContext {
 
     /**
      * Create CV cho mentor
-     * 
+     *
      * @param mentor_id
      * @param fullName
      * @param date_of_birth
@@ -39,7 +39,7 @@ public class MentorCVDAO extends DBContext {
      * @param programming
      * @param skillId
      * @return true or false
-     * @throws SQLException 
+     * @throws SQLException
      */
     public boolean createCV(String username, int mentor_id, String fullName, String date_of_birth, int gender, String address,
             String profession, String profession_intro, String service_des, String archivement, String archivement_des, String programming, String[] skillId) throws SQLException {
@@ -119,6 +119,7 @@ public class MentorCVDAO extends DBContext {
 
     /**
      * Lấy ra thông tin của CV mentor dựa trên mentor_id được truyền vào
+     *
      * @param mentor_id
      * @return CV_Mentor
      */
@@ -143,7 +144,7 @@ public class MentorCVDAO extends DBContext {
 
     /**
      * Lấy ra 4 mentor để hiện thị trên sider
-     * 
+     *
      * @return List
      */
     public List<CV_Mentor> getTopListMentor() {
@@ -163,9 +164,10 @@ public class MentorCVDAO extends DBContext {
         }
         return list;
     }
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public List<CV_Mentor> getAllListMentor() {
         List<CV_Mentor> list = new ArrayList<>();
@@ -184,13 +186,35 @@ public class MentorCVDAO extends DBContext {
         }
         return list;
     }
-    
+
+    public List<CV_Mentor> getAllListMentorByskill_id(int skill_id) {
+        List<CV_Mentor> list = new ArrayList<>();
+        String sql = "SELECT cv_of_mentor.mentor_id, email, full_name, avatar, profession, profession_introduction, service_description, achievements\n"
+                + "FROM user\n"
+                + "JOIN cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
+                + "JOIN cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id where skill_id = ?";
+        try {
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, skill_id);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                list.add(new CV_Mentor(rs.getInt("mentor_id"), rs.getString("profession"),
+                        rs.getString("profession_introduction"), rs.getString("service_description"), rs.getString("achievements"),
+                        new User(rs.getString("avatar"), rs.getString("full_name"), rs.getString("email"))));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     /**
-     * 
+     *
      * @param lisst
      * @param start
      * @param end
-     * @return 
+     * @return
      */
     public List<CV_Mentor> getListByPage(List<CV_Mentor> lisst, int start, int end) {
         List<CV_Mentor> arr = new ArrayList<>();
@@ -366,7 +390,6 @@ public class MentorCVDAO extends DBContext {
         }
         return 0;
     }
-        
 
     //Lấy ra số lượng trang n /  trên tổng số trang.
     public int getNumberPage() {
@@ -392,7 +415,7 @@ public class MentorCVDAO extends DBContext {
         }
         return 0;
     }
-        
+
     //List all mentor -> Da Phan Trang -> Vi tri trang.
     public List<MentorInfo> GetListMentorPagingAdm(int index) {
         List<MentorInfo> list = new ArrayList<>();
@@ -584,6 +607,7 @@ public class MentorCVDAO extends DBContext {
 
     /**
      * Lay ra cac mentor co skill phu hop voi skill ma mentee da yeu cau
+     *
      * @param itg
      * @return ArrayList
      */
@@ -652,7 +676,9 @@ public class MentorCVDAO extends DBContext {
     }
 
     /**
-     * Lay ra cac mentor co skill phu hop voi skill ma mentee da yeu cau va theo sap xep cua mentee
+     * Lay ra cac mentor co skill phu hop voi skill ma mentee da yeu cau va theo
+     * sap xep cua mentee
+     *
      * @param itg
      * @return ArrayList
      */
@@ -669,7 +695,7 @@ public class MentorCVDAO extends DBContext {
                     + "WHERE cv_skill.skill_id IN (" + String.join(",", Collections.nCopies(itg.size(), "?")) + ") "
                     + "GROUP BY cv_of_mentor.mentor_id, avatar, email, phone, cv_of_mentor.profession\n"
                     + "ORDER BY rating " + typeSort + ";";
-           
+
             PreparedStatement stm = connection.prepareStatement(sql);
 
             String countSql = "SELECT COUNT(request_id) AS count FROM swp391_group5.request WHERE mentor_id = ?";
@@ -728,21 +754,26 @@ public class MentorCVDAO extends DBContext {
     public static void main(String[] args) {
         MentorCVDAO obj = new MentorCVDAO();
         // Tạo danh sách các skill ID
-        ArrayList<Integer> skillIds = new ArrayList<>();
-        skillIds.add(1);
-        skillIds.add(2);
-        skillIds.add(3);
+//        ArrayList<Integer> skillIds = new ArrayList<>();
+//        skillIds.add(1);
+//        skillIds.add(2);
+//        skillIds.add(3);
+//
+//        // Gọi phương thức listMentorSuggestion
+//        ArrayList<CV_Mentor> mentors = obj.listMentorSuggestion(skillIds);
+//
+//        // Hiển thị thông tin mentor và count
+//        for (CV_Mentor mentor : mentors) {
+//            System.out.println("Profession: " + mentor.getProfession());
+//            System.out.println("Number of Requests: " + mentor.getNumberRequest());
+//            System.out.println("Rating: " + mentor.getRating());
+//            System.out.println("-------------------------------------");
+//        }
+        int skill_id = 4;
+        List<CV_Mentor> listMentor = obj.getAllListMentor();
+        for (CV_Mentor mentor : listMentor) {
+            System.out.println(mentor);        }
 
-        // Gọi phương thức listMentorSuggestion
-        ArrayList<CV_Mentor> mentors = obj.listMentorSuggestion(skillIds);
-
-        // Hiển thị thông tin mentor và count
-        for (CV_Mentor mentor : mentors) {
-            System.out.println("Profession: " + mentor.getProfession());
-            System.out.println("Number of Requests: " + mentor.getNumberRequest());
-            System.out.println("Rating: " + mentor.getRating());
-            System.out.println("-------------------------------------");
-        }
     }
 
 }
