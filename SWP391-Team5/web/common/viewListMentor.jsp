@@ -70,13 +70,14 @@
                                 <div class="row col-12">
                                     <div class="mb_10 col-sm-12 col-md-6">
                                         <input type="text" name="keyword" style="width: 100%" value="" class="form-control"
-                                               placeholder="Nhập từ khóa để tìm kiếm Mentor">
+                                               placeholder="Enter keywords to search Mentor by name">
                                     </div>
 
 
                                     <div class="select-search-box-multiple col-sm-12 col-md-3 mb_10">
-                                        <select style="width: 100%;" name="field_id[]" id="fields_id" multiple="multiple"
-                                                data-placeholder="Chọn kĩ năng">
+                                        <select style="width: 100%;" name="skill_id" id="fields_id" "
+                                                data-placeholder="Choose a skill">
+<!--                                            <option value=0 > All Skill</option>-->
                                             <c:forEach var="s" items="${listS}">
                                             
                                             <option value="${s.skill_id}">${s.skill_name}</option>
@@ -87,7 +88,7 @@
                                     <div class="col-sm-12 col-md-3">
                                         <button type="submit" class="btn btn-info btn_search text-uppercase mb_10 ml-5">
                                             <i class="icon icon-search"></i>
-                                            <span class="btn_search_text">Tìm kiếm</span>
+                                            <span class="btn_search_text">Find</span>
                                         </button>
                                     </div>
                                 </div>
@@ -111,20 +112,20 @@
                                         
                                         <div class="mb_10 col-md-3">
                                             <input type="text" name="professtion" style="width: 180px;" value=""
-                                                   class="form-control" placeholder="Tên nghề nghiệp">
+                                                   class="form-control" placeholder="Search by professional">
                                         </div>
                                         <div class="mb_10 col-md-3">
                                             <input type="text" name="service" style="width: 180px;" value=""
-                                                   class="form-control" placeholder="Tên dịch vụ">
+                                                   class="form-control" placeholder="Search the service">
                                         </div>
                                         <div class="mb_10 col-md-3">
                                             <input type="text" name="achievements" style="width: 180px;" value=""
-                                                   class="form-control" placeholder="Tên thành tựu">
+                                                   class="form-control" placeholder="Search by achievements">
                                         </div>
 
                                         <div class="col-md-3">                                          
                                             <button type="submit" class="ml-3 btn btn-info btn_search text-uppercase mb_10 ">
-                                                <span class="btn_search_text">Áp dụng</span>
+                                                <span class="btn_search_text">Apply</span>
                                             </button>
                                         </div>
                                     </div>

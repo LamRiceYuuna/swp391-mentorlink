@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
@@ -95,7 +95,7 @@ public class commentAndRateStartController extends HttpServlet {
             ratingSkill[2] = Integer.parseInt(rating3);
         }
         FeedbackDAO dao = new FeedbackDAO();
-        if(dao.insertFeedbackSkill(user_id, mentor_id, ratingSkill, skillId) == true && dao.insertFeedback(user_id, mentor_id, rating, opinion)) {
+        if(dao.insertFeedbackSkill(user_id, mentor_id, ratingSkill, skillId) == true && dao.insertFeedback(user_id, mentor_id, rating, opinion) == true ) {
             request.getRequestDispatcher("/mentee/feedbackSuccessful.jsp").forward(request, response);
         }else{
             request.setAttribute("error", "Loi roi be oi");

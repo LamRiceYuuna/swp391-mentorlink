@@ -149,14 +149,21 @@ public class MentorCVDAO extends DBContext {
      */
     public List<CV_Mentor> getTopListMentor() {
         List<CV_Mentor> list = new ArrayList<>();
-        String sql = "select *  from(select   mentor_id ,email,full_name, avatar, profession, profession_introduction,service_description, achievements \n"
-                + "  from user inner join cv_of_mentor on user_id = mentor_id) as top limit 4";
+        String sql = "SELECT cv.mentor_id, u.email, u. full_name, u.avatar,cv. profession, cv.profession_introduction,cv.service_description,cv. achievements, COUNT(*) AS request_count\n"
+                + "FROM cv_of_mentor cv\n"
+                + "INNER JOIN user u on  cv.mentor_id = u.user_id\n"
+                + "INNER JOIN request req ON cv.mentor_id = req.mentor_id\n"
+                + "INNER JOIN request_status rs ON req.request_status = rs.status_id\n"
+                + "WHERE rs.status_name = 'Finished'\n"
+                + "GROUP BY cv.mentor_id\n"
+                + "ORDER BY request_count DESC\n"
+                + "LIMIT 4;";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 list.add(new CV_Mentor(rs.getInt("mentor_id"), rs.getString("profession"),
-                        rs.getString("profession_introduction"), rs.getString("service_description"), rs.getString("achievements"),
+                        rs.getString("profession_introduction"), rs.getString("service_description"), rs.getString("achievements"), rs.getInt("request_count"),
                         new User(rs.getString("avatar"), rs.getString("full_name"), rs.getString("email"))));
             }
         } catch (SQLException e) {
@@ -236,10 +243,15 @@ public class MentorCVDAO extends DBContext {
     * @param achievements
     * @return 
     */
-   public List<CV_Mentor> search(String keyword, String professtion, String service, String achievements) {
+   public List<CV_Mentor> search(int skill_id, String keyword, String professtion, String service, String achievements) {
         List<CV_Mentor> list = new ArrayList<>();
-        String sql = "select   mentor_id ,email,full_name, avatar, profession, profession_introduction,service_description, achievements \n"
-                + "  from user inner join cv_of_mentor on user_id = mentor_id where 1=1 ";
+        String sql = "SELECT cv_of_mentor.mentor_id, email, full_name, avatar, profession, profession_introduction, service_description, achievements\n"
+                + "FROM user\n"
+                + "JOIN cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
+                + "JOIN cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id where 1=1  ";
+        if (skill_id != 0) {
+            sql += " and skill_id =" + skill_id;
+        }
         if (keyword != null && !keyword.equals("")) {
             sql += " and full_name like '%" + keyword + "%' ";
         }
@@ -839,7 +851,8 @@ public class MentorCVDAO extends DBContext {
         int skill_id = 4;
         List<CV_Mentor> listMentor = obj.getAllListMentor();
         for (CV_Mentor mentor : listMentor) {
-            System.out.println(mentor);        }
+            System.out.println(mentor);
+        }
 
     }
 =======

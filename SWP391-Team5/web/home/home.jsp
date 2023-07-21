@@ -86,7 +86,7 @@
                                                             <img src="temp/ic-mentee.png"
                                                                  style="width: auto; height: 18px; margin-bottom: 2px;"
                                                                  data-toggle="tooltip" data-placement="bottom" title=""
-                                                                 data-original-title="Số Mentee"> <span class="wrap-number">
+                                                                 data-original-title="Số Mentee">${p.numberRequest} <span class="wrap-number">
                                                             </span>
                                                         </div>
                                                     </div>
@@ -122,7 +122,9 @@
                                                 </p>
                                                 <div class="line line2"></div>
                                                 <div class="text-center">
+                                                    <a href="viewcv?mentor_id=${p.mentor_id}">
                                                     <span class="mentor_detail_link notopmargin mb-1">Xem chi tiết</span>
+                                                    </a>
                                                 </div>
                                             </a>
                                         </div>
@@ -143,7 +145,7 @@
                     <div class="container">
                         <div>
                             <div>
-                                <h4 class="primary-color mb-2">Các ngôn ngữ cơ bản phổ biến nhất</h4>
+                                <h4 class="primary-color mb-2">The good language for beginner </h4>
 
                             </div>
                             <div class="row">
@@ -152,14 +154,13 @@
                                     <div class="col-md-4 col-sm-12 mb-4">
                                         <div class="p-3"
                                              style="background-color: #fff; border-radius: 20px; min-height: 370px;">
-                                            <a href="#" target="_blank">
+                                            <a href="searchBySkillid?skill_id=${s.skill_id}" target="_blank">
                                                 <img src="${s.skill_img}" class="w-100 image_fade">
                                                 <div class="row" style="padding-left: 8px; ">
 
                                                 </div>
                                                 <h4 class="t600 mb-3 mt-3">${s.skill_name}</h4>
-                                                <p class="mb-3 course-desciption" style="color: #949BA1">Đặc biệt dành cho những
-                                                    người mới bắt đầu có đam mê về lập trình.</p>
+                                                <p class="mb-3 course-desciption" style="color: #949BA1">Especially for beginners who are passionate about programming.</p>
                                             </a>
                                         </div>
                                     </div>
