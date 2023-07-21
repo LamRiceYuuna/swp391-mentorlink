@@ -746,6 +746,75 @@ public class MentorCVDAO extends DBContext {
         }
         return null;
     }
+    
+    public ArrayList<CV_Mentor> listMentorSuggestionSort(ArrayList<Integer> itg, String typeSort, int index) {
+        ArrayList<CV_Mentor> list = new ArrayList<>();
+        try {
+            String sql = "SELECT cv_of_mentor.mentor_id, username, avatar, full_name, email, phone, cv_of_mentor.profession,\n"
+                    + "       GROUP_CONCAT(DISTINCT cv_skill.skill_id) AS skill_ids,\n"
+                    + "       ROUND((SELECT SUM(rate_start) FROM swp391_group5.feedback WHERE mentor_id = cv_of_mentor.mentor_id) / \n"
+                    + "             (SELECT COUNT(rate_start) FROM swp391_group5.feedback WHERE mentor_id = cv_of_mentor.mentor_id), 1) AS rating\n"
+                    + "FROM swp391_group5.user\n"
+                    + "JOIN swp391_group5.cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
+                    + "JOIN swp391_group5.cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id\n"
+                    + "WHERE cv_skill.skill_id IN (" + String.join(",", Collections.nCopies(itg.size(), "?")) + ") "
+                    + "GROUP BY cv_of_mentor.mentor_id, avatar, email, phone, cv_of_mentor.profession\n"
+                    + "ORDER BY rating " + typeSort + "limit 1 offset ?;";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(itg.size()+1, (index - 1) * 1);
+            String countSql = "SELECT COUNT(request_id) AS count FROM swp391_group5.request WHERE mentor_id = ?";
+            PreparedStatement countStm = connection.prepareStatement(countSql);
+
+            String ratingSql = "SELECT (SELECT SUM(rate_start) FROM swp391_group5.feedback WHERE mentor_id = ?) AS totalStar,\n"
+                    + "       (SELECT COUNT(rate_start) FROM swp391_group5.feedback WHERE mentor_id = ?) AS numberStar,\n"
+                    + "       ROUND((SELECT SUM(rate_start) FROM swp391_group5.feedback WHERE mentor_id = ?) / (SELECT COUNT(rate_start) "
+                    + "FROM swp391_group5.feedback WHERE mentor_id = ?), 1) AS rating";
+            PreparedStatement ratingStm = connection.prepareStatement(ratingSql);
+
+            for (int i = 0; i < itg.size(); i++) {
+                stm.setInt(i + 1, itg.get(i));
+            }
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                CV_Mentor mentor = new CV_Mentor(
+                        rs.getInt("mentor_id"),
+                        rs.getString("profession"),
+                        new User(
+                                rs.getString("avatar"),
+                                rs.getString("full_name"),
+                                rs.getString("email"),
+                                rs.getString("username"),
+                                rs.getString("phone")
+                        )
+                );
+                //Lay ra request cua moi mentor
+                int mentorId = rs.getInt("mentor_id");
+                countStm.setInt(1, mentorId);
+                ResultSet countRs = countStm.executeQuery();
+                if (countRs.next()) {
+                    int count = countRs.getInt("count");
+                    mentor.setNumberRequest(count);
+                }
+
+                //Lay ra rating cua moi mentor
+                ratingStm.setInt(1, mentorId);
+                ratingStm.setInt(2, mentorId);
+                ratingStm.setInt(3, mentorId);
+                ratingStm.setInt(4, mentorId);
+                ResultSet ratingRs = ratingStm.executeQuery();
+                if (ratingRs.next()) {
+                    float rating = ratingRs.getFloat("rating");
+                    mentor.setRating(rating);
+                }
+                list.add(mentor);
+            }
+            return list;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
         MentorCVDAO obj = new MentorCVDAO();
