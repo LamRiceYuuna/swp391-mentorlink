@@ -44,53 +44,62 @@ public class ListRequestByMe1 extends HttpServlet {
         String idAcc = request.getParameter("idAcc");
         String idRej = request.getParameter("idRej");
         String idp = request.getParameter("id");
+
+        String index = request.getParameter("index");
+        //Do luc dau chay chua co gia tri -> Nen phai gan gia tri = 1 tuc la trang dau tien. De lan dau chay o trang 1 va khac null
+        if (index == null) {
+            index = "1";
+        }
+        int indexPage = Integer.parseInt(index);
+
         requestDAO dao = new requestDAO();
         //User sessionUser = (User) session.getAttribute("acc");
         User sessionUser = (User) session.getAttribute("acc");
         String sessionUser_id = sessionUser.getUser_id();
         //String sessionUser_id = "3";
-        Date currentTime = new Date(); 
-        
-        if(request_idDel!=null){
-        dao.DeleteRequestSkill(request_idDel);
-        dao.deletebyIDForMente(request_idDel);
+        Date currentTime = new Date();
+
+        if (request_idDel != null) {
+            dao.DeleteRequestSkill(request_idDel);
+            dao.deletebyIDForMente(request_idDel);
         }
-        
-        if(request_idCan != null){
-        dao.cancelRequest(request_idCan);
+
+        if (request_idCan != null) {
+            dao.cancelRequest(request_idCan);
         }
-        if(idAcc != null){
-        dao.acceptOrRejectRequest(idAcc, 5);
+        if (idAcc != null) {
+            dao.acceptOrRejectRequest(idAcc, 5);
         }
-        if(idRej != null){
-        dao.acceptOrRejectRequest(idRej, 2);
+        if (idRej != null) {
+            dao.acceptOrRejectRequest(idRej, 2);
         }
-        int sum=0;
-        if(idp!=null){
+        int sum = 0;
+        if (idp != null) {
             int idr = Integer.parseInt(idp);
             RequestName rn = dao.getRequestByID(idr);
             int MenTorID = rn.getMentor_id();
             List<Skill> ls = rn.getSkill_name();
 //            String url = "commentAndRateStart?mentorId="+MenTorID;
-            String url = "commentAndRateStart?mentorId="+MenTorID;
+            String url = "commentAndRateStart?mentorId=" + MenTorID;
             for (Skill l : ls) {
-                url+="&skillId="+l.getSkill_id();
+                url += "&skillId=" + l.getSkill_id();
             }
             dao.update(5, idr);
             response.sendRedirect(url);
         }
-        List<RequestName> list1 = dao.listRequestByID(sessionUser_id);
-        
-        sum = list1.size();
+        List<RequestName> list1 = dao.listRequestByIDMente(sessionUser_id, indexPage);
+        List<RequestName> sumRq = dao.listRequestByID(sessionUser_id);
+
+        sum = sumRq.size();
         request.setAttribute("sum", sum);
-        
+
         for (RequestName request1 : list1) {
             if (request1.getRequest_status() == 5) {
-                if(dao.checkTime(request1.getFinish_date())){
-                dao.update(4, request1.getRequest_id());
+                if (dao.checkTime(request1.getFinish_date())) {
+                    dao.update(4, request1.getRequest_id());
                 }
             }
-            if(request1.getRequest_status()==1){
+            if (request1.getRequest_status() == 1) {
                 Timestamp timeBeginString = request1.getTime_begin();
 
                 if (timeBeginString.before(currentTime)) {
@@ -101,9 +110,10 @@ public class ListRequestByMe1 extends HttpServlet {
             }
         }
         for (RequestName request1 : list1) {
-                dao.update(request1.getRequest_status(),request1.getRequest_id());
-            }
+            dao.update(request1.getRequest_status(), request1.getRequest_id());
+        }
         request.setAttribute("lista", list1);
+        request.setAttribute("indexPagee", indexPage);
         request.getRequestDispatcher("/mentee/listrequestbyme.jsp").forward(request, response);
 
     }

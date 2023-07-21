@@ -131,7 +131,7 @@ public class requestDAO extends DBContext {
             ex.printStackTrace();
         }
     }
-    
+
     public void update_Request_Status_Finish(String requestId) {
         String sql = "UPDATE `swp391_group5`.`request` SET `request_status` = 4 WHERE `request_id` = ?;";
         try {
@@ -145,11 +145,39 @@ public class requestDAO extends DBContext {
 
     public List<RequestName> listRequestByID(String mentee_id) {
         List<RequestName> list1 = new ArrayList<>();
-        String sql = "SELECT * FROM swp391_group5.request where mentee_id= " + mentee_id + " order by request_id desc;";
+        String sql = "SELECT * FROM swp391_group5.request where mentee_id= " + mentee_id + " order by request_id desc";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            //ps.setInt(1, Integer.parseInt(mentee_id));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                RequestName rn = new RequestName();
+                rn.setRequest_id(rs.getInt(1));
+                rn.setMentor_id(rs.getInt(2));
+                rn.setMentee_id(rs.getInt(3));
+                rn.setTitle(rs.getString(4));
+                rn.setRequest_content(rs.getString(5));
+                rn.setTime_study(rs.getInt(6));
+                rn.setTime_begin(rs.getTimestamp(7));
+                rn.setCreated_date(rs.getTimestamp(8));
+                rn.setFinish_date(rs.getTimestamp(9));
+                rn.setRequest_status(rs.getInt(10));
+                rn.setSkill_name(getAllSkillByRequestID(rn.getRequest_id()));
+                list1.add(rn);
+            }
 
+        } catch (Exception e) {
+
+        }
+        return list1;
+
+    }
+
+    public List<RequestName> listRequestByIDMente(String mentee_id, int index) {
+        List<RequestName> list1 = new ArrayList<>();
+        String sql = "SELECT * FROM swp391_group5.request where mentee_id= " + mentee_id + " order by request_id desc limit 6 offset ?;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, (index - 1) * 6);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 RequestName rn = new RequestName();
@@ -252,7 +280,7 @@ public class requestDAO extends DBContext {
 //
 //    }
     public static void main(String[] args) {
-//        requestDAO rq = new requestDAO();
+        requestDAO rq = new requestDAO();
 //
 //        // Gọi phương thức listRequestByMetorID để lấy danh sách các request
 //        List<Request> requests = rq.listRequestByMetorID("2");
@@ -278,6 +306,9 @@ public class requestDAO extends DBContext {
 //
 //            System.out.println("-----------------------------");
 //        }
+        int a = 3;
+        int rs = rq.getNumberPage4(3);
+        System.out.println("NB:" + rs);
     }
 
     //Lấy ra số lượng trang n /  trên tổng số trang. của trang list following request
@@ -295,6 +326,30 @@ public class requestDAO extends DBContext {
                 //Tổng số bản ghi mentor được lấy ra / Số lượng bản ghi sẽ có trên một trang. 
                 // Lay Ra So luong trang ( Moi trang la 10 bang ghi).
                 countPage = total / 10;
+                if (total % 10 != 0) {
+                    countPage++;
+                }
+                return countPage;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
+    public int getNumberPage4(int mentee_id) {
+        String query = "SELECT count(*) FROM swp391_group5.request where mentee_id = " + mentee_id + ";";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                //Tổng số bản ghi mentor được lấy ra.
+                int total = rs.getInt(1);
+                int countPage = 0;
+                //Tổng số bản ghi mentor được lấy ra / Số lượng bản ghi sẽ có trên một trang. 
+                // Lay Ra So luong trang ( Moi trang la 10 bang ghi).
+                countPage = total / 6;
                 if (total % 10 != 0) {
                     countPage++;
                 }
@@ -472,7 +527,7 @@ public class requestDAO extends DBContext {
             ex.printStackTrace();
         }
     }
-    
+
     public void acceptOrRejectRequest(String request_idCan, int status) {
         String sql = "UPDATE `swp391_group5`.`request`\n"
                 + "SET\n"

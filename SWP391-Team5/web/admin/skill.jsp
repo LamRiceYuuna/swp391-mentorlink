@@ -442,7 +442,7 @@
                             </a></li>
                         <li><a href="listmentee">
                                 <i class="fas fa-chart-bar"></i>
-                                <span class="nav-item">List-All-Mentee</span>
+                                <span class="nav-item">Statistic-Mentee</span>
                             </a></li>
 
                         <li><a href="logout" class="logout">

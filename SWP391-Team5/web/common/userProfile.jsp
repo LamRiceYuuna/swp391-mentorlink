@@ -62,19 +62,19 @@
                                 <i class="fa fa-key text-center mr-1 icon"></i>
                                 Change Password
                             </a>
-                            
+
                             <c:if test="${sessionScope.acc.cv_status == 1}">
                                 <a class="nav-link link" id="security-tab" data-toggle="pill" href="viewcv?mentor_id=${sessionScope.acc.getUser_id()}" role="tab"
-                               aria-controls="security" aria-selected="false">
-                                <i class="fa fa-user text-center mr-1 icon"></i>
-                                View CV
-                            </a>
-                        </c:if>
-                            <a data-modal-target="#popup-btn-rq-statistic" class="nav-link link" id="security-tab" data-toggle="pill" href="#" role="tab"
-                               aria-controls="security" aria-selected="false">
-                                <i class="fa fa-user text-center mr-1 icon"></i>
-                                View Statistic Request
-                            </a>
+                                   aria-controls="security" aria-selected="false">
+                                    <i class="fa fa-user text-center mr-1 icon"></i>
+                                    View CV
+                                </a>
+                                <a data-modal-target="#popup-btn-rq-statistic" class="nav-link link" id="security-tab" data-toggle="pill" href="updatecv" role="tab"
+                                   aria-controls="security" aria-selected="false">
+                                    <i class="fa fa-user text-center mr-1 icon"></i>
+                                    Update CV
+                                </a>
+                            </c:if>
                         </div>
                     </div>
                     <form id="form2" action="UserProfile" method="post">                       
@@ -90,7 +90,7 @@
                                             <input type="text" class="form-control" name="account_name" value="${InfoUser.username}" required>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-6">                                      
                                         <div class="form-group">
                                             <label class="lab">Full Name</label>
