@@ -154,14 +154,13 @@
                                     <div class="col-md-4 col-sm-12 mb-4">
                                         <div class="p-3"
                                              style="background-color: #fff; border-radius: 20px; min-height: 370px;">
-                                            <a href="#" target="_blank">
+                                            <a href="searchBySkillid?skill_id=${s.skill_id}" target="_blank">
                                                 <img src="${s.skill_img}" class="w-100 image_fade">
                                                 <div class="row" style="padding-left: 8px; ">
 
                                                 </div>
                                                 <h4 class="t600 mb-3 mt-3">${s.skill_name}</h4>
-                                                <p class="mb-3 course-desciption" style="color: #949BA1">Đặc biệt dành cho những
-                                                    người mới bắt đầu có đam mê về lập trình.</p>
+                                                <p class="mb-3 course-desciption" style="color: #949BA1">Especially for beginners who are passionate about programming.</p>
                                             </a>
                                         </div>
                                     </div>
