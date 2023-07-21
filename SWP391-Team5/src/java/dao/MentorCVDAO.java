@@ -149,21 +149,14 @@ public class MentorCVDAO extends DBContext {
      */
     public List<CV_Mentor> getTopListMentor() {
         List<CV_Mentor> list = new ArrayList<>();
-        String sql = "SELECT cv.mentor_id, u.email, u. full_name, u.avatar,cv. profession, cv.profession_introduction,cv.service_description,cv. achievements, COUNT(*) AS request_count\n"
-                + "FROM cv_of_mentor cv\n"
-                + "INNER JOIN user u on  cv.mentor_id = u.user_id\n"
-                + "INNER JOIN request req ON cv.mentor_id = req.mentor_id\n"
-                + "INNER JOIN request_status rs ON req.request_status = rs.status_id\n"
-                + "WHERE rs.status_name = 'Finished'\n"
-                + "GROUP BY cv.mentor_id\n"
-                + "ORDER BY request_count DESC\n"
-                + "LIMIT 4;";
+        String sql = "select *  from(select   mentor_id ,email,full_name, avatar, profession, profession_introduction,service_description, achievements \n"
+                + "  from user inner join cv_of_mentor on user_id = mentor_id) as top limit 4";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 list.add(new CV_Mentor(rs.getInt("mentor_id"), rs.getString("profession"),
-                        rs.getString("profession_introduction"), rs.getString("service_description"), rs.getString("achievements"), rs.getInt("request_count"),
+                        rs.getString("profession_introduction"), rs.getString("service_description"), rs.getString("achievements"),
                         new User(rs.getString("avatar"), rs.getString("full_name"), rs.getString("email"))));
             }
         } catch (SQLException e) {
@@ -194,31 +187,6 @@ public class MentorCVDAO extends DBContext {
         return list;
     }
 
-<<<<<<< HEAD
-    public List<CV_Mentor> getAllListMentorByskill_id(int skill_id) {
-        List<CV_Mentor> list = new ArrayList<>();
-        String sql = "SELECT cv_of_mentor.mentor_id, email, full_name, avatar, profession, profession_introduction, service_description, achievements\n"
-                + "FROM user\n"
-                + "JOIN cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
-                + "JOIN cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id where skill_id = ?";
-        try {
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, skill_id);
-            ResultSet rs = stm.executeQuery();
-
-            while (rs.next()) {
-                list.add(new CV_Mentor(rs.getInt("mentor_id"), rs.getString("profession"),
-                        rs.getString("profession_introduction"), rs.getString("service_description"), rs.getString("achievements"),
-                        new User(rs.getString("avatar"), rs.getString("full_name"), rs.getString("email"))));
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return list;
-    }
-
-=======
->>>>>>> tuandv
     /**
      *
      * @param lisst
@@ -243,15 +211,10 @@ public class MentorCVDAO extends DBContext {
     * @param achievements
     * @return 
     */
-   public List<CV_Mentor> search(int skill_id, String keyword, String professtion, String service, String achievements) {
+   public List<CV_Mentor> search(String keyword, String professtion, String service, String achievements) {
         List<CV_Mentor> list = new ArrayList<>();
-        String sql = "SELECT cv_of_mentor.mentor_id, email, full_name, avatar, profession, profession_introduction, service_description, achievements\n"
-                + "FROM user\n"
-                + "JOIN cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
-                + "JOIN cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id where 1=1  ";
-        if (skill_id != 0) {
-            sql += " and skill_id =" + skill_id;
-        }
+        String sql = "select   mentor_id ,email,full_name, avatar, profession, profession_introduction,service_description, achievements \n"
+                + "  from user inner join cv_of_mentor on user_id = mentor_id where 1=1 ";
         if (keyword != null && !keyword.equals("")) {
             sql += " and full_name like '%" + keyword + "%' ";
         }
@@ -431,8 +394,6 @@ public class MentorCVDAO extends DBContext {
         return 0;
     }
 
-<<<<<<< HEAD
-=======
     //Lấy ra số lượng trang n /  trên tổng số trang Listmentor suggestion.
     public int getNumberPage3() {
         String query = "SELECT count(*) as total\n"
@@ -463,7 +424,6 @@ public class MentorCVDAO extends DBContext {
         return 0;
     }
 
->>>>>>> tuandv
     //List all mentor -> Da Phan Trang -> Vi tri trang.
     public List<MentorInfo> GetListMentorPagingAdm(int index) {
         List<MentorInfo> list = new ArrayList<>();
@@ -603,15 +563,6 @@ public class MentorCVDAO extends DBContext {
             ps2.setString(6, programming);
             ps2.setInt(7, mentor_id);
             ps2.executeUpdate();
-<<<<<<< HEAD
-            
-//            String sqlDel = 
-            
-            // Câu lệnh INSERT vào table_B
-            String sql3 = "UPDATE `swp391_group5`.`cv_skill`\n"
-                    + "SET `skill_id` = ?\n"
-                    + "WHERE `mentor_id` = ?;";
-=======
 
             String sql4 = "DELETE FROM `swp391_group5`.`cv_skill`\n"
                     + "WHERE mentor_id = ?;";
@@ -626,7 +577,6 @@ public class MentorCVDAO extends DBContext {
                     + "VALUES\n"
                     + "(?,\n"
                     + "?);";
->>>>>>> tuandv
             PreparedStatement ps3 = connection.prepareStatement(sql3);
 
             for (String id : skillId) {
@@ -760,13 +710,7 @@ public class MentorCVDAO extends DBContext {
                     + "JOIN swp391_group5.cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id\n"
                     + "WHERE cv_skill.skill_id IN (" + String.join(",", Collections.nCopies(itg.size(), "?")) + ") "
                     + "GROUP BY cv_of_mentor.mentor_id, avatar, email, phone, cv_of_mentor.profession\n"
-<<<<<<< HEAD
-                    + "ORDER BY rating " + typeSort + ";";
-
-            PreparedStatement stm = connection.prepareStatement(sql);
-=======
                     + "ORDER BY rating " + typeSort + "limit 1 offset ?;";
->>>>>>> tuandv
 
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(itg.size()+1, (index - 1) * 1);
@@ -823,15 +767,9 @@ public class MentorCVDAO extends DBContext {
         return null;
     }
 
-<<<<<<< HEAD
-    public static void main(String[] args) {
-        MentorCVDAO obj = new MentorCVDAO();
-        // Tạo danh sách các skill ID
-=======
 //    public static void main(String[] args) {
 //        MentorCVDAO obj = new MentorCVDAO();
 //        // Tạo danh sách các skill ID
->>>>>>> tuandv
 //        ArrayList<Integer> skillIds = new ArrayList<>();
 //        skillIds.add(1);
 //        skillIds.add(2);
@@ -847,16 +785,6 @@ public class MentorCVDAO extends DBContext {
 //            System.out.println("Rating: " + mentor.getRating());
 //            System.out.println("-------------------------------------");
 //        }
-<<<<<<< HEAD
-        int skill_id = 4;
-        List<CV_Mentor> listMentor = obj.getAllListMentor();
-        for (CV_Mentor mentor : listMentor) {
-            System.out.println(mentor);
-        }
-
-    }
-=======
 //    }
->>>>>>> tuandv
 
 }
