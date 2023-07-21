@@ -36,10 +36,10 @@
           type="text/css" media="all" />
 
 
+    <jsp:useBean id="a" class="dao.MentorCVDAO" scope = "request"></jsp:useBean>
+    </head>
 
-</head>
-
-<body>
+    <body>
     <jsp:include page="/home/header.jsp"/>
     <div id="content" class="site-content">
         <div class="sigma_subheader after-title text-left style-1 dark-overlay ">
@@ -52,15 +52,15 @@
                                 <li itemprop="itemListElement" itemscope itemtype="#"
                                     class="breadcrumb-item"><a itemprop="item"
                                                            href="#"><span
-                                            itemprop="name">Home</span></a></li>
-                                <li class="breadcrumb-item-page">(Page)</li>
+                                            itemprop="name"></span></a></li>
+                                <li class="breadcrumb-item-page"></li>
                             </ol>
                         </nav>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="page-content">
+        <div class="page-content" style="min-height: 56vh">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-lg-4">
@@ -72,12 +72,12 @@
                                 <form action="mentorSuggestion" method="post">
                                     <div class="dc-innerbanner">
                                         <div class="dc-formtheme dc-form-advancedsearch">
-<!--                                            <div class="form-group">
-                                                <input type="hidden" name="searchby" class="form-control"
-                                                       value="both">
-                                                <input type="text" name="keyword" class="form-control"
-                                                       placeholder="Search" value>
-                                            </div>-->
+                                            <!--                                            <div class="form-group">
+                                                                                            <input type="hidden" name="searchby" class="form-control"
+                                                                                                   value="both">
+                                                                                            <input type="text" name="keyword" class="form-control"
+                                                                                                   placeholder="Search" value>
+                                                                                        </div>-->
                                             <div class="form-group">
                                                 <h4>Rating</h4>
                                                 <div class="dc-select">
@@ -89,24 +89,24 @@
                                                             Sort increase</option>
                                                         <option data-flag class=" level-0" value="desc">
                                                             Sort reduction</option>    
-                                                        
+
                                                     </select>
                                                 </div>
                                             </div>
-<!--                                            <div class="form-group">
-                                                <h4>Request</h4>
-                                                <div class="dc-select">
-                                                    <select name="request_sort" class="chosen-select">
-                                                        <option value>Select a sort</option>
-                                                        <option data-flag class=" level-0" value="default">
-                                                            Default</option>    
-                                                        <option data-flag class=" level-0" value="asc">
-                                                            Sort increase</option>
-                                                        <option data-flag class=" level-0" value="desc">
-                                                            Sort reduction</option> 
-                                                    </select>
-                                                </div>
-                                            </div>-->
+                                            <!--                                            <div class="form-group">
+                                                                                            <h4>Request</h4>
+                                                                                            <div class="dc-select">
+                                                                                                <select name="request_sort" class="chosen-select">
+                                                                                                    <option value>Select a sort</option>
+                                                                                                    <option data-flag class=" level-0" value="default">
+                                                                                                        Default</option>    
+                                                                                                    <option data-flag class=" level-0" value="asc">
+                                                                                                        Sort increase</option>
+                                                                                                    <option data-flag class=" level-0" value="desc">
+                                                                                                        Sort reduction</option> 
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>-->
                                             <div class="dc-btnarea">
                                                 <input type="submit" value="Submit" style="background: #175E4C; border: none">
                                             </div>
@@ -154,7 +154,7 @@
                                             <h3>
                                                 <a
                                                     href="viewcv?mentor_id=${s.getMentor_id()}">${s.getInfor().getFull_name()}</a>
-                                                <i class="fa fa-leaf" data-toggle="tooltip" style="width: 30px; height: 20px; margin-left: 1px; 
+                                                <i class="fa fa-leaf" data-toggle="tooltip" style="width: 30px; height: 20px; margin-left: 1px;
                                                    line-height: 20px; font-size: 18px; color: #175E4C; background-color: white" title="Verified user"></i>
                                             </h3>
                                             <div class="user-tag">
@@ -217,8 +217,45 @@
 
 
                     </div>
+                    <div class="pagination-custom">
+                        <!-- So trang dang dung JspUseBean: Doi tuong cua class CVDAO -->
+                        <c:forEach begin="1" end="${a.getNumberPage3()}" var = "i">
+                            <!-- Lay ra vi tri trang dang dung -->
+                            <a href="mentorSuggestion?index=${i}" class="${indexPagee == i ?  "active" : ""}">${i}</a>
+                        </c:forEach>
+                    </div>
+                    <style>
+                        .pagination-custom a {
+                            color: #333;
+                            text-decoration: none;
+                            padding: 8px 10px;
+                            margin: 0 5px;
+                            border: 1px solid #ddd;
+                            border-radius: 3px;
+                            display: inline-block;
+                            font-size: 12px;
+                            width: 2%;
+                        }
+
+                        .pagination-custom a:hover {
+                            background-color: #ddd;
+                        }
+
+                        .pagination-custom a.active {
+                            background-color: #1e7e34;
+                            color: #fff;
+                        }
+
+                        /* Luật CSS mới để áp dụng màu khác cho các nút có class "current" */
+                        .pagination-custom a.current {
+                            background-color: #ffffff;
+                            color: #333;
+                        }
+                    </style>
                 </div>
+
             </div>
+
         </div>
     </div>
     <jsp:include page="/home/footer.jsp"/>

@@ -37,7 +37,7 @@
         <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="assets/css/ratecomment.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
- <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
 
         <title>${cv.getInfor().getFull_name()}</title>
@@ -136,9 +136,13 @@
                                         <div class="profile-action">
                                             <div class="profile_btn box-group box-group-custom" id="connect_mentor_pair">
                                                 <div class="box-group-custom-top">
-                                                    <c:if test="${sessionScope.acc.role != 2}"> 
+                                                    <c:if test="${sessionScope.acc.role == 1}"> 
                                                         <a href="requestMentor?mentor_id=${mentor_id}"><button id="show-login" type="button" class="btn btn-info btn-box-top-lg"
-                                                                                                               style="background-color: #175E4C; color: #fff; margin-top: 20px;">Tạo yêu cầu</button></a>
+                                                                                                               style="background-color: #175E4C; color: #fff; margin-top: 20px;">Create Request</button></a>
+                                                        </c:if>
+                                                        <c:if test="${sessionScope.acc.role == 2 && sessionScope.acc.user_id == mentor_id}"> 
+                                                        <a href="updatecv"><button id="show-login" type="button" class="btn btn-info btn-box-top-lg"
+                                                                                                               style="background-color: #175E4C; color: #fff; margin-top: 20px;">Update CV</button></a>
                                                         </c:if>
                                                 </div>
                                             </div>
@@ -149,11 +153,11 @@
                                             style="float: left; display: flex; overflow-x: auto; white-space: nowrap; max-width: 100%;">
                                             <li class="first_tab">
                                                 <a href="#profile" role="tab" data-toggle="tab_profile"
-                                                   data-get="profile">Hồ sơ</a>
+                                                   data-get="profile">CV Profile</a>
                                             </li>
                                             <li class="first_tab">
                                                 <a href="#review" role="tab" data-toggle="tab_profile"
-                                                   data-get="review">Đánh giá</a>
+                                                   data-get="review">Feedback</a>
                                             </li>
                                         </ul>
                                         <div class="tab-container mt-4" style="clear: both;">
@@ -167,14 +171,14 @@
                                                     <!--<div class="line"></div>-->
                                                     <div class="mentor_section mentor_intro_text">
                                                         <div class="intro_section_title">
-                                                            <h4>GIỚI THIỆU BẢN THÂN</h4>
+                                                            <h4>SELF INTRODUCTION</h4>
                                                         </div>
                                                         <p></p>
                                                     </div>
                                                     <div class="line"></div>
                                                     <div class="mentor_section mentor_exp">
                                                         <div class="intro_section_title">
-                                                            <h4>NGHỀ NGHIỆP</h4>
+                                                            <h4>PROFESSION</h4>
                                                         </div>
                                                         <ul>
                                                             <li class="clearfix">
@@ -190,7 +194,7 @@
                                                                         <p class="achievements"></p>
                                                                     </div>
                                                                     <div class="date">
-                                                                        <span class="start_time"> 05/2022</span>
+                                                                        <span class="start_time">05/2022</span>
                                                                         <span> - </span>
                                                                         <span class="end_time">Hiện tại</span>
                                                                     </div>
@@ -200,7 +204,7 @@
                                                     </div>
                                                     <div class="mentor_section mentor_exp mentor_edu">
                                                         <div class="intro_section_title">
-                                                            <h4>THÀNH TÍCH</h4>
+                                                            <h4>ARCHIVEMENT</h4>
                                                         </div>
                                                         <ul>
                                                             <li class="clearfix">
@@ -245,7 +249,7 @@
                                                     </div>
                                                     <div class="mentor_section mentor_awards">
                                                         <div class="intro_section_title">
-                                                            <h4>DỊCH VỤ</h4>
+                                                            <h4>SERVICE</h4>
                                                         </div>
                                                         <ul>
                                                             <li class="clearfix">
@@ -271,15 +275,15 @@
                                                 <div class="pb-4 pt-4 pl-3 pr-3">
                                                     <div class="row">
                                                         <div class="wrapper1  row">
-                                                            <h3>Kĩ năng</h3> 
+                                                            <h3>Mentor's Skills</h3> 
                                                             <c:forEach var="f" items="${listFS}">
                                                                 <div class="col-6" style="margin-bottom: 20px">
                                                                     <h5 style="display: inline">${f.getSkill().getSkill_name()}: ${f.getStar_rate_skill()}/5</h5>                                                          
                                                                     <i class="fa fa-star yellow-star" style="font-size: 22px"></i>
                                                                 </div>
                                                             </c:forEach>
-                                                                
-                                                          
+
+
 
                                                         </div>
 
@@ -288,7 +292,7 @@
 
 
                                                 <div style="text-align: center; background: #175E4C; border-radius: 8px;">
-                                                    <h3 style="color: white">Đánh Từ Mentee</h3>
+                                                    <h3 style="color: white">Feedback From Mentee</h3>
                                                 </div>
                                                 <div style="border-top: 0.3px solid #E9E9E9;" class=""></div>
                                                 <c:forEach var="i" items="${listF}">
@@ -389,7 +393,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h4 class="mb-4 pl-0" style="font-size: 16px; font-weight: bold;">Có thể bạn quan tâm
+                                    <h4 class="mb-4 pl-0" style="font-size: 16px; font-weight: bold;">Maybe you are interested
                                     </h4>
                                     <c:forEach var="i" begin="1" end="5">
                                         <div class="mentor_right_item pb-3">
