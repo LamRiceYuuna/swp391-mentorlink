@@ -137,7 +137,6 @@
                     <div class="col-md-12 col-lg-8">
 
                         <div class="col-12 order-last">
-                             <c:set var="menteeId" value="${sessionScope.acc.user_id}" />
                             <c:forEach var="s" items="${listS}">
                                 <div class="mentor-widget">
                                     <div class="user-info-left">
@@ -219,7 +218,7 @@
                     </div>
                     <div class="pagination-custom">
                         <!-- So trang dang dung JspUseBean: Doi tuong cua class CVDAO -->
-                        <c:forEach begin="1" end="${a.getNumberPage3(menteeId)}" var = "i">
+                        <c:forEach begin="1" end="${a.getNumberPage3()}" var = "i">
                             <!-- Lay ra vi tri trang dang dung -->
                             <a href="mentorSuggestion?index=${i}" class="${indexPagee == i ?  "active" : ""}">${i}</a>
                         </c:forEach>
