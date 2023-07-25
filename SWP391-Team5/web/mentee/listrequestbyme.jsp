@@ -80,7 +80,7 @@
         <body>
         <jsp:include page="../home/header.jsp"/>
 
-        <div class="header_fixed">
+        <div class="header_fixed" style="min-height: 54vh;">
             <div class="outer">
                 <div class="title">
                     <h1>List Request</h1>

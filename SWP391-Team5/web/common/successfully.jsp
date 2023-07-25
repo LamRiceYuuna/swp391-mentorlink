@@ -49,19 +49,11 @@
                                     Your request has been successfully completed. We sincerely hope you will continue to contribute meaningfully to the platform.
                                 </h4>
                             </div>
-
-
-
                             <div class="mb_10 center mt-3">
-<!--                                <button type="submit" class="btn btn-success"
-                                        style="min-width: 200px;">CV của bạn</button>-->
-                                <a href="Home" class="btn btn-success"
-                                   style="min-width: 200px;">Back to Home</a>
+                                <a href="listrequestbyme1" class="btn btn-success"
+                                   style="min-width: 200px;">Go to List Request</a>
                             </div>
 
-                            <!--                            <div class="mb_10 nobottommargin center">
-                                                            <a href="login" class="">Back to Login</a>
-                                                        </div>-->
                         </div>
                     </div>
                 </div>

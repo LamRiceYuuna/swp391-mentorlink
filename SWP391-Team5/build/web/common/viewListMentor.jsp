@@ -14,8 +14,7 @@
 
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <link rel="icon" href="https://scontent.fhan5-1.fna.fbcdn.net/v/t1.15752-9/346119165_204038079126623_4944693773758350157_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_ohc=59rA4Ca5SLQAX9FFAc0&_nc_ht=scontent.fhan5-1.fna&oh=03_AdRxmjNtaFmGhZQ4ul_XUCsH5XiC-mmcQODINzz4E7nZ8A&oe=6496E682">
-
+        <link rel="icon" href="temp/logo2.png">
         <link
             href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Roboto:300,300i,400,400i,500,500i,700,700i&amp;subset=vietnamese"
             rel="stylesheet">

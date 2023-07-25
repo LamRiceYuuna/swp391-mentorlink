@@ -89,11 +89,11 @@
                                                         </div>
                                                         <div class="pl-0" style="width: 100%;">
                                                             <div>
-                                                                <a href="UserProfile" class="" style="font-size: 14px;" title="Duy Dao">
+                                                                <a href="UserProfile" class="" style="font-size: 14px;" title="">
                                                                     Mentee: ${sessionScope.acc.username} </a>
                                                             </div>
                                                             <div>
-                                                                <a href="UserProfile" class="" style="font-size: 12px;" title="Duy Dao">
+                                                                <a href="UserProfile" class="" style="font-size: 12px;" title="">
                                                                     My profile
                                                                 </a>
                                                             </div>

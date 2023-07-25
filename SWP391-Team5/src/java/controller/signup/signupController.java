@@ -112,7 +112,7 @@ public class signupController extends HttpServlet {
             User acc2 = accD.getAccByEmail(email);
             if (acc1 != null || acc2 != null) {
                 request.setAttribute("err", "Tên tài khoản hoặc email đã được đăng ký!!");
-                request.getRequestDispatcher("signup.jsp").forward(request, response);
+                request.getRequestDispatcher("signup/signup.jsp").forward(request, response);
 
             } else {
                 session.setAttribute("drawUserName", username);

@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="assets/css/custom.minbc11.css?v=99" type="text/css" />
         <link rel="stylesheet" href="assets/css/override.css" type="text/css" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Change password successfully</title>
+        <title>Successfully</title>
     </head>
 
 
@@ -27,7 +27,7 @@
         <jsp:include page="../home/header.jsp"/>
 
         <section id="content">
-            <div class="content-wrap nopadding">
+            <div class="content-wrap nopadding" style="margin-top: 109px; min-height: 52vh">
                 <div class="login_container"
                      style=" background: url() center center no-repeat; background-size: cover;">
                 </div>
@@ -35,7 +35,7 @@
                      style="max-width: 500px; background-color: rgba(255,255,255,0.93);">
                     <div class="card-body nopadding">
                         <div class="wrap-title">
-                            <h3 class="title">Thanks for your feedback ! </h3>
+                            <h3 class="title">Successfully</h3>
                         </div>
                         <div class="login-logo">
                             <img src="assets/images/logo2.png" alt="ym">

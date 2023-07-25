@@ -17,7 +17,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />   
 
-
+    <link rel="icon" href="temp/logo2.png">
     <link rel="stylesheet" id="google-fonts-css"
           href="https://fonts.googleapis.com/css?family=Poppins%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900%26display%3Dswap%7COpen+Sans%3A300%2C400%2C600%2C700%2C800%26display%3Dswap"
           type="text/css" media="all" />
