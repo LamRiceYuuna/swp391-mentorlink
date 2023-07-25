@@ -283,7 +283,8 @@ public class UserDAO extends DBContext {
     }
 
     public void insert(String username, String password, String email, String role, String name, String date, String address, String gender, String phone) {
-        String sql = "INSERT INTO `swp391_group5`.`user` (`username`, `password`, `gender`, `full_name`, `date_of_birth`, `email`, `address`, `phone`, `role`, `user_status`) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = " INSERT INTO `swp391_group5`.`user` (`username`, `password`, `gender`, `avatar`, `full_name`, `date_of_birth`, `email`, `address`, `phone`, `role`, `user_status`)\n" +
+                                                                                                " VALUES (?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?);";
         // chuye sang date
         Date birthdate = null;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -294,19 +295,21 @@ public class UserDAO extends DBContext {
         }
         java.sql.Date sqlBirthdate = new java.sql.Date(birthdate.getTime());
         //:
+        String avatar = "avatar.jpg";
         int user_status = 1;
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, username);
             ps.setString(2, password);
             ps.setBoolean(3, Boolean.parseBoolean(gender));
-            ps.setString(4, name);
-            ps.setDate(5, sqlBirthdate);
-            ps.setString(6, email);
-            ps.setString(7, address);
-            ps.setString(8, phone);
-            ps.setInt(9, Integer.parseInt(role));
-            ps.setInt(10, user_status);
+            ps.setString(4, avatar);
+            ps.setString(5, name);
+            ps.setDate(6, sqlBirthdate);
+            ps.setString(7, email);
+            ps.setString(8, address);
+            ps.setString(9, phone);
+            ps.setInt(10, Integer.parseInt(role));
+            ps.setInt(11, user_status);
             ps.executeUpdate();
 
         } catch (SQLException ex) {
