@@ -71,9 +71,13 @@ public class requestDAO extends DBContext {
      */
     public List<Request> listRequestByMetorID(String mentor_id, int index) {
         List<Request> list1 = new ArrayList<>();
-        String sql = "SELECT * FROM swp391_group5.request where mentor_id = ? and request_status in (1, 2, 4) limit 10 offset ?;";
+        String sql = "SELECT *\n"
+                + "FROM swp391_group5.request\n"
+                + "WHERE mentor_id = ? AND request_status IN (1, 2, 4)\n"
+                + "ORDER BY request_id DESC\n"
+                + "LIMIT 10 OFFSET ?;";
         String sql2 = "select skill.skill_name from swp391_group5.request_skill join swp391_group5.skill on skill.skill_id = request_skill.skill_id "
-                + "where request_skill.request_id = ?;";
+                + "where request_skill.request_id = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, Integer.parseInt(mentor_id));
@@ -312,7 +316,7 @@ public class requestDAO extends DBContext {
         int b = 2;
         String c = rq.getmailmentor(b);
         System.out.println(c);
-        
+
     }
 
     //Lấy ra số lượng trang n /  trên tổng số trang. của trang list following request
@@ -913,9 +917,9 @@ public class requestDAO extends DBContext {
 //        }
 //        return email; 
 //    }
-     public String getmailmentor(int id_temp) {
-        
-        String sql = "select email from swp391_group5.user where user_id= "+id_temp+";";
+    public String getmailmentor(int id_temp) {
+
+        String sql = "select email from swp391_group5.user where user_id= " + id_temp + ";";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -930,7 +934,7 @@ public class requestDAO extends DBContext {
     }
 
     public String getEmailToSend(String requestId_yes) {
-         String sql = "select user.email from  swp391_group5.user join swp391_group5.request on user.user_id = mentee_id where request_id = " +requestId_yes+" ;";
+        String sql = "select user.email from  swp391_group5.user join swp391_group5.request on user.user_id = mentee_id where request_id = " + requestId_yes + " ;";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -942,7 +946,6 @@ public class requestDAO extends DBContext {
 
         }
         return null;
-            }
+    }
 
 }
-
