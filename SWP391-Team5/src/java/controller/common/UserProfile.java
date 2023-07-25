@@ -130,7 +130,6 @@ public class UserProfile extends HttpServlet {
     }// </editor-fold>
 
     public static void main(String[] args) {
-
         UserDAO dao = new UserDAO();
         User userIf = dao.getUserById(3);
         String avatarUrl = userIf.getAvatar();
