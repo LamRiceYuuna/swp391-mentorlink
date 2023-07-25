@@ -309,6 +309,10 @@ public class requestDAO extends DBContext {
         int a = 3;
         int rs = rq.getNumberPage4(3);
         System.out.println("NB:" + rs);
+        int b = 2;
+        String c = rq.getmailmentor(b);
+        System.out.println(c);
+        
     }
 
     //Lấy ra số lượng trang n /  trên tổng số trang. của trang list following request
@@ -892,4 +896,53 @@ public class requestDAO extends DBContext {
         return count;
     }
 
+//    public String getmailmentor(int id_temp) {
+//        String email = "";
+//        String sql = "select email from swp391_group5.user where user_id= ?";
+//        try {
+//            PreparedStatement st = connection.prepareStatement(sql);
+//            
+//            st.setInt(1, id_temp);
+//            ResultSet rs = ps.executeQuery();
+//            if (rs.next()) {
+//               email = rs.getString("email");
+//            }
+//           ps.executeQuery();
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//        }
+//        return email; 
+//    }
+     public String getmailmentor(int id_temp) {
+        
+        String sql = "select email from swp391_group5.user where user_id= "+id_temp+";";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
+    public String getEmailToSend(String requestId_yes) {
+         String sql = "select user.email from  swp391_group5.user join swp391_group5.request on user.user_id = mentee_id where request_id = " +requestId_yes+" ;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+
+        } catch (Exception e) {
+
+        }
+        return null;
+            }
+
 }
+
