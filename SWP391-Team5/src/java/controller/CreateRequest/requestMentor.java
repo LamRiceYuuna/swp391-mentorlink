@@ -78,7 +78,6 @@ public class requestMentor extends HttpServlet {
         String mail = sessionUser.getEmail();
         String name = sessionUser.getFull_name();
         //lấy id mentor
-        // trước hết cứ mặc định là 2
         String tieude = request.getParameter("tieude");
         String batdau = request.getParameter("batdau");
         String ketthuc = request.getParameter("ketthuc");
@@ -88,6 +87,7 @@ public class requestMentor extends HttpServlet {
         String framework = request.getParameter("framework");
         request.setAttribute("skills", skills);
         Mail ml = new Mail();
+        
         //********************************************************
         requestMentor rq = new requestMentor();
         Timestamp batdau1 = rq.convertToTimestamp(batdau);
@@ -126,8 +126,9 @@ public class requestMentor extends HttpServlet {
                 processRequest(request, response);
             } else {
                 requestDAO DAO = new requestDAO();
-//                DAO.insert1(tieude, batdau1, id_mentor, "2", ketthuc1, sogiohoc, noidung, framework, skills);
-
+                
+                String email_mentor = DAO.getmailmentor(id_temp);
+                System.out.println(email_mentor);
                 try {
                     result = DAO.insert1(tieude, batdau1, id_temp, sessionUser_id, ketthuc1, sogiohoc, noidung, framework, skills);
                     String messageText = "Mentor Link hello: " + name
@@ -138,12 +139,20 @@ public class requestMentor extends HttpServlet {
                     + "\ncontent: " + noidung
                     + "\nRequests will be approved at the latest 12 hours";
                     ml.send(mail, messageText);
-                    
+                     String message = "You have a new request from: " + name
+                    + "\nTitle: " + tieude
+                    + "\nStart time: " + batdau1
+                    + "\nEnd time ...: " + ketthuc1
+                    + "\nDuration of study: " + sogiohoc
+                    + "\ncontent: " + noidung
+                    + "\nRequests will be approved at the latest 12 hours";
+                     ml.send(email_mentor, message);
                     request.getRequestDispatcher("/common/successfully.jsp").forward(request, response);
                 } catch (SQLException e) {
                     // Xử lý ngoại lệ ở đây
                     result = false; // hoặc thực hiện hành động khác khi có lỗi
-                } catch (ParseException ex) {
+                } 
+                catch (ParseException ex) {
                     Logger.getLogger(requestMentor.class.getName()).log(Level.SEVERE, null, ex);
                 }
                

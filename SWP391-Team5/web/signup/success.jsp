@@ -1,10 +1,3 @@
-
-<%-- 
-    Document   : forgetPassword
-    Created on : Jul 1, 2023, 3:22:04 PM
-    Author     : lamnb
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -46,7 +39,7 @@
                         <div id="change-content">
                             <div class="center">
                                 <h4 style="margin-bottom: 50px">
-                                    Your request has been successfully completed. We sincerely hope you will continue to contribute meaningfully to the platform.
+                                   Congratulations, you have successfully registered
                                 </h4>
                             </div>
 
@@ -55,8 +48,8 @@
                             <div class="mb_10 center mt-3">
 <!--                                <button type="submit" class="btn btn-success"
                                         style="min-width: 200px;">CV của bạn</button>-->
-                                <a href="Home" class="btn btn-success"
-                                   style="min-width: 200px;">Back to Home</a>
+                                <a href="login" class="btn btn-success"
+                                   style="min-width: 200px;">Back to Login</a>
                             </div>
 
                             <!--                            <div class="mb_10 nobottommargin center">
