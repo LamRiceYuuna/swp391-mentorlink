@@ -64,13 +64,20 @@ public class UserProfile extends HttpServlet {
         User sessionUser = (User) session.getAttribute("acc");
         // Lấy user_id từ đối tượng User lấy từ session
         String sessionUser_id = sessionUser.getUser_id();
+        
+       
+        
+        
         // Khởi tạo đối tượng UserDAO
         UserDAO dao = new UserDAO();
         // Sử dụng UserDAO để lấy thông tin người dùng từ cơ sở dữ liệu dựa trên user_id
         User userIf = dao.getUserById(Integer.parseInt(sessionUser_id));
+        String avatarUrl = userIf.getAvatar();
+        session.setAttribute("avatarUrl", avatarUrl);
         request.setAttribute("InfoUser", userIf);
-//        request.getRequestDispatcher("/common/userProfile.jsp").forward(request, response);
         request.getRequestDispatcher("/common/userProfile.jsp").forward(request, response);
+
+//        request.getRequestDispatcher("test.jsp").forward(request, response);
     }
 
     /**
@@ -122,4 +129,11 @@ public class UserProfile extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public static void main(String[] args) {
+
+        UserDAO dao = new UserDAO();
+        User userIf = dao.getUserById(3);
+        String avatarUrl = userIf.getAvatar();
+        System.out.println("URL: " + avatarUrl);
+    }
 }

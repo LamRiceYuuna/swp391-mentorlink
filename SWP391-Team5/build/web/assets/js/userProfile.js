@@ -3,32 +3,50 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
-let avatarImg = document.getElementById("avatarImage");
-let inputFile = document.getElementById("input-file");
+function displayImage() {
+    var fileInput = document.getElementById('input-file');
+    var avatarImage = document.getElementById('avatarImage');
+    var file = fileInput.files[0];
+    var reader = new FileReader();
 
-inputFile.onchange = function () {
-    var file = inputFile.files[0];
-    var fileName = file.name;
-    var folderPath = "Assets2/upload/";
+    reader.onloadend = function () {
+        avatarImage.src = reader.result;
+    }
 
-    avatarImg.src = URL.createObjectURL(inputFile.files[0]);
-    var imageURL = folderPath + fileName;
-    
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        avatarImage.src = "";
+    }
 }
 
-document.getElementById('input-file').addEventListener('change', function () {
-    var form = document.getElementById('myForm');
-    var formData = new FormData(form);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', form.action, true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            // Xử lý phản hồi từ máy chủ nếu cần
-            console.log(xhr.responseText);
+// Khi form được gửi
+
+$('#myForm').on('submit', function (e) {
+    e.preventDefault();
+
+    var formData = new FormData(this);
+
+    $.ajax({
+        url: $(this).attr('action'),
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            // Xử lý khi upload thành công
+            $('#avatarImage').attr('src', 'assets/upload/' + response);
+
+            //Tải lại trang
+            setTimeout(function () {
+                location.reload();
+            }, 2000);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            // Xử lý khi có lỗi xảy ra
+            console.log(textStatus, errorThrown);
         }
-    };
-    xhr.send(formData);
+    });
 });
-
 

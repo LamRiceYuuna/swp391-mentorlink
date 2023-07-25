@@ -71,7 +71,7 @@ public class requestDAO extends DBContext {
      */
     public List<Request> listRequestByMetorID(String mentor_id, int index) {
         List<Request> list1 = new ArrayList<>();
-        String sql = "SELECT * FROM swp391_group5.request where mentor_id = ? and request_status in (1, 2) limit 10 offset ?;";
+        String sql = "SELECT * FROM swp391_group5.request where mentor_id = ? and request_status in (1, 2, 4) limit 10 offset ?;";
         String sql2 = "select skill.skill_name from swp391_group5.request_skill join swp391_group5.skill on skill.skill_id = request_skill.skill_id "
                 + "where request_skill.request_id = ?;";
         try {
@@ -174,7 +174,7 @@ public class requestDAO extends DBContext {
 
     public List<RequestName> listRequestByIDMente(String mentee_id, int index) {
         List<RequestName> list1 = new ArrayList<>();
-        String sql = "SELECT * FROM swp391_group5.request where mentee_id= " + mentee_id + " order by request_id desc limit 6 offset ?;";
+        String sql = "SELECT * FROM swp391_group5.request where mentee_id = " + mentee_id + " order by request_id desc limit 6 offset ?;";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, (index - 1) * 6);
