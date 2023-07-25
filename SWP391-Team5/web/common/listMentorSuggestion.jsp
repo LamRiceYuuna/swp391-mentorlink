@@ -37,6 +37,7 @@
 
 
     <jsp:useBean id="a" class="dao.MentorCVDAO" scope = "request"></jsp:useBean>
+    <jsp:useBean id="b" class="dao.FeedbackDAO" scope = "request"></jsp:useBean>
     </head>
 
     <body>
@@ -165,8 +166,9 @@
                                                                                                                 <div class="full-stars" style="width: 100%"></div>-->
                                                 <span style="font-weight:700;">${s.getRating()}/5 </span><i class="fa-sharp fa-solid fa-star" style="color: yellow"></i>
                                             </div>
+                                            <c:set var="mentorId" value="${s.getMentor_id()}" />
                                             <div class="user-feedback">
-                                                <span><i class="fa-solid fa-comment"></i>123 Feedback</span>
+                                                <span><i class="fa-solid fa-comment"></i>${b.getNumberOfFeedback(mentorId)} Feedback</span>
                                             </div>
                                             <div class="user-location">
                                                 <span><i class="fa-sharp fa-solid fa-clipboard-question"></i>${s.getNumberRequest()} Request</span>
@@ -216,9 +218,10 @@
 
 
                     </div>
+                    <c:set var="listSki" value="${listSki}" />
                     <div class="pagination-custom">
                         <!-- So trang dang dung JspUseBean: Doi tuong cua class CVDAO -->
-                        <c:forEach begin="1" end="${a.getNumberPage3()}" var = "i">
+                        <c:forEach begin="1" end="${a.getNumberPage3(listSki)}" var = "i">
                             <!-- Lay ra vi tri trang dang dung -->
                             <a href="mentorSuggestion?index=${i}" class="${indexPagee == i ?  "active" : ""}">${i}</a>
                         </c:forEach>

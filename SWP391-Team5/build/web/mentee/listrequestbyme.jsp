@@ -13,8 +13,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Table Design || Future Web</title>
+        <title>List Request</title>
         <link rel="stylesheet" href="assets/css/listrequestbyme.css"/>
+        <link rel="icon" href="temp/logo2.png">
         <jsp:useBean id="a" class="dao.requestDAO" scope = "request"></jsp:useBean>
         </head>
 
@@ -92,7 +93,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>STT</th>
+                        <th>ID</th>
                         <th>Skill</th>
                         <th>Title</th>
                         <th>Content</th>
@@ -105,7 +106,7 @@
                     <c:set var="menteeid" value="${sessionScope.acc.user_id}" />
                     <c:forEach begin="0" end="${lista.size()-1}" step="1" var="i">
                         <tr>
-                            <td>${i + 1}</td>
+                            <td>${lista.get(i).request_id}</td>
                             <td>
                                 <c:forEach items="${lista.get(i).getSkill_name()}" var="s">
                                     <img src="${s.skill_img}">

@@ -14,10 +14,10 @@
         <jsp:useBean id="sk" class="dao.SkillDAO" scope = "request"></jsp:useBean>
         </head>
         <body>
-            Hello       
+            Hello   ${kk}   ${listS.size()}
+        <c:forEach items="${listS}" var="skillId">
+        <li>${skillId}</li>
+        </c:forEach>
 
-        <c:forEach var="i" items="${sk.getSkillById(2)}">
-            <span>${i}</span>
-        </c:forEach>  
-    </body>
+</body>
 </html>

@@ -76,7 +76,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>STT</th>
+                                    <th>ID</th>
                                     <th>Title</th>
                                     <th>Content</th>
                                     <th>Skill</th>
@@ -91,7 +91,7 @@
                                 <c:set var="mentorId" value="${a.getNumberPage1(searchValue)}"/>
                                 <c:forEach var="i" begin="0" end="${listR.size() - 1}" step="1">
                                     <tr>
-                                        <td>${i + 1}</td>
+                                        <td>${listR.get(i).request_id}</td>
                                         <td>${listR.get(i).getTitle()}</td>
                                         <td>${listR.get(i).getRequest_content()}</td>                                        
                                         <td>

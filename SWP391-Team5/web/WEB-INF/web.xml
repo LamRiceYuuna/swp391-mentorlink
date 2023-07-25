@@ -82,19 +82,20 @@
     <!-- authorization(Filter Login mentor , mentee, admin): acc == null  -> Warning -->
     <filter-mapping>
         <filter-name>AccountFilter</filter-name>
-        <url-pattern>/changePass</url-pattern>
-        <!--        <url-pattern>/forgetPass</url-pattern>-->
+        <url-pattern>/forgetPassword</url-pattern>
+        <url-pattern>/signupController</url-pattern>
         <url-pattern>/logout</url-pattern>
+        <url-pattern>/changePass</url-pattern>
     </filter-mapping>
     <!-- error Status -->
-    <!--    <error-page>
+    <error-page>
         <error-code>404</error-code>
         <location>/security/error404.html</location>
-    </error-page>-->
-    <!--    <error-page>
+    </error-page>
+    <error-page>
         <error-code>500</error-code>
         <location>/security/error500.html</location>
-    </error-page>-->
+    </error-page>
     <!-- End Filter -->
     <servlet>
         <servlet-name>HomePage</servlet-name>

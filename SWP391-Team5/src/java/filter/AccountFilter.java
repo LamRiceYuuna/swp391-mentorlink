@@ -108,10 +108,28 @@ public class AccountFilter implements Filter {
                 HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
-        User a = (User)session.getAttribute("acc");
+        User a = (User) session.getAttribute("acc");
+        String url = req.getServletPath();
         // -> acc == null -> login
-        if(session.getAttribute("acc") == null){
+        if (session.getAttribute("acc") != null && a.getRole() == 3 && !url.contains("logout")) {
             res.sendRedirect("security/warning.html");
+        }
+        if (session.getAttribute("acc") != null && url.contains("logout")) {
+            req.getRequestDispatcher("logout").forward(request, response);
+        } else if (session.getAttribute("acc") == null && url.contains("logout")) {
+            res.sendRedirect("security/warning.html");
+        } else if (session.getAttribute("acc") == null && url.contains("forgetPassword")) {
+            req.getRequestDispatcher("forgetPassword").forward(request, response);
+        } else if (session.getAttribute("acc") != null && url.contains("forgetPassword")) {
+            res.sendRedirect("security/warning.html");
+        } else if (session.getAttribute("acc") == null && url.contains("signupController")) {
+            req.getRequestDispatcher("signupController").forward(request, response);
+        } else if (session.getAttribute("acc") != null && url.contains("signupController")) {
+            res.sendRedirect("security/warning.html");
+        } else if (session.getAttribute("acc") == null && url.contains("changePass")) {
+            req.getRequestDispatcher("login").forward(request, response);
+        } else if (session.getAttribute("acc") != null && url.contains("changePass")) {
+            req.getRequestDispatcher("changePass").forward(request, response);
         }
         
 	Throwable problem = null;

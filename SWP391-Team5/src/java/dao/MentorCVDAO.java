@@ -342,21 +342,21 @@ public class MentorCVDAO extends DBContext {
     public List<MentorInfo> GetListMentorPagingSearchAdm(int index, String txtSearch) {
         List<MentorInfo> list = new ArrayList<>();
         try {
-            String query = "SELECT\n"
-                    + "ROW_NUMBER() OVER (ORDER BY cv_of_mentor.mentor_id) AS STT,\n"
-                    + "user.user_id AS ID,\n"
-                    + "user.full_name AS `Full name`,\n"
-                    + "user.username AS `Account name`,\n"
-                    + "cv_of_mentor.profession AS  `Occupation`,\n"
-                    + "COUNT(CASE WHEN request.request_status IN (1, 2, 4, 5) THEN 1 ELSE NULL END) AS `Number of currently`,\n"
-                    + "CONCAT(ROUND((COUNT(CASE WHEN request.request_status = 4 THEN 1 ELSE NULL END) / COUNT(CASE WHEN request.request_status IN (1, 2, 4, 5) THEN 1 ELSE NULL END)) * 100), '%') AS  `Percentage completed`,\n"
-                    + "ROUND(AVG(feedback.rate_start), 1) AS  `Average star rating`,\n"
-                    + "CASE WHEN user.user_status = 1 THEN 1 ELSE 0 END AS `Active status of the advisor`\n"
+            String query = "SELECT \n"
+                    + "    ROW_NUMBER() OVER (ORDER BY cv_of_mentor.mentor_id) AS STT,\n"
+                    + "    user.user_id AS ID,\n"
+                    + "    user.full_name AS `Full name`,\n"
+                    + "    user.username AS `Account name`,\n"
+                    + "    cv_of_mentor.profession AS `Occupation`,\n"
+                    + "    COUNT(DISTINCT CASE WHEN request.request_status IN (1, 2, 4, 5) THEN request.request_id ELSE NULL END) AS `Number of currently`,\n"
+                    + "    CONCAT(ROUND((COUNT(DISTINCT CASE WHEN request.request_status = 5 THEN request.request_id ELSE NULL END) / \n"
+                    + "    COUNT(DISTINCT CASE WHEN request.request_status IN (1, 2, 4, 5) THEN request.request_id ELSE NULL END)) * 100), '%') AS `Percentage completed`,\n"
+                    + "    ROUND(AVG(feedback.rate_start), 1) AS  `Average star rating`,\n"
+                    + "    CASE WHEN user.user_status = 1 THEN 1 ELSE 0 END AS `Active status of the advisor`\n"
                     + "FROM swp391_group5.user\n"
                     + "JOIN cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
                     + "LEFT JOIN request ON user.user_id = request.mentor_id\n"
                     + "LEFT JOIN feedback ON user.user_id = feedback.mentor_id\n"
-                    //Them Dieu kien search tu khoa cua ten.
                     + "WHERE user.role = 2 and user.full_name like ? \n"
                     + "GROUP BY user.user_id\n"
                     // SET Ban Ghi bat dau va ban ghi cuoi cung -> lay ra toi da 10 ban ghi
@@ -439,28 +439,32 @@ public class MentorCVDAO extends DBContext {
     }
 
     //Lấy ra số lượng trang n /  trên tổng số trang Listmentor suggestion.
-    public int getNumberPage3() {
-        String query = "SELECT count(*) as total\n"
+    public int getNumberPage3(ArrayList<Integer> itg) {
+        String query = "SELECT COUNT(DISTINCT cv_of_mentor.mentor_id) AS total_records\n"
                 + "FROM swp391_group5.user\n"
                 + "JOIN swp391_group5.cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
                 + "JOIN swp391_group5.cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id\n"
-                + "WHERE cv_skill.skill_id IN (2,3,4,5,6)\n"
-                + "GROUP BY cv_of_mentor.mentor_id, username,avatar, full_name, email, phone, cv_of_mentor.profession;";
+                + "WHERE cv_skill.skill_id IN (" + String.join(",", Collections.nCopies(itg.size(), "?")) + ");";
         try {
             conn = new DBContext().getConnection();
+            
             ps = conn.prepareStatement(query);
+            for (int i = 0; i < itg.size(); i++) {
+                ps.setInt(i + 1, itg.get(i));
+            }
             rs = ps.executeQuery();
+            
             while (rs.next()) {
                 //Tổng số bản ghi mentor được lấy ra.
                 int total = rs.getInt(1);
                 int countPage = 0;
                 //Tổng số bản ghi mentor được lấy ra / Số lượng bản ghi sẽ có trên một trang. 
                 // Lay Ra So luong trang ( Moi trang la 10 bang ghi).
-                countPage = total / 2;
+                countPage = total / 4;
                 if (total % 10 != 0) {
                     countPage++;
                 }
-                return countPage;
+                return countPage - 1;
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -472,16 +476,17 @@ public class MentorCVDAO extends DBContext {
     public List<MentorInfo> GetListMentorPagingAdm(int index) {
         List<MentorInfo> list = new ArrayList<>();
         try {
-            String query = "SELECT\n"
-                    + "ROW_NUMBER() OVER (ORDER BY cv_of_mentor.mentor_id) AS STT,\n"
-                    + "user.user_id AS ID,\n"
-                    + "user.full_name AS `Full name`,\n"
-                    + "user.username AS `Account name`,\n"
-                    + "cv_of_mentor.profession AS  `Occupation`,\n"
-                    + "COUNT(CASE WHEN request.request_status IN (1, 2, 4) THEN 1 ELSE NULL END) AS `Number of currently`,\n"
-                    + "CONCAT(ROUND((COUNT(CASE WHEN request.request_status = 4 THEN 1 ELSE NULL END) / COUNT(CASE WHEN request.request_status IN (1, 2, 4) THEN 1 ELSE NULL END)) * 100), '%') AS  `Percentage completed`,\n"
-                    + "ROUND(AVG(feedback.rate_start), 1) AS  `Average star rating`,\n"
-                    + "CASE WHEN user.user_status = 1 THEN 1 ELSE 0 END AS `Active status of the advisor`\n"
+            String query = "SELECT \n"
+                    + "    ROW_NUMBER() OVER (ORDER BY cv_of_mentor.mentor_id) AS STT,\n"
+                    + "    user.user_id AS ID,\n"
+                    + "    user.full_name AS `Full name`,\n"
+                    + "    user.username AS `Account name`,\n"
+                    + "    cv_of_mentor.profession AS `Occupation`,\n"
+                    + "    COUNT(DISTINCT CASE WHEN request.request_status IN (1, 2, 4, 5) THEN request.request_id ELSE NULL END) AS `Number of currently`,\n"
+                    + "    CONCAT(ROUND((COUNT(DISTINCT CASE WHEN request.request_status = 5 THEN request.request_id ELSE NULL END) / \n"
+                    + "    COUNT(DISTINCT CASE WHEN request.request_status IN (1, 2, 4, 5) THEN request.request_id ELSE NULL END)) * 100), '%') AS `Percentage completed`,\n"
+                    + "    ROUND(AVG(feedback.rate_start), 1) AS  `Average star rating`,\n"
+                    + "    CASE WHEN user.user_status = 1 THEN 1 ELSE 0 END AS `Active status of the advisor`\n"
                     + "FROM swp391_group5.user\n"
                     + "JOIN cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
                     + "LEFT JOIN request ON user.user_id = request.mentor_id\n"
@@ -614,7 +619,6 @@ public class MentorCVDAO extends DBContext {
             ps2.setInt(7, mentor_id);
             ps2.executeUpdate();
 
-            
             //Câu lệnh Update vào table_B
             String sql3 = "INSERT INTO `swp391_group5`.`cv_skill`\n"
                     + "(`mentor_id`,\n"
@@ -749,9 +753,9 @@ public class MentorCVDAO extends DBContext {
                     + "JOIN swp391_group5.cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
                     + "JOIN swp391_group5.cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id\n"
                     + "WHERE cv_skill.skill_id IN (" + String.join(",", Collections.nCopies(itg.size(), "?")) + ") "
-                    + "GROUP BY cv_of_mentor.mentor_id, username,avatar, full_name, email, phone, cv_of_mentor.profession limit 1 offset ?;";
+                    + "GROUP BY cv_of_mentor.mentor_id, username,avatar, full_name, email, phone, cv_of_mentor.profession limit 4 offset ?;";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(itg.size() + 1, (index - 1) * 1);
+            stm.setInt(itg.size() + 1, (index - 1) * 4);
             String countSql = "SELECT COUNT(request_id) AS count FROM swp391_group5.request WHERE mentor_id = ?";
             PreparedStatement countStm = connection.prepareStatement(countSql);
 
@@ -806,7 +810,7 @@ public class MentorCVDAO extends DBContext {
         return null;
     }
 
-    public ArrayList<CV_Mentor> listMentorSuggestionSort(ArrayList<Integer> itg, String typeSort, int index) {
+    public ArrayList<CV_Mentor> listMentorSuggestionSortDesc(ArrayList<Integer> itg, String typeSort, int index) {
         ArrayList<CV_Mentor> list = new ArrayList<>();
         try {
             String sql = "SELECT cv_of_mentor.mentor_id, username, avatar, full_name, email, phone, cv_of_mentor.profession,\n"
@@ -818,10 +822,79 @@ public class MentorCVDAO extends DBContext {
                     + "JOIN swp391_group5.cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id\n"
                     + "WHERE cv_skill.skill_id IN (" + String.join(",", Collections.nCopies(itg.size(), "?")) + ") "
                     + "GROUP BY cv_of_mentor.mentor_id, avatar, email, phone, cv_of_mentor.profession\n"
-                    + "ORDER BY rating " + typeSort + "limit 1 offset ?;";
+                    + "ORDER BY rating desc limit 4 offset ?;";
 
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(itg.size() + 1, (index - 1) * 1);
+            stm.setInt(itg.size() + 1, (index - 1) * 4);
+            String countSql = "SELECT COUNT(request_id) AS count FROM swp391_group5.request WHERE mentor_id = ?";
+            PreparedStatement countStm = connection.prepareStatement(countSql);
+
+            String ratingSql = "SELECT (SELECT SUM(rate_start) FROM swp391_group5.feedback WHERE mentor_id = ?) AS totalStar,\n"
+                    + "       (SELECT COUNT(rate_start) FROM swp391_group5.feedback WHERE mentor_id = ?) AS numberStar,\n"
+                    + "       ROUND((SELECT SUM(rate_start) FROM swp391_group5.feedback WHERE mentor_id = ?) / (SELECT COUNT(rate_start) "
+                    + "FROM swp391_group5.feedback WHERE mentor_id = ?), 1) AS rating";
+            PreparedStatement ratingStm = connection.prepareStatement(ratingSql);
+
+            for (int i = 0; i < itg.size(); i++) {
+                stm.setInt(i + 1, itg.get(i));
+            }
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                CV_Mentor mentor = new CV_Mentor(
+                        rs.getInt("mentor_id"),
+                        rs.getString("profession"),
+                        new User(
+                                rs.getString("avatar"),
+                                rs.getString("full_name"),
+                                rs.getString("email"),
+                                rs.getString("username"),
+                                rs.getString("phone")
+                        )
+                );
+                //Lay ra request cua moi mentor
+                int mentorId = rs.getInt("mentor_id");
+                countStm.setInt(1, mentorId);
+                ResultSet countRs = countStm.executeQuery();
+                if (countRs.next()) {
+                    int count = countRs.getInt("count");
+                    mentor.setNumberRequest(count);
+                }
+
+                //Lay ra rating cua moi mentor
+                ratingStm.setInt(1, mentorId);
+                ratingStm.setInt(2, mentorId);
+                ratingStm.setInt(3, mentorId);
+                ratingStm.setInt(4, mentorId);
+                ResultSet ratingRs = ratingStm.executeQuery();
+                if (ratingRs.next()) {
+                    float rating = ratingRs.getFloat("rating");
+                    mentor.setRating(rating);
+                }
+                list.add(mentor);
+            }
+            return list;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
+    public ArrayList<CV_Mentor> listMentorSuggestionSortAsc(ArrayList<Integer> itg, String typeSort, int index) {
+        ArrayList<CV_Mentor> list = new ArrayList<>();
+        try {
+            String sql = "SELECT cv_of_mentor.mentor_id, username, avatar, full_name, email, phone, cv_of_mentor.profession,\n"
+                    + "       GROUP_CONCAT(DISTINCT cv_skill.skill_id) AS skill_ids,\n"
+                    + "       ROUND((SELECT SUM(rate_start) FROM swp391_group5.feedback WHERE mentor_id = cv_of_mentor.mentor_id) / \n"
+                    + "             (SELECT COUNT(rate_start) FROM swp391_group5.feedback WHERE mentor_id = cv_of_mentor.mentor_id), 1) AS rating\n"
+                    + "FROM swp391_group5.user\n"
+                    + "JOIN swp391_group5.cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
+                    + "JOIN swp391_group5.cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id\n"
+                    + "WHERE cv_skill.skill_id IN (" + String.join(",", Collections.nCopies(itg.size(), "?")) + ") "
+                    + "GROUP BY cv_of_mentor.mentor_id, avatar, email, phone, cv_of_mentor.profession\n"
+                    + "ORDER BY rating asc limit 4 offset ?;";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(itg.size() + 1, (index - 1) * 4);
             String countSql = "SELECT COUNT(request_id) AS count FROM swp391_group5.request WHERE mentor_id = ?";
             PreparedStatement countStm = connection.prepareStatement(countSql);
 
@@ -877,27 +950,15 @@ public class MentorCVDAO extends DBContext {
 
     public static void main(String[] args) {
         MentorCVDAO obj = new MentorCVDAO();
-        // Tạo danh sách các skill ID
-//        ArrayList<Integer> skillIds = new ArrayList<>();
-//        skillIds.add(1);
-//        skillIds.add(2);
-//        skillIds.add(3);
-//
-//        // Gọi phương thức listMentorSuggestion
-//        ArrayList<CV_Mentor> mentors = obj.listMentorSuggestion(skillIds);
-//
-//        // Hiển thị thông tin mentor và count
-//        for (CV_Mentor mentor : mentors) {
-//            System.out.println("Profession: " + mentor.getProfession());
-//            System.out.println("Number of Requests: " + mentor.getNumberRequest());
-//            System.out.println("Rating: " + mentor.getRating());
-//            System.out.println("-------------------------------------");
-//        }
-        int skill_id = 4;
-        List<CV_Mentor> listMentor = obj.getAllListMentor();
-        for (CV_Mentor mentor : listMentor) {
-            System.out.println(mentor);
-        }
+        ArrayList<Integer> itg = new ArrayList<>();
+        itg.add(2);
+        itg.add(3);
+        itg.add(4);
+        itg.add(5);
+        itg.add(7);
+        itg.add(10);
+        int o = obj.getNumberPage3(itg);
+        System.out.println("H: " + o);
 
     }
     //Dai

@@ -124,7 +124,23 @@ public class MenteeDAO extends DBContext {
     
     //Lấy ra số lượng trang n /  trên tổng số trang. của trang listmentee (admin)
     public int getNumberPage2() {
-        String query = "Select count(*) from swp391_group5.user where user.role = 1";
+        String query = "SELECT\n"
+                + "COUNT(DISTINCT user.user_id) AS total_records\n"
+                + "FROM\n"
+                + "    swp391_group5.`user`\n"
+                + "    JOIN swp391_group5.`request` ON user.user_id = request.mentee_id\n"
+                + "    LEFT JOIN (\n"
+                + "        SELECT\n"
+                + "            request.mentee_id,\n"
+                + "            SUM(request.time_study) AS time_study\n"
+                + "        FROM\n"
+                + "            swp391_group5.`request`\n"
+                + "        GROUP BY\n"
+                + "            request.mentee_id\n"
+                + "    ) AS subquery ON request.mentee_id = subquery.mentee_id\n"
+                + "    LEFT JOIN swp391_group5.`request_skill` ON request.request_id = request_skill.request_id\n"
+                + "WHERE\n"
+                + "    user.role = 1";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);

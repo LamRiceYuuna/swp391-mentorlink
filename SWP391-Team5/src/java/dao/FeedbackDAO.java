@@ -51,7 +51,7 @@ public class FeedbackDAO extends DBContext {
         }
         return false;
     }
-    
+
     public boolean insertFeedback11(int user_id, int mentor_id, int rate_start, String feedback) {
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
@@ -121,14 +121,14 @@ public class FeedbackDAO extends DBContext {
             ps = conn.prepareStatement(sql);
             for (int i = 0; i < skillId.length; i++) {
                 for (int j = 0; j < nbRateStar.length; j++) {
-                   ps.setInt(1, mentee_id); 
-                   ps.setInt(2, mentor_id); 
-                   ps.setString(3, skillId[i]); 
-                   ps.setInt(4, nbRateStar[i]); 
-                   ps.executeUpdate();
-                   break;
+                    ps.setInt(1, mentee_id);
+                    ps.setInt(2, mentor_id);
+                    ps.setString(3, skillId[i]);
+                    ps.setInt(4, nbRateStar[i]);
+                    ps.executeUpdate();
+                    break;
                 }
-            }           
+            }
             return true;
         } catch (SQLException e) {
             System.out.println(e);
@@ -139,6 +139,25 @@ public class FeedbackDAO extends DBContext {
     public static void main(String[] args) {
         FeedbackDAO fb = new FeedbackDAO();
         fb.insertFeedback(3, 1, 5, "Mentor good");
+    }
+
+    public int getNumberOfFeedback(int mentor_id) {
+        String query = "SELECT COUNT(*) FROM swp391_group5.feedback WHERE mentor_id = ?;";
+        int feedbackCount = 0;
+
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, mentor_id);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                feedbackCount = rs.getInt(1);
+            }
+            return feedbackCount;
+        } catch (Exception e) {
+        }
+        return 0;
     }
 
 }

@@ -4,6 +4,7 @@
  */
 package controller.mentee;
 
+import dao.FeedbackDAO;
 import dao.MentorCVDAO;
 import dao.requestSkillDAO;
 import java.io.IOException;
@@ -32,7 +33,6 @@ public class ListMentorSuggestion extends HttpServlet {
         // Lấy user_id từ đối tượng User lấy từ session
         String sessionUser_id = sessionUser.getUser_id();
         int mentee_id = Integer.parseInt(sessionUser_id);
-
         String typeSort = request.getParameter("sort");
         if (typeSort == null) {
             typeSort = "default";
@@ -53,18 +53,23 @@ public class ListMentorSuggestion extends HttpServlet {
         //Lay ra ki nang
         ArrayList<Integer> skillIds = requestSkill.getItg();
         //Ham list ra cac mentor phu hop voi ki nang ma mentee da yeu cau
-
+        request.setAttribute("listSki", skillIds);
         request.setAttribute("indexPagee", indexPage);
-        
 
         if (typeSort.equals("default")) {
             ArrayList<CV_Mentor> list = dao.listMentorSuggestion(skillIds, indexPage);
             request.setAttribute("listS", list);
-        } else {
-            ArrayList<CV_Mentor> list = dao.listMentorSuggestionSort(skillIds, typeSort, indexPage);
-            request.setAttribute("listS", list);
-        }     
-        request.getRequestDispatcher("common/listMentorSuggestion.jsp").forward(request, response);      
+        } 
+        if (typeSort.equals("desc")) {
+            ArrayList<CV_Mentor> list = dao.listMentorSuggestionSortDesc(skillIds, typeSort, indexPage);
+            request.setAttribute("listS", list);          
+        }
+        
+        if (typeSort.equals("asc")) {
+            ArrayList<CV_Mentor> list = dao.listMentorSuggestionSortAsc(skillIds, typeSort, indexPage);
+            request.setAttribute("listS", list);          
+        }
+        request.getRequestDispatcher("common/listMentorSuggestion.jsp").forward(request, response);
     }
 
     @Override
@@ -97,4 +102,12 @@ public class ListMentorSuggestion extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public static void main(String[] args) {
+        requestSkillDAO obj = new requestSkillDAO();
+        Request_Skill requestSkill = obj.getRequestSkillID(3);
+        ArrayList<Integer> skillIds = requestSkill.getItg();
+        for (Integer i : skillIds) {
+            System.out.println(i);
+        }
+    }
 }
