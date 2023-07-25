@@ -182,7 +182,7 @@
                                                   rows="4" style="resize: none;" required=""></textarea>
                                     </div>
 
-                                    <h3 class="multisteps-form__title" style="margin-top: 50px;"><b>The rogramming</b></h3>
+                                    <h3 class="multisteps-form__title" style="margin-top: 50px;"><b>The programming</b></h3>
                                     <h4 style="content: '';
                                         background-color: #175E4C; width: 260px; height: 4px; margin-bottom: 50px;"></h4>
                                     <div class="form-row mt-4">

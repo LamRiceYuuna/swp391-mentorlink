@@ -497,7 +497,6 @@
                                 <thead >
                                 <div> 
                                     <tr>
-                                        <th>STT</th>
                                         <th>ID</th>
                                         <th>Full Name</th>
                                         <th>Account Name</th>
@@ -507,14 +506,13 @@
                                 </div>
                                 </thead>
                                 <tbody>
-                                    <c:forEach begin="1" end="${listMentee.size() - 1}" step="1" var="i">
+                                    <c:forEach items="${listMentee}" var="o">
                                         <tr>
-                                            <td>${i}</td>
-                                            <td>${listMentee.get(i).getMentee_id()}</td>
-                                            <td>${listMentee.get(i).getMentee_name()}</td>
-                                            <td>${listMentee.get(i).getMentee_account()}</td>
-                                            <td>${listMentee.get(i).getTime_study()}</td>
-                                            <td>${listMentee.get(i).getTotal_skill()}</td>                                      
+                                            <td>${o.getMentee_id()}</td>
+                                            <td>${o.getMentee_name()}</td>
+                                            <td>${o.getMentee_account()}</td>
+                                            <td>${o.getTime_study()}</td>
+                                            <td>${o.getTotal_skill()}</td>                                      
                                         </tr>
                                     </c:forEach>
                                 </tbody>
