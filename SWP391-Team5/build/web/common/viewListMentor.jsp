@@ -32,15 +32,13 @@
         <link rel="stylesheet" href="assets/css/custom.min.css" type="text/css" />
         <link rel="stylesheet" href="assets/css/overrideb6f5.css?v=10" type="text/css" />
 
-        
+
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!--    <script src="assets/js/jquery.js"></script>-->
         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="temp/home.css">
 
-        <title>List Mentor</title>
-
-
+        <title>List Mentor</title>      
 
     </head>
 
@@ -77,12 +75,12 @@
                                     <div class="select-search-box-multiple col-sm-12 col-md-3 mb_10">
                                         <select style="width: 100%;" name="skill_id" id="fields_id" "
                                                 data-placeholder="Choose a skill">
-<!--                                            <option value=0 > All Skill</option>-->
+                                            <!--                                            <option value=0 > All Skill</option>-->
                                             <c:forEach var="s" items="${listS}">
-                                            
-                                            <option value="${s.skill_id}">${s.skill_name}</option>
+
+                                                <option value="${s.skill_id}">${s.skill_name}</option>
                                             </c:forEach>
-                                             
+
                                         </select>
                                     </div>
                                     <div class="col-sm-12 col-md-3">
@@ -99,17 +97,17 @@
                 </div>
                 <div class="container mt-3">
                     <div class="col-12">
-<!--                        <p class="mb-2">Tìm thấy <b>688</b> Mentor cho bạn!<span class="ml-3"
-                                                                                 style="cursor: pointer;color:#175E4C;" onclick="toggleFilter()"><b>Lọc kết quả</b><i
-                                    id="toggle-icon-filter" class="fa fa-chevron-circle-down fa-lg" aria-hidden="true"
-                                    style="color:#175E4C; padding-left: 5px;  border-left: 1px solid #fff;"></i></span></p>-->
+                        <!--                        <p class="mb-2">Tìm thấy <b>688</b> Mentor cho bạn!<span class="ml-3"
+                                                                                                         style="cursor: pointer;color:#175E4C;" onclick="toggleFilter()"><b>Lọc kết quả</b><i
+                                                            id="toggle-icon-filter" class="fa fa-chevron-circle-down fa-lg" aria-hidden="true"
+                                                            style="color:#175E4C; padding-left: 5px;  border-left: 1px solid #fff;"></i></span></p>-->
                     </div>
                     <div id="filter-search" class="col-12 pt-2" style="background-color: #63A393">
                         <div class="search_mentor">
                             <div class="search_box_mentor page_search_mentor pt-1 pb-1">
                                 <div class="form-inline pl-3 mb-1 justify-content-between">
                                     <div class="row">
-                                        
+
                                         <div class="mb_10 col-md-3">
                                             <input type="text" name="professtion" style="width: 180px;" value=""
                                                    class="form-control" placeholder="Search by professional">
@@ -164,24 +162,24 @@
                                                     </div>
                                                 </a>
                                             </div>
-<!--                                            <div class="carousel-item">
-                                                <a href="#"
-                                                   target="_blank">
-                                                    <div class="d-none d-md-block">
-                                                        <img src="https://mentori.vn/assets/images/banner/search_mentor_ck_desktop.png?v=1"
-                                                             width="100%">
-                                                        <div style="height: 50px">
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-lg-block">
-                                                        <img src="https://mentori.vn/assets/images/banner/search_mentor_ck_mobile.png?v=1"
-                                                             width="100%">
-                                                        <div style="height: 50px">
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </a>
-                                            </div>-->
+                                            <!--                                            <div class="carousel-item">
+                                                                                            <a href="#"
+                                                                                               target="_blank">
+                                                                                                <div class="d-none d-md-block">
+                                                                                                    <img src="https://mentori.vn/assets/images/banner/search_mentor_ck_desktop.png?v=1"
+                                                                                                         width="100%">
+                                                                                                    <div style="height: 50px">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="d-lg-block">
+                                                                                                    <img src="https://mentori.vn/assets/images/banner/search_mentor_ck_mobile.png?v=1"
+                                                                                                         width="100%">
+                                                                                                    <div style="height: 50px">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                
+                                                                                            </a>
+                                                                                        </div>-->
                                             <div class="carousel-item">
                                                 <a href="#" target="_blank">
                                                     <img src="https://mentori.vn/assets/images/banner/search_mentor_ck_desktop.png?v=1" width="100%">
@@ -227,72 +225,72 @@
                                 </div>
                                 <div class="row">
                                     <c:forEach var="p" items="${listM}">
-                        
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-3 mt-3">
-                            <div class="mentor_item mentor_item_custom wow fadeInUp">
-                                <a href="viewcv?mentor_id=${p.mentor_id}">
-                                    <div class="mentor_avatar">
-                                        <img src="assets/upload/${p.getInfor().getAvatar()}" alt="${p.getInfor().getFull_name()}">
-                                    </div>
-                                    <div class="mentor_info">
-                                        <div style="min-height: 100px;">
-                                            <div class="name">${p.getInfor().getFull_name()} </div>
-                                            <div class="">
-                                                <span class="jobs">
-                                                    ${p.profession} <span
-                                                        class="field"></span> </span>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-1">
-                                            <div class="user-rate col-6">
-                                                <div class="wrap-star">
-                                                    <img src="temp/ic-mentee.png"
-                                                        style="width: auto; height: 18px; margin-bottom: 2px;"
-                                                        data-toggle="tooltip" data-placement="bottom" title=""
-                                                        data-original-title="Số Mentee"> <span class="wrap-number">
-                                                        </span>
+
+                                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-3 mt-3">
+                                            <div class="mentor_item mentor_item_custom wow fadeInUp">
+                                                <a href="viewcv?mentor_id=${p.mentor_id}">
+                                                    <div class="mentor_avatar">
+                                                        <img src="assets/upload/${p.getInfor().getAvatar()}" alt="${p.getInfor().getFull_name()}">
+                                                    </div>
+                                                    <div class="mentor_info">
+                                                        <div style="min-height: 100px;">
+                                                            <div class="name">${p.getInfor().getFull_name()} </div>
+                                                            <div class="">
+                                                                <span class="jobs">
+                                                                    ${p.profession} <span
+                                                                        class="field"></span> </span>
+                                                            </div>                                                                    
+                                                        </div>
+                                                        <div class="row mt-1">
+                                                            <div class="user-rate col-6">
+                                                                <div class="wrap-star">
+                                                                    <img src="temp/ic-mentee.png"
+                                                                         style="width: auto; height: 18px; margin-bottom: 2px;"
+                                                                         data-toggle="tooltip" data-placement="bottom" title=""
+                                                                         data-original-title="Số Mentee"> <span class="wrap-number">
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="user-favorite col-6">
+                                                                <div class="wrap-star">
+                                                                    <!--                                                    <img src="temp/followed.png"
+                                                                                                                            style="width: auto; height: 18px; margin-bottom: 2px;"
+                                                                                                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                                                                                                            data-original-title="Số người Theo dõi">-->
+                                                                    <span class="wrap-number" style="padding-bottom: 2px;"></span>
+                                                                </div>
+                                                                <div></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <div class="mentor_item_info_box1">
+                                                    <a href="#" class="mentor_item_info_box_ref"
+                                                       title="${p.getInfor().getFull_name()}">
+                                                        <div class="span_title"><span>Giới thiệu bản thân</span>
+                                                        </div>
+                                                        <div class="line"></div>
+                                                        <p>${p.profession_introduction}</p>
+                                                        <span class="span_title">Chủ đề MentorLink</span>
+                                                        <div class="line"></div>
+                                                        <p><i class="fa fa-circle" style="font-size: 11px !important;"
+                                                              aria-hidden="true"></i>
+                                                            <strong>Service description: </strong>${p.service_description}
+                                                        </p>
+                                                        <p><i class="fa fa-circle" style="font-size: 11px !important;"
+                                                              aria-hidden="true"></i>
+                                                            <strong>Achievements: </strong>${p.achievements}
+                                                        </p>
+                                                        <div class="line line2"></div>
+                                                        <div class="text-center">
+                                                            <span class="mentor_detail_link notopmargin mb-1">Xem chi tiết</span>
+                                                        </div>
+                                                    </a>
                                                 </div>
                                             </div>
-                                            <div class="user-favorite col-6">
-                                                <div class="wrap-star">
-<!--                                                    <img src="temp/followed.png"
-                                                        style="width: auto; height: 18px; margin-bottom: 2px;"
-                                                        data-toggle="tooltip" data-placement="bottom" title=""
-                                                        data-original-title="Số người Theo dõi">-->
-                                                    <span class="wrap-number" style="padding-bottom: 2px;"></span>
-                                                </div>
-                                                <div></div>
-                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                                <div class="mentor_item_info_box1">
-                                    <a href="#" class="mentor_item_info_box_ref"
-                                        title="${p.getInfor().getFull_name()}">
-                                        <div class="span_title"><span>Giới thiệu bản thân</span>
-                                        </div>
-                                        <div class="line"></div>
-                                        <p>${p.profession_introduction}</p>
-                                        <span class="span_title">Chủ đề MentorLink</span>
-                                        <div class="line"></div>
-                                        <p><i class="fa fa-circle" style="font-size: 11px !important;"
-                                                aria-hidden="true"></i>
-                                            <strong>Service description: </strong>${p.service_description}
-                                        </p>
-                                        <p><i class="fa fa-circle" style="font-size: 11px !important;"
-                                                aria-hidden="true"></i>
-                                            <strong>Achievements: </strong>${p.achievements}
-                                        </p>
-                                        <div class="line line2"></div>
-                                        <div class="text-center">
-                                            <span class="mentor_detail_link notopmargin mb-1">Xem chi tiết</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        </c:forEach>  
-                               
+                                    </c:forEach>  
+
                                 </div>
                             </div>
                             <!-- Phân trang  -->
@@ -302,7 +300,7 @@
                                     <ul class='pagination'>
                                         <c:forEach begin="${1}" end="${requestScope.num}" var="i" >
                                             <li class='page-item'><a class='page-link' style="color: green; font-style:inherit "   href='viewListMentor?page=${i}'>${i}</a></li>
-                                        </c:forEach>
+                                            </c:forEach>
 
                                     </ul>
                                 </nav>

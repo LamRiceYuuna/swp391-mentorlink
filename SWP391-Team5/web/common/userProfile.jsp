@@ -25,29 +25,67 @@
         <link rel="stylesheet" href="assets/popup.css"/>
         <link rel="stylesheet" href="temp/home1.css">
 
+        <style>
+            .cssbuttons-io-button {
+                display: flex;
+                align-items: center;
+                font-family: inherit;
+                font-weight: 500;
+                font-size: 17px;
+                padding: 0.8em 1.5em 0.8em 1.2em;
+                color: white;
+                background: #ad5389;
+                background: linear-gradient(0deg, rgb(120, 47, 255) 0%, rgb(185, 132, 255) 100%);
+                border: none;
+                box-shadow: 0 0.7em 1.5em -0.5em rgb(184, 146, 255);
+                letter-spacing: 0.05em;
+                border-radius: 20em;
+            }
 
+            .cssbuttons-io-button svg {
+                margin-right: 8px;
+            }
+
+            .cssbuttons-io-button:hover {
+                box-shadow: 0 0.5em 1.5em -0.5em rgb(149, 91, 255);
+            }
+
+            .cssbuttons-io-button:active {
+                box-shadow: 0 0.3em 1em -0.5em rgb(160, 109, 255);
+            }
+
+            .bnt {
+                margin-left: 35px;
+                margin-bottom: 20px;
+                height: 20px;
+                width: auto;
+            }
+        </style>
 
 
     </head>
 
     <body>
         <jsp:include page="/home/header.jsp"/>
-
         <section class="py-5 my-5">  
             <div id="alertDiv"></div>
             <div class="container">
                 <div class="bg-white shadow rounded-lg d-block d-sm-flex">
                     <div class="profile-tab-nav border-left">
                         <div class="p-4">
-                            <div class="img-circle2 text-center mb-3 upload">
-                                <img id="avatarImage" src="assets/upload/${InfoUser.getAvatar()}" alt="Image" class="shadow">
-                                <form id="myForm" action="UploadAvatar" method="post" enctype="multipart/form-data">
+                            <form id="myForm" action="UploadAvatar" method="post" enctype="multipart/form-data">
+                                <div class="img-circle2 text-center mb-3 upload">
+                                    <img id="avatarImage" src="assets/upload/${InfoUser.getAvatar()}" alt="Image" class="shadow">
                                     <div class="round">
-                                        <input type="file" name="file" id="input-file">
-                                        <i class="fa fa-camera" style="color: #fff;"></i>
-                                    </div>                 
-                                </form>
-                            </div>
+                                        <input type="file" name="file" id="input-file" onchange="displayImage()">
+                                        <i class="fa fa-camera" style="color: #fff;"></i>                                        
+                                    </div>    
+                                </div>
+                                <button class="cssbuttons-io-button bnt" type="submit" >                               
+                                    <span><i class="fa-solid fa-upload"></i> Upload</span>
+                                </button>    
+                            </form>
+                            
 
                             <h4 class="text-center">${InfoUser.getFull_name()}</h4>
                         </div>
@@ -148,7 +186,7 @@
                             </div>																														
                         </div>
                     </form>   
-
+                 
                     <script>
                         $(document).ready(function () {
                             $("#form2").submit(function (event) {
@@ -164,7 +202,7 @@
                                         if (response === "success") {
                                             // Hiển thị alert thành công bằng Bootstrap
                                             var alertDiv = $("#alertDiv");
-                                            alertDiv.html("<div class='alert alert-success alert-slide-in custom-width' role='alert'><i class='fa-solid fa-check'></i>Insert thành công!</div>");
+                                            alertDiv.html("<div class='alert alert-success alert-slide-in custom-width' role='alert'><i class='fa-solid fa-check'></i>Update successful information!</div>");
                                             alertDiv.show();
                                             setTimeout(function () {
                                                 alertDiv.hide();
@@ -172,7 +210,7 @@
                                         } else {
                                             // Hiển thị alert lỗi bằng Bootstrap
                                             var alertDiv = $("#alertDiv");
-                                            alertDiv.html("<div class='alert alert-danger' role='alert'><i class='fa-solid fa-xmark-large'></i>Insert thất bại!</div>");
+                                            alertDiv.html("<div class='alert alert-danger' role='alert'><i class='fa-solid fa-xmark-large'></i>Update failure information!</div>");
                                             alertDiv.show();
                                             setTimeout(function () {
                                                 alertDiv.hide();

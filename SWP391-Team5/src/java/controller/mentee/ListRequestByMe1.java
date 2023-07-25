@@ -67,15 +67,15 @@ public class ListRequestByMe1 extends HttpServlet {
         if (request_idCan != null) {
             dao.cancelRequest(request_idCan);
         }
-        if (idAcc != null) {
-            dao.acceptOrRejectRequest(idAcc, 5);
-        }
+//        if (idAcc != null) {
+//            dao.acceptOrRejectRequest(idAcc, 5);
+//        }
         if (idRej != null) {
             dao.acceptOrRejectRequest(idRej, 2);
         }
         int sum = 0;
-        if (idp != null) {
-            int idr = Integer.parseInt(idp);
+        if (idAcc != null) {
+            int idr = Integer.parseInt(idAcc);
             RequestName rn = dao.getRequestByID(idr);
             int MenTorID = rn.getMentor_id();
             List<Skill> ls = rn.getSkill_name();

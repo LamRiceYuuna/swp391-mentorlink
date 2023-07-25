@@ -2,28 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-
         <group>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/login/LogoutControl.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/dao/SkillDAO.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/forgetPassword/changePasswordSuccessful.jsp</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/dao/MentorCVDAO.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/viewListMentor/viewListMentorController.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/mentee/commentAndRateStartController.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/fogetPassword/forgetPasswordController.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/home/HomePage.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/viewListMentor/searchController.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/model/CV_Mentor.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/dao/DBContext.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/home/home.jsp</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/fogetPassword/verifyCodeController.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/login/LoginControl.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/fogetPassword/sendMailController.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/dao/FeedbackDAO.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/fogetPassword/changePassSuccessful.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/forgetPassword/verifySuccessful.jsp</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/fogetPassword/changePasswordController.java</file>
+            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/assets/css/userProfile.css</file>
+            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/home/header.jsp</file>
+            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/dao/MentorCVDAO.java</file>
+            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/common/userProfile.jsp</file>
+            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/common/UploadAvatar.java</file>
+            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/assets/js/userProfile.js</file>
+            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/home/HomePage.java</file>
+            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/viewListMentor/viewListMentorController.java</file>
+            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/common/UserProfile.java</file>
+            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/dao/UserDAO.java</file>
         </group>
-
     </open-files>
 </project-private>

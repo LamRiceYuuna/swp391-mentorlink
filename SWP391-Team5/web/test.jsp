@@ -14,16 +14,9 @@
     </head>
     <body>
         Hello       
-        
-        ${mess1}
-        ${mess2}        
-        ${mess4} 
-        ${mess}
-        Mang
-        <c:forEach var="i" items="${ratingSkill}">
-            <p>Rating: ${i}</p>
-        </c:forEach>
-            
-        Result: ${m}
+
+        <%-- Kiểm tra giá trị của biến avatarUrl bằng cách in ra --%>
+        <c:set var="avatarUrl" value="${sessionScope.avatarUrl}" />
+        <c:out value="${avatarUrl}" />
     </body>
 </html>
