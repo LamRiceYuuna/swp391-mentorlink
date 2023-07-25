@@ -112,6 +112,11 @@
                                                     <span>Processing</span>
                                                 </div>
                                             </c:if>
+                                            <c:if test="${listR.get(i).getRequest_status() == 4}">
+                                                <div class="status">
+                                                    <span>Waiting</span>
+                                                </div>
+                                            </c:if>
                                         </td>
                                         <td>
                                             <div style="text-align: center;">
@@ -127,7 +132,7 @@
                                                     <form action="followingRequest" method="post" style="display: inline">
                                                         <button name="requestId_Fi" value="${listR.get(i).getRequest_id()}">Finish</button>                                                   
                                                     </form>                                                   
-                                                </c:if>
+                                                </c:if>                                               
                                             </div>
                                         </td>                                          
                                     </tr>

@@ -21,6 +21,7 @@
     </head>
 
     <body> 
+            
             <header id="header" class="sticky-header">
                 <div id="header-wrap">
                     <div class="container-md header">
@@ -69,9 +70,10 @@
                                 <c:if test="${sessionScope.acc.role == 1}"> 
                                     <div id="top-user">
                                         <div class="div" id="user-avatar">
+                                            <c:set var="avatarUrl" value="${sessionScope.avatarUrl}" />
                                             <img alt="" class="img-circle avatar_header"
                                                  style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
-                                                 src="assets/upload/${sessionScope.acc.avatar}">
+                                                 src="assets/upload/${avatarUrl}">
 
                                         </div>
                                         <ul class="select_user_box" id="select_user_box">
@@ -82,7 +84,7 @@
                                                             <a href="/user/523868402" class="" title="Duy Dao">
                                                                 <img alt="" class="img-circle avatar_header"
                                                                      style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
-                                                                     src="assets/upload/${sessionScope.acc.avatar}">
+                                                                     src="assets/upload/${avatarUrl}">
                                                             </a>
                                                         </div>
                                                         <div class="pl-0" style="width: 100%;">
@@ -153,9 +155,10 @@
                                 <c:if test="${sessionScope.acc.role == 2}"> 
                                     <div id="top-user">
                                         <div class="div" id="user-avatar">
+                                            <c:set var="avatarUrl" value="${sessionScope.avatarUrl}" />
                                             <img alt="" class="img-circle avatar_header"
                                                  style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
-                                                 src="assets/upload/${sessionScope.acc.avatar}">
+                                                 src="assets/upload/${avatarUrl}">
                                             <!--                                        <i class="fa fa-angle-down fa-lg" aria-hidden="true" style="color:#fff;"></i>-->
                                         </div>
                                         <ul class="select_user_box" id="select_user_box" >
@@ -166,7 +169,7 @@
                                                             <a href="#" class="" title="Duy Dao">
                                                                 <img alt="" class="img-circle avatar_header"
                                                                      style="width: 36px; height: 36px; -o-object-fit: cover; object-fit: cover;-o-object-position: center; object-position: center;"
-                                                                     src="assets/upload/${sessionScope.acc.avatar}">
+                                                                     src="assets/upload/${avatarUrl}">
                                                             </a>
                                                         </div>
                                                         <div class="pl-0" style="width: 100%;">
