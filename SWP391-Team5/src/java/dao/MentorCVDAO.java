@@ -233,10 +233,12 @@ public class MentorCVDAO extends DBContext {
     * @param achievements
     * @return 
     */
-   public List<CV_Mentor> search(String keyword, String professtion, String service, String achievements) {
+   public List<CV_Mentor> search(String keyword, String professtion, String service, String achievements, int skill_id) {
         List<CV_Mentor> list = new ArrayList<>();
-        String sql = "select   mentor_id ,email,full_name, avatar, profession, profession_introduction,service_description, achievements \n"
-                + "  from user inner join cv_of_mentor on user_id = mentor_id where 1=1 ";
+        String sql = "SELECT distinct (cv_of_mentor.mentor_id), email, full_name, avatar, profession, profession_introduction, service_description, achievements\n"
+                + "FROM user\n"
+                + "JOIN cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
+                + "JOIN cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id where 1=1 ";
         if (keyword != null && !keyword.equals("")) {
             sql += " and full_name like '%" + keyword + "%' ";
         }
@@ -248,6 +250,9 @@ public class MentorCVDAO extends DBContext {
         }
         if (achievements != null && !achievements.equals("")) {
             sql += " and achievements like '%" + achievements + "%'  ";
+        }
+        if (skill_id != 0) {
+            sql += " and skill_id=" + skill_id;
         }
 
         try {
@@ -585,9 +590,8 @@ public class MentorCVDAO extends DBContext {
             ps2.setString(6, programming);
             ps2.setInt(7, mentor_id);
             ps2.executeUpdate();
-            
+
 //            String sqlDel = 
-            
             // Câu lệnh INSERT vào table_B
             String sql3 = "UPDATE `swp391_group5`.`cv_skill`\n"
                     + "SET `skill_id` = ?\n"
@@ -651,7 +655,7 @@ public class MentorCVDAO extends DBContext {
                     + "WHERE cv_skill.skill_id IN (" + String.join(",", Collections.nCopies(itg.size(), "?")) + ") "
                     + "GROUP BY cv_of_mentor.mentor_id, username,avatar, full_name, email, phone, cv_of_mentor.profession limit 1 offset ?;";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(itg.size()+1, (index - 1) * 1);
+            stm.setInt(itg.size() + 1, (index - 1) * 1);
             String countSql = "SELECT COUNT(request_id) AS count FROM swp391_group5.request WHERE mentor_id = ?";
             PreparedStatement countStm = connection.prepareStatement(countSql);
 
@@ -664,7 +668,7 @@ public class MentorCVDAO extends DBContext {
             for (int i = 0; i < itg.size(); i++) {
                 stm.setInt(i + 1, itg.get(i));
             }
-            
+
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 CV_Mentor mentor = new CV_Mentor(
@@ -729,7 +733,7 @@ public class MentorCVDAO extends DBContext {
 
             PreparedStatement stm = connection.prepareStatement(sql);
 
-            stm.setInt(itg.size()+1, (index - 1) * 1);
+            stm.setInt(itg.size() + 1, (index - 1) * 1);
             String countSql = "SELECT COUNT(request_id) AS count FROM swp391_group5.request WHERE mentor_id = ?";
             PreparedStatement countStm = connection.prepareStatement(countSql);
 
@@ -788,7 +792,8 @@ public class MentorCVDAO extends DBContext {
         int skill_id = 4;
         List<CV_Mentor> listMentor = obj.getAllListMentor();
         for (CV_Mentor mentor : listMentor) {
-            System.out.println(mentor);        }
+            System.out.println(mentor);
+        }
 
     }
 
