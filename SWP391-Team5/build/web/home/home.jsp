@@ -81,7 +81,7 @@
                                                                         class="field"></span> </span>
                                                             </div>
                                                                     <c:forEach var="i" items="${sk.getSkillByMentor_id(p.mentor_id)}">
-                                                                        <span>${i},</span>
+                                                                        <span><b>${i},</b></span>
                                                                     </c:forEach>           
                                                         </div>
                                                 <div class="row mt-1">
@@ -90,16 +90,12 @@
                                                             <img src="temp/ic-mentee.png"
                                                                  style="width: auto; height: 18px; margin-bottom: 2px;"
                                                                  data-toggle="tooltip" data-placement="bottom" title=""
-                                                                 data-original-title="Số Mentee">${p.numberRequest} <span class="wrap-number">
+                                                                 data-original-title="Số Mentee"> ${p.numberRequest} <span class="wrap-number">
                                                             </span>
                                                         </div>
                                                     </div>
                                                     <div class="user-favorite col-6">
-                                                        <div class="wrap-star">
-                                                            <!--                                                    <img src="temp/followed.png"
-                                                                                                                    style="width: auto; height: 18px; margin-bottom: 2px;"
-                                                                                                                    data-toggle="tooltip" data-placement="bottom" title=""
-                                                                                                                    data-original-title="Số người Theo dõi">-->
+                                                        <div class="wrap-star">                                                    
                                                             <span class="wrap-number" style="padding-bottom: 2px;"></span>
                                                         </div>
                                                         <div></div>
@@ -157,7 +153,7 @@
 
                                     <div class="col-md-4 col-sm-12 mb-4">
                                         <div class="p-3"
-                                             style="background-color: #fff; border-radius: 20px; min-height: 370px;">
+                                            style="background-color: #fff; border-radius: 20px; min-height: 370px;">
                                             <a href="searchBySkillid?skill_id=${s.skill_id}" target="_blank">
                                                 <img src="${s.skill_img}" class="w-100 image_fade">
                                                 <div class="row" style="padding-left: 8px; ">
@@ -171,7 +167,7 @@
                                     </div>
                                 </c:forEach>
 
-
+                                
 
                             </div>
                         </div>

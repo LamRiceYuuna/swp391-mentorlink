@@ -26,7 +26,7 @@
         <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 
         <!--<link rel="stylesheet" href="assets/css/font-icons.css" type="text/css" />-->
-
+        <link rel="icon" href="temp/logo2.png">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
         <link rel="stylesheet" href="assets/css/responsive.css" type="text/css" />
 
@@ -142,7 +142,7 @@
                                                         </c:if>
                                                         <c:if test="${sessionScope.acc.role == 2 && sessionScope.acc.user_id == mentor_id}"> 
                                                         <a href="updatecv"><button id="show-login" type="button" class="btn btn-info btn-box-top-lg"
-                                                                                                               style="background-color: #175E4C; color: #fff; margin-top: 20px;">Update CV</button></a>
+                                                                                   style="background-color: #175E4C; color: #fff; margin-top: 20px;">Update CV</button></a>
                                                         </c:if>
                                                 </div>
                                             </div>

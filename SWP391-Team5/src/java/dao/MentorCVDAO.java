@@ -162,12 +162,12 @@ public class MentorCVDAO extends DBContext {
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                list.add(new CV_Mentor(rs.getInt("mentor_id"), 
+                list.add(new CV_Mentor(rs.getInt("mentor_id"),
                         rs.getString("profession"),
                         rs.getString("profession_introduction"),
                         rs.getString("service_description"),
                         rs.getString("achievements"),
-                        rs.getInt("request_count"), 
+                        rs.getInt("request_count"),
                         new User(rs.getString("avatar"),
                                 rs.getString("full_name"),
                                 rs.getString("email"))));
@@ -184,10 +184,12 @@ public class MentorCVDAO extends DBContext {
      */
     public List<CV_Mentor> getAllListMentor() {
         List<CV_Mentor> list = new ArrayList<>();
-        String sql = "SELECT distinct (cv_of_mentor.mentor_id), email, full_name, avatar, profession, profession_introduction, service_description, achievements\n"
-                + "FROM user\n"
-                + "JOIN cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
-                + "JOIN cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id";
+//        String sql = "SELECT distinct (cv_of_mentor.mentor_id), email, full_name, avatar, profession, profession_introduction, service_description, achievements\n"
+//                + "FROM user\n"
+//                + "JOIN cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id\n"
+//                + "JOIN cv_skill ON cv_of_mentor.mentor_id = cv_skill.mentor_id";
+        String sql = "SELECT (cv_of_mentor.mentor_id), email, full_name, avatar, profession, profession_introduction, service_description, achievements FROM swp391_group5.user\n"
+                + "JOIN swp391_group5.cv_of_mentor ON user.user_id = cv_of_mentor.mentor_id";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
@@ -586,7 +588,13 @@ public class MentorCVDAO extends DBContext {
             ps1.setInt(5, mentor_id);
             ps1.executeUpdate();
 
-            // Câu lệnh INSERT vào table_Cv of Mentor
+            String sql4 = "DELETE FROM `swp391_group5`.`cv_skill`\n"
+                    + "WHERE mentor_id = ?;";
+            PreparedStatement ps4 = connection.prepareStatement(sql4);
+            ps4.setInt(1, mentor_id);
+            ps4.executeUpdate();
+
+            // Câu lệnh Update vào table_Cv of Mentor
             String sql2 = "UPDATE `swp391_group5`.`cv_of_mentor`\n"
                     + "SET\n"
                     + "`profession` = ?,\n"
@@ -606,21 +614,23 @@ public class MentorCVDAO extends DBContext {
             ps2.setInt(7, mentor_id);
             ps2.executeUpdate();
 
-//            String sqlDel = 
-            // Câu lệnh INSERT vào table_B
-            String sql3 = "UPDATE `swp391_group5`.`cv_skill`\n"
-                    + "SET `skill_id` = ?\n"
-                    + "WHERE `mentor_id` = ?;";
+            
+            //Câu lệnh Update vào table_B
+            String sql3 = "INSERT INTO `swp391_group5`.`cv_skill`\n"
+                    + "(`mentor_id`,\n"
+                    + "`skill_id`)\n"
+                    + "VALUES\n"
+                    + "(?,\n"
+                    + "?);";
             PreparedStatement ps3 = connection.prepareStatement(sql3);
 
             for (String id : skillId) {
                 int value_id = Integer.parseInt(id);
 
                 // Thiết lập các giá trị trong Prepared Statement
-                ps3.setInt(1, value_id);
-                ps3.setInt(2, mentor_id);
-
-                // Thực hiện câu lệnh cập nhật trong cơ sở dữ liệu
+                ps3.setInt(1, mentor_id);
+                ps3.setInt(2, value_id);
+                // Thực hiện câu lệnh chèn vào cơ sở dữ liệu
                 ps3.executeUpdate();
             }
 
