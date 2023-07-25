@@ -91,7 +91,7 @@ public class registerVerificationController extends HttpServlet {
                 session.removeAttribute("address");
                  session.removeAttribute("address");
              
-            request.getRequestDispatcher("/signup/success.html").forward(request, response);
+            request.getRequestDispatcher("/signup/success.jsp").forward(request, response);
         }
     
 }

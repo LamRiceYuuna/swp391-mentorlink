@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="assets/css/custom.minbc11.css?v=99" type="text/css" />
         <link rel="stylesheet" href="assets/css/override.css" type="text/css" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Forget Password</title>
+        <title>Successfully</title>
     </head>
 
 
