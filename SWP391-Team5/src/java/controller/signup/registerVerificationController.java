@@ -79,30 +79,29 @@ public class registerVerificationController extends HttpServlet {
             UserDAO ud = new UserDAO();
             ud.insert(userName, password, email, accounttype, name, date, address, gender, phone);
 
-        
             //xóa thông tin rác
             session.removeAttribute("drawUserName");
             session.removeAttribute("drawEmail");
             session.removeAttribute("drawPassword");
             session.removeAttribute("accounttype");
-             session.removeAttribute("name");
-              session.removeAttribute("date");
-               session.removeAttribute("phone");
-                session.removeAttribute("address");
-                 session.removeAttribute("address");
-             
+            session.removeAttribute("name");
+            session.removeAttribute("date");
+            session.removeAttribute("phone");
+            session.removeAttribute("address");
+            session.removeAttribute("address");
+
             request.getRequestDispatcher("/signup/success.jsp").forward(request, response);
         }
-    
-}
 
-/**
- * Returns a short description of the servlet.
- *
- * @return a String containing servlet description
- */
-@Override
-public String getServletInfo() {
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

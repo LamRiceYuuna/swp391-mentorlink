@@ -73,7 +73,7 @@ public class requestMentor extends HttpServlet {
         HttpSession session = request.getSession();
         User sessionUser = (User) session.getAttribute("acc");
         String sessionUser_id = sessionUser.getUser_id();
-
+        request.setAttribute("menteeId", sessionUser_id);
         //lấy mail của mentee  
         String mail = sessionUser.getEmail();
         String name = sessionUser.getFull_name();
@@ -131,30 +131,30 @@ public class requestMentor extends HttpServlet {
                 System.out.println(email_mentor);
                 try {
                     result = DAO.insert1(tieude, batdau1, id_temp, sessionUser_id, ketthuc1, sogiohoc, noidung, framework, skills);
-                    String messageText = "Mentor Link hello: " + name
-                    + "\nTitle: " + tieude
-                    + "\nStart time: " + batdau1
-                    + "\nEnd time ...: " + ketthuc1
-                    + "\nDuration of study: " + sogiohoc
-                    + "\ncontent: " + noidung
-                    + "\nRequests will be approved at the latest 12 hours";
-                    ml.send(mail, messageText);
-                     String message = "You have a new request from: " + name
-                    + "\nTitle: " + tieude
-                    + "\nStart time: " + batdau1
-                    + "\nEnd time ...: " + ketthuc1
-                    + "\nDuration of study: " + sogiohoc
-                    + "\ncontent: " + noidung
-                    + "\nRequests will be approved at the latest 12 hours";
-                     ml.send(email_mentor, message);
+//                    String messageText = "Mentor Link hello: " + name
+//                    + "\nTitle: " + tieude
+//                    + "\nStart time: " + batdau1
+//                    + "\nEnd time ...: " + ketthuc1
+//                    + "\nDuration of study: " + sogiohoc
+//                    + "\ncontent: " + noidung
+//                    + "\nRequests will be approved at the latest 12 hours";
+//                    ml.send(mail, messageText);
+//                     String message = "You have a new request from: " + name
+//                    + "\nTitle: " + tieude
+//                    + "\nStart time: " + batdau1
+//                    + "\nEnd time ...: " + ketthuc1
+//                    + "\nDuration of study: " + sogiohoc
+//                    + "\ncontent: " + noidung
+//                    + "\nRequests will be approved at the latest 12 hours";
+//                     ml.send(email_mentor, message);
                     request.getRequestDispatcher("/common/successfully.jsp").forward(request, response);
                 } catch (SQLException e) {
                     // Xử lý ngoại lệ ở đây
                     result = false; // hoặc thực hiện hành động khác khi có lỗi
                 } 
-                catch (ParseException ex) {
-                    Logger.getLogger(requestMentor.class.getName()).log(Level.SEVERE, null, ex);
-                }
+//                catch (ParseException ex) {
+//                    Logger.getLogger(requestMentor.class.getName()).log(Level.SEVERE, null, ex);
+//                }
                
             }
 

@@ -77,7 +77,7 @@
                             <div class="mb_10">
                                 <label for="">ngày tháng năm sinh <span style="color: red">*</span></label>
                                 <input  type="date" name="date" value=""
-                                        class="form-control not-dark login-form-password" />
+                                        class="form-control not-dark login-form-password" max="<%=java.time.LocalDate.now()%>"/>
                             </div>
                             <div class="mb_10">
                                 <label for="">Phone <span style="color: red">*</span></label>

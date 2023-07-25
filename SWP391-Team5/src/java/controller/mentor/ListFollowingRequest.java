@@ -99,26 +99,26 @@ public class ListFollowingRequest extends HttpServlet {
         Mail ml = new Mail();
         if (requestId_yes != null) {
             //.....................
-            String email = dao.getEmailToSend(requestId_yes);
-            String messageText = "Your request has been approved.";
-            try {
-                ml.send(email, messageText);
-            } catch (ParseException ex) {
-                Logger.getLogger(ListFollowingRequest.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            String email = dao.getEmailToSend(requestId_yes);
+//            String messageText = "Your request has been approved.";
+//            try {
+//                ml.send(email, messageText);
+//            } catch (ParseException ex) {
+//                Logger.getLogger(ListFollowingRequest.class.getName()).log(Level.SEVERE, null, ex);
+//            }
             //................................................
             dao.update_Request_Status(2, requestId_yes);
             processRequest(request, response);
         }
         if (requestId_no != null) {
             //.................................
-            String email = dao.getEmailToSend(requestId_no);
-            String messageText = "Your request has been declined.";
-            try {
-                ml.send(email, messageText);
-            } catch (ParseException ex) {
-                Logger.getLogger(ListFollowingRequest.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            String email = dao.getEmailToSend(requestId_no);
+//            String messageText = "Your request has been declined.";
+//            try {
+//                ml.send(email, messageText);
+//            } catch (ParseException ex) {
+//                Logger.getLogger(ListFollowingRequest.class.getName()).log(Level.SEVERE, null, ex);
+//            }
             //............................
             dao.update_Request_Status(3, requestId_no);
             processRequest(request, response);
