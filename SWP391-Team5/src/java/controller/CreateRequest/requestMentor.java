@@ -134,7 +134,7 @@ public class requestMentor extends HttpServlet {
                     String messageText = "Mentor Link hello: " + name
                     + "\nTitle: " + tieude
                     + "\nStart time: " + batdau1
-                    + "\nEnd time ...: " + ketthuc1
+                    + "\nEnd time : " + ketthuc1
                     + "\nDuration of study: " + sogiohoc
                     + "\ncontent: " + noidung
                     + "\nRequests will be approved at the latest 12 hours";

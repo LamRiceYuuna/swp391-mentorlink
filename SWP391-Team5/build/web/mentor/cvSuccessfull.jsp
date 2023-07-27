@@ -30,7 +30,7 @@
                  min-height: 67vh;
                  background-color: #FFF;
                  margin-top: 50px;">
-            <div class="content-wrap nopadding">
+            <div class="content-wrap nopadding" style="min-height: 70vh">
                 <div class="login_container"
                      style=" background: url() center center no-repeat; background-size: cover;">
                 </div>

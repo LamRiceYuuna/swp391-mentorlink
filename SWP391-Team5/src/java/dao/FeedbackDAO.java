@@ -136,10 +136,6 @@ public class FeedbackDAO extends DBContext {
         return false;
     }
 
-    public static void main(String[] args) {
-        FeedbackDAO fb = new FeedbackDAO();
-        fb.insertFeedback(3, 1, 5, "Mentor good");
-    }
 
     public int getNumberOfFeedback(int mentor_id) {
         String query = "SELECT COUNT(*) FROM swp391_group5.feedback WHERE mentor_id = ?;";

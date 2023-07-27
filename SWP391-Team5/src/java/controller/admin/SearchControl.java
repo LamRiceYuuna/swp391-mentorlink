@@ -39,20 +39,7 @@ public class SearchControl extends HttpServlet {
         request.getRequestDispatcher("admin/searchmentor.jsp").forward(request, response);
     }
 
-    public static void main(String[] args) {
-        MentorCVDAO men = new MentorCVDAO();
-        int count = men.getNumberPage();
-        System.out.println(count);
-
-        List<MentorInfo> mentors = new ArrayList<>();
-        MentorCVDAO c = new MentorCVDAO();
-
-        mentors = c.GetListMentorPagingSearchAdm(2, "j");
-
-        for (MentorInfo mentor : mentors) {
-            System.out.println(mentor.toString());
-        }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     @Override

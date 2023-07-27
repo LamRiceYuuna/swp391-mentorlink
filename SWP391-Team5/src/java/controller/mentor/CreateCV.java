@@ -116,7 +116,9 @@ public class CreateCV extends HttpServlet {
         String service_des = request.getParameter("service_des");
         String programming = request.getParameter("programming");
         String[] skillId = request.getParameterValues("SkillId");
-
+        if(skillId == null) {
+            
+        }
         //Khởi tạo đối tượng
         MentorCVDAO dao = new MentorCVDAO();
 

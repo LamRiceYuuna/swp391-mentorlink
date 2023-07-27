@@ -39,32 +39,32 @@ public class MenteeDAO extends DBContext {
 
         try {
             String query = "SELECT\n"
-                    + "    user.user_id,\n"
-                    + "    user.full_name,\n"
-                    + "    user.username,\n"
-                    + "    subquery.time_study,\n"
-                    + "    COUNT(DISTINCT request_skill.skill_id) AS skill_count\n"
-                    + "FROM\n"
-                    + "    swp391_group5.`user`\n"
-                    + "    JOIN swp391_group5.`request` ON user.user_id = request.mentee_id\n"
-                    + "    LEFT JOIN (\n"
-                    + "        SELECT\n"
-                    + "            request.mentee_id,\n"
-                    + "            SUM(request.time_study) AS time_study\n"
-                    + "        FROM\n"
-                    + "            swp391_group5.`request`\n"
-                    + "        GROUP BY\n"
-                    + "            request.mentee_id\n"
-                    + "    ) AS subquery ON request.mentee_id = subquery.mentee_id\n"
-                    + "    LEFT JOIN swp391_group5.`request_skill` ON request.request_id = request_skill.request_id\n"
-                    + "GROUP BY\n"
-                    + "    user.user_id,\n"
-                    + "    user.full_name,\n"
-                    + "    user.username,\n"
-                    + "    subquery.time_study\n"
-                    + "ORDER BY\n"
-                    + "    user.full_name\n"
-                    + "LIMIT 10 offset ?";
+                + "    user.user_id,\n"
+                +  "  user.full_name,\n"
+                + "    user.username,\n"
+                + "    subquery.time_study,\n"
+                + "    COUNT(DISTINCT request_skill.skill_id) AS skill_count\n"
+                + "FROM"
+                + "    swp391_group5.`user`\n"
+                +  "  JOIN swp391_group5.`request` ON user.user_id = request.mentee_id\n"
+                + "    LEFT JOIN (\n"
+                + "        SELECT\n"
+                + "            request.mentee_id,\n"
+                + "            SUM(request.time_study) AS time_study\n"
+                + "        FROM\n"
+                + "            swp391_group5.`request`\n"
+                + "        GROUP BY\n"
+                + "            request.mentee_id\n"
+                + "    ) AS subquery ON request.mentee_id = subquery.mentee_id\n"
+                + "    LEFT JOIN swp391_group5.`request_skill` ON request.request_id = request_skill.request_id\n"
+                + "GROUP BY\n"
+                + "    user.user_id,\n"
+                + "    user.full_name,\n"
+                + "    user.username,\n"
+                + "    subquery.time_study\n"
+                + "ORDER BY\n"
+                + "    user.user_id ASC\n" // Sort by full_name in ascending order
+                + "LIMIT 10 OFFSET ?";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             // Moi page 10 rows: Index  là vi tri page
@@ -114,13 +114,13 @@ public class MenteeDAO extends DBContext {
         return result;
     }
 
-    public static void main(String[] args) {
-        MenteeDAO d = new MenteeDAO();
-        List<SkillMentee> t = d.getSkillMentees();
-        for (SkillMentee mentee : t) {
-            System.out.println(mentee.getSkillName());
-        }
-    }
+//    public static void main(String[] args) {
+//        MenteeDAO d = new MenteeDAO();
+//        List<SkillMentee> t = d.getSkillMentees();
+//        for (SkillMentee mentee : t) {
+//            System.out.println(mentee.getSkillName());
+//        }
+//    }
     
     //Lấy ra số lượng trang n /  trên tổng số trang. của trang listmentee (admin)
     public int getNumberPage2() {

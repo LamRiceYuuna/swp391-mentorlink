@@ -283,41 +283,41 @@ public class requestDAO extends DBContext {
 //        return list1;
 //
 //    }
-    public static void main(String[] args) {
-        requestDAO rq = new requestDAO();
+//    public static void main(String[] args) {
+//        requestDAO rq = new requestDAO();
+////
+////        // Gọi phương thức listRequestByMetorID để lấy danh sách các request
+////        List<Request> requests = rq.listRequestByMetorID("2");
+////
+////        // In thông tin các request
+////        for (Request request : requests) {
+////            System.out.println("Name: " + request.getTitle());
+////            System.out.println("Name: " + request.getRequest_id());
+////            System.out.println("Mentor ID: " + request.getMentor_id());
+////            // In thông tin các trường khác của request
+////
+////            // In thông tin skill_name
+////            List<String> skillNames = request.getSkill_name();
+////
+////            System.out.println("Skill Names:");
+////            if (skillNames.isEmpty()) {
+////                System.out.println("No skills found.");
+////            } else {
+////                for (String skillName : skillNames) {
+////                    System.out.println(skillName);
+////                }
+////            }
+////
+////            System.out.println("-----------------------------");
+////        }
+//        int a = 3;
+//        int rs = rq.getNumberPage4(3);
+//        System.out.println("NB:" + rs);
+//        int b = 2;
+//        String c = rq.getmailmentor(b);
+//        System.out.println(c);
 //
-//        // Gọi phương thức listRequestByMetorID để lấy danh sách các request
-//        List<Request> requests = rq.listRequestByMetorID("2");
-//
-//        // In thông tin các request
-//        for (Request request : requests) {
-//            System.out.println("Name: " + request.getTitle());
-//            System.out.println("Name: " + request.getRequest_id());
-//            System.out.println("Mentor ID: " + request.getMentor_id());
-//            // In thông tin các trường khác của request
-//
-//            // In thông tin skill_name
-//            List<String> skillNames = request.getSkill_name();
-//
-//            System.out.println("Skill Names:");
-//            if (skillNames.isEmpty()) {
-//                System.out.println("No skills found.");
-//            } else {
-//                for (String skillName : skillNames) {
-//                    System.out.println(skillName);
-//                }
-//            }
-//
-//            System.out.println("-----------------------------");
-//        }
-        int a = 3;
-        int rs = rq.getNumberPage4(3);
-        System.out.println("NB:" + rs);
-        int b = 2;
-        String c = rq.getmailmentor(b);
-        System.out.println(c);
-
-    }
+//    }
 
     //Lấy ra số lượng trang n /  trên tổng số trang. của trang list following request
     public int getNumberPage1(int mentor_id) {

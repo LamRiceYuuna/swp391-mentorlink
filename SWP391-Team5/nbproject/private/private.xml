@@ -3,22 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/common/listMentorSuggestion.jsp</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/dao/MentorCVDAO.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/dao/requestDAO.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/mentor/ListFollowingRequest.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/filter/AccountFilter.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/CreateRequest/requestMentor.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/mentee/ListMentorSuggestion.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/admin/listmentee.jsp</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/admin/UpdateStatusMentorSearch.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/admin/ListMenteeControl.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/dao/MenteeDAO.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/dao/FeedbackDAO.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/dao/DBContext.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/CreateRequest/Mail.java</file>
-            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/mentee/ListRequestByMe1.java</file>
+            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/mentor/UpdateCv.java</file>
+            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/mentor/createCV.jsp</file>
+            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/src/java/controller/mentor/CreateCV.java</file>
+            <file>file:/C:/Users/Tuan%20Vinh/OneDrive/Documents/GitHub/mentorlink/SWP391-Team5/web/mentor/updateCV.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -20,7 +20,7 @@
         <jsp:include page="../home/header.jsp"/>
 
         <section id="content">
-            <div class="content-wrap nopadding" style="margin-top: 109px; min-height: 52vh">
+            <div class="content-wrap nopadding" style="margin-top: 109px; min-height: 70vh">
                 <div class="login_container"
                      style=" background: url() center center no-repeat; background-size: cover;">
                 </div>

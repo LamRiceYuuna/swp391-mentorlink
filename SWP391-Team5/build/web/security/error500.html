@@ -47,7 +47,21 @@
                     transform: rotateZ(0);
                 }
             }
+            
+            .btn {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #ffffff;
+                color: #000;
+                text-decoration: none;
+                border-radius: 3px;
+                transition: background-color 0.3s ease;
+            }
 
+            .btn:hover {
+                background-color: #828bb2;
+                text-align: center;
+            }
         </style>
     </head>
 
@@ -55,6 +69,7 @@
         <h1>500</h1>
         <h3 style="margin-bottom: 20px;">Exception: Code Invalid.</h3>
         <p style="margin-bottom: 10px;"><br><br>Please check the logic code!</p>
+        <a class="btn" href="javascript:history.back()"> Come back.</a>
     </body>
 
 </html>

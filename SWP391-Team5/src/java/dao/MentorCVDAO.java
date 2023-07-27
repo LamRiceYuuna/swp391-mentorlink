@@ -174,6 +174,7 @@ public class MentorCVDAO extends DBContext {
             }
         } catch (SQLException e) {
             System.out.println(e);
+            System.out.println(e.fillInStackTrace());
         }
         return list;
     }
@@ -948,18 +949,18 @@ public class MentorCVDAO extends DBContext {
         return null;
     }
 
-    public static void main(String[] args) {
-        MentorCVDAO obj = new MentorCVDAO();
-        ArrayList<Integer> itg = new ArrayList<>();
-        itg.add(2);
-        itg.add(3);
-        itg.add(4);
-        itg.add(5);
-        itg.add(7);
-        itg.add(10);
-        int o = obj.getNumberPage3(itg);
-        System.out.println("H: " + o);
-
-    }
+//    public static void main(String[] args) {
+//        MentorCVDAO obj = new MentorCVDAO();
+//        ArrayList<Integer> itg = new ArrayList<>();
+//        itg.add(2);
+//        itg.add(3);
+//        itg.add(4);
+//        itg.add(5);
+//        itg.add(7);
+//        itg.add(10);
+//        int o = obj.getNumberPage3(itg);
+//        System.out.println("H: " + o);
+//
+//    }
     //Dai
 }

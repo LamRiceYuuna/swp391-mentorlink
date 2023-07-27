@@ -43,26 +43,26 @@ public class FeedbackSkillDAO extends DBContext {
         return list;
     }
 
-    public static void main(String[] args) {
-        // Kết nối cơ sở dữ liệu và tạo đối tượng Feedback_SkillDAO (giả sử)      
-        FeedbackSkillDAO feedbackSkillDAO = new FeedbackSkillDAO();
-
-        // Thực hiện gọi phương thức getStarRateSkill và lấy danh sách kết quả
-        String mentorId = "2";
-        ArrayList<Feedback_Skill> feedbackSkills = feedbackSkillDAO.getStarRateSkill(mentorId);
-
-        // Hiển thị kết quả
-        if (!feedbackSkills.isEmpty()) {
-            for (Feedback_Skill feedbackSkill : feedbackSkills) {
-                System.out.println("Skill Name: " + feedbackSkill.getSkill().getSkill_name());
-                System.out.println("Average Rate Skill: " + feedbackSkill.getStar_rate_skill());
-                System.out.println("--------------------");
-            }
-        } else {
-            System.out.println("No feedback skills found for the given mentor ID.");
-        }
-       
-    }
+//    public static void main(String[] args) {
+//        // Kết nối cơ sở dữ liệu và tạo đối tượng Feedback_SkillDAO (giả sử)      
+//        FeedbackSkillDAO feedbackSkillDAO = new FeedbackSkillDAO();
+//
+//        // Thực hiện gọi phương thức getStarRateSkill và lấy danh sách kết quả
+//        String mentorId = "2";
+//        ArrayList<Feedback_Skill> feedbackSkills = feedbackSkillDAO.getStarRateSkill(mentorId);
+//
+//        // Hiển thị kết quả
+//        if (!feedbackSkills.isEmpty()) {
+//            for (Feedback_Skill feedbackSkill : feedbackSkills) {
+//                System.out.println("Skill Name: " + feedbackSkill.getSkill().getSkill_name());
+//                System.out.println("Average Rate Skill: " + feedbackSkill.getStar_rate_skill());
+//                System.out.println("--------------------");
+//            }
+//        } else {
+//            System.out.println("No feedback skills found for the given mentor ID.");
+//        }
+//       
+//    }
 
 
 }

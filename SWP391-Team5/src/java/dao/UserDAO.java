@@ -218,11 +218,11 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public static void main(String[] args) {
-        UserDAO dt = new UserDAO();
-        User a = dt.checkUserExisted("mentor1");
-        System.out.println(a.getUsername());
-    }
+//    public static void main(String[] args) {
+//        UserDAO dt = new UserDAO();
+//        User a = dt.checkUserExisted("mentor1");
+//        System.out.println(a.getUsername());
+//    }
 
     /**
      *

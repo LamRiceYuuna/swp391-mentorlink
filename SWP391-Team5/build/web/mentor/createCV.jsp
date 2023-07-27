@@ -45,7 +45,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12 col-lg-8 m-auto">
-                            <form id="formId" class="multisteps-form__form" action="CreateCV" method="post">
+                            <form id="formId" class="multisteps-form__form" action="CreateCV" method="post" onsubmit="return validateForm()">
                                 <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
                                     <h3 class="multisteps-form__title"><b>Your User Info</b></h3>
                                     <div class="multisteps-form__content">
@@ -71,8 +71,7 @@
                                                         <option value="Male" ${InfoU.getGender() == 1 ? 'selected' : ''}>Nam</option>
                                                         <option value="Female" ${InfoU.getGender() == 0 ? 'selected' : ''}>Nữ</option>
                                                     </select>
-                                                </div>                                                   
-                                                <!--<input class="multisteps-form__input form-control" type="text" name="gender"/>-->
+                                                </div>                                                                                                  
                                             </div>
                                         </div>
                                         <div class="form-row mt-4">
@@ -142,14 +141,6 @@
                                     <div class="wrapper2">
                                         <div class="container2">
                                             <c:forEach var="s" items="${listSkill}">
-                                                <!--                                                <div class="form-element ">
-                                                                                                    <input type="checkbox" name="SkillId" value="${s.getSkill_id()}" id="${s.getSkill_name()}">
-                                                                                                    <label for="${s.getSkill_name()}">
-                                                                                                        <div class="title">
-                                                ${s.getSkill_name()}
-                                            </div>
-                                        </label>
-                                    </div>-->
                                                 <label class="option_item">
                                                     <input type="checkbox" class="checkbox" name="SkillId" value="${s.getSkill_id()}">
                                                     <div class="option_inner facebook">
@@ -160,7 +151,7 @@
                                             </c:forEach>    
 
 
-                                        </div>
+                                        </div>                                        
                                         <div class="row">
                                             <div class="button-row d-flex mt-4 col-12">
                                                 <button class="btn btn-back js-btn-prev" type="button" title="Prev" style="color: #fff;
@@ -171,6 +162,26 @@
                                         </div>
                                     </div>
                                 </div>
+                                <script>
+                                    function validateForm() {
+                                        const checkboxes = document.getElementsByName("SkillId");
+                                        let isChecked = false;
+
+                                        for (let i = 0; i < checkboxes.length; i++) {
+                                            if (checkboxes[i].checked) {
+                                                isChecked = true;
+                                                break;
+                                            }
+                                        }
+
+                                        if (!isChecked) {
+                                            alert("Vui lòng chọn ít nhất một kỹ năng.");
+                                            return false; // Ngăn người dùng gửi biểu mẫu nếu không có checkbox nào được chọn.
+                                        }
+
+                                        return true; // Cho phép người dùng gửi biểu mẫu nếu có ít nhất một checkbox được chọn.
+                                    }
+                                </script>
 
                                 <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                                     <h3 class="multisteps-form__title"><b>Service Description</b></h3>

@@ -190,7 +190,7 @@
                                             </ul>
                                         </div>
                                         <div class="user-booking">
-                                            <a href="requestMentor?mentor_id=${s.getMentor_id()}" style="background: #175E4C; border: none">Tạo yêu cầu</a>
+                                            <a href="requestMentor?mentor_id=${s.getMentor_id()}" style="background: #175E4C; border: none">Create Request</a>
                                         </div>
                                     </div>
                                 </div>

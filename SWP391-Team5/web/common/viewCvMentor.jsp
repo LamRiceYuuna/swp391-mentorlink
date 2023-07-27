@@ -136,6 +136,10 @@
                                         <div class="profile-action">
                                             <div class="profile_btn box-group box-group-custom" id="connect_mentor_pair">
                                                 <div class="box-group-custom-top">
+                                                    <c:if test="${sessionScope.acc == null}"> 
+                                                        <a href="login"><button id="show-login" type="button" class="btn btn-info btn-box-top-lg"
+                                                                                                               style="background-color: #175E4C; color: #fff; margin-top: 20px;">Create Request</button></a>
+                                                        </c:if>
                                                     <c:if test="${sessionScope.acc.role == 1}"> 
                                                         <a href="requestMentor?mentor_id=${mentor_id}"><button id="show-login" type="button" class="btn btn-info btn-box-top-lg"
                                                                                                                style="background-color: #175E4C; color: #fff; margin-top: 20px;">Create Request</button></a>

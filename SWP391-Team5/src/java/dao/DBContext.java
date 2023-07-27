@@ -39,14 +39,5 @@ public class DBContext {
             e.printStackTrace();
         }
     }
-    public static void main(String[] args) {
-        DBContext dbContext = new DBContext();
-
-        Connection connection = dbContext.getConnection();
-
-        // Sử dụng connection để thực hiện các thao tác SQL
-        // Sau khi hoàn thành, đóng kết nối
-        dbContext.closeConnection();
-    }
-    
+      
 }

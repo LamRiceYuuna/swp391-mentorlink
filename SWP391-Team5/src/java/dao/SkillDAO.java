@@ -199,11 +199,11 @@ public class SkillDAO {
         return listSkill;
     }
 
-    public static void main(String[] args) {
-        SkillDAO dao = new SkillDAO();
-        List<String> list = dao.getSkillByMentor_id(2);
-        for (String sk : list) {
-            System.out.println(sk);
-        }
-    }
+//    public static void main(String[] args) {
+//        SkillDAO dao = new SkillDAO();
+//        List<String> list = dao.getSkillByMentor_id(2);
+//        for (String sk : list) {
+//            System.out.println(sk);
+//        }
+//    }
 }

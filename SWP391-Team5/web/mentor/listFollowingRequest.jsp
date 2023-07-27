@@ -66,7 +66,7 @@
 
         <div class="container3">
 
-            <section class="main" style="min-height: 65vh;">
+            <section class="main" style="min-height: 70vh;">
                 <section class="attendance">
                     <div class="attendance-list">
                         <h1 style="text-align: center;">List Following Request</h1>
@@ -81,6 +81,7 @@
                                     <th>Content</th>
                                     <th>Skill</th>
                                     <th>Start Time</th>
+                                    <th>Duration</th>
                                     <th>End Time</th>
                                     <th style="text-align: center;">Status</th>
                                     <th style="text-align: center;">Action</th>                                   
@@ -100,6 +101,7 @@
                                             </c:forEach>        
                                         </td>
                                         <td>${listR.get(i).getCreated_date()}</td>
+                                        <td>${listR.get(i).getTime_study()}</td>
                                         <td>${listR.get(i).getFinish_date()}</td>
                                         <td>
                                             <c:if test="${listR.get(i).getRequest_status() == 1}">

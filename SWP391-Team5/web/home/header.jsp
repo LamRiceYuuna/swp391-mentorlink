@@ -112,11 +112,11 @@
 
                                             <li><a class="pb-0">Individual</a></li>
                                             <li class="dt-menu-item-parent"></li>
-                                            <li>
+<!--                                            <li>
                                                 <a href="#" class="pb-0" style="cursor: pointer;">
                                                     <i class="fa fa-tag"></i>Request Mentor
                                                 </a>
-                                            </li>
+                                            </li>-->
                                             <li>
                                                 <a href="satisticsRequest" class="pb-0" style="cursor: pointer;">
                                                     <i class="fa fa-shopping-cart"></i>Statistic Request Mentee

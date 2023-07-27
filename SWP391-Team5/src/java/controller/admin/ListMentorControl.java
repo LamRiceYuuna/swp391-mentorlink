@@ -56,15 +56,6 @@ public class ListMentorControl extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public static void main(String[] args) {
-        List<MentorInfo> mentors = new ArrayList<>();
-        MentorCVDAO c = new MentorCVDAO();
-
-        mentors = c.GetListMentorPagingAdm(1);
-
-        for (MentorInfo mentor : mentors) {
-            System.out.println(mentor.toString());
-        }
-    }
+    
 
 }
